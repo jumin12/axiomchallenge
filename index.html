@@ -839,11 +839,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 0;
             padding: 0 10px;
             transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
             z-index: 1100;
             pointer-events: auto;
+            overflow: hidden;
         }
 
         .nav-audio-toggle:hover {
@@ -870,12 +871,24 @@
         .volume-slider {
             -webkit-appearance: none;
             appearance: none;
-            width: 60px;
+            width: 0;
             height: 4px;
             background: rgba(214, 165, 80, 0.3);
             border-radius: 2px;
             outline: none;
-            flex: 1;
+            flex: 0 0 auto;
+            opacity: 0;
+            margin-left: 0;
+            pointer-events: none;
+            transition: width 0.2s ease, opacity 0.2s ease, margin 0.2s ease;
+        }
+
+        .nav-audio-toggle:hover .volume-slider,
+        .nav-audio-toggle:focus-within .volume-slider {
+            width: 80px;
+            opacity: 1;
+            margin-left: 8px;
+            pointer-events: auto;
         }
 
         .volume-slider::-webkit-slider-thumb {
@@ -1094,31 +1107,27 @@
 
         .dev-console-overlay {
             position: fixed;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(6, 8, 12, 0.78);
-            backdrop-filter: blur(6px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 420px;
             z-index: 3200;
-            padding: 30px;
+            pointer-events: none;
+            transform: translateX(-100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .dev-console-overlay.is-visible {
-            opacity: 1;
             pointer-events: auto;
+            transform: translateX(0);
         }
 
         .dev-console-modal {
-            width: min(960px, 100%);
-            max-height: 90vh;
-            background: rgba(18, 16, 12, 0.94);
-            border: 1px solid rgba(214, 165, 80, 0.45);
-            border-radius: 18px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
+            width: 100%;
+            height: 100%;
+            background: rgba(18, 16, 12, 0.97);
+            border-right: 2px solid rgba(214, 165, 80, 0.5);
+            box-shadow: 4px 0 40px rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -1141,21 +1150,82 @@
             letter-spacing: 0.04em;
         }
 
+        .dev-console-header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
         .dev-console-close {
             background: transparent;
-            border: none;
+            border: 1px solid rgba(214, 165, 80, 0.35);
+            color: #f9ebe1;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background 0.2s ease, transform 0.2s ease;
+            font-weight: 100;
+        }
+
+        .dev-console-close:hover {
+            background: rgba(214, 165, 80, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .dev-console-close-btn {
+            background: transparent;
+            border: 1px solid rgba(214, 165, 80, 0.35);
             color: #f9ebe1;
             font-size: 24px;
             cursor: pointer;
             width: 36px;
             height: 36px;
-            border-radius: 50%;
+            border-radius: 8px;
             transition: background 0.2s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
         }
 
-        .dev-console-close:hover {
-            background: rgba(214, 165, 80, 0.18);
+        .dev-console-close-btn:hover {
+            background: rgba(255, 107, 107, 0.25);
+            border-color: rgba(255, 107, 107, 0.5);
+            color: #ffb3b3;
             transform: scale(1.05);
+        }
+
+        .dev-console-toggle-btn {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(-100%);
+            background: rgba(18, 16, 12, 0.95);
+            border: 2px solid rgba(214, 165, 80, 0.5);
+            border-left: none;
+            border-radius: 0 12px 12px 0;
+            color: #f2d37c;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 12px 8px;
+            z-index: 3100;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .dev-console-toggle-btn.is-visible {
+            transform: translateY(-50%) translateX(0);
+        }
+
+        .dev-console-toggle-btn:hover {
+            background: rgba(214, 165, 80, 0.25);
+        }
+
+        .dev-console-toggle-btn.panel-open {
+            left: 420px;
         }
 
         .dev-console-body {
@@ -1419,6 +1489,12 @@
             font-size: 14px;
         }
 
+        .dev-console-form-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .dev-console-input,
         .dev-console-textarea {
             border: 1px solid rgba(214, 165, 80, 0.28);
@@ -1456,74 +1532,87 @@
         }
 
         .dev-console-riddle-item {
-            border: 1px solid rgba(214, 165, 80, 0.18);
-            border-radius: 10px;
-            padding: 12px 14px;
-            background: rgba(24, 20, 16, 0.9);
+            border: 1px solid rgba(214, 165, 80, 0.25);
+            border-radius: 12px;
+            padding: 16px;
+            background: rgba(24, 20, 16, 0.95);
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 10px;
+            transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .dev-console-riddle-item:hover {
+            border-color: rgba(214, 165, 80, 0.45);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .dev-console-riddle-item.is-custom {
-            border-color: rgba(151, 232, 255, 0.45);
+            border-left: 3px solid rgba(151, 232, 255, 0.6);
         }
 
         .dev-console-riddle-editor {
             display: none;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             margin-top: 12px;
-            border: 1px solid rgba(214, 165, 80, 0.2);
+            border: 1px solid rgba(214, 165, 80, 0.3);
             border-radius: 10px;
-            padding: 12px;
-            background: rgba(18, 16, 14, 0.9);
+            padding: 16px;
+            background: rgba(14, 12, 10, 0.95);
         }
 
         .dev-console-riddle-editor.is-visible {
             display: flex;
         }
 
-        .dev-console-riddle-editor {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 12px;
-            border: 1px solid rgba(214, 165, 80, 0.2);
-            border-radius: 10px;
-            padding: 12px;
-            background: rgba(18, 16, 14, 0.9);
-        }
-
-        .dev-console-riddle-editor.is-visible {
+        .dev-console-riddle-editor label {
             display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: #f9ebe1;
+            font-size: 14px;
         }
 
         .dev-console-riddle-title {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 100;
             color: #f2d37c;
+            letter-spacing: 0.01em;
         }
 
         .dev-console-riddle-meta {
-            font-size: 13px;
-            color: rgba(249, 235, 225, 0.7);
+            font-size: 12px;
+            color: rgba(249, 235, 225, 0.65);
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .dev-console-riddle-meta span {
+            display: inline-flex;
+            align-items: center;
         }
 
         .dev-console-riddle-question {
             font-size: 14px;
-            color: rgba(249, 235, 225, 0.78);
+            color: rgba(249, 235, 225, 0.85);
+            line-height: 1.5;
+            padding: 8px 0;
         }
 
         .dev-console-tag {
-            padding: 2px 8px;
-            border-radius: 999px;
-            font-size: 12px;
-            background: rgba(151, 232, 255, 0.18);
-            color: #a8ecff;
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(151, 232, 255, 0.15);
+            border: 1px solid rgba(151, 232, 255, 0.4);
+            color: #97e8ff;
+            font-size: 11px;
+            font-weight: 100;
+            letter-spacing: 0.02em;
         }
 
         .dev-console-muted {
@@ -1682,7 +1771,10 @@
         <div class="dev-console-modal" role="dialog" aria-modal="true" aria-labelledby="devConsoleTitle">
             <div class="dev-console-header">
                 <div class="dev-console-title" id="devConsoleTitle">Developer Console</div>
-                <button type="button" class="dev-console-close" id="devConsoleClose" aria-label="Close developer console">×</button>
+                <div class="dev-console-header-actions">
+                    <button type="button" class="dev-console-close" id="devConsoleClose" aria-label="Minimize developer console">Minimize</button>
+                    <button type="button" class="dev-console-close-btn" id="devConsoleCloseBtn" aria-label="Close developer console">×</button>
+                </div>
             </div>
             <div class="dev-console-body" id="devConsoleBody">
                 <div class="dev-console-auth" id="devConsoleLock">
@@ -1738,6 +1830,10 @@
                             </div>
                             <form id="devConsoleAddRiddleForm" class="dev-console-add-form">
                                 <label>
+                                    Riddle Name / Title
+                                    <input id="devConsoleRiddleName" class="dev-console-input" type="text" placeholder="e.g., The Guardian's Test" required>
+                                </label>
+                                <label>
                                     Riddle Question
                                     <textarea id="devConsoleRiddleQuestion" class="dev-console-textarea" placeholder="Enter the riddle question" required></textarea>
                                 </label>
@@ -1749,7 +1845,7 @@
                                     Signature / Attribution
                                     <input id="devConsoleRiddleSignature" class="dev-console-input" type="text" placeholder="Optional signature">
                                 </label>
-                                <div>
+                                <div class="dev-console-form-actions">
                                     <button type="submit" class="dev-console-primary">Save Riddle</button>
                                     <button type="button" class="dev-console-secondary" id="devConsoleResetForm">Reset</button>
                                 </div>
@@ -1774,6 +1870,8 @@
         </div>
     </div>
 
+    <button type="button" class="dev-console-toggle-btn" id="devConsoleToggle" aria-label="Toggle developer console">DEV CONSOLE</button>
+
     <script>
         // Page management
         let currentPage = localStorage.getItem('currentPage') || 'login';
@@ -1783,7 +1881,7 @@
         const SECOND_RIDDLE_ID = 2;
         const TOTAL_RIDDLE_COUNT = 10;
         const RIDDLE_ADVANCE_DELAY_MS = 3000;
-        const RIDDLE_TRANSITION_DELAY_MS = 450;
+        const RIDDLE_TRANSITION_DELAY_MS = 600;
 
         const FIGURE_IMAGE_MAP = {
             hooded: 'art/hooded-figure.png',
@@ -2273,6 +2371,11 @@
             }
 
             requestAnimationFrame(() => adjustRiddleContainer());
+            
+            // Call onContentUpdate callback if provided (for figure variant changes during transition)
+            if (options.onContentUpdate) {
+                options.onContentUpdate();
+            }
             };
 
             if (options.useTransition) {
@@ -2285,11 +2388,14 @@
                 setTimeout(() => {
                     updateContent();
 
+                    // Wait for next frame to ensure content is updated, then start fade-in
                     requestAnimationFrame(() => {
-                        content.classList.remove('is-transitioning');
-                        if (container) {
-                            container.classList.remove('is-transitioning');
-                        }
+                        requestAnimationFrame(() => {
+                            content.classList.remove('is-transitioning');
+                            if (container) {
+                                container.classList.remove('is-transitioning');
+                            }
+                        });
                     });
                 }, RIDDLE_TRANSITION_DELAY_MS);
             } else {
@@ -2316,8 +2422,10 @@
                 return;
             }
             const current = activeRiddleChallenge.riddles[activeRiddleChallenge.index];
-            renderRiddleView(current, activeRiddleChallenge.playerName, { useTransition: Boolean(useTransition) });
-            flushQueuedFigureVariant();
+            renderRiddleView(current, activeRiddleChallenge.playerName, { 
+                useTransition: Boolean(useTransition),
+                onContentUpdate: () => flushQueuedFigureVariant()
+            });
         }
 
         function renderChallengeCompletion(playerName) {
@@ -2518,7 +2626,7 @@
                 }
 
                 performPageSwitch(pageId, overlay);
-            }, 150);
+            }, 500);
         }
 
         function performPageSwitch(pageId, overlay = null) {
@@ -3331,6 +3439,8 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
             DevConsoleState.elements = {
                 overlay,
                 close: document.getElementById('devConsoleClose'),
+                closeBtn: document.getElementById('devConsoleCloseBtn'),
+                toggleBtn: document.getElementById('devConsoleToggle'),
                 lock: document.getElementById('devConsoleLock'),
                 content: document.getElementById('devConsoleContent'),
                 passwordInput: document.getElementById('devConsolePassword'),
@@ -3342,6 +3452,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 accountsTableBody: document.querySelector('#devConsoleAccountsTable tbody'),
                 accountsSummary: document.getElementById('devConsoleAccountsSummary'),
                 addRiddleForm: document.getElementById('devConsoleAddRiddleForm'),
+                riddleName: document.getElementById('devConsoleRiddleName'),
                 riddleQuestion: document.getElementById('devConsoleRiddleQuestion'),
                 riddleAnswers: document.getElementById('devConsoleRiddleAnswers'),
                 riddleSignature: document.getElementById('devConsoleRiddleSignature'),
@@ -3363,6 +3474,8 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
             const {
                 overlay,
                 close,
+                closeBtn,
+                toggleBtn,
                 unlockButton,
                 passwordInput,
                 menu,
@@ -3375,11 +3488,8 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
             } = DevConsoleState.elements;
 
             close?.addEventListener('click', hideDevConsole);
-            overlay?.addEventListener('click', event => {
-                if (event.target === overlay) {
-                    hideDevConsole();
-                }
-            });
+            closeBtn?.addEventListener('click', closeDevConsole);
+            toggleBtn?.addEventListener('click', toggleDevConsole);
 
             unlockButton?.addEventListener('click', handleDevConsoleUnlock);
             passwordInput?.addEventListener('keydown', event => {
@@ -3439,13 +3549,14 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
         }
 
         function showDevConsole() {
-            const { overlay, passwordInput } = DevConsoleState.elements;
+            const { overlay, passwordInput, toggleBtn } = DevConsoleState.elements;
             if (!overlay) {
                 return;
             }
 
             overlay.classList.add('is-visible');
             overlay.setAttribute('aria-hidden', 'false');
+            toggleBtn?.classList.add('panel-open');
             DevConsoleState.isVisible = true;
 
             if (!DevConsoleState.isUnlocked || Date.now() > DevConsoleState.unlockExpiresAt) {
@@ -3457,20 +3568,27 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
         }
 
         function hideDevConsole() {
-            const { overlay, passwordInput } = DevConsoleState.elements;
+            const { overlay, passwordInput, toggleBtn } = DevConsoleState.elements;
             overlay?.classList.remove('is-visible');
             overlay?.setAttribute('aria-hidden', 'true');
+            toggleBtn?.classList.remove('panel-open');
             DevConsoleState.isVisible = false;
             DevConsoleState.recentKeypressCount = 0;
-            if (passwordInput) {
-                passwordInput.value = '';
-            }
+            // Don't clear password or hide toggle button when minimizing - only when fully closing
+        }
+
+        function closeDevConsole() {
+            hideDevConsole();
+            lockDevConsole();
+            DevConsoleState.isUnlocked = false;
+            DevConsoleState.unlockExpiresAt = 0;
         }
 
         function lockDevConsole() {
-            const { lock, content, error, passwordInput } = DevConsoleState.elements;
+            const { lock, content, error, passwordInput, toggleBtn } = DevConsoleState.elements;
             lock?.classList.remove('hidden');
             content?.classList.add('hidden');
+            toggleBtn?.classList.remove('is-visible');
             if (error) {
                 error.textContent = '';
             }
@@ -3504,9 +3622,10 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
         }
 
         function unlockDevConsoleUI() {
-            const { lock, content, passwordInput, error } = DevConsoleState.elements;
+            const { lock, content, passwordInput, error, toggleBtn } = DevConsoleState.elements;
             lock?.classList.add('hidden');
             content?.classList.remove('hidden');
+            toggleBtn?.classList.add('is-visible');
             if (error) {
                 error.textContent = '';
             }
@@ -3853,8 +3972,9 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 .filter(Boolean);
         }
 
-        function createCustomRiddleDefinition({ question, answers, signature }) {
+        function createCustomRiddleDefinition({ name, question, answers, signature }) {
             const trimmedQuestion = question.trim();
+            const trimmedName = name?.trim() || 'Custom Riddle';
             if (!trimmedQuestion || !answers.length) {
                 return null;
             }
@@ -3862,7 +3982,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
             const id = `custom-${Date.now()}`;
             return {
                 id,
-                heading: 'Custom Riddle',
+                heading: trimmedName,
                 white: ['A custom riddle added via dev console.'],
                 yellow: trimmedQuestion,
                 answers,
@@ -3874,29 +3994,31 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
         function handleDevConsoleRiddleSubmit(event) {
             event.preventDefault();
             const {
+                riddleName,
                 riddleQuestion,
                 riddleAnswers,
                 riddleSignature,
                 riddleFeedback
             } = DevConsoleState.elements;
 
-            if (!riddleQuestion || !riddleAnswers) {
+            if (!riddleName || !riddleQuestion || !riddleAnswers) {
                 return;
             }
 
+            const name = riddleName.value;
             const question = riddleQuestion.value;
             const answers = normalizeCustomAnswers(riddleAnswers.value).map(answer => answer.toLowerCase());
             const signature = riddleSignature?.value || '';
 
-            if (!question.trim() || !answers.length) {
+            if (!name.trim() || !question.trim() || !answers.length) {
                 if (riddleFeedback) {
-                    riddleFeedback.textContent = 'Question and at least one answer are required.';
+                    riddleFeedback.textContent = 'Name, question, and at least one answer are required.';
                     riddleFeedback.className = 'dev-console-feedback error';
                 }
                 return;
             }
 
-            const customRiddle = createCustomRiddleDefinition({ question, answers, signature });
+            const customRiddle = createCustomRiddleDefinition({ name, question, answers, signature });
             if (!customRiddle) {
                 if (riddleFeedback) {
                     riddleFeedback.textContent = 'Unable to create riddle. Check your inputs and try again.';
@@ -3917,6 +4039,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 riddleFeedback.className = 'dev-console-feedback success';
             }
 
+            riddleName.value = '';
             riddleQuestion.value = '';
             riddleAnswers.value = '';
             if (riddleSignature) {
@@ -3928,12 +4051,16 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
 
         function resetDevConsoleRiddleForm() {
             const {
+                riddleName,
                 riddleQuestion,
                 riddleAnswers,
                 riddleSignature,
                 riddleFeedback
             } = DevConsoleState.elements;
 
+            if (riddleName) {
+                riddleName.value = '';
+            }
             if (riddleQuestion) {
                 riddleQuestion.value = '';
             }
