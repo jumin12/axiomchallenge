@@ -1,0 +1,4446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mysterious Journey</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chiller&family=Centaur&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Allura&family=IM+Fell+English:ital@0;1&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Centaur', serif;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Page containers */
+        .page {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            pointer-events: none;
+        }
+
+        .page > * {
+            opacity: 0;
+            transition: opacity 1.4s ease-in-out;
+            will-change: opacity;
+        }
+
+        .page.active {
+            pointer-events: auto;
+        }
+
+        .page.active > * {
+            opacity: 1;
+        }
+
+        /* Ensure login page is always centered when active */
+        .signup-page.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Sign Up Page Styles */
+        .signup-page {
+            background: url('art/challenge-webpage-background.png') center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .signup-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('art/challenge-webpage-background-shadow-hue.png') center/cover;
+            z-index: 1;
+        }
+
+        .signup-container {
+            max-width: 1500px;
+            width: 100%;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 40px;
+            margin: 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            height: 800px;
+            gap: 40px;
+        }
+
+        .signup-title {
+            font-size: 2.8rem;
+            color: #ffffff;
+            margin-bottom: 14px;
+            text-align: center;
+            font-weight: 100;
+            letter-spacing: 1px;
+            font-family: 'Centaur', serif;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-bottom: 18px;
+            color: #ffffff;
+            font-family: 'Centaur', serif;
+        }
+
+        .login-link a {
+            color: #d6a550;
+            text-decoration: none;
+        }
+
+        .signup-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .intro-page {
+            background: url('art/challenge-webpage-background.png') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            padding-top: 130px;
+            box-sizing: border-box;
+        }
+
+        .intro-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('art/challenge-webpage-background-shadow-hue.png') center/cover;
+            z-index: 1;
+        }
+
+        .intro-container {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro-content {
+            width: clamp(320px, 80vw, 1280px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .youtube-frame {
+            width: clamp(320px, 80vw, 1280px);
+            aspect-ratio: 16 / 9;
+            background: #000000;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
+            position: relative;
+        }
+
+        .youtube-frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #000000;
+        }
+
+        .youtube-progress,
+        .youtube-progress-track,
+        .youtube-progress-fill,
+        .youtube-time {
+            display: none;
+        }
+
+        .login-divider-stack {
+            position: relative;
+            width: 90px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .login-divider-stack img {
+            position: absolute;
+            width: 400px;
+            height: auto;
+            top: 50%;
+            left: 50%;
+            transform-origin: center center;
+        }
+
+        .login-divider-stack .divider-left {
+            top: calc(50% + 13px);
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        .login-divider-stack .divider-right {
+            top: calc(50% - 5px);
+            transform: translate(-50%, -50%) rotate(-90deg);
+        }
+
+        .login-form-container,
+        .social-container {
+            background: url('art/lightbox-medium.png') center/contain no-repeat;
+            background-size: 100% 100%;
+            width: 1000px;
+            height: 750px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 70px 60px 80px;
+            overflow: visible;
+        }
+
+        .signup-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            overflow: visible;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+            display: flex;
+            justify-content: center;
+            overflow: visible;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff;
+            font-weight: 100;
+            font-family: 'Centaur', serif;
+        }
+
+        .form-group input {
+            background: url('art/email-text-box.png') center/cover no-repeat;
+            width: 460px;
+            height: 80px;
+            border: none;
+            background-color: transparent;
+            color: #d6a550;
+            font-size: 20px;
+            padding: 20px 30px 12px 30px;
+            text-align: center;
+            font-family: 'Centaur', serif;
+            font-style: normal;
+            font-weight: 100;
+            line-height: 1.2;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            overflow: visible;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            color: #e6ebff;
+            text-shadow: 0 0 16px rgba(151, 196, 255, 0.95), 0 0 34px rgba(174, 110, 255, 0.55);
+        }
+
+        .form-group input::placeholder {
+            color: #d6a550;
+            opacity: 0.7;
+            font-family: 'Centaur', serif;
+            font-style: normal;
+            font-weight: 100;
+        }
+
+        /* Override browser autofill styling */
+        .form-group input:-webkit-autofill,
+        .form-group input:-webkit-autofill:hover,
+        .form-group input:-webkit-autofill:focus,
+        .form-group input:-webkit-autofill:active {
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: #d6a550;
+            transition: background-color 5000s ease-in-out 0s;
+            box-shadow: inset 0 0 20px 20px transparent;
+            background-color: transparent !important;
+        }
+
+        .signup-btn {
+            background: url('art/text-button-field.png') center/contain no-repeat;
+            width: 550px;
+            max-width: 100vw;
+            height: 125px;
+            border: none;
+            background-color: transparent;
+            color: #d0d8ff;
+            font-size: 24px;
+            font-weight: 100;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+            font-family: 'Centaur', serif;
+            padding: 0 40px;
+            text-align: center;
+            text-shadow: 0 0 8px rgba(160, 190, 255, 0.85);
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            color: #e6ebff;
+            text-shadow: 0 0 14px rgba(160, 190, 255, 0.95), 0 0 30px rgba(174, 110, 255, 0.6);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider span {
+            color: #ffffff;
+            font-size: 14px;
+            font-family: 'Centaur', serif;
+        }
+
+        .social-buttons {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .discord-btn {
+            background: none;
+            width: 100%;
+            height: 100%;
+            border: none;
+            font-size: 34px;
+            font-weight: 100;
+            cursor: pointer;
+            color: #f2d37c;
+            font-family: 'Centaur', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 45px;
+            text-transform: none;
+            transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .discord-btn:hover,
+        .discord-btn:focus {
+            outline: none;
+            transform: translateY(-6px);
+            color: #ffe4a8;
+            text-shadow: 0 0 16px rgba(214, 165, 80, 0.6), 0 0 30px rgba(214, 165, 80, 0.35);
+        }
+
+        .discord-btn img {
+            width: 260px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 0 20px rgba(214, 165, 80, 0.55));
+        }
+
+        .discord-btn span {
+            letter-spacing: 1px;
+        }
+
+        .signup-info-footer {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 160px);
+            max-width: 1320px;
+            display: flex;
+            justify-content: center;
+            padding: 0 40px 14px;
+            pointer-events: none;
+        }
+
+        .legal-text {
+            font-size: 12px;
+            color: #ffffff;
+            line-height: 1.6;
+            font-family: 'Centaur', serif;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0;
+            pointer-events: auto;
+            background: rgba(7, 5, 3, 0.55);
+            padding: 12px 36px;
+            border-radius: 6px;
+        }
+
+        .legal-text a {
+            color: #d6a550;
+            text-decoration: none;
+        }
+
+        /* Name Entry Page Styles */
+        .name-entry-page {
+            background: url('art/challenge-webpage-background.png') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .name-entry-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('art/challenge-webpage-background-shadow-hue.png') center/cover;
+            z-index: 1;
+        }
+
+        .name-entry-container {
+            background: url('art/lightbox-medium.png') center/contain no-repeat;
+            width: 1000px;
+            height: 750px;
+            position: relative;
+            margin: 0 auto;
+            background-position: center center;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .name-entry-content {
+            text-align: left;
+            color: white;
+            z-index: 2;
+            width: 72%;
+            padding: 0 10px;
+            max-width: 640px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 125px;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .name-entry-body {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .stag-guidance {
+            font-family: 'Centaur', serif;
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .golden-swirl {
+            width: 450px;
+            max-width: 100%;
+            height: 70px;
+            background: url('art/divider.png') center/contain no-repeat;
+            margin: -20px auto 20px auto;
+        }
+
+        .name-question {
+            font-family: 'Centaur', serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 18px;
+            text-align: left;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .mysterious-signature {
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #ffffff;
+            text-align: left;
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 420px;
+            font-weight: 100;
+            align-self: flex-start;
+            margin-left: 65%;
+            margin-right: auto;
+        }
+
+        .name-input-container {
+            position: relative;
+            margin-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .name-input {
+            background: transparent;
+            border: none;
+            color: #d6a550;
+            font-family: 'Centaur', serif;
+            font-style: normal;
+            font-size: 1.3rem;
+            font-weight: 100;
+            padding: 0 25px;
+            text-align: center;
+            outline: none;
+            box-shadow: none;
+            width: 400px;
+            height: 55px;
+            position: absolute;
+            top: 5px;
+            z-index: 2;
+        }
+
+        .name-line {
+            background: url('art/character-name-line.png') center/contain no-repeat;
+            width: 400px;
+            height: 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .yellow-x {
+            position: absolute;
+            left: 40px;
+            top: 35%;
+            transform: translateY(-50%);
+            color: #d6a550;
+            font-family: 'Chiller', cursive;
+            font-style: normal;
+            font-size: 2rem;
+            font-weight: 100;
+            z-index: 3;
+        }
+
+        .name-input:focus {
+            outline: none;
+            box-shadow: none;
+            border: none;
+        }
+
+        .name-input::placeholder {
+            color: #d6a550;
+            opacity: 0.7;
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
+            font-weight: 100;
+        }
+
+        .hooded-figure {
+            position: absolute;
+            left: 38px;
+            top: 5px;
+            width: 300px;
+            height: 250px;
+            background: url('art/hooded-figure.png') center/contain no-repeat;
+            z-index: 1;
+        }
+
+        .stag-banner {
+            position: absolute;
+            right: 60px;
+            top: 45px;
+            width: 300px;
+            height: 250px;
+            background: url('art/axiom-flag.png') center/contain no-repeat;
+            z-index: 1;
+        }
+
+        /* Riddle Page Styles */
+        .riddle-page {
+            background: url('art/challenge-webpage-background.png') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .riddle-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('art/challenge-webpage-background-shadow-hue.png') center/cover;
+            z-index: 1;
+        }
+
+        .riddle-page .riddle-container,
+        .riddle-page .riddle-content {
+            opacity: 1;
+            transition: opacity 0.6s ease;
+        }
+
+        .riddle-page .riddle-container.is-transitioning,
+        .riddle-page .riddle-content.is-transitioning {
+            opacity: 0;
+        }
+
+        .riddle-content .stag-guidance,
+        .riddle-content .golden-swirl,
+        .riddle-content .mysterious-signature,
+        .riddle-dialog,
+        .riddle-question,
+        .trust-question,
+        .riddle-disclaimer {
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .riddle-container {
+            background: url('art/lightbox-medium.png') center/contain no-repeat;
+            width: 1000px;
+            height: 750px;
+            position: relative;
+            margin: 0 auto;
+            background-position: center center;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            opacity: 1;
+            transition: opacity 0.6s ease;
+        }
+
+        .riddle-container[data-riddle-id="8"],
+        .riddle-container[data-riddle-id="17"],
+        .riddle-container[data-riddle-id="21"] {
+            background: url('art/lightbox-XL.png') center/contain no-repeat;
+            width: 1200px;
+            height: 900px;
+        }
+
+        .riddle-content {
+            text-align: left;
+            color: white;
+            z-index: 2;
+            width: 72%;
+            padding: 0 10px;
+            max-width: 640px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 1;
+            transition: opacity 0.6s ease;
+        }
+
+        .riddle-dialog {
+            font-family: 'Centaur', serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            text-align: left;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .riddle-dialog p {
+            margin: 0;
+        }
+
+        .riddle-question {
+            font-family: 'Centaur', serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-top: 10px;
+            margin-bottom: 18px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .riddle-question.highlight {
+            color: #d6a550;
+        }
+
+        .trust-question {
+            color: #d6a550;
+        }
+
+        .riddle-input-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .riddle-input {
+            background: url('art/text-button-field.png') center/contain no-repeat;
+            width: 4725px;
+            height: 120px;
+            border: none;
+            background-color: transparent;
+            color: #d0d8ff;
+            font-size: 20px;
+            padding: 0 30px;
+            text-align: center;
+            font-family: 'Centaur', serif;
+            font-weight: 100;
+            text-shadow: 0 0 9px rgba(151, 196, 255, 0.8);
+            caret-color: transparent;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .riddle-input:focus {
+            outline: none;
+            color: #e6ebff;
+            text-shadow: 0 0 16px rgba(151, 196, 255, 0.95), 0 0 34px rgba(174, 110, 255, 0.55);
+        }
+
+        .riddle-input::placeholder {
+            color: rgba(208, 216, 255, 0.5);
+            font-family: 'Centaur', serif;
+        }
+
+        .riddle-input.success {
+            color: #6cd3a0;
+            text-shadow: 0 0 18px rgba(108, 211, 160, 0.45);
+        }
+
+        .riddle-input.error {
+            color: #ff7676;
+            text-shadow: 0 0 18px rgba(255, 118, 118, 0.6);
+        }
+
+        .riddle-hooded-figure {
+            position: absolute;
+            left: 60px;
+            top: -10px;
+            width: 300px;
+            height: 250px;
+            background: center/contain no-repeat;
+            z-index: 1;
+        }
+
+        .riddle-stag-banner {
+            position: absolute;
+            right: 60px;
+            top: 45px;
+            width: 300px;
+            height: 250px;
+            background: url('art/axiom-flag.png') center/contain no-repeat;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            position: fixed;
+            top: -12px;
+            left: 0;
+            width: 100vw;
+            height: 80px;
+            background: url('art/navbar.png') center top no-repeat;
+            background-size: 320% 80px;
+            z-index: 1000;
+            display: block;
+            pointer-events: none;
+        }
+
+        .nav-audio-toggle {
+            position: fixed;
+            top: 12px;
+            right: 36px;
+            width: 120px;
+            height: 32px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(12, 9, 6, 0.78);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            z-index: 1100;
+            pointer-events: auto;
+        }
+
+        .nav-audio-toggle:hover {
+            background: rgba(24, 18, 12, 0.92);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .nav-audio-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: #f4e3c1;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        .nav-audio-toggle.is-muted svg {
+            stroke: #ff6b6b;
+        }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 60px;
+            height: 4px;
+            background: rgba(214, 165, 80, 0.3);
+            border-radius: 2px;
+            outline: none;
+            flex: 1;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #f4e3c1;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #f4e3c1;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s ease;
+        }
+
+        .volume-slider::-moz-range-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .page-transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 2000;
+        }
+
+        .page-transition-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Button styles */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #3182ce;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2c5282;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .signup-content {
+                flex-direction: column;
+            }
+            
+            .signup-container {
+                margin: 10px;
+                padding: 20px;
+            }
+            
+            .name-entry-container,
+            .riddle-container {
+                width: 95%;
+                height: 650px;
+                margin: 0 auto;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .riddle-content {
+                top: 90px;
+            }
+            
+            .hooded-figure,
+            .riddle-hooded-figure {
+                left: 40px;
+                top: -7px;
+                width: 200px;
+                height: 180px;
+            }
+            
+            .stag-banner,
+            .riddle-stag-banner {
+                right: 36px;
+                top: 25px;
+                width: 200px;
+                height: 180px;
+            }
+            
+            .name-input {
+                width: 320px;
+                height: 45px;
+                font-size: 22px;
+                font-weight: 100;
+                top: 5px;
+            }
+            
+            .name-line {
+                width: 320px;
+                height: 80px;
+            }
+            
+            .yellow-x {
+                font-size: 22px;
+                font-weight: 100;
+                left: 30px;
+                top: 35%;
+            }
+            
+            .golden-swirl {
+                width: 360px;
+                height: 55px;
+            }
+            
+            .name-entry-content,
+            .riddle-content {
+                width: 82%;
+                max-width: 520px;
+                top: 100px;
+            }
+            
+            .riddle-input {
+                width: 3712px;
+                height: 100px;
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .signup-container {
+                margin: 5px;
+                padding: 15px;
+            }
+            
+            .name-entry-container,
+            .riddle-container {
+                width: 98%;
+                height: 550px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .hooded-figure,
+            .riddle-hooded-figure {
+                left: 30px;
+                top: -5px;
+                width: 150px;
+                height: 150px;
+            }
+            
+            .stag-banner,
+            .riddle-stag-banner {
+                right: 31px;
+                top: 20px;
+                width: 150px;
+                height: 150px;
+            }
+            
+            .name-input {
+                width: 260px;
+                height: 40px;
+                font-size: 20px;
+                font-weight: 100;
+                top: 5px;
+            }
+            
+            .name-line {
+                width: 260px;
+                height: 70px;
+            }
+            
+            .yellow-x {
+                font-size: 20px;
+                font-weight: 100;
+                left: 25px;
+                top: 35%;
+            }
+            
+            .golden-swirl {
+                width: 280px;
+                height: 45px;
+            }
+            
+            .name-entry-content,
+            .riddle-content {
+                top: 90px;
+                width: 86%;
+                max-width: 440px;
+            }
+            
+            .riddle-input {
+                width: 3037px;
+                height: 90px;
+                font-size: 20px;
+            }
+        }
+
+        .dev-console-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(6, 8, 12, 0.78);
+            backdrop-filter: blur(6px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 3200;
+            padding: 30px;
+        }
+
+        .dev-console-overlay.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .dev-console-modal {
+            width: min(960px, 100%);
+            max-height: 90vh;
+            background: rgba(18, 16, 12, 0.94);
+            border: 1px solid rgba(214, 165, 80, 0.45);
+            border-radius: 18px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .dev-console-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 26px;
+            background: linear-gradient(90deg, rgba(26, 20, 14, 0.98), rgba(36, 28, 20, 0.96));
+            border-bottom: 1px solid rgba(214, 165, 80, 0.35);
+        }
+
+        .dev-console-title {
+            font-size: 22px;
+            font-weight: 100;
+            color: #f2d37c;
+            letter-spacing: 0.04em;
+        }
+
+        .dev-console-close {
+            background: transparent;
+            border: none;
+            color: #f9ebe1;
+            font-size: 24px;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .dev-console-close:hover {
+            background: rgba(214, 165, 80, 0.18);
+            transform: scale(1.05);
+        }
+
+        .dev-console-body {
+            display: flex;
+            flex-direction: column;
+            padding: 20px 26px 26px;
+            gap: 18px;
+            overflow-y: auto;
+        }
+
+        .dev-console-auth {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .dev-console-auth label {
+            font-size: 16px;
+            color: #f9ebe1;
+        }
+
+        .dev-console-password-input {
+            width: 240px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(214, 165, 80, 0.4);
+            background: rgba(14, 12, 10, 0.9);
+            color: #f2d37c;
+            text-align: center;
+            font-size: 16px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .dev-console-password-input:focus {
+            outline: none;
+            border-color: rgba(255, 196, 120, 0.6);
+            box-shadow: 0 0 0 2px rgba(214, 165, 80, 0.25);
+        }
+
+        .dev-console-primary {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, rgba(214, 165, 80, 0.95), rgba(255, 210, 130, 0.95));
+            color: #2c1a07;
+            font-weight: 100;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .dev-console-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(214, 165, 80, 0.35);
+        }
+
+        .dev-console-secondary {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(214, 165, 80, 0.35);
+            background: rgba(20, 18, 16, 0.9);
+            color: #f9ebe1;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .dev-console-secondary:hover {
+            background: rgba(214, 165, 80, 0.22);
+            color: #f9ebe1;
+            transform: translateY(-1px);
+        }
+
+        .dev-console-tertiary {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(214, 165, 80, 0.32);
+            background: rgba(32, 26, 20, 0.92);
+            color: #f9ebe1;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .dev-console-tertiary:hover {
+            background: rgba(214, 165, 80, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .dev-console-tertiary.danger {
+            border-color: rgba(255, 107, 107, 0.45);
+            color: #ffb3b3;
+        }
+
+        .dev-console-tertiary.danger:hover {
+            background: rgba(255, 107, 107, 0.18);
+            color: #ffcfcf;
+        }
+
+        .dev-console-inline-actions,
+        .dev-console-riddle-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .dev-console-error {
+            color: #ff8a80;
+            font-size: 14px;
+            min-height: 18px;
+        }
+
+        .dev-console-menu {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .dev-console-menu button {
+            border-radius: 10px;
+            background: rgba(20, 18, 16, 0.9);
+            border: 1px solid rgba(214, 165, 80, 0.28);
+            color: #f9ebe1;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .dev-console-menu button:hover {
+            background: rgba(214, 165, 80, 0.18);
+        }
+
+        .dev-console-menu button.is-active {
+            background: rgba(214, 165, 80, 0.24);
+            border-color: rgba(214, 165, 80, 0.55);
+            color: #ffe7c2;
+        }
+
+        .dev-console-panels {
+            position: relative;
+        }
+
+        .dev-console-panel {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .dev-console-panel.is-active {
+            display: flex;
+        }
+
+        .dev-console-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .dev-console-panel-header h3 {
+            font-size: 18px;
+            color: #f2d37c;
+            font-weight: 100;
+        }
+
+        .dev-console-caption {
+            font-size: 14px;
+            color: rgba(249, 235, 225, 0.7);
+        }
+
+        .dev-console-list {
+            display: grid;
+            gap: 10px;
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .dev-console-list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(26, 22, 18, 0.9);
+            border: 1px solid rgba(214, 165, 80, 0.22);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: #f9ebe1;
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+        }
+
+        .dev-console-list-item:hover {
+            border-color: rgba(214, 165, 80, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .dev-console-list-item.is-active {
+            border-color: rgba(214, 165, 80, 0.65);
+            background: rgba(214, 165, 80, 0.18);
+        }
+
+        .dev-console-list-title {
+            font-weight: 100;
+            font-size: 16px;
+        }
+
+        .dev-console-list-subtitle {
+            font-size: 13px;
+            color: rgba(249, 235, 225, 0.65);
+            margin-left: 14px;
+        }
+
+        .dev-console-scroll {
+            max-height: 320px;
+            overflow-y: auto;
+            border-radius: 10px;
+            border: 1px solid rgba(214, 165, 80, 0.2);
+            background: rgba(26, 22, 18, 0.85);
+        }
+
+        .dev-console-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .dev-console-table th,
+        .dev-console-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(214, 165, 80, 0.12);
+            text-align: left;
+            color: #f9ebe1;
+        }
+
+        .dev-console-table th {
+            color: #f2d37c;
+            font-weight: 100;
+            background: rgba(214, 165, 80, 0.08);
+        }
+
+        .dev-console-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .dev-console-table tr.is-current td {
+            background: rgba(214, 165, 80, 0.12);
+        }
+
+        .dev-console-add-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .dev-console-add-form label {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: #f9ebe1;
+            font-size: 14px;
+        }
+
+        .dev-console-input,
+        .dev-console-textarea {
+            border: 1px solid rgba(214, 165, 80, 0.28);
+            background: rgba(18, 14, 10, 0.9);
+            color: #f9ebe1;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 14px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .dev-console-input:focus,
+        .dev-console-textarea:focus {
+            outline: none;
+            border-color: rgba(214, 165, 80, 0.5);
+            box-shadow: 0 0 0 2px rgba(214, 165, 80, 0.2);
+        }
+
+        .dev-console-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .dev-console-feedback {
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        .dev-console-feedback.success {
+            color: #9ae6b4;
+        }
+
+        .dev-console-feedback.error {
+            color: #ff8a80;
+        }
+
+        .dev-console-riddle-item {
+            border: 1px solid rgba(214, 165, 80, 0.18);
+            border-radius: 10px;
+            padding: 12px 14px;
+            background: rgba(24, 20, 16, 0.9);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .dev-console-riddle-item.is-custom {
+            border-color: rgba(151, 232, 255, 0.45);
+        }
+
+        .dev-console-riddle-editor {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+            border: 1px solid rgba(214, 165, 80, 0.2);
+            border-radius: 10px;
+            padding: 12px;
+            background: rgba(18, 16, 14, 0.9);
+        }
+
+        .dev-console-riddle-editor.is-visible {
+            display: flex;
+        }
+
+        .dev-console-riddle-editor {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+            border: 1px solid rgba(214, 165, 80, 0.2);
+            border-radius: 10px;
+            padding: 12px;
+            background: rgba(18, 16, 14, 0.9);
+        }
+
+        .dev-console-riddle-editor.is-visible {
+            display: flex;
+        }
+
+        .dev-console-riddle-title {
+            font-size: 16px;
+            font-weight: 100;
+            color: #f2d37c;
+        }
+
+        .dev-console-riddle-meta {
+            font-size: 13px;
+            color: rgba(249, 235, 225, 0.7);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .dev-console-riddle-question {
+            font-size: 14px;
+            color: rgba(249, 235, 225, 0.78);
+        }
+
+        .dev-console-tag {
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 12px;
+            background: rgba(151, 232, 255, 0.18);
+            color: #a8ecff;
+        }
+
+        .dev-console-muted {
+            color: rgba(249, 235, 225, 0.6);
+            font-size: 14px;
+        }
+
+        .dev-console-summary {
+            font-size: 14px;
+            color: rgba(249, 235, 225, 0.75);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .dev-console-modal {
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+            }
+
+            .dev-console-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-bar" id="navBar"></div>
+    <div class="nav-audio-toggle" id="audioToggle">
+        <svg viewBox="0 0 24 24" aria-hidden="true" id="audioIcon">
+            <!-- Speaker base -->
+            <path d="M5 9v6h3l5 5V4l-5 5H5z" class="speaker-base"></path>
+            <!-- Sound waves (visible when not muted) -->
+            <path d="M15 8.5a4 4 0 0 1 0 7" class="wave wave-1"></path>
+            <path d="M17 6.5a7 7 0 0 1 0 11" class="wave wave-2"></path>
+            <!-- X (visible when muted) -->
+            <path d="M16 9l4 4M20 9l-4 4" class="mute-x" style="display: none;"></path>
+        </svg>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="60" aria-label="Volume control">
+    </div>
+    <div class="page-transition-overlay" id="pageTransitionOverlay"></div>
+
+    <!-- Login/Sign Up Page -->
+    <div class="page intro-page" id="introPage">
+        <div class="intro-container">
+            <div class="intro-content">
+                <div class="youtube-frame">
+                    <video id="introVideo" preload="auto" controls poster="art/lightbox-texture.png">
+                        <track label="English" kind="captions" srclang="en" src="intro/Challenge_Intro_Video.vtt">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page signup-page" id="loginPage">
+        <div class="signup-container">
+            <div class="signup-content">
+                <div class="login-form-container">
+                    <h2 class="signup-title" id="pageTitle">Log In</h2>
+                    <p class="login-link" id="pageLink">Don't have an account? <a href="#" onclick="toggleLoginSignup()">Sign Up</a></p>
+                    
+                    <div class="signup-form">
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Email" maxlength="50" required>
+                        </div>
+                        <div class="form-group" id="confirmEmailGroup" style="display: none;">
+                            <input type="email" id="confirmEmail" placeholder="Confirm Email" maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="password" placeholder="Password" maxlength="30" required>
+                        </div>
+                        <div class="form-group" id="confirmPasswordGroup" style="display: none;">
+                            <input type="password" id="confirmPassword" placeholder="Confirm Password" maxlength="30">
+                        </div>
+                        <button class="signup-btn" id="submitBtn" onclick="handleSubmit()">Log In</button>
+                    </div>
+                </div>
+
+                <div class="login-divider-stack">
+                    <img src="art/divider.png" alt="Login divider" class="divider-left">
+                    <img src="art/divider.png" alt="Login divider" class="divider-right">
+                </div>
+                
+                <div class="social-container">
+                    <div class="social-buttons">
+                        <button class="discord-btn" onclick="handleSocialLogin('discord')">
+                            <img src="art/discordicon1.png" alt="Discord icon">
+                            <span>Continue with discord</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="signup-info-footer">
+                <div class="legal-text" id="legalText" style="display: none;">
+                    <p>This website is not affiliated with, endorsed by, or sponsored by Intrepid Studios. All assets, imagery, and content related to Ashes of Creation are the property of Intrepid Studios, Inc. and are used here for informational and fan content purposes only.</p>
+                    <p>All rights reserved by their respective owners.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Name Entry Page -->
+    <div class="page name-entry-page" id="nameEntryPage">
+        <div class="name-entry-container">
+            <div class="hooded-figure"></div>
+            <div class="stag-banner"></div>
+            <div class="name-entry-content">
+                <div class="stag-guidance">The Stag has guided you well...</div>
+                <div class="golden-swirl"></div>
+                <div class="name-entry-body">
+                    <div class="name-question">Speak quickly Traveler! What is your name?</div>
+                    <div class="mysterious-signature">- Mysterious Figure</div>
+                </div>
+                <div class="name-input-container">
+                    <input type="text" class="name-input" id="playerName" placeholder="Type Your Name Here" maxlength="25">
+                    <div class="name-line">
+                        <div class="yellow-x">- X</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Riddle Page -->
+    <div class="page riddle-page" id="riddlePage">
+        <div class="riddle-container">
+            <div class="riddle-hooded-figure"></div>
+            <div class="riddle-stag-banner"></div>
+            <div class="riddle-content" id="riddleContent">
+                <div class="stag-guidance" id="riddleHeading">The Stag has guided you well...</div>
+                <div class="golden-swirl"></div>
+                <div class="riddle-dialog" id="riddleDialog">
+                    <p>Traveler,</p>
+                    <p>So, you want to join our ranks? We applaud you for making it this far. Time is short and desperate times call for desperate measures. Only your dedication and perserverence will prove that. But can we trust you?</p>
+                    <div class="riddle-question">But can we trust you? If we can't... <span class="trust-question">who can we trust?</span></div>
+                </div>
+                <div class="riddle-disclaimer" id="riddleDisclaimer" style="display: none;"></div>
+                <div class="mysterious-signature" id="riddleSignature">- Mysterious Figure</div>
+                <div class="riddle-input-container">
+                    <input type="text" class="riddle-input" id="riddleAnswer" placeholder="Enter Text Here" maxlength="25">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dev-console-overlay" id="devConsoleOverlay" aria-hidden="true">
+        <div class="dev-console-modal" role="dialog" aria-modal="true" aria-labelledby="devConsoleTitle">
+            <div class="dev-console-header">
+                <div class="dev-console-title" id="devConsoleTitle">Developer Console</div>
+                <button type="button" class="dev-console-close" id="devConsoleClose" aria-label="Close developer console">×</button>
+            </div>
+            <div class="dev-console-body" id="devConsoleBody">
+                <div class="dev-console-auth" id="devConsoleLock">
+                    <label for="devConsolePassword">Enter developer password to continue</label>
+                    <input id="devConsolePassword" class="dev-console-password-input" type="password" autocomplete="off" placeholder="Password">
+                    <button type="button" class="dev-console-primary" id="devConsoleUnlock">Unlock</button>
+                    <div class="dev-console-error" id="devConsoleError" role="alert"></div>
+                </div>
+                <div class="hidden" id="devConsoleContent">
+                    <div class="dev-console-menu" role="tablist" aria-label="Developer console views">
+                        <button type="button" class="is-active" data-panel="navigate" role="tab" aria-selected="true">Navigate Pages</button>
+                        <button type="button" data-panel="accounts" role="tab" aria-selected="false">Accounts</button>
+                        <button type="button" data-panel="addRiddle" role="tab" aria-selected="false">Add Riddle</button>
+                        <button type="button" data-panel="riddles" role="tab" aria-selected="false">Riddle Library</button>
+                    </div>
+                    <div class="dev-console-panels">
+                        <div class="dev-console-panel is-active" id="devConsolePanel-navigate" role="tabpanel">
+                            <div class="dev-console-panel-header">
+                                <h3>Jump to Page</h3>
+                                <div class="dev-console-caption">Select a page to switch immediately</div>
+                            </div>
+                            <div class="dev-console-list" id="devConsolePageList"></div>
+                        </div>
+                        <div class="dev-console-panel" id="devConsolePanel-accounts" role="tabpanel">
+                            <div class="dev-console-panel-header">
+                                <h3>Accounts</h3>
+                                <div class="dev-console-caption">Stored user accounts from local storage</div>
+                                <div class="dev-console-inline-actions">
+                                    <button type="button" class="dev-console-tertiary" id="devConsoleClearAccounts">Delete All Accounts</button>
+                                </div>
+                            </div>
+                            <div class="dev-console-scroll">
+                                <table class="dev-console-table" id="devConsoleAccountsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Password</th>
+                                            <th>Player Name</th>
+                                            <th>Provider</th>
+                                            <th>Created</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div class="dev-console-summary" id="devConsoleAccountsSummary"></div>
+                        </div>
+                        <div class="dev-console-panel" id="devConsolePanel-addRiddle" role="tabpanel">
+                            <div class="dev-console-panel-header">
+                                <h3>Add Custom Riddle</h3>
+                                <div class="dev-console-caption">Create a new riddle entry for future challenges</div>
+                            </div>
+                            <form id="devConsoleAddRiddleForm" class="dev-console-add-form">
+                                <label>
+                                    Riddle Question
+                                    <textarea id="devConsoleRiddleQuestion" class="dev-console-textarea" placeholder="Enter the riddle question" required></textarea>
+                                </label>
+                                <label>
+                                    Answers (comma separated)
+                                    <input id="devConsoleRiddleAnswers" class="dev-console-input" type="text" placeholder="Answer 1, Answer 2" required>
+                                </label>
+                                <label>
+                                    Signature / Attribution
+                                    <input id="devConsoleRiddleSignature" class="dev-console-input" type="text" placeholder="Optional signature">
+                                </label>
+                                <div>
+                                    <button type="submit" class="dev-console-primary">Save Riddle</button>
+                                    <button type="button" class="dev-console-secondary" id="devConsoleResetForm">Reset</button>
+                                </div>
+                                <div class="dev-console-feedback" id="devConsoleRiddleFeedback"></div>
+                            </form>
+                        </div>
+                        <div class="dev-console-panel" id="devConsolePanel-riddles" role="tabpanel">
+                            <div class="dev-console-panel-header">
+                                <h3>Riddle Library</h3>
+                                <div class="dev-console-caption">Manage base and custom riddles</div>
+                                <div class="dev-console-inline-actions">
+                                    <button type="button" class="dev-console-tertiary" id="devConsoleExportRiddles">Export JSON</button>
+                                    <button type="button" class="dev-console-tertiary" id="devConsoleImportRiddles">Import JSON</button>
+                                </div>
+                            </div>
+                            <div class="dev-console-list" id="devConsoleRiddleList"></div>
+                            <input type="file" id="devConsoleRiddleImportInput" class="hidden" accept="application/json">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Page management
+        let currentPage = localStorage.getItem('currentPage') || 'login';
+        let isLoginMode = true; // true for login, false for signup
+        
+        const INTRO_RIDDLE_ID = 'intro';
+        const SECOND_RIDDLE_ID = 2;
+        const TOTAL_RIDDLE_COUNT = 10;
+        const RIDDLE_ADVANCE_DELAY_MS = 3000;
+        const RIDDLE_TRANSITION_DELAY_MS = 450;
+
+        const FIGURE_IMAGE_MAP = {
+            hooded: 'art/hooded-figure.png',
+            xenith: 'art/xenith-bust.png',
+            angelcry: 'art/angel-bust.png'
+        };
+        const FIGURE_VARIANT_KEY = 'figureVariant';
+        const QUEUED_FIGURE_VARIANT_KEY = 'queuedFigureVariant';
+        const ACTIVE_CHALLENGE_KEY = 'activeRiddleState';
+
+        let activeRiddleChallenge = null;
+        let pendingRiddleAdvanceTimeout = null;
+        let pendingErrorRemovalTimeout = null;
+        const DEV_CONSOLE_PASSWORD = 'test123';
+        const DEV_CONSOLE_STORAGE_KEY = 'customRiddles';
+        const DEV_CONSOLE_RIDDLE_OVERRIDES_KEY = 'customRiddleOverrides';
+        const DEV_CONSOLE_REMOVED_RIDDLES_KEY = 'removedRiddleIds';
+        const DEV_CONSOLE_UNLOCK_TIMEOUT_MS = 120000;
+        const DEV_CONSOLE_PAGES = [
+            { id: 'login', label: 'Login' },
+            { id: 'signup', label: 'Sign Up' },
+            { id: 'intro', label: 'Intro Video' },
+            { id: 'nameEntry', label: 'Name Entry' },
+            { id: 'riddle', label: 'Riddle Challenge' }
+        ];
+
+        const DevConsoleState = {
+            isVisible: false,
+            isUnlocked: false,
+            unlockExpiresAt: 0,
+            recentKeypressCount: 0,
+            lastKeyTime: 0,
+            activePanel: 'navigate',
+            elements: {}
+        };
+
+        function normalizeAnswer(value) {
+            return (value || '')
+                .toString()
+                .trim()
+                .toLowerCase()
+                .replace(/[\\u2019']/g, '')
+                .replace(/[^a-z0-9]/g, '');
+        }
+
+        const BASE_RIDDLE_DEFINITIONS = [
+            {
+                id: INTRO_RIDDLE_ID,
+                heading: 'The Stag has guided you well...',
+                white: [
+                    '<player>,',
+                    'So, you want to join our ranks? We applaud you for making it this far. Time is short and desperate times call for desperate measures. Only your dedication and perseverance will prove that. But can we trust you?'
+                ],
+                yellow: "If we can't... who can we trust?",
+                highlightToken: 'who can we trust?',
+                signature: '- Mysterious Figure',
+                isIntro: true,
+                allowGuildMemberAnswers: true
+            },
+            {
+                id: 2,
+                heading: "So you've finally found me...",
+                white: [
+                    'Greetings,',
+                    "Apologies for the secrecy. Verra is a dangerous place, and the trial has only just begun. The path ahead won't be easy--but I have faith in you."
+                ],
+                yellow: "Eternal guardian of temporal flow, witnessing ages come and go. Her watchful gaze oversees the chime, regulating the sands of time. Who is this warden of endless ages, chronicling history's turning pages?",
+                answers: ['goddess of time', 'aeterna']
+            },
+            {
+                id: 3,
+                heading: 'Move with purpose...',
+                white: ['The past is riddled with forgotten truths. Let’s bring them back to light.'],
+                yellow: "In shadows deep where whispers play, I tread with grace at break of day. A crown I wear, though not of gold, In autumn’s chill, my tale is told. What am I?",
+                answers: ['stag', 'a stag']
+            },
+            {
+                id: 4,
+                heading: 'Time is against us...',
+                white: ["The shadows have whispered of your arrival. I hope you're as skilled as they say."],
+                yellow: "In hearts of beings, a radiant spark, dispelling shadows, banishing dark. His essence fuels the drive to cope, instilling courage, fostering hope. Who is this deity of uplifting force, guiding souls on their destined course?",
+                answers: ['god of hope', 'resna']
+            },
+            {
+                id: 5,
+                heading: 'The past is riddled with forgotten truths...',
+                white: ["The shadows have whispered of your arrival. I hope you're as skilled as they say."],
+                yellow: "Two divine sisters, bound by trust, One shaped worlds, the other discussed. A warning whispered, dark forces wait, Who foresaw this tragic fate?",
+                answers: ['goddess of fate']
+            },
+            {
+                id: 6,
+                heading: 'Trust nothing but your wit, and even that may fail you...',
+                white: ['The stars align only for the worthy. Prove yourself.'],
+                yellow: "Foreseeing threads of future's weave, she warned of trials, urged to believe. Guiding preparation for the Underrealm, her prophecies whispered in the ear. Who is this seer of destiny's course, mapping fate's path from its source?",
+                answers: ['goddess of fate', 'norlan']
+            },
+            {
+                id: 7,
+                heading: 'A hidden enemy watches from the shadows. Can you outsmart them?',
+                white: ['The past is riddled with forgotten truths. Let’s bring them back to light.'],
+                yellow: "A realm was forged, both new and bright, Yet shadows stirred beyond its light. Their defeat was not the end, What vile foes would rise again?",
+                answers: ['the ancients', 'ancients', 'the others']
+            },
+            {
+                id: 8,
+                heading: 'You’ve done well so far, but the hardest trials remain.',
+                white: [
+                    '<player>,',
+                    "So, you're smarter than a goblin. Congratulations, but don't get cocky! We have a caravan delivering some resistive supplies to one of our outposts. But they're late. Find them and help them complete their mission.",
+                    'The only information we have in regard to their whereabouts is this map with a note attached:'
+                ],
+                yellow: "In a land where legends loom, A fortress guards a flower in full plume. Petals of steel, a gleaming hue, Strength and magic in every dew. What is this place where wonders grow, A haven of power few will know?",
+                answers: ['steel bloom', 'citadel of the steel bloom'],
+                disclaimer: 'Placeholder -- classified intelligence pending.'
+            },
+            {
+                id: 9,
+                heading: 'You’ve done well so far, but the hardest trials remain.',
+                white: ['No challenge is too great for those who persevere. Step into the unknown and prove yourself. You’re closer than you think. Keep going.'],
+                yellow: "From essence pure, creation sprung, by divine hands, songs were sung. A goddess's touch ignited the flame, bringing forth life, bestowing name. Who is this deity of birthing light, crafting worlds from boundless might?",
+                answers: ['goddess of creation', 'vyra']
+            },
+            {
+                id: 10,
+                heading: 'Your choices will have consequences.',
+                white: ['I believe in you. Now prove me right. You didn’t come this far for nothing.'],
+                yellow: "Banished to realms devoid of grace, the defeated found a desolate place. Stripped of power, in shadows they reside, plotting return with vengeful pride. Where were these fallen exiles sent, a place of darkness and lament?",
+                answers: ['the void', 'void']
+            },
+            {
+                id: 11,
+                heading: 'Your choices will have consequences.',
+                white: ['Show them what you’re capable of. But be careful. Others have tried and failed.'],
+                yellow: "A goddess, wise, prepared the way, For those who'd flee the darkened fray. A world was made, a distant shore, What was its name forevermore?",
+                answers: ['sanctus']
+            },
+            {
+                id: 12,
+                heading: 'Some knowledge is best left untouched...',
+                white: ['Not all answers bring comfort. Solving this may unlock something… dangerous.'],
+                yellow: "Opposing the triad's daring course, deities stood firm with righteous force. They battled to banish, to set things right, casting out darkness to restore the light. Who are these guardians of order and truth, defenders of creation since its youth?",
+                answers: ['the seven', 'seven']
+            },
+            {
+                id: 13,
+                heading: 'Time for the next test. Let’s begin.',
+                white: ['I expect nothing less than brilliance from you. You were meant for this adventure.'],
+                yellow: "A bridge between the worlds was set, A path unknown, a fate unmet. By gods' design, a door was made, What is this bridge, through light and shade?",
+                answers: ['divine gateways', 'the divine gateways']
+            },
+            {
+                id: 14,
+                heading: 'You have a sharp mind. Put it to good use.',
+                white: ['You’ve proven yourself before. Do it again. There’s no one better suited for this than you.'],
+                yellow: "Three of ten, with secrets to impart, taught forbidden truths, a rebellious start. Elevating mortals to divine estate, leading to conflict and a fractured fate. Who are these mentors of hidden lore, whose actions ignited divine war?",
+                answers: ['the others', 'others']
+            },
+            {
+                id: 15,
+                heading: 'Your instincts haven’t failed you yet...',
+                white: ['Some journeys are measured in miles. Yours is measured in decisions.'],
+                yellow: "In times of old, when danger was nigh, They sought refuge where shadows lie. A blend of races, united and strong, In the depths they waited, enduring long. Who emerged from darkness to the light, A testament to survival's might?",
+                answers: ['tulnar', 'the tulnar']
+            },
+            {
+                id: 16,
+                heading: 'One wrong step and you might never get another...',
+                white: ['At the heart of every mystery is a simple truth. You just have to find it.'],
+                yellow: "From distant voids, they made their way, Through twisted doors of dark decay. A gateway born from dread and fright, What name is given to this blight?",
+                answers: ['harbingers', 'the harbingers']
+            },
+            {
+                id: 17,
+                heading: 'A keen eye and a sharp mind—that’s what will get you through this.',
+                white: ['If you succeed, your name will be remembered. If you fail, no one will ever know you were here.'],
+                yellow: "In the heart of dense forests, under canopies green, Nature's guardians dwell, rarely seen. With pointed ears and a bond to the land, They wield ancient magic with a gentle hand. Who are these beings of the woodland realm, With nature's power at their helm?",
+                answers: ["py'rai", "pyr'ai", 'pyrai'],
+                disclaimer: 'Placeholder -- awaiting verification.'
+            },
+            {
+                id: 18,
+                heading: 'You’ve handled worse. This should be no different.',
+                white: ['You smell that? That’s the scent of something rotten lurking nearby.'],
+                yellow: "A world once bright, now cloaked in dread, Its trees defiled, its rivers bled. A force unseen yet felt so deep, What twisted all and made gods weep?",
+                answers: ['corruption']
+            },
+            {
+                id: 19,
+                heading: 'No hesitation. No doubt. Just action.',
+                white: ['You’ve got the brains. Now show me you’ve got the nerve.'],
+                yellow: "Not of flesh, yet part of you, A tethered link both old and new. Through planes unknown, it makes its flight, What guides your being beyond the night?",
+                answers: ['soul', 'a soul']
+            },
+            {
+                id: 20,
+                heading: 'Your next decision could be your last. Choose carefully.',
+                white: ['You carry yourself like someone who knows what they’re doing. Let’s hope that’s true. They’re expecting you to fail. Prove them wrong.'],
+                yellow: "A power pure yet darkly split, It shapes the world as gods see fit. Yet twisted hands can bring its doom, What force was tainted to consume?",
+                answers: ['essence']
+            },
+            {
+                id: 21,
+                heading: 'A song of The Seven...',
+                white: ['We’ve recently come across an ancient artifact. It looks to be sealed by magic. Only the proper notes will unlock its secrets.'],
+                yellow: "From skies above, a blazing flight,Turning day into endless night.With searing breath, it scorches the land,Summoning embers at its command. A name of flame, both feared and grand—",
+                answers: ['firebrand'],
+                disclaimer: 'Placeholder -- melody required.'
+            }
+        ];
+
+        const RIDDLE_DEFINITIONS = BASE_RIDDLE_DEFINITIONS.map(def => ({
+            ...def,
+            normalizedAnswers: new Set((def.answers || []).map(normalizeAnswer).filter(Boolean))
+        }));
+
+        const RIDDLE_DEFINITION_MAP = RIDDLE_DEFINITIONS.reduce((acc, def) => {
+            acc[def.id] = def;
+            return acc;
+        }, {});
+
+        function shuffleArray(source) {
+            const array = source.slice();
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function applyPlayerName(text, playerName) {
+            if (!text) {
+                return '';
+            }
+            const name = playerName || 'Traveler';
+            return text
+                .replace(/<player>/gi, name)
+                .replace(/<username>/gi, name)
+                .replace(/<applicant profile name>/gi, name)
+                .replace(/<name>/gi, name);
+        }
+
+        function getGuildMemberNames() {
+            try {
+                const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+                return Array.from(
+                    new Set(
+                        Object.values(accounts)
+                            .map(account => (account && account.playerName ? account.playerName.trim() : ''))
+                            .filter(Boolean)
+                    )
+                );
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function getActivePlayerName() {
+            const currentUser = getCurrentUser();
+            if (currentUser && currentUser.playerName) {
+                return currentUser.playerName;
+            }
+            const nameInput = document.getElementById('playerName');
+            if (nameInput && nameInput.value.trim()) {
+                return nameInput.value.trim();
+            }
+            return 'Traveler';
+        }
+
+        function applyFigureVariant(variant) {
+            const normalized = FIGURE_IMAGE_MAP[variant] ? variant : 'hooded';
+            localStorage.setItem(FIGURE_VARIANT_KEY, normalized);
+
+            const imageUrl = FIGURE_IMAGE_MAP[normalized];
+            document.querySelectorAll('.hooded-figure, .riddle-hooded-figure').forEach(el => {
+                el.style.backgroundImage = `url('${imageUrl}')`;
+            });
+        }
+
+        function setQueuedFigureVariant(variant) {
+            const normalized = FIGURE_IMAGE_MAP[variant] ? variant : 'hooded';
+            localStorage.setItem(QUEUED_FIGURE_VARIANT_KEY, normalized);
+        }
+
+        function flushQueuedFigureVariant() {
+            const queued = localStorage.getItem(QUEUED_FIGURE_VARIANT_KEY);
+            if (queued) {
+                applyFigureVariant(queued);
+                localStorage.removeItem(QUEUED_FIGURE_VARIANT_KEY);
+            }
+        }
+
+        function restoreFigureVariant() {
+            const stored = localStorage.getItem(FIGURE_VARIANT_KEY) || 'hooded';
+            applyFigureVariant(stored);
+        }
+
+        function buildRiddleChallenge(playerName, variant = localStorage.getItem(FIGURE_VARIANT_KEY) || 'hooded') {
+            const intro = RIDDLE_DEFINITION_MAP[INTRO_RIDDLE_ID];
+            const second = RIDDLE_DEFINITION_MAP[SECOND_RIDDLE_ID];
+
+            const pool = RIDDLE_DEFINITIONS.filter(riddle =>
+                riddle.id !== INTRO_RIDDLE_ID && riddle.id !== SECOND_RIDDLE_ID
+            );
+
+            const riddles = [];
+            if (intro) {
+                riddles.push(intro);
+            }
+
+            if (second) {
+                const signatureVariant = variant === 'angelcry' ? '- Angelcry' : '- Xenith';
+            riddles.push({ ...second, signature: signatureVariant });
+            }
+
+            const remainingSlots = Math.max(0, TOTAL_RIDDLE_COUNT - riddles.length);
+            if (remainingSlots > 0) {
+            const selection = shuffleArray(pool)
+                .slice(0, remainingSlots)
+                .map(riddle => ({ ...riddle }));
+            riddles.push(...selection);
+            }
+
+            return {
+                playerName: playerName || 'Traveler',
+                index: 0,
+                riddles,
+                completed: false,
+                variant
+            };
+        }
+
+        function clearPendingRiddleAdvance() {
+            if (pendingRiddleAdvanceTimeout) {
+                clearTimeout(pendingRiddleAdvanceTimeout);
+                pendingRiddleAdvanceTimeout = null;
+            }
+        }
+
+        function clearPendingErrorRemoval() {
+            if (pendingErrorRemovalTimeout) {
+                clearTimeout(pendingErrorRemovalTimeout);
+                pendingErrorRemovalTimeout = null;
+            }
+        }
+
+        function clearActiveChallengeState() {
+            localStorage.removeItem(ACTIVE_CHALLENGE_KEY);
+            localStorage.removeItem(FIGURE_VARIANT_KEY);
+            localStorage.removeItem(QUEUED_FIGURE_VARIANT_KEY);
+            clearPendingRiddleAdvance();
+            activeRiddleChallenge = null;
+        }
+
+        function getIntroAnswerSet(playerName) {
+            const answers = new Set();
+            ['xenith', 'angelcry'].forEach(answer => answers.add(answer));
+            return answers;
+        }
+
+        function isAnswerCorrect(riddle, answer, playerName) {
+            if (!riddle) {
+                return false;
+            }
+            const normalizedAnswer = normalizeAnswer(answer);
+            if (!normalizedAnswer) {
+                return false;
+            }
+            if (riddle.allowGuildMemberAnswers) {
+                return getIntroAnswerSet(playerName).has(normalizedAnswer);
+            }
+            return riddle.normalizedAnswers.has(normalizedAnswer);
+        }
+
+        function createQuestionElement(riddle, playerName) {
+            const questionElement = document.createElement('div');
+            questionElement.id = 'riddleQuestion';
+            questionElement.className = 'riddle-question';
+
+            const isIntroRiddle = Boolean(riddle && riddle.isIntro);
+            if (!isIntroRiddle) {
+                questionElement.classList.add('highlight');
+            }
+
+            const questionText = applyPlayerName(riddle ? riddle.yellow : '', playerName);
+            if (riddle && riddle.highlightToken) {
+                const token = riddle.highlightToken;
+                const lowerText = questionText.toLowerCase();
+                const lowerToken = token.toLowerCase();
+                const tokenIndex = lowerText.indexOf(lowerToken);
+                if (tokenIndex !== -1) {
+                    const before = questionText.slice(0, tokenIndex);
+                    const middle = questionText.slice(tokenIndex, tokenIndex + token.length);
+                    const after = questionText.slice(tokenIndex + token.length);
+                    if (before) {
+                        questionElement.appendChild(document.createTextNode(before));
+                    }
+                    const highlightSpan = document.createElement('span');
+                    highlightSpan.className = 'trust-question';
+                    highlightSpan.textContent = middle;
+                    questionElement.appendChild(highlightSpan);
+                    if (after) {
+                        questionElement.appendChild(document.createTextNode(after));
+                    }
+                    return questionElement;
+                }
+            }
+
+            questionElement.textContent = questionText;
+            return questionElement;
+        }
+
+        function renderRiddleView(riddle, playerName, options = {}) {
+            const content = document.getElementById('riddleContent');
+            const headingEl = document.getElementById('riddleHeading');
+            const dialogEl = document.getElementById('riddleDialog');
+            const signatureEl = document.getElementById('riddleSignature');
+            const disclaimerEl = document.getElementById('riddleDisclaimer');
+            const inputEl = document.getElementById('riddleAnswer');
+
+            if (!content || !headingEl || !dialogEl || !inputEl) {
+                return;
+            }
+
+            // Clear any pending error removal timeout
+            clearPendingErrorRemoval();
+
+            // Set riddle ID on container for CSS targeting
+            const container = content.closest('.riddle-container');
+            if (container && riddle.id) {
+                container.setAttribute('data-riddle-id', riddle.id);
+            }
+
+            const updateContent = () => {
+                headingEl.textContent = applyPlayerName(riddle.heading, playerName);
+
+                dialogEl.innerHTML = '';
+                const whiteSegments = Array.isArray(riddle.white) ? riddle.white : (riddle.white ? [riddle.white] : []);
+                whiteSegments.forEach(segment => {
+                    const resolved = applyPlayerName(segment, playerName);
+                    if (!resolved) {
+                        return;
+                    }
+                    const paragraph = document.createElement('p');
+                    paragraph.textContent = resolved;
+                    dialogEl.appendChild(paragraph);
+                });
+                dialogEl.appendChild(createQuestionElement(riddle, playerName));
+
+                if (disclaimerEl) {
+                    if (riddle.disclaimer) {
+                        disclaimerEl.style.display = 'block';
+                        disclaimerEl.textContent = applyPlayerName(riddle.disclaimer, playerName);
+                    } else {
+                        disclaimerEl.style.display = 'none';
+                        disclaimerEl.textContent = '';
+                    }
+                }
+
+                if (signatureEl) {
+                    if (riddle.signature) {
+                        signatureEl.style.display = 'block';
+                        signatureEl.textContent = applyPlayerName(riddle.signature, playerName);
+                    } else {
+                        signatureEl.style.display = 'none';
+                        signatureEl.textContent = '';
+                    }
+                }
+
+                inputEl.classList.remove('success', 'error');
+
+                if (options.inputValue !== undefined) {
+                    inputEl.value = options.inputValue;
+                } else {
+                    inputEl.value = '';
+                }
+
+                const placeholderText = options.inputPlaceholder !== undefined
+                    ? options.inputPlaceholder
+                    : (riddle.placeholder || 'Enter Text Here');
+                inputEl.placeholder = placeholderText;
+
+                const shouldDisable = Boolean(options.disableInput);
+                inputEl.disabled = shouldDisable;
+            if (!shouldDisable) {
+                inputEl.focus({ preventScroll: true });
+            }
+
+            requestAnimationFrame(() => adjustRiddleContainer());
+            };
+
+            if (options.useTransition) {
+                content.classList.add('is-transitioning');
+                const container = content.closest('.riddle-container');
+                if (container) {
+                    container.classList.add('is-transitioning');
+                }
+
+                setTimeout(() => {
+                    updateContent();
+
+                    requestAnimationFrame(() => {
+                        content.classList.remove('is-transitioning');
+                        if (container) {
+                            container.classList.remove('is-transitioning');
+                        }
+                    });
+                }, RIDDLE_TRANSITION_DELAY_MS);
+            } else {
+                updateContent();
+                content.classList.remove('is-transitioning');
+                const container = content.closest('.riddle-container');
+                if (container) {
+                    container.classList.remove('is-transitioning');
+                }
+            }
+        }
+
+        function renderIntroOnly(playerName) {
+            const intro = RIDDLE_DEFINITION_MAP[INTRO_RIDDLE_ID];
+            if (!intro) {
+                return;
+            }
+            renderRiddleView(intro, playerName, { useTransition: false });
+            flushQueuedFigureVariant();
+        }
+
+        function renderCurrentChallengeRiddle(useTransition) {
+            if (!activeRiddleChallenge || !activeRiddleChallenge.riddles.length) {
+                return;
+            }
+            const current = activeRiddleChallenge.riddles[activeRiddleChallenge.index];
+            renderRiddleView(current, activeRiddleChallenge.playerName, { useTransition: Boolean(useTransition) });
+            flushQueuedFigureVariant();
+        }
+
+        function renderChallengeCompletion(playerName) {
+            clearPendingRiddleAdvance();
+            const completionRiddle = {
+                heading: `Stand tall, ${playerName}.`,
+                white: ['You have conquered every riddle set before you.'],
+                yellow: 'Await further orders. Your dedication has been noted.',
+                signature: '- Mysterious Figure',
+                placeholder: 'Challenge Complete'
+            };
+            renderRiddleView(completionRiddle, playerName, {
+                useTransition: true,
+                disableInput: true,
+                inputValue: '',
+                inputPlaceholder: 'Challenge Complete'
+            });
+            const inputEl = document.getElementById('riddleAnswer');
+            if (inputEl) {
+                inputEl.classList.add('success');
+            }
+        }
+        
+        function maybeStartRiddleChallenge(playerName, answer) {
+            const normalizedAnswer = normalizeAnswer(answer);
+            if (!['xenith', 'angelcry'].includes(normalizedAnswer)) {
+                activeRiddleChallenge = null;
+                return false;
+            }
+            setQueuedFigureVariant(normalizedAnswer);
+            if (
+                !activeRiddleChallenge ||
+                normalizeAnswer(activeRiddleChallenge.playerName) !== normalizeAnswer(playerName)
+            ) {
+                clearPendingRiddleAdvance();
+                activeRiddleChallenge = buildRiddleChallenge(playerName, normalizedAnswer);
+            } else {
+                activeRiddleChallenge.playerName = playerName;
+            }
+            activeRiddleChallenge.variant = normalizedAnswer;
+            return true;
+        }
+
+        function prepareRiddleView() {
+            const contentExists = document.getElementById('riddleContent');
+            if (!contentExists) {
+                return;
+            }
+            clearPendingRiddleAdvance();
+            const playerName = getActivePlayerName();
+            const restored = restoreActiveChallenge();
+
+            if (restored) {
+                activeRiddleChallenge = restored;
+                localStorage.setItem(FIGURE_VARIANT_KEY, restored.variant || 'hooded');
+                if (restored.completed) {
+                    renderChallengeCompletion(restored.playerName);
+                } else if (restored.index === 0 && restored.riddles[0]?.id === INTRO_RIDDLE_ID) {
+                    setQueuedFigureVariant('hooded');
+                    renderIntroOnly(restored.playerName);
+                } else {
+                    renderCurrentChallengeRiddle(false);
+                }
+            } else {
+                activeRiddleChallenge = null;
+                renderIntroOnly(playerName);
+            }
+        }
+
+        function advanceRiddle() {
+            if (!activeRiddleChallenge) {
+                return;
+            }
+            if (activeRiddleChallenge.index >= activeRiddleChallenge.riddles.length - 1) {
+                finalizeRiddleChallenge();
+                return;
+            }
+            activeRiddleChallenge.index += 1;
+            setQueuedFigureVariant(activeRiddleChallenge.variant);
+            renderCurrentChallengeRiddle(true);
+            saveActiveChallenge();
+        }
+
+        function finalizeRiddleChallenge() {
+            if (!activeRiddleChallenge || activeRiddleChallenge.completed) {
+                return;
+            }
+            activeRiddleChallenge.completed = true;
+            renderChallengeCompletion(activeRiddleChallenge.playerName);
+        }
+
+        function handleRiddleSubmission(answer) {
+            const inputEl = document.getElementById('riddleAnswer');
+            if (!inputEl) {
+                return;
+            }
+            const trimmedAnswer = (answer || '').trim();
+            if (!trimmedAnswer) {
+                updateDevConsoleRiddleFeedback(false, 'Answer is required.');
+                return;
+            }
+
+            clearPendingRiddleAdvance();
+            clearPendingErrorRemoval();
+            inputEl.classList.remove('error', 'success');
+
+            const playerName = getActivePlayerName();
+
+            if (activeRiddleChallenge && !activeRiddleChallenge.completed) {
+                const current = activeRiddleChallenge.riddles[activeRiddleChallenge.index];
+                const correct = isAnswerCorrect(current, trimmedAnswer, playerName);
+                if (correct) {
+                    inputEl.classList.add('success');
+                    inputEl.disabled = true;
+                    pendingRiddleAdvanceTimeout = setTimeout(() => {
+                        advanceRiddle();
+                    }, RIDDLE_ADVANCE_DELAY_MS);
+                    saveActiveChallenge();
+                    updateDevConsoleRiddleFeedback(true, `Correct answer for riddle ${current.id}. Advancing...`);
+                } else {
+                    inputEl.classList.add('error');
+                    pendingErrorRemovalTimeout = setTimeout(() => {
+                        inputEl.classList.remove('error');
+                        pendingErrorRemovalTimeout = null;
+                    }, 1200);
+                    updateDevConsoleRiddleFeedback(false, 'Incorrect answer. Try again.');
+                }
+            } else {
+                const intro = RIDDLE_DEFINITION_MAP[INTRO_RIDDLE_ID];
+                const correct = isAnswerCorrect(intro, trimmedAnswer, playerName);
+                if (correct) {
+                    inputEl.classList.add('success');
+                    if (maybeStartRiddleChallenge(playerName, trimmedAnswer)) {
+                        inputEl.disabled = true;
+                        pendingRiddleAdvanceTimeout = setTimeout(() => {
+                            advanceRiddle();
+                        }, RIDDLE_ADVANCE_DELAY_MS);
+                        saveActiveChallenge();
+                        updateDevConsoleRiddleFeedback(true, 'Intro answer accepted. Challenge started.');
+                    }
+                } else {
+                    inputEl.classList.add('error');
+                    pendingErrorRemovalTimeout = setTimeout(() => {
+                        inputEl.classList.remove('error');
+                        pendingErrorRemovalTimeout = null;
+                    }, 1200);
+                    updateDevConsoleRiddleFeedback(false, 'Incorrect intro response.');
+                }
+            }
+        }
+
+
+        function ensureOverlayState(overlay) {
+            if (!overlay) {
+                return;
+            }
+
+            if (overlay.dataset.transitioning === undefined) {
+                overlay.dataset.transitioning = 'false';
+            }
+            if (overlay.dataset.queuedPage === undefined) {
+                overlay.dataset.queuedPage = '';
+            }
+            if (overlay.dataset.transitionStart === undefined) {
+                overlay.dataset.transitionStart = '';
+            }
+            if (overlay.dataset.completing === undefined) {
+                overlay.dataset.completing = 'false';
+            }
+        }
+
+        function showPage(pageId) {
+            const overlay = document.getElementById('pageTransitionOverlay');
+            if (!overlay) {
+                performPageSwitch(pageId);
+                return;
+            }
+
+            ensureOverlayState(overlay);
+
+            if (overlay.dataset.transitioning === 'true') {
+                overlay.dataset.queuedPage = pageId;
+                return;
+            }
+
+            overlay.dataset.transitionStart = String(Date.now());
+            overlay.dataset.completing = 'false';
+            overlay.dataset.transitioning = 'true';
+            overlay.classList.add('visible');
+
+            setTimeout(() => {
+                const stillTargetingRequestedPage = overlay.dataset.queuedPage === '' || overlay.dataset.queuedPage === pageId;
+                if (!stillTargetingRequestedPage) {
+                    overlay.dataset.transitioning = 'false';
+                    overlay.dataset.completing = 'false';
+                    overlay.classList.remove('visible');
+                    return;
+                }
+
+                performPageSwitch(pageId, overlay);
+            }, 150);
+        }
+
+        function performPageSwitch(pageId, overlay = null) {
+            const targetPageId = pageId + 'Page';
+
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                const isTarget = page.id === targetPageId;
+                page.classList.remove('active');
+
+                if (!isTarget) {
+                    // Force hide all non-target pages including login page when switching
+                    page.style.display = 'none';
+
+                    if (page.id === 'introPage') {
+                        const introVideo = page.querySelector('#introVideo');
+                        if (introVideo) {
+                            introVideo.pause();
+                            introVideo.currentTime = 0;
+                            if (typeof deferredAudioPlayback !== 'undefined' && deferredAudioPlayback instanceof Set) {
+                                deferredAudioPlayback.delete(introVideo);
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Show the requested page
+            const pageElement = document.getElementById(targetPageId);
+            if (pageElement) {
+                if (pageId === 'login' || pageId === 'signup' || pageId === 'intro') {
+                    pageElement.style.display = 'flex';
+                } else if (pageElement.classList.contains('signup-page')) {
+                    pageElement.style.display = 'flex';
+                } else {
+                    pageElement.style.display = 'block';
+                }
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        pageElement.classList.add('active');
+                        waitForImages(pageElement)
+                            .catch(() => {})
+                            .then(() => {
+                                if (pageId === 'riddle') {
+                                    prepareRiddleView();
+                                }
+                            })
+                            .finally(() => {
+                                finishOverlayTransition(overlay);
+                            });
+                        handlePageAudio(pageId);
+                    });
+                });
+
+                localStorage.setItem('currentPage', pageId);
+                currentPage = pageId;
+
+                refreshDevConsoleIfVisible();
+
+                const navBar = document.getElementById('navBar');
+                const audioToggle = document.getElementById('audioToggle');
+                const shouldHideShell = (pageId === 'login' || pageId === 'intro');
+
+                if (navBar) {
+                    navBar.style.display = shouldHideShell ? 'none' : 'block';
+                }
+
+                if (audioToggle) {
+                    audioToggle.style.display = shouldHideShell ? 'none' : 'flex';
+                }
+
+                if (pageId === 'intro') {
+                    initializeIntroVideo();
+                }
+
+                if (shouldHideShell) {
+                    const controller = window.__audioController;
+                    if (controller?.backgroundMusic) {
+                        controller.backgroundMusic.pause();
+                        controller.backgroundMusic.currentTime = 0;
+                    }
+                }
+            }
+
+            adjustLightboxSize();
+        }
+
+        function finishOverlayTransition(overlay) {
+            if (!overlay) {
+                return;
+            }
+
+            if (overlay.dataset.transitioning !== 'true' || overlay.dataset.completing === 'true') {
+                return;
+            }
+
+            overlay.dataset.completing = 'true';
+
+            const minimumOverlayDuration = 300;
+            const start = Number(overlay.dataset.transitionStart || Date.now());
+            const elapsed = Date.now() - start;
+            const remaining = Math.max(0, minimumOverlayDuration - elapsed);
+
+            setTimeout(() => {
+                overlay.classList.remove('visible');
+                overlay.dataset.transitioning = 'false';
+                overlay.dataset.transitionStart = '';
+                overlay.dataset.completing = 'false';
+
+                if (overlay.dataset.queuedPage) {
+                    const queued = overlay.dataset.queuedPage;
+                    overlay.dataset.queuedPage = '';
+                    showPage(queued);
+                }
+            }, remaining + 200);
+        }
+        
+        function adjustLightboxSize() {
+            adjustRiddleContainer();
+        }
+
+        function adjustRiddleContainer() {
+            const container = document.querySelector('.riddle-container');
+            const content = document.querySelector('.riddle-content');
+            if (!container || !content) {
+                return;
+            }
+
+            container.classList.remove('small', 'medium', 'large');
+
+            const contentHeight = content.offsetHeight;
+            const contentWidth = content.offsetWidth;
+
+            if (contentHeight < 420 && contentWidth < 500) {
+                container.classList.add('small');
+            } else if (contentHeight > 550 || contentWidth > 600) {
+                container.classList.add('large');
+            } else {
+                container.classList.add('medium');
+            }
+        }
+
+        function toggleLoginSignup() {
+            isLoginMode = !isLoginMode;
+            updateLoginSignupUI();
+        }
+
+        function updateLoginSignupUI() {
+            const pageTitle = document.querySelector('#pageTitle');
+            const pageLink = document.querySelector('#pageLink');
+            const submitBtn = document.getElementById('submitBtn');
+            const confirmEmailGroup = document.getElementById('confirmEmailGroup');
+            const confirmPasswordGroup = document.getElementById('confirmPasswordGroup');
+            const legalText = document.getElementById('legalText');
+
+            if (!pageTitle || !pageLink || !submitBtn || !confirmEmailGroup || !confirmPasswordGroup || !legalText) {
+                console.warn('Login/Signup UI elements missing; skipping update.');
+                return;
+            }
+            
+            if (isLoginMode) {
+                pageTitle.textContent = 'Log In';
+                
+                // Check if this is a returning user
+                const currentUser = getCurrentUser();
+                if (currentUser) {
+                    pageLink.innerHTML = 'Welcome back! <a href="#" onclick="toggleLoginSignup()">Create new account</a>';
+                    pageLink.style.color = '#ffffff';
+                    pageLink.style.fontWeight = '500';
+                } else {
+                    pageLink.innerHTML = 'Don\'t have an account? <a href="#" onclick="toggleLoginSignup()">Sign Up</a>';
+                    pageLink.style.color = '#ffffff';
+                    pageLink.style.fontWeight = 'normal';
+                }
+                
+                submitBtn.textContent = 'Log In';
+                confirmEmailGroup.style.display = 'none';
+                confirmPasswordGroup.style.display = 'none';
+                legalText.style.display = 'none';
+            } else {
+                pageTitle.textContent = 'Sign Up';
+                pageLink.innerHTML = 'Already have an account? <a href="#" onclick="toggleLoginSignup()">Log In</a>';
+                pageLink.style.color = '#ffffff';
+                pageLink.style.fontWeight = 'normal';
+                submitBtn.textContent = 'Sign Up';
+                confirmEmailGroup.style.display = 'block';
+                confirmPasswordGroup.style.display = 'block';
+                legalText.style.display = 'block';
+            }
+        }
+
+        // Account management functions
+        function createAccount(email, password, provider = null) {
+            const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+            accounts[email] = {
+                password: password,
+                playerName: null,
+                riddleAnswer: null,
+                provider: provider, // Track the login provider
+                createdAt: new Date().toISOString()
+            };
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+            localStorage.setItem('currentUser', email);
+        }
+
+        function loginAccount(email, password) {
+            const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+            if (accounts[email] && accounts[email].password === password) {
+                localStorage.setItem('currentUser', email);
+                return accounts[email];
+            }
+            return null;
+        }
+
+        function getCurrentUser() {
+            const email = localStorage.getItem('currentUser');
+            if (email) {
+                const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+                return accounts[email] || null;
+            }
+            return null;
+        }
+
+         function routeUser(user) {
+             if (!user) {
+                showPage('login');
+                 return;
+            }
+
+            if (!hasSeenIntro()) {
+                showPage('intro');
+                return;
+            }
+             
+             if (!user.playerName) {
+                 showPage('nameEntry');
+             } else if (!user.riddleAnswer) {
+                 showPage('riddle');
+             } else {
+                 // User has completed everything, stay on riddle page
+                 showPage('riddle');
+             }
+         }
+
+        function handleSubmit() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (isLoginMode) {
+                // Login logic
+                const user = loginAccount(email, password);
+                if (user) {
+                    alert('Login successful!');
+                    // Small delay to ensure DOM is ready
+                    setTimeout(() => {
+                        routeUser(user);
+                    }, 100);
+                } else {
+                    alert('Invalid email or password');
+                }
+            } else {
+                // Signup logic
+                const confirmEmail = document.getElementById('confirmEmail').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (!confirmEmail || !confirmPassword) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                if (email !== confirmEmail) {
+                    alert('Emails do not match');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+                
+                // Check if account already exists
+                const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+                if (accounts[email]) {
+                    alert('Account already exists. Please log in instead.');
+                    isLoginMode = true;
+                    updateLoginSignupUI();
+                    return;
+                }
+                
+                 // Create new account
+                 createAccount(email, password);
+                 alert('Account created successfully!');
+                 
+                 // Small delay to ensure DOM is ready
+                 setTimeout(() => {
+                     // Get the newly created user and route them
+                     const newUser = getCurrentUser();
+                     routeUser(newUser);
+                 }, 100);
+            }
+        }
+
+         function handleSocialLogin(provider) {
+             // Check if user already has a Discord account
+             const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+             let existingDiscordAccount = null;
+             let existingDiscordEmail = null;
+             
+             // Look for existing Discord account by checking provider field first, then email pattern as fallback
+             for (const email in accounts) {
+                 if (accounts[email].provider === provider) {
+                     existingDiscordAccount = accounts[email];
+                     existingDiscordEmail = email;
+                     break;
+                 }
+             }
+             
+             // Fallback: check email pattern for older accounts without provider field
+             if (!existingDiscordAccount) {
+                 for (const email in accounts) {
+                     if (email.includes('@' + provider + '.com')) {
+                         existingDiscordAccount = accounts[email];
+                         existingDiscordEmail = email;
+                         break;
+                     }
+                 }
+             }
+             
+             if (existingDiscordAccount) {
+                 // User already has a Discord account, log them in
+                 localStorage.setItem('currentUser', existingDiscordEmail);
+                 alert('Welcome back! Logged in with ' + provider.charAt(0).toUpperCase() + provider.slice(1) + ' successfully!');
+                 
+                 // Small delay to ensure DOM is ready
+                 setTimeout(() => {
+                     routeUser(existingDiscordAccount);
+                 }, 100);
+             } else {
+                 // Create new Discord account
+                 const fakeEmail = 'user' + Date.now() + '@' + provider + '.com';
+                 const fakePassword = provider + '123';
+                 createAccount(fakeEmail, fakePassword, provider);
+                 alert('Logged in with ' + provider.charAt(0).toUpperCase() + provider.slice(1) + ' successfully!');
+                 
+                 // Small delay to ensure DOM is ready
+                 setTimeout(() => {
+                     // Get the newly created user and route them
+                     const newUser = getCurrentUser();
+                     routeUser(newUser);
+                 }, 100);
+             }
+         }
+
+
+        function proceedToRiddle() {
+            const playerName = document.getElementById('playerName').value.trim();
+            if (!playerName) {
+                alert('Please enter your name');
+                return;
+            }
+            
+            // Update user account with player name
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                const email = localStorage.getItem('currentUser');
+                const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+                accounts[email].playerName = playerName;
+                localStorage.setItem('accounts', JSON.stringify(accounts));
+            }
+            
+            showPage('riddle');
+        }
+
+        function submitRiddleAnswer() {
+            const answer = document.getElementById('riddleAnswer')?.value?.trim();
+            if (!answer) {
+                alert('Please enter an answer');
+                return;
+            }
+            handleRiddleSubmission(answer);
+        }
+
+        function waitForImages(container) {
+            if (!container) {
+                return Promise.resolve();
+            }
+
+            const images = Array.from(container.querySelectorAll('img'))
+                .filter(img => !img.complete);
+
+            if (!images.length) {
+                return Promise.resolve();
+            }
+
+            return Promise.all(
+                images.map(img => new Promise(resolve => {
+                    const cleanUp = () => {
+                        img.removeEventListener('load', cleanUp);
+                        img.removeEventListener('error', cleanUp);
+                        resolve();
+                    };
+
+                    img.addEventListener('load', cleanUp, { once: true });
+                    img.addEventListener('error', cleanUp, { once: true });
+                }))
+            );
+        }
+
+        // Function to pre-fill login form with existing user data
+        function prefillLoginForm() {
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                const email = localStorage.getItem('currentUser');
+                if (email) {
+                    document.getElementById('email').value = email;
+                    document.getElementById('password').value = currentUser.password;
+                    
+                    // Switch to login mode and update UI
+                    isLoginMode = true;
+                    updateLoginSignupUI();
+                    
+                    // Add a helpful message
+                    const pageLink = document.getElementById('pageLink');
+                    if (pageLink) {
+                        pageLink.innerHTML = 'Welcome back! <a href="#" onclick="toggleLoginSignup()">Create new account</a>';
+                        pageLink.style.color = '#ffffff';
+                        pageLink.style.fontWeight = '500';
+                    }
+                }
+            }
+        }
+
+        // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the login/signup UI first
+            updateLoginSignupUI();
+            
+            // Ensure login page is properly centered from the start
+            showPage('login');
+            initializeGlobalAudio();
+            setupUserInteractionGate();
+
+            if (hasSeenIntro()) {
+                markIntroSeen();
+            }
+            restoreFigureVariant();
+            
+            // Adjust lightbox size on load
+            setTimeout(() => {
+                adjustLightboxSize();
+            }, 200);
+            
+            // Pre-fill login form if user exists
+            setTimeout(() => {
+                prefillLoginForm();
+            }, 50);
+            
+            // Add event listeners
+            const playerNameInput = document.getElementById('playerName');
+            const riddleAnswerInput = document.getElementById('riddleAnswer');
+            
+            if (playerNameInput) {
+                playerNameInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        proceedToRiddle();
+                    }
+                });
+            }
+            
+            if (riddleAnswerInput) {
+                riddleAnswerInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        submitRiddleAnswer();
+                    }
+                });
+            }
+            
+            // Restore form data if available
+            const currentUserForRestore = getCurrentUser();
+            if (currentUserForRestore) {
+                if (currentUserForRestore.playerName && playerNameInput) {
+                    playerNameInput.value = currentUserForRestore.playerName;
+                }
+                
+                if (currentUserForRestore.riddleAnswer && riddleAnswerInput) {
+                    riddleAnswerInput.value = currentUserForRestore.riddleAnswer;
+                }
+            }
+
+            initializeDevConsoleElements();
+            restoreCustomRiddles();
+        });
+
+        const INTRO_VIDEO_PATH = 'intro/Challenge_Intro_Video.mov';
+        const INTRO_SEEN_KEY = 'introSeen';
+
+        function markIntroSeen() {
+            localStorage.setItem(INTRO_SEEN_KEY, 'true');
+        }
+
+        function hasSeenIntro() {
+            return localStorage.getItem(INTRO_SEEN_KEY) === 'true';
+        }
+
+        function initializeIntroVideo() {
+            const video = document.getElementById('introVideo');
+            if (!video) {
+                return;
+            }
+
+            video.src = INTRO_VIDEO_PATH;
+            video.defaultPlayerStateApplied = false;
+            const applyInitialVideoState = () => {
+                if (video.defaultPlayerStateApplied) return;
+                const shouldMute = localStorage.getItem('audioMuted') === 'true';
+                video.muted = shouldMute;
+                video.defaultPlayerStateApplied = true;
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {
+                        deferredAudioPlayback.add(video);
+                    });
+                }
+            };
+
+            video.addEventListener('loadedmetadata', applyInitialVideoState, { once: true });
+            applyInitialVideoState();
+
+            video.addEventListener('ended', () => {
+                markIntroSeen();
+                routeUserAfterIntro();
+            });
+        }
+
+        function routeUserAfterIntro() {
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                markIntroSeen();
+                routeUser(currentUser);
+            } else {
+                markIntroSeen();
+                showPage('login');
+            }
+        }
+
+let hasUserInteracted = false;
+const deferredAudioPlayback = new Set();
+
+function setupUserInteractionGate() {
+    if (setupUserInteractionGate.initialized) return;
+
+    const unlockAudio = () => {
+        if (hasUserInteracted) return;
+        hasUserInteracted = true;
+        deferredAudioPlayback.forEach(media => {
+            media.play().catch(() => {});
+        });
+        deferredAudioPlayback.clear();
+    };
+
+    ['click', 'keydown', 'touchstart'].forEach(eventName => {
+        document.addEventListener(eventName, unlockAudio, { once: true, passive: true });
+    });
+
+    setupUserInteractionGate.initialized = true;
+}
+
+function safePlay(mediaElement) {
+    if (!mediaElement) return;
+    const playPromise = mediaElement.play?.();
+    if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {
+            deferredAudioPlayback.add(mediaElement);
+        });
+    }
+}
+
+        function initializeGlobalAudio() {
+            const audioToggle = document.getElementById('audioToggle');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const audioIcon = document.getElementById('audioIcon');
+            const introVideo = document.getElementById('introVideo');
+            let backgroundMusic = document.getElementById('backgroundMusic');
+            let stagVoice = document.getElementById('stagVoiceover');
+
+            if (!backgroundMusic) {
+                backgroundMusic = document.createElement('audio');
+                backgroundMusic.id = 'backgroundMusic';
+        backgroundMusic.src = 'sound/Alex-Productions-Challenge_Theme_Song_Battle.mp3';
+                backgroundMusic.loop = true;
+                backgroundMusic.preload = 'auto';
+                backgroundMusic.volume = 0.6;
+                document.body.appendChild(backgroundMusic);
+
+        backgroundMusic.addEventListener('canplay', () => {
+            if (currentPage !== 'login' && currentPage !== 'intro') {
+                safePlay(backgroundMusic);
+            }
+        }, { once: true });
+            }
+
+            if (!stagVoice) {
+                stagVoice = document.createElement('audio');
+                stagVoice.id = 'stagVoiceover';
+                stagVoice.src = 'sound/hooded-figure-stag-has-guided-you-well-voiceover.mp3';
+                stagVoice.preload = 'auto';
+                stagVoice.volume = 1.0;
+                stagVoice.dataset.played = localStorage.getItem('stagVoicePlayed') || 'false';
+                document.body.appendChild(stagVoice);
+
+                stagVoice.addEventListener('ended', () => {
+                    localStorage.setItem('stagVoicePlayed', 'true');
+                    stagVoice.dataset.played = 'true';
+                    fadeAudio(backgroundMusic, true);
+                });
+            }
+
+            const updateAudioIcon = (muted) => {
+                const waves = audioIcon?.querySelectorAll('.wave');
+                const muteX = audioIcon?.querySelector('.mute-x');
+                if (waves && muteX) {
+                    waves.forEach(wave => wave.style.display = muted ? 'none' : '');
+                    muteX.style.display = muted ? '' : 'none';
+                }
+            };
+
+            const applyMuteState = (muted) => {
+                audioToggle?.classList.toggle('is-muted', muted);
+                updateAudioIcon(muted);
+                if (introVideo) introVideo.muted = muted;
+                if (backgroundMusic) backgroundMusic.muted = muted;
+                if (stagVoice) stagVoice.muted = muted;
+            };
+
+            const applyVolumeState = (volume) => {
+                const volumeValue = volume / 100;
+                if (backgroundMusic) backgroundMusic.volume = volumeValue * 0.6;
+                if (introVideo) introVideo.volume = volumeValue;
+                localStorage.setItem('audioVolume', volume);
+            };
+
+            // Initialize saved states
+            const savedMuted = localStorage.getItem('audioMuted') === 'true';
+            const savedVolume = localStorage.getItem('audioVolume') || '60';
+            applyMuteState(savedMuted);
+            
+            if (volumeSlider) {
+                volumeSlider.value = savedVolume;
+                applyVolumeState(savedVolume);
+            }
+
+            // Handle mute toggle on icon click
+            audioIcon?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const newMuted = !(backgroundMusic?.muted ?? savedMuted);
+                localStorage.setItem('audioMuted', newMuted ? 'true' : 'false');
+                applyMuteState(newMuted);
+                if (!newMuted) {
+                    if (backgroundMusic?.paused && currentPage !== 'login' && currentPage !== 'intro') {
+                        safePlay(backgroundMusic);
+                    }
+                }
+            });
+
+            // Handle volume slider
+            volumeSlider?.addEventListener('input', (e) => {
+                const volume = e.target.value;
+                applyVolumeState(volume);
+                
+                // Auto-unmute when adjusting volume
+                if (volume > 0 && (backgroundMusic?.muted ?? savedMuted)) {
+                    localStorage.setItem('audioMuted', 'false');
+                    applyMuteState(false);
+                    if (backgroundMusic?.paused && currentPage !== 'login' && currentPage !== 'intro') {
+                        safePlay(backgroundMusic);
+                    }
+                }
+            });
+
+            window.__audioController = {
+                backgroundMusic,
+                stagVoice,
+                playStagOnce: () => {
+                    if (!stagVoice || !backgroundMusic) return;
+                    if (stagVoice.dataset.played === 'true') return;
+                    fadeAudio(backgroundMusic, false, 600);
+                    stagVoice.currentTime = 0;
+            safePlay(stagVoice);
+                }
+            };
+
+            handlePageAudio(currentPage);
+        }
+
+function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0.6) {
+            if (!audioElement) return;
+            const startVolume = fadeIn ? 0 : audioElement.volume;
+            const endVolume = fadeIn ? targetVolume : 0;
+            const startTime = performance.now();
+
+            const step = (now) => {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const currentVolume = startVolume + (endVolume - startVolume) * progress;
+                audioElement.volume = Math.max(0, Math.min(targetVolume, currentVolume));
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else if (!fadeIn) {
+                    audioElement.pause();
+                }
+            };
+
+    if (fadeIn && audioElement.paused) {
+        safePlay(audioElement);
+            }
+
+            requestAnimationFrame(step);
+        }
+
+        function handlePageAudio(pageId) {
+            const controller = window.__audioController;
+            if (!controller) return;
+
+            if (pageId === 'intro' || pageId === 'login') {
+                if (controller.backgroundMusic) {
+                    controller.backgroundMusic.pause();
+                    controller.backgroundMusic.currentTime = 0;
+                }
+                return;
+            }
+
+            if (pageId === 'nameEntry') {
+                controller.playStagOnce();
+                return;
+            }
+
+            fadeAudio(controller.backgroundMusic, true, 600, 0.6);
+        }
+
+        function saveActiveChallenge() {
+            if (!activeRiddleChallenge) {
+                localStorage.removeItem(ACTIVE_CHALLENGE_KEY);
+                return;
+            }
+
+            const serialized = {
+                playerName: activeRiddleChallenge.playerName,
+                index: activeRiddleChallenge.index,
+                riddles: activeRiddleChallenge.riddles.map(r => r.id || r.originalId || r),
+                completed: activeRiddleChallenge.completed,
+                variant: activeRiddleChallenge.variant || localStorage.getItem(FIGURE_VARIANT_KEY) || 'hooded'
+            };
+
+            localStorage.setItem(ACTIVE_CHALLENGE_KEY, JSON.stringify(serialized));
+        }
+
+        function restoreActiveChallenge() {
+            try {
+                const raw = localStorage.getItem(ACTIVE_CHALLENGE_KEY);
+                if (!raw) {
+                    return null;
+                }
+                const parsed = JSON.parse(raw);
+                if (!parsed || !Array.isArray(parsed.riddles)) {
+                    return null;
+                }
+
+                const queuedVariant = parsed.variant && FIGURE_IMAGE_MAP[parsed.variant] ? parsed.variant : 'hooded';
+                setQueuedFigureVariant(queuedVariant);
+
+                const orderedRiddles = parsed.riddles
+                    .map(id => RIDDLE_DEFINITION_MAP[id])
+                    .filter(Boolean)
+                    .map(riddle => ({ ...riddle }));
+
+                if (!orderedRiddles.length) {
+                    return null;
+                }
+
+                const normalizedIndex = Math.min(
+                    Math.max(parsed.index || 0, 0),
+                    orderedRiddles.length - 1
+                );
+
+                return {
+                    playerName: parsed.playerName || getActivePlayerName(),
+                    index: normalizedIndex,
+                    riddles: orderedRiddles,
+                    completed: Boolean(parsed.completed),
+                    variant: queuedVariant
+                };
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function initializeDevConsoleElements() {
+            const overlay = document.getElementById('devConsoleOverlay');
+            if (!overlay) {
+                return;
+            }
+
+            DevConsoleState.elements = {
+                overlay,
+                close: document.getElementById('devConsoleClose'),
+                lock: document.getElementById('devConsoleLock'),
+                content: document.getElementById('devConsoleContent'),
+                passwordInput: document.getElementById('devConsolePassword'),
+                unlockButton: document.getElementById('devConsoleUnlock'),
+                error: document.getElementById('devConsoleError'),
+                menu: overlay.querySelector('.dev-console-menu'),
+                panels: overlay.querySelectorAll('.dev-console-panel'),
+                pageList: document.getElementById('devConsolePageList'),
+                accountsTableBody: document.querySelector('#devConsoleAccountsTable tbody'),
+                accountsSummary: document.getElementById('devConsoleAccountsSummary'),
+                addRiddleForm: document.getElementById('devConsoleAddRiddleForm'),
+                riddleQuestion: document.getElementById('devConsoleRiddleQuestion'),
+                riddleAnswers: document.getElementById('devConsoleRiddleAnswers'),
+                riddleSignature: document.getElementById('devConsoleRiddleSignature'),
+                riddleFeedback: document.getElementById('devConsoleRiddleFeedback'),
+                resetForm: document.getElementById('devConsoleResetForm'),
+                riddleList: document.getElementById('devConsoleRiddleList'),
+                exportRiddlesButton: document.getElementById('devConsoleExportRiddles'),
+                importRiddlesButton: document.getElementById('devConsoleImportRiddles'),
+                importRiddlesInput: document.getElementById('devConsoleRiddleImportInput'),
+                clearAccountsButton: document.getElementById('devConsoleClearAccounts')
+            };
+
+            setupDevConsoleEvents();
+            renderDevConsolePages();
+            refreshDevConsolePagesActiveState();
+        }
+
+        function setupDevConsoleEvents() {
+            const {
+                overlay,
+                close,
+                unlockButton,
+                passwordInput,
+                menu,
+                addRiddleForm,
+                resetForm,
+                exportRiddlesButton,
+                importRiddlesButton,
+                importRiddlesInput,
+                clearAccountsButton
+            } = DevConsoleState.elements;
+
+            close?.addEventListener('click', hideDevConsole);
+            overlay?.addEventListener('click', event => {
+                if (event.target === overlay) {
+                    hideDevConsole();
+                }
+            });
+
+            unlockButton?.addEventListener('click', handleDevConsoleUnlock);
+            passwordInput?.addEventListener('keydown', event => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    handleDevConsoleUnlock();
+                }
+            });
+
+            document.addEventListener('keydown', handleDevConsoleKeydown, true);
+
+            menu?.querySelectorAll('button').forEach(button => {
+                button.addEventListener('click', () => {
+                    switchDevConsolePanel(button.dataset.panel);
+                });
+            });
+
+            addRiddleForm?.addEventListener('submit', handleDevConsoleRiddleSubmit);
+            resetForm?.addEventListener('click', resetDevConsoleRiddleForm);
+            exportRiddlesButton?.addEventListener('click', exportRiddles);
+            importRiddlesButton?.addEventListener('click', () => importRiddlesInput?.click());
+            importRiddlesInput?.addEventListener('change', event => {
+                const file = event.target.files?.[0];
+                importRiddles(file);
+                event.target.value = '';
+            });
+            clearAccountsButton?.addEventListener('click', handleClearAllAccounts);
+        }
+
+        function handleDevConsoleKeydown(event) {
+            if (event.key !== '`') {
+                DevConsoleState.recentKeypressCount = 0;
+                return;
+            }
+
+            const now = Date.now();
+            if (now - DevConsoleState.lastKeyTime > 800) {
+                DevConsoleState.recentKeypressCount = 0;
+            }
+
+            DevConsoleState.recentKeypressCount += 1;
+            DevConsoleState.lastKeyTime = now;
+
+            if (DevConsoleState.recentKeypressCount >= 3) {
+                event.preventDefault();
+                DevConsoleState.recentKeypressCount = 0;
+                toggleDevConsole();
+            }
+        }
+
+        function toggleDevConsole() {
+            if (DevConsoleState.isVisible) {
+                hideDevConsole();
+            } else {
+                showDevConsole();
+            }
+        }
+
+        function showDevConsole() {
+            const { overlay, passwordInput } = DevConsoleState.elements;
+            if (!overlay) {
+                return;
+            }
+
+            overlay.classList.add('is-visible');
+            overlay.setAttribute('aria-hidden', 'false');
+            DevConsoleState.isVisible = true;
+
+            if (!DevConsoleState.isUnlocked || Date.now() > DevConsoleState.unlockExpiresAt) {
+                lockDevConsole();
+                requestAnimationFrame(() => passwordInput?.focus());
+            } else {
+                unlockDevConsoleUI();
+            }
+        }
+
+        function hideDevConsole() {
+            const { overlay, passwordInput } = DevConsoleState.elements;
+            overlay?.classList.remove('is-visible');
+            overlay?.setAttribute('aria-hidden', 'true');
+            DevConsoleState.isVisible = false;
+            DevConsoleState.recentKeypressCount = 0;
+            if (passwordInput) {
+                passwordInput.value = '';
+            }
+        }
+
+        function lockDevConsole() {
+            const { lock, content, error, passwordInput } = DevConsoleState.elements;
+            lock?.classList.remove('hidden');
+            content?.classList.add('hidden');
+            if (error) {
+                error.textContent = '';
+            }
+            if (passwordInput) {
+                passwordInput.value = '';
+            }
+            DevConsoleState.isUnlocked = false;
+        }
+
+        function handleDevConsoleUnlock() {
+            const { passwordInput, error } = DevConsoleState.elements;
+            const value = passwordInput?.value?.trim() || '';
+
+            if (!value) {
+                if (error) {
+                    error.textContent = 'Password required.';
+                }
+                return;
+            }
+
+            if (value !== DEV_CONSOLE_PASSWORD) {
+                if (error) {
+                    error.textContent = 'Incorrect password.';
+                }
+                return;
+            }
+
+            DevConsoleState.isUnlocked = true;
+            DevConsoleState.unlockExpiresAt = Date.now() + DEV_CONSOLE_UNLOCK_TIMEOUT_MS;
+            unlockDevConsoleUI();
+        }
+
+        function unlockDevConsoleUI() {
+            const { lock, content, passwordInput, error } = DevConsoleState.elements;
+            lock?.classList.add('hidden');
+            content?.classList.remove('hidden');
+            if (error) {
+                error.textContent = '';
+            }
+            if (passwordInput) {
+                passwordInput.value = '';
+            }
+            refreshDevConsoleData();
+        }
+
+        function switchDevConsolePanel(panelId) {
+            if (!panelId || panelId === DevConsoleState.activePanel) {
+                return;
+            }
+
+            DevConsoleState.activePanel = panelId;
+            const { menu, panels } = DevConsoleState.elements;
+
+            menu?.querySelectorAll('button').forEach(button => {
+                const isActive = button.dataset.panel === panelId;
+                button.classList.toggle('is-active', isActive);
+                button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            panels?.forEach(panel => {
+                panel.classList.toggle('is-active', panel.id === `devConsolePanel-${panelId}`);
+            });
+
+            if (panelId === 'accounts') {
+                renderDevConsoleAccounts();
+            } else if (panelId === 'riddles') {
+                renderDevConsoleRiddles();
+            }
+        }
+
+        function renderDevConsolePages() {
+            const { pageList } = DevConsoleState.elements;
+            if (!pageList) {
+                return;
+            }
+
+            pageList.innerHTML = '';
+            DEV_CONSOLE_PAGES.forEach(page => {
+                const item = document.createElement('button');
+                item.type = 'button';
+                item.className = 'dev-console-list-item';
+                item.dataset.page = page.id;
+                item.innerHTML = `
+                    <span class="dev-console-list-title">${page.label}</span>
+                    <span class="dev-console-list-subtitle">${page.id}</span>
+                `;
+                item.addEventListener('click', () => {
+                    if (page.id === 'riddle') {
+                        renderDevConsoleRiddleSelection();
+                    } else {
+                        hideDevConsole();
+                        showPage(page.id);
+                    }
+                });
+
+                if (currentPage === page.id) {
+                    item.classList.add('is-active');
+                }
+
+                pageList.appendChild(item);
+            });
+        }
+
+        function renderDevConsoleRiddleSelection() {
+            const { pageList } = DevConsoleState.elements;
+            if (!pageList) {
+                return;
+            }
+
+            pageList.innerHTML = '';
+
+            // Add back button
+            const backButton = document.createElement('button');
+            backButton.type = 'button';
+            backButton.className = 'dev-console-list-item';
+            backButton.innerHTML = `
+                <span class="dev-console-list-title">← Back to Pages</span>
+                <span class="dev-console-list-subtitle">Return to page list</span>
+            `;
+            backButton.addEventListener('click', () => {
+                renderDevConsolePages();
+            });
+            pageList.appendChild(backButton);
+
+            // Get all available riddles
+            const overrides = loadRiddleOverrides();
+            const removed = loadRemovedRiddleIds();
+            const customRiddles = loadCustomRiddles();
+
+            const baseRiddles = BASE_RIDDLE_DEFINITIONS
+                .filter(riddle => !removed.has(String(riddle.id)))
+                .map(riddle => {
+                    const override = overrides[riddle.id];
+                    return override ? { ...riddle, ...override } : riddle;
+                });
+
+            const allRiddles = [...baseRiddles, ...customRiddles];
+
+            // Sort riddles
+            allRiddles.sort((a, b) => {
+                const idA = String(a.id);
+                const idB = String(b.id);
+                const isCustomA = idA.startsWith('custom');
+                const isCustomB = idB.startsWith('custom');
+
+                if (isCustomA !== isCustomB) {
+                    return isCustomA ? 1 : -1;
+                }
+
+                const numA = Number(idA);
+                const numB = Number(idB);
+
+                if (!Number.isNaN(numA) && !Number.isNaN(numB)) {
+                    return numA - numB;
+                }
+
+                return idA.localeCompare(idB);
+            });
+
+            // Render riddle list
+            allRiddles.forEach(riddle => {
+                const item = document.createElement('button');
+                item.type = 'button';
+                item.className = 'dev-console-list-item';
+                item.dataset.riddleId = riddle.id;
+                
+                const riddleTitle = riddle.heading || 'Untitled Riddle';
+                const riddleId = riddle.id;
+                
+                item.innerHTML = `
+                    <span class="dev-console-list-title">${riddleTitle}</span>
+                    <span class="dev-console-list-subtitle">ID: ${riddleId}</span>
+                `;
+                
+                item.addEventListener('click', () => {
+                    jumpToSpecificRiddle(riddle.id);
+                });
+
+                pageList.appendChild(item);
+            });
+        }
+
+        function jumpToSpecificRiddle(riddleId) {
+            // Get current user info
+            const currentUser = getCurrentUser();
+            const playerName = currentUser?.playerName || 'Traveler';
+            const variant = localStorage.getItem(FIGURE_VARIANT_KEY) || 'hooded';
+
+            // Build a challenge with just this specific riddle
+            const riddleDefinition = RIDDLE_DEFINITION_MAP[riddleId];
+            if (!riddleDefinition) {
+                console.error('Riddle not found:', riddleId);
+                return;
+            }
+
+            // Create a challenge with just this one riddle
+            activeRiddleChallenge = {
+                playerName: playerName,
+                index: 0,
+                riddles: [riddleDefinition],
+                completed: false,
+                variant: variant
+            };
+
+            // Save and navigate
+            saveActiveChallenge();
+            hideDevConsole();
+            showPage('riddle');
+        }
+
+        function parseAccountsFromStorage() {
+            try {
+                return JSON.parse(localStorage.getItem('accounts') || '{}');
+            } catch (error) {
+                return {};
+            }
+        }
+
+        function renderDevConsoleAccounts() {
+            const { accountsTableBody, accountsSummary } = DevConsoleState.elements;
+            if (!accountsTableBody) {
+                return;
+            }
+
+            const accounts = parseAccountsFromStorage();
+            const currentUserEmail = localStorage.getItem('currentUser');
+            accountsTableBody.innerHTML = '';
+
+            const entries = Object.entries(accounts);
+            entries.forEach(([email, account]) => {
+                const row = document.createElement('tr');
+                if (email === currentUserEmail) {
+                    row.classList.add('is-current');
+                }
+
+                const safeAccount = account || {};
+                const createdAt = safeAccount.createdAt ? new Date(safeAccount.createdAt).toLocaleString() : '—';
+                row.innerHTML = `
+                    <td>${email}</td>
+                    <td>${safeAccount.password || '—'}</td>
+                    <td>${safeAccount.playerName || '—'}</td>
+                    <td>${safeAccount.provider || 'local'}</td>
+                    <td>${createdAt}</td>
+                    <td>
+                        <div class="dev-console-inline-actions">
+                            <button type="button" class="dev-console-tertiary" data-action="reset" data-email="${email}">Reset Progress</button>
+                            <button type="button" class="dev-console-tertiary danger" data-action="delete" data-email="${email}">Delete</button>
+                        </div>
+                    </td>
+                `;
+                accountsTableBody.appendChild(row);
+            });
+
+            accountsTableBody.querySelectorAll('button[data-action="reset"]').forEach(button => {
+                button.addEventListener('click', () => handleAccountReset(button.dataset.email));
+            });
+
+            accountsTableBody.querySelectorAll('button[data-action="delete"]').forEach(button => {
+                button.addEventListener('click', () => handleAccountDelete(button.dataset.email));
+            });
+
+            if (accountsSummary) {
+                if (!entries.length) {
+                    accountsSummary.textContent = 'No accounts found in local storage.';
+                } else {
+                    accountsSummary.textContent = `${entries.length} account${entries.length === 1 ? '' : 's'} stored. Current user: ${currentUserEmail || 'none'}.`;
+                }
+            }
+        }
+
+        function handleAccountDelete(email) {
+            if (!email) {
+                return;
+            }
+
+            const accounts = parseAccountsFromStorage();
+            if (!accounts[email]) {
+                return;
+            }
+
+            delete accounts[email];
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+
+            if (localStorage.getItem('currentUser') === email) {
+                localStorage.removeItem('currentUser');
+                clearActiveChallengeState();
+                showPage('login');
+            }
+
+            renderDevConsoleAccounts();
+            refreshDevConsolePagesActiveState();
+        }
+
+        function handleAccountReset(email) {
+            if (!email) {
+                return;
+            }
+
+            const accounts = parseAccountsFromStorage();
+            const account = accounts[email];
+            if (!account) {
+                return;
+            }
+
+            account.playerName = null;
+            account.riddleAnswer = null;
+            accounts[email] = account;
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+
+            if (localStorage.getItem('currentUser') === email) {
+                clearActiveChallengeState();
+                showPage('login');
+            }
+
+            renderDevConsoleAccounts();
+            refreshDevConsolePagesActiveState();
+        }
+
+        function handleClearAllAccounts() {
+            const accounts = parseAccountsFromStorage();
+            if (!Object.keys(accounts).length) {
+                return;
+            }
+
+            localStorage.removeItem('accounts');
+            localStorage.removeItem('currentUser');
+            clearActiveChallengeState();
+            showPage('login');
+            renderDevConsoleAccounts();
+            refreshDevConsolePagesActiveState();
+        }
+
+        function loadCustomRiddles() {
+            try {
+                const stored = JSON.parse(localStorage.getItem(DEV_CONSOLE_STORAGE_KEY) || '[]');
+                if (!Array.isArray(stored)) {
+                    return [];
+                }
+                return stored.filter(riddle => riddle && typeof riddle === 'object');
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveCustomRiddles(riddles) {
+            localStorage.setItem(DEV_CONSOLE_STORAGE_KEY, JSON.stringify(riddles));
+        }
+
+        function loadRiddleOverrides() {
+            try {
+                const stored = JSON.parse(localStorage.getItem(DEV_CONSOLE_RIDDLE_OVERRIDES_KEY) || '{}');
+                return stored && typeof stored === 'object' ? stored : {};
+            } catch (error) {
+                return {};
+            }
+        }
+
+        function saveRiddleOverrides(overrides) {
+            localStorage.setItem(DEV_CONSOLE_RIDDLE_OVERRIDES_KEY, JSON.stringify(overrides || {}));
+        }
+
+        function loadRemovedRiddleIds() {
+            try {
+                const stored = JSON.parse(localStorage.getItem(DEV_CONSOLE_REMOVED_RIDDLES_KEY) || '[]');
+                return Array.isArray(stored) ? new Set(stored.map(String)) : new Set();
+            } catch (error) {
+                return new Set();
+            }
+        }
+
+        function saveRemovedRiddleIds(set) {
+            const values = Array.from(set || new Set());
+            localStorage.setItem(DEV_CONSOLE_REMOVED_RIDDLES_KEY, JSON.stringify(values));
+        }
+
+        function normalizeCustomAnswers(input) {
+            return (input || '')
+                .split(',')
+                .map(answer => answer.trim())
+                .filter(Boolean);
+        }
+
+        function createCustomRiddleDefinition({ question, answers, signature }) {
+            const trimmedQuestion = question.trim();
+            if (!trimmedQuestion || !answers.length) {
+                return null;
+            }
+
+            const id = `custom-${Date.now()}`;
+            return {
+                id,
+                heading: 'Custom Riddle',
+                white: ['A custom riddle added via dev console.'],
+                yellow: trimmedQuestion,
+                answers,
+                signature: signature?.trim() || '- Dev Console',
+                isCustom: true
+            };
+        }
+
+        function handleDevConsoleRiddleSubmit(event) {
+            event.preventDefault();
+            const {
+                riddleQuestion,
+                riddleAnswers,
+                riddleSignature,
+                riddleFeedback
+            } = DevConsoleState.elements;
+
+            if (!riddleQuestion || !riddleAnswers) {
+                return;
+            }
+
+            const question = riddleQuestion.value;
+            const answers = normalizeCustomAnswers(riddleAnswers.value).map(answer => answer.toLowerCase());
+            const signature = riddleSignature?.value || '';
+
+            if (!question.trim() || !answers.length) {
+                if (riddleFeedback) {
+                    riddleFeedback.textContent = 'Question and at least one answer are required.';
+                    riddleFeedback.className = 'dev-console-feedback error';
+                }
+                return;
+            }
+
+            const customRiddle = createCustomRiddleDefinition({ question, answers, signature });
+            if (!customRiddle) {
+                if (riddleFeedback) {
+                    riddleFeedback.textContent = 'Unable to create riddle. Check your inputs and try again.';
+                    riddleFeedback.className = 'dev-console-feedback error';
+                }
+                return;
+            }
+
+            const riddles = loadCustomRiddles();
+            riddles.push(customRiddle);
+            saveCustomRiddles(riddles);
+
+            integrateCustomRiddle(customRiddle);
+            renderDevConsoleRiddles();
+
+            if (riddleFeedback) {
+                riddleFeedback.textContent = 'Riddle saved successfully.';
+                riddleFeedback.className = 'dev-console-feedback success';
+            }
+
+            riddleQuestion.value = '';
+            riddleAnswers.value = '';
+            if (riddleSignature) {
+                riddleSignature.value = '';
+            }
+
+            updateDevConsoleRiddleFeedback(true, `Custom riddle ${customRiddle.id} added.`);
+        }
+
+        function resetDevConsoleRiddleForm() {
+            const {
+                riddleQuestion,
+                riddleAnswers,
+                riddleSignature,
+                riddleFeedback
+            } = DevConsoleState.elements;
+
+            if (riddleQuestion) {
+                riddleQuestion.value = '';
+            }
+            if (riddleAnswers) {
+                riddleAnswers.value = '';
+            }
+            if (riddleSignature) {
+                riddleSignature.value = '';
+            }
+            if (riddleFeedback) {
+                riddleFeedback.textContent = '';
+                riddleFeedback.className = 'dev-console-feedback';
+            }
+
+            updateDevConsoleRiddleFeedback(false, 'Riddle form reset.');
+        }
+
+        function integrateCustomRiddle(customRiddle) {
+            if (!customRiddle) {
+                return;
+            }
+
+            const normalizedAnswers = new Set((customRiddle.answers || []).map(normalizeAnswer).filter(Boolean));
+            const definition = { ...customRiddle, normalizedAnswers };
+            refreshRiddleDefinition(definition);
+        }
+
+        function renderDevConsoleRiddles() {
+            const { riddleList } = DevConsoleState.elements;
+            if (!riddleList) {
+                return;
+            }
+
+            riddleList.innerHTML = '';
+
+            const overrides = loadRiddleOverrides();
+            const removed = loadRemovedRiddleIds();
+
+            const baseRiddles = BASE_RIDDLE_DEFINITIONS
+                .filter(riddle => !removed.has(String(riddle.id)))
+                .map(riddle => {
+                    const override = overrides[riddle.id];
+                    const merged = override ? {
+                        ...riddle,
+                        ...override,
+                        answers: override.answers || riddle.answers,
+                        white: override.white || riddle.white,
+                        yellow: override.yellow ?? riddle.yellow,
+                        heading: override.heading ?? riddle.heading,
+                        signature: override.signature ?? riddle.signature
+                    } : riddle;
+
+                    return {
+                        id: merged.id,
+                        heading: merged.heading,
+                        yellow: merged.yellow,
+                        answers: Array.from(new Set((merged.answers || []).map(normalizeAnswer))).map(answer => answer),
+                        white: Array.isArray(merged.white) ? merged.white : (merged.white ? [merged.white] : []),
+                        signature: merged.signature,
+                        isCustom: Boolean(override)
+                    };
+                });
+
+            const customRiddles = loadCustomRiddles().map(riddle => ({
+                ...riddle,
+                answers: Array.from(new Set((riddle.answers || []).map(normalizeAnswer))),
+                white: Array.isArray(riddle.white) ? riddle.white : (riddle.white ? [riddle.white] : []),
+                isCustom: true
+            }));
+
+            const allRiddles = [...baseRiddles, ...customRiddles];
+
+            allRiddles.sort((a, b) => {
+                const idA = String(a.id);
+                const idB = String(b.id);
+
+                const isCustomA = idA.startsWith('custom');
+                const isCustomB = idB.startsWith('custom');
+
+                if (isCustomA !== isCustomB) {
+                    return isCustomA ? 1 : -1;
+                }
+
+                const numA = Number(idA);
+                const numB = Number(idB);
+
+                if (!Number.isNaN(numA) && !Number.isNaN(numB)) {
+                    return numA - numB;
+                }
+
+                return idA.localeCompare(idB, undefined, { sensitivity: 'base' });
+            });
+
+            allRiddles.forEach(riddle => {
+                const item = document.createElement('div');
+                item.className = `dev-console-riddle-item${riddle.isCustom ? ' is-custom' : ''}`;
+                const heading = riddle.heading || '—';
+                const yellow = riddle.yellow || '—';
+                const white = (riddle.white && riddle.white.join(' ')) || '—';
+                const answerList = (riddle.answers || []).join(', ') || '—';
+
+                item.innerHTML = `
+                    <div class="dev-console-riddle-title">${heading}</div>
+                    <div class="dev-console-riddle-meta">
+                        <span>ID: ${riddle.id}</span>
+                        <span>Answers: ${answerList}</span>
+                        ${riddle.isCustom ? '<span class="dev-console-tag">Custom</span>' : ''}
+                    </div>
+                    <div class="dev-console-riddle-question">${yellow}</div>
+                    <div class="dev-console-riddle-question">${white}</div>
+                    <div class="dev-console-riddle-actions">
+                        <button type="button" class="dev-console-tertiary" data-action="edit" data-riddle="${riddle.id}">Edit</button>
+                        <button type="button" class="dev-console-tertiary danger" data-action="delete" data-riddle="${riddle.id}">Delete</button>
+                    </div>
+                    <div class="dev-console-riddle-editor" id="devConsoleRiddleEditor-${riddle.id}">
+                        <label>
+                            Heading
+                            <input type="text" class="dev-console-input" data-field="heading" value="${heading.replace(/"/g, '&quot;')}">
+                        </label>
+                        <label>
+                            Question (yellow)
+                            <textarea class="dev-console-textarea" data-field="yellow">${yellow}</textarea>
+                        </label>
+                        <label>
+                            Narrative (white, one per line)
+                            <textarea class="dev-console-textarea" data-field="white">${(riddle.white || []).join('\n')}</textarea>
+                        </label>
+                        <label>
+                            Answers (comma separated)
+                            <input type="text" class="dev-console-input" data-field="answers" value="${answerList}">
+                        </label>
+                        <label>
+                            Signature
+                            <input type="text" class="dev-console-input" data-field="signature" value="${(riddle.signature || '').replace(/"/g, '&quot;')}">
+                        </label>
+                        <div class="dev-console-inline-actions">
+                            <button type="button" class="dev-console-tertiary" data-action="save" data-riddle="${riddle.id}">Save</button>
+                            <button type="button" class="dev-console-tertiary" data-action="cancel" data-riddle="${riddle.id}">Cancel</button>
+                        </div>
+                    </div>
+                `;
+                riddleList.appendChild(item);
+            });
+
+            if (!allRiddles.length) {
+                const muted = document.createElement('div');
+                muted.className = 'dev-console-muted';
+                muted.textContent = 'No riddles found.';
+                riddleList.appendChild(muted);
+            }
+
+            riddleList.querySelectorAll('button[data-action="edit"]').forEach(button => {
+                button.addEventListener('click', () => showRiddleEditor(button.dataset.riddle));
+            });
+
+            riddleList.querySelectorAll('button[data-action="delete"]').forEach(button => {
+                button.addEventListener('click', () => deleteRiddle(button.dataset.riddle));
+            });
+
+            riddleList.querySelectorAll('button[data-action="save"]').forEach(button => {
+                button.addEventListener('click', () => saveRiddleEdits(button.dataset.riddle));
+            });
+
+            riddleList.querySelectorAll('button[data-action="cancel"]').forEach(button => {
+                button.addEventListener('click', () => hideRiddleEditor(button.dataset.riddle));
+            });
+        }
+
+        function refreshDevConsoleData() {
+            renderDevConsolePages();
+            refreshDevConsolePagesActiveState();
+            if (DevConsoleState.activePanel === 'accounts') {
+                renderDevConsoleAccounts();
+            } else if (DevConsoleState.activePanel === 'riddles') {
+                renderDevConsoleRiddles();
+            }
+        }
+
+        function restoreCustomRiddles() {
+            Object.keys(RIDDLE_DEFINITION_MAP).forEach(key => {
+                if (!BASE_RIDDLE_DEFINITIONS.some(base => String(base.id) === String(key))) {
+                    delete RIDDLE_DEFINITION_MAP[key];
+                }
+            });
+
+            RIDDLE_DEFINITIONS.length = 0;
+            BASE_RIDDLE_DEFINITIONS.forEach(def => {
+                const normalizedAnswers = new Set((def.answers || []).map(normalizeAnswer).filter(Boolean));
+                const clone = { ...def, normalizedAnswers };
+                RIDDLE_DEFINITION_MAP[def.id] = clone;
+                RIDDLE_DEFINITIONS.push(clone);
+            });
+
+            const overrides = loadRiddleOverrides();
+            Object.entries(overrides).forEach(([id, override]) => {
+                const base = RIDDLE_DEFINITION_MAP[id];
+                if (!base) {
+                    return;
+                }
+
+                const merged = {
+                    ...base,
+                    ...override,
+                    answers: override.answers || base.answers,
+                    white: override.white || base.white,
+                    yellow: override.yellow ?? base.yellow,
+                    heading: override.heading ?? base.heading,
+                    signature: override.signature ?? base.signature,
+                    isCustom: Boolean(base.isCustom || override.isCustom)
+                };
+
+                merged.normalizedAnswers = new Set((merged.answers || []).map(normalizeAnswer).filter(Boolean));
+                refreshRiddleDefinition(merged);
+            });
+
+            const removed = loadRemovedRiddleIds();
+            removed.forEach(id => {
+                delete RIDDLE_DEFINITION_MAP[id];
+            });
+
+            for (let i = RIDDLE_DEFINITIONS.length - 1; i >= 0; i -= 1) {
+                if (!RIDDLE_DEFINITION_MAP[RIDDLE_DEFINITIONS[i].id]) {
+                    RIDDLE_DEFINITIONS.splice(i, 1);
+                }
+            }
+
+            const stored = loadCustomRiddles();
+            stored.forEach(integrateCustomRiddle);
+        }
+
+        function updateDevConsoleRiddleFeedback(isSuccess, message) {
+            const { riddleFeedback } = DevConsoleState.elements;
+            if (!riddleFeedback) {
+                return;
+            }
+
+            riddleFeedback.textContent = message || '';
+            riddleFeedback.className = 'dev-console-feedback';
+
+            if (!message) {
+                return;
+            }
+
+            if (isSuccess) {
+                riddleFeedback.classList.add('success');
+            } else {
+                riddleFeedback.classList.add('error');
+            }
+        }
+
+        function showRiddleEditor(riddleId) {
+            if (!riddleId) {
+                return;
+            }
+
+            const editor = document.getElementById(`devConsoleRiddleEditor-${riddleId}`);
+            if (!editor) {
+                return;
+            }
+
+            editor.classList.add('is-visible');
+        }
+
+        function hideRiddleEditor(riddleId) {
+            if (!riddleId) {
+                return;
+            }
+
+            const editor = document.getElementById(`devConsoleRiddleEditor-${riddleId}`);
+            if (!editor) {
+                return;
+            }
+
+            editor.classList.remove('is-visible');
+        }
+
+        function collectRiddleEditorValues(riddleId) {
+            const editor = document.getElementById(`devConsoleRiddleEditor-${riddleId}`);
+            if (!editor) {
+                return null;
+            }
+
+            const heading = editor.querySelector('[data-field="heading"]').value.trim();
+            const yellow = editor.querySelector('[data-field="yellow"]').value.trim();
+            const whiteRaw = editor.querySelector('[data-field="white"]').value
+                .split('\n')
+                .map(line => line.trim())
+                .filter(Boolean);
+            const answers = normalizeCustomAnswers(editor.querySelector('[data-field="answers"]').value);
+            const signature = editor.querySelector('[data-field="signature"]').value.trim();
+
+            return {
+                heading,
+                yellow,
+                white: whiteRaw,
+                answers,
+                signature
+            };
+        }
+
+        function saveRiddleEdits(riddleId) {
+            if (!riddleId) {
+                return;
+            }
+
+            const values = collectRiddleEditorValues(riddleId);
+            if (!values) {
+                return;
+            }
+
+            if (!values.heading || !values.yellow || !values.answers.length) {
+                updateDevConsoleRiddleFeedback(false, 'Heading, question, and answers are required.');
+                return;
+            }
+
+            const normalizedAnswersArray = values.answers.map(normalizeAnswer).filter(Boolean);
+            if (!normalizedAnswersArray.length) {
+                updateDevConsoleRiddleFeedback(false, 'At least one valid answer is required.');
+                return;
+            }
+
+            const overrides = loadRiddleOverrides();
+            const removed = loadRemovedRiddleIds();
+            const customRiddles = loadCustomRiddles();
+            const isCustom = String(riddleId).startsWith('custom');
+
+            if (isCustom) {
+                const updatedCustom = customRiddles.map(riddle => {
+                    if (String(riddle.id) !== String(riddleId)) {
+                        return riddle;
+                    }
+                    return {
+                        ...riddle,
+                        heading: values.heading,
+                        yellow: values.yellow,
+                        white: values.white,
+                        answers: values.answers,
+                        signature: values.signature || riddle.signature || '- Dev Console'
+                    };
+                });
+                saveCustomRiddles(updatedCustom);
+
+                const baseDefinition = RIDDLE_DEFINITION_MAP[riddleId] || {};
+            const definition = {
+                    ...baseDefinition,
+                    id: riddleId,
+                    heading: values.heading,
+                    yellow: values.yellow,
+                    white: values.white,
+                    signature: values.signature || baseDefinition.signature || '- Dev Console',
+                    answers: values.answers,
+                    normalizedAnswers: new Set(normalizedAnswersArray),
+                    isCustom: true
+                };
+                refreshRiddleDefinition(definition);
+            } else {
+                removed.delete(String(riddleId));
+                saveRemovedRiddleIds(removed);
+
+                overrides[riddleId] = {
+                    heading: values.heading,
+                    yellow: values.yellow,
+                    white: values.white,
+                    answers: values.answers,
+                    signature: values.signature
+                };
+                saveRiddleOverrides(overrides);
+
+                const baseDefinition = BASE_RIDDLE_DEFINITIONS.find(riddle => String(riddle.id) === String(riddleId)) || RIDDLE_DEFINITION_MAP[riddleId] || {};
+                const definition = {
+                    ...baseDefinition,
+                    heading: values.heading,
+                    yellow: values.yellow,
+                    white: values.white,
+                    signature: values.signature || baseDefinition.signature,
+                    answers: values.answers,
+                    normalizedAnswers: new Set(normalizedAnswersArray)
+                };
+                refreshRiddleDefinition(definition);
+            }
+
+            hideRiddleEditor(riddleId);
+            renderDevConsoleRiddles();
+            updateDevConsoleRiddleFeedback(true, `Riddle ${riddleId} updated.`);
+        }
+
+        function deleteRiddle(riddleId) {
+            if (!riddleId) {
+                return;
+            }
+
+            const overrides = loadRiddleOverrides();
+            const removed = loadRemovedRiddleIds();
+            const customRiddles = loadCustomRiddles();
+            const isCustom = String(riddleId).startsWith('custom');
+
+            if (isCustom) {
+                const filtered = customRiddles.filter(riddle => String(riddle.id) !== String(riddleId));
+                saveCustomRiddles(filtered);
+            } else {
+                removed.add(String(riddleId));
+                delete overrides[riddleId];
+                saveRiddleOverrides(overrides);
+                saveRemovedRiddleIds(removed);
+            }
+
+            delete RIDDLE_DEFINITION_MAP[riddleId];
+            for (let i = RIDDLE_DEFINITIONS.length - 1; i >= 0; i -= 1) {
+                if (String(RIDDLE_DEFINITIONS[i].id) === String(riddleId)) {
+                    RIDDLE_DEFINITIONS.splice(i, 1);
+                }
+            }
+
+            renderDevConsoleRiddles();
+            updateDevConsoleRiddleFeedback(true, `Riddle ${riddleId} removed.`);
+        }
+
+        function exportRiddles() {
+            const data = {
+                custom: loadCustomRiddles(),
+                overrides: loadRiddleOverrides(),
+                removed: Array.from(loadRemovedRiddleIds())
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'riddles-export.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            updateDevConsoleRiddleFeedback(true, 'Riddle data exported.');
+        }
+
+        function importRiddles(file) {
+            if (!file) {
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = event => {
+                try {
+                    const parsed = JSON.parse(event.target.result);
+                    if (parsed.custom && Array.isArray(parsed.custom)) {
+                        saveCustomRiddles(parsed.custom);
+                    }
+                    if (parsed.overrides && typeof parsed.overrides === 'object') {
+                        saveRiddleOverrides(parsed.overrides);
+                    }
+                    if (parsed.removed && Array.isArray(parsed.removed)) {
+                        saveRemovedRiddleIds(new Set(parsed.removed.map(String)));
+                    }
+                    restoreCustomRiddles();
+                    renderDevConsoleRiddles();
+                    updateDevConsoleRiddleFeedback(true, 'Riddle import completed.');
+                } catch (error) {
+                    updateDevConsoleRiddleFeedback(false, 'Failed to import riddles. Check file format.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function loadRiddleDefinition(id) {
+            return RIDDLE_DEFINITION_MAP[id] || null;
+        }
+
+        function refreshRiddleDefinition(definition) {
+            if (!definition) {
+                return;
+            }
+
+            const index = RIDDLE_DEFINITIONS.findIndex(riddle => riddle.id === definition.id);
+            if (index >= 0) {
+                RIDDLE_DEFINITIONS[index] = definition;
+            } else {
+                RIDDLE_DEFINITIONS.push(definition);
+            }
+
+            RIDDLE_DEFINITION_MAP[definition.id] = definition;
+        }
+
+        function refreshDevConsolePagesActiveState() {
+            const { pageList } = DevConsoleState.elements;
+            if (!pageList) {
+                return;
+            }
+
+            pageList.querySelectorAll('.dev-console-list-item').forEach(button => {
+                const pageId = button.dataset.page;
+                button.classList.toggle('is-active', pageId === currentPage);
+            });
+        }
+
+        function refreshDevConsoleIfVisible() {
+            if (!DevConsoleState.isVisible || !DevConsoleState.isUnlocked) {
+                return;
+            }
+
+            refreshDevConsolePagesActiveState();
+            if (DevConsoleState.activePanel === 'accounts') {
+                renderDevConsoleAccounts();
+            } else if (DevConsoleState.activePanel === 'riddles') {
+                renderDevConsoleRiddles();
+            }
+        }
+    </script>
+</body>
+</html>
