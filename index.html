@@ -63,7 +63,10 @@
 
         /* Sign Up Page Styles */
         .signup-page {
-            background: url('art/challenge-webpage-background.png') center/cover;
+            background-image: url('art/challenge-webpage-background.png');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -82,7 +85,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('art/challenge-webpage-background-shadow-hue.png') center/cover;
+            background-image: url('art/challenge-webpage-background-shadow-hue.png');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
             z-index: 1;
         }
 
@@ -119,11 +125,14 @@
             margin-bottom: 18px;
             color: #ffffff;
             font-family: 'Centaur', serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
         }
 
         .login-link a {
             color: #d6a550;
             text-decoration: none;
+            font-size: 1.8rem;
         }
 
         .signup-content {
@@ -133,6 +142,7 @@
             justify-content: center;
             width: 100%;
             height: 100%;
+            transform: translateX(-28px);
         }
 
         .intro-page {
@@ -229,6 +239,7 @@
 
         .login-divider-stack .divider-right {
             top: calc(50% - 5px);
+            left: calc(50% + 10px);
             transform: translate(-50%, -50%) rotate(-90deg);
         }
 
@@ -243,7 +254,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 70px 60px 80px;
+            padding: 75px 60px 75px;
             overflow: visible;
         }
 
@@ -409,33 +420,77 @@
         .signup-info-footer {
             position: absolute;
             bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            pointer-events: none;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .signup-info-footer .footer-bg {
+            width: 100%;
+            height: auto;
+            display: block;
+            image-rendering: crisp-edges;
+        }
+
+        .footer-content {
+            position: absolute;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: calc(100% - 160px);
-            max-width: 1320px;
             display: flex;
-            justify-content: center;
-            padding: 0 40px 14px;
-            pointer-events: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            width: 90%;
+            max-width: 1200px;
         }
 
-        .legal-text {
-            font-size: 12px;
-            color: #ffffff;
-            line-height: 1.6;
-            font-family: 'Centaur', serif;
+        .footer-legal {
             text-align: center;
-            max-width: 1000px;
-            margin: 0;
-            pointer-events: auto;
-            background: rgba(7, 5, 3, 0.55);
-            padding: 12px 36px;
-            border-radius: 6px;
+            color: #999999;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            font-family: 'Centaur', serif;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            margin-bottom: -30px;
         }
 
-        .legal-text a {
-            color: #d6a550;
-            text-decoration: none;
+        .footer-logos {
+            display: flex;
+            gap: 100px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logos img {
+            height: 125px;
+            width: 250px;
+            object-fit: contain;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            padding-left: 35px;
+        }
+
+        .footer-logos img:hover {
+            opacity: 1;
+        }
+
+        .footer-logos .intrepid-logo {
+            height: 112.5px;
+            width: 200px;
+        }
+
+        .footer-logos .aoc-logo {
+            height: 131.25px;
+            width: 262.5px;
         }
 
         /* Name Entry Page Styles */
@@ -601,8 +656,8 @@
         .name-input::placeholder {
             color: #d6a550;
             opacity: 0.7;
-            font-family: 'IM Fell English', serif;
-            font-style: italic;
+            font-family: 'Centaur', serif;
+            font-style: normal;
             font-weight: 100;
         }
 
@@ -830,17 +885,17 @@
             position: fixed;
             top: 12px;
             right: 36px;
-            width: 120px;
-            height: 32px;
+            width: 144px;
+            height: 38px;
             border: none;
             border-radius: 10px;
-            background: rgba(12, 9, 6, 0.78);
+            background: transparent;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0;
-            padding: 0 10px;
+            padding: 0 12px;
             transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
             z-index: 1100;
             pointer-events: auto;
@@ -848,14 +903,14 @@
         }
 
         .nav-audio-toggle:hover {
-            background: rgba(24, 18, 12, 0.92);
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+            background: transparent;
+            box-shadow: none;
             transform: translateY(-2px);
         }
 
         .nav-audio-toggle svg {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             fill: none;
             stroke: #f4e3c1;
             stroke-width: 2;
@@ -1603,6 +1658,26 @@
             padding: 8px 0;
         }
 
+        .dev-console-riddle-section {
+            margin: 6px 0;
+        }
+
+        .dev-console-riddle-section strong {
+            color: #f2d37c;
+            font-size: 13px;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .dev-console-riddle-content {
+            font-size: 14px;
+            color: rgba(249, 235, 225, 0.85);
+            line-height: 1.5;
+            padding: 6px 0;
+            padding-left: 12px;
+        }
+
         .dev-console-tag {
             display: inline-block;
             padding: 4px 10px;
@@ -1713,11 +1788,19 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="signup-info-footer">
-                <div class="legal-text" id="legalText" style="display: none;">
-                    <p>This website is not affiliated with, endorsed by, or sponsored by Intrepid Studios. All assets, imagery, and content related to Ashes of Creation are the property of Intrepid Studios, Inc. and are used here for informational and fan content purposes only.</p>
-                    <p>All rights reserved by their respective owners.</p>
+        </div>
+        
+        <div class="signup-info-footer">
+            <img src="art/footer.png" alt="Footer" class="footer-bg">
+            <div class="footer-content">
+                <p class="footer-legal">
+                    This website is not affiliated with, endorsed by, or sponsored by Intrepid Studios. All assets, imagery, and content related to Ashes of Creation are the property of Intrepid Studios, Inc. and are used here for informational and fan content purposes only.
+                    All rights reserved by their respective owners.
+                </p>
+                <div class="footer-logos">
+                    <img src="art/intrepidlogo.png" alt="Intrepid Logo" class="intrepid-logo">
+                    <img src="art/Axiom-logo.png" alt="Axiom Logo">
+                    <img src="art/AOC-LOGO.png" alt="AOC Logo" class="aoc-logo">
                 </div>
             </div>
         </div>
@@ -1787,6 +1870,7 @@
                     <div class="dev-console-menu" role="tablist" aria-label="Developer console views">
                         <button type="button" class="is-active" data-panel="navigate" role="tab" aria-selected="true">Navigate Pages</button>
                         <button type="button" data-panel="accounts" role="tab" aria-selected="false">Accounts</button>
+                        <button type="button" data-panel="profiles" role="tab" aria-selected="false">Riddle Profiles</button>
                         <button type="button" data-panel="addRiddle" role="tab" aria-selected="false">Add Riddle</button>
                         <button type="button" data-panel="riddles" role="tab" aria-selected="false">Riddle Library</button>
                     </div>
@@ -1823,6 +1907,59 @@
                             </div>
                             <div class="dev-console-summary" id="devConsoleAccountsSummary"></div>
                         </div>
+                        <div class="dev-console-panel" id="devConsolePanel-profiles" role="tabpanel">
+                            <div class="dev-console-panel-header">
+                                <h3>Riddle Profiles</h3>
+                                <div class="dev-console-caption">Manage character signatures, busts, and passwords for the "who can we trust" screen</div>
+                            </div>
+                            <div class="dev-console-list" id="devConsoleProfileList"></div>
+                            <div style="margin-top: 20px;">
+                                <button type="button" class="dev-console-primary" id="devConsoleShowAddProfile">Add New Profile</button>
+                            </div>
+                            <div class="dev-console-feedback" id="devConsoleProfileFeedback"></div>
+                            <input type="file" id="devConsoleProfileImageInput" class="hidden" accept="image/png,image/jpeg,image/jpg,image/webp">
+                            
+                            <!-- Add/Edit Profile Form (hidden by default) -->
+                            <div id="devConsoleProfileEditor" style="display: none; margin-top: 24px; border: 1px solid rgba(214, 165, 80, 0.3); border-radius: 12px; padding: 20px; background: rgba(14, 12, 10, 0.95);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                                    <h4 style="margin: 0; color: #f2d37c; font-size: 18px;" id="devConsoleProfileEditorTitle">Add New Profile</h4>
+                                    <button type="button" class="dev-console-tertiary" id="devConsoleCancelProfileEdit">Cancel</button>
+                                </div>
+                                <form id="devConsoleProfileForm" class="dev-console-add-form">
+                                    <label>
+                                        Profile Name
+                                        <input id="devConsoleProfileName" class="dev-console-input" type="text" placeholder="e.g., Xenith" required>
+                                    </label>
+                                    <label>
+                                        Signature
+                                        <input id="devConsoleProfileSignature" class="dev-console-input" type="text" placeholder="e.g., - Xenith" required>
+                                    </label>
+                                    <label>
+                                        Password (for "who can we trust" screen)
+                                        <input id="devConsoleProfilePassword" class="dev-console-input" type="text" placeholder="Leave empty if none">
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: #f4e3c1; margin-top: 12px;">
+                                        <input type="checkbox" id="devConsoleProfileEnabled" style="width: auto;">
+                                        <span>Enable as password on "who can we trust" screen</span>
+                                    </label>
+                                    <div style="margin-top: 16px;">
+                                        <label style="display: block; margin-bottom: 8px; color: #f4e3c1;">Character Bust Image</label>
+                                        <div style="display: flex; gap: 12px; align-items: center;">
+                                            <button type="button" class="dev-console-tertiary" id="devConsoleSelectProfileImage">Choose Image</button>
+                                            <span id="devConsoleProfileImageName" style="color: rgba(249, 235, 225, 0.6); font-size: 14px;">No image selected</span>
+                                        </div>
+                                        <div id="devConsoleProfileImagePreview" style="margin-top: 12px; display: none;">
+                                            <img id="devConsoleProfileImagePreviewImg" src="" alt="Preview" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(214, 165, 80, 0.4);">
+                                        </div>
+                                    </div>
+                                    <div class="dev-console-form-actions" style="margin-top: 20px;">
+                                        <button type="submit" class="dev-console-primary" id="devConsoleSaveProfile">Save Profile</button>
+                                        <button type="button" class="dev-console-secondary" id="devConsoleResetProfileForm">Reset</button>
+                                    </div>
+                                    <div class="dev-console-feedback" id="devConsoleProfileFormFeedback"></div>
+                                </form>
+                            </div>
+                        </div>
                         <div class="dev-console-panel" id="devConsolePanel-addRiddle" role="tabpanel">
                             <div class="dev-console-panel-header">
                                 <h3>Add Custom Riddle</h3>
@@ -1830,20 +1967,27 @@
                             </div>
                             <form id="devConsoleAddRiddleForm" class="dev-console-add-form">
                                 <label>
-                                    Riddle Name / Title
+                                    Heading
                                     <input id="devConsoleRiddleName" class="dev-console-input" type="text" placeholder="e.g., The Guardian's Test" required>
                                 </label>
                                 <label>
-                                    Riddle Question
-                                    <textarea id="devConsoleRiddleQuestion" class="dev-console-textarea" placeholder="Enter the riddle question" required></textarea>
+                                    Narrative (white, one per line)
+                                    <textarea id="devConsoleRiddleWhite" class="dev-console-textarea" placeholder="Enter the narrative text (white dialog)"></textarea>
+                                </label>
+                                <label>
+                                    Question (yellow)
+                                    <textarea id="devConsoleRiddleQuestion" class="dev-console-textarea" placeholder="Enter the riddle question (yellow dialog)" required></textarea>
                                 </label>
                                 <label>
                                     Answers (comma separated)
                                     <input id="devConsoleRiddleAnswers" class="dev-console-input" type="text" placeholder="Answer 1, Answer 2" required>
                                 </label>
                                 <label>
-                                    Signature / Attribution
-                                    <input id="devConsoleRiddleSignature" class="dev-console-input" type="text" placeholder="Optional signature">
+                                    Signature
+                                    <select id="devConsoleRiddleSignature" class="dev-console-input">
+                                        <option value="">None</option>
+                                        <option value="<default>">Default (player's choice)</option>
+                                    </select>
                                 </label>
                                 <div class="dev-console-form-actions">
                                     <button type="submit" class="dev-console-primary">Save Riddle</button>
@@ -1890,6 +2034,7 @@
         };
         const FIGURE_VARIANT_KEY = 'figureVariant';
         const QUEUED_FIGURE_VARIANT_KEY = 'queuedFigureVariant';
+        const SELECTED_PROFILE_KEY = 'selectedProfileId';
         const ACTIVE_CHALLENGE_KEY = 'activeRiddleState';
 
         let activeRiddleChallenge = null;
@@ -1899,6 +2044,7 @@
         const DEV_CONSOLE_STORAGE_KEY = 'customRiddles';
         const DEV_CONSOLE_RIDDLE_OVERRIDES_KEY = 'customRiddleOverrides';
         const DEV_CONSOLE_REMOVED_RIDDLES_KEY = 'removedRiddleIds';
+        const DEV_CONSOLE_PROFILES_KEY = 'riddleProfiles';
         const DEV_CONSOLE_UNLOCK_TIMEOUT_MS = 120000;
         const DEV_CONSOLE_PAGES = [
             { id: 'login', label: 'Login' },
@@ -1949,7 +2095,8 @@
                     "Apologies for the secrecy. Verra is a dangerous place, and the trial has only just begun. The path ahead won't be easy--but I have faith in you."
                 ],
                 yellow: "Eternal guardian of temporal flow, witnessing ages come and go. Her watchful gaze oversees the chime, regulating the sands of time. Who is this warden of endless ages, chronicling history's turning pages?",
-                answers: ['goddess of time', 'aeterna']
+                answers: ['goddess of time', 'aeterna'],
+                signature: '<default>'
             },
             {
                 id: 3,
@@ -2103,6 +2250,74 @@
             return acc;
         }, {});
 
+        // Riddle Profile Management
+        function getDefaultProfiles() {
+            return [
+                {
+                    id: 'mysterious-figure',
+                    name: 'Mysterious Figure',
+                    signature: '- Mysterious Figure',
+                    bust: 'art/hooded-figure.png',
+                    password: 'mysterious figure',
+                    enabledAsPassword: false,
+                    isDefault: true
+                },
+                {
+                    id: 'xenith',
+                    name: 'Xenith',
+                    signature: '- Xenith',
+                    bust: 'art/xenith-bust.png',
+                    password: 'xenith',
+                    enabledAsPassword: true,
+                    isDefault: true
+                },
+                {
+                    id: 'angelcry',
+                    name: 'Angelcry',
+                    signature: '- Angelcry',
+                    bust: 'art/angel-bust.png',
+                    password: 'angelcry',
+                    enabledAsPassword: true,
+                    isDefault: true
+                },
+                {
+                    id: 'player',
+                    name: 'Player',
+                    signature: '- <player>',
+                    bust: '',
+                    password: '',
+                    enabledAsPassword: false,
+                    isDefault: true,
+                    isPlayer: true
+                }
+            ];
+        }
+
+        function loadProfiles() {
+            try {
+                const stored = localStorage.getItem(DEV_CONSOLE_PROFILES_KEY);
+                if (!stored) {
+                    const defaults = getDefaultProfiles();
+                    saveProfiles(defaults);
+                    return defaults;
+                }
+                return JSON.parse(stored);
+            } catch (error) {
+                const defaults = getDefaultProfiles();
+                saveProfiles(defaults);
+                return defaults;
+            }
+        }
+
+        function saveProfiles(profiles) {
+            localStorage.setItem(DEV_CONSOLE_PROFILES_KEY, JSON.stringify(profiles || []));
+        }
+
+        function getProfileBySignature(signature) {
+            const profiles = loadProfiles();
+            return profiles.find(p => p.signature === signature);
+        }
+
         function shuffleArray(source) {
             const array = source.slice();
             for (let i = array.length - 1; i > 0; i--) {
@@ -2151,11 +2366,23 @@
             return 'Traveler';
         }
 
-        function applyFigureVariant(variant) {
+        function applyFigureVariant(variant, forceDefault = false) {
             const normalized = FIGURE_IMAGE_MAP[variant] ? variant : 'hooded';
             localStorage.setItem(FIGURE_VARIANT_KEY, normalized);
 
-            const imageUrl = FIGURE_IMAGE_MAP[normalized];
+            // Check if we have a custom profile selected (unless forceDefault is true)
+            const selectedProfileId = !forceDefault ? localStorage.getItem(SELECTED_PROFILE_KEY) : null;
+            let imageUrl = FIGURE_IMAGE_MAP[normalized];
+            
+            if (selectedProfileId) {
+                const profiles = loadProfiles();
+                const selectedProfile = profiles.find(p => p.id === selectedProfileId);
+                if (selectedProfile && selectedProfile.bust) {
+                    // Use custom profile's bust image
+                    imageUrl = selectedProfile.bust;
+                }
+            }
+            
             document.querySelectorAll('.hooded-figure, .riddle-hooded-figure').forEach(el => {
                 el.style.backgroundImage = `url('${imageUrl}')`;
             });
@@ -2193,8 +2420,8 @@
             }
 
             if (second) {
-                const signatureVariant = variant === 'angelcry' ? '- Angelcry' : '- Xenith';
-            riddles.push({ ...second, signature: signatureVariant });
+                // Don't override signature - let it resolve from <default> during rendering
+                riddles.push({ ...second });
             }
 
             const remainingSlots = Math.max(0, TOTAL_RIDDLE_COUNT - riddles.length);
@@ -2229,16 +2456,37 @@
         }
 
         function clearActiveChallengeState() {
+            // Clear user-specific challenge state
+            const currentUserEmail = localStorage.getItem('currentUser');
+            if (currentUserEmail) {
+                localStorage.removeItem(ACTIVE_CHALLENGE_KEY + '_' + currentUserEmail);
+            }
+            // Also clear global keys for backwards compatibility
             localStorage.removeItem(ACTIVE_CHALLENGE_KEY);
             localStorage.removeItem(FIGURE_VARIANT_KEY);
             localStorage.removeItem(QUEUED_FIGURE_VARIANT_KEY);
+            localStorage.removeItem(SELECTED_PROFILE_KEY);
             clearPendingRiddleAdvance();
             activeRiddleChallenge = null;
+            
+            // Clear the name input field
+            const playerNameInput = document.getElementById('playerName');
+            if (playerNameInput) {
+                playerNameInput.value = '';
+            }
         }
 
         function getIntroAnswerSet(playerName) {
             const answers = new Set();
-            ['xenith', 'angelcry'].forEach(answer => answers.add(answer));
+            const profiles = loadProfiles();
+            
+            // Add all enabled profile passwords
+            profiles.forEach(profile => {
+                if (profile.enabledAsPassword && profile.password) {
+                    answers.add(normalizeAnswer(profile.password));
+                }
+            });
+            
             return answers;
         }
 
@@ -2342,9 +2590,36 @@
                 }
 
                 if (signatureEl) {
-                    if (riddle.signature) {
+                    let displaySignature = riddle.signature;
+                    
+                    // Handle <default> signature - use selected profile or figure variant
+                    if (displaySignature === '<default>') {
+                        const selectedProfileId = localStorage.getItem(SELECTED_PROFILE_KEY);
+                        const profiles = loadProfiles();
+                        
+                        let selectedProfile;
+                        if (selectedProfileId) {
+                            // Use selected profile from password entry
+                            selectedProfile = profiles.find(p => p.id === selectedProfileId);
+                        } else {
+                            // Fallback to variant mapping
+                            const currentVariant = localStorage.getItem(FIGURE_VARIANT_KEY) || 'hooded';
+                            const variantToProfile = {
+                                'hooded': profiles.find(p => p.id === 'mysterious-figure'),
+                                'xenith': profiles.find(p => p.id === 'xenith'),
+                                'angelcry': profiles.find(p => p.id === 'angelcry')
+                            };
+                            selectedProfile = variantToProfile[currentVariant];
+                        }
+                        
+                        if (selectedProfile) {
+                            displaySignature = selectedProfile.signature;
+                        }
+                    }
+                    
+                    if (displaySignature) {
                         signatureEl.style.display = 'block';
-                        signatureEl.textContent = applyPlayerName(riddle.signature, playerName);
+                        signatureEl.textContent = applyPlayerName(displaySignature, playerName);
                     } else {
                         signatureEl.style.display = 'none';
                         signatureEl.textContent = '';
@@ -2414,7 +2689,8 @@
                 return;
             }
             renderRiddleView(intro, playerName, { useTransition: false });
-            flushQueuedFigureVariant();
+            // Always show hooded figure for intro riddle, ignoring custom profile
+            applyFigureVariant('hooded', true);
         }
 
         function renderCurrentChallengeRiddle(useTransition) {
@@ -2443,6 +2719,8 @@
                 inputValue: '',
                 inputPlaceholder: 'Challenge Complete'
             });
+            // Completion message is from Mysterious Figure, so show hooded figure
+            applyFigureVariant('hooded', true);
             const inputEl = document.getElementById('riddleAnswer');
             if (inputEl) {
                 inputEl.classList.add('success');
@@ -2451,21 +2729,48 @@
         
         function maybeStartRiddleChallenge(playerName, answer) {
             const normalizedAnswer = normalizeAnswer(answer);
-            if (!['xenith', 'angelcry'].includes(normalizedAnswer)) {
+            const profiles = loadProfiles();
+            
+            // Find the profile that matches this password
+            const matchingProfile = profiles.find(p => 
+                p.enabledAsPassword && 
+                p.password && 
+                normalizeAnswer(p.password) === normalizedAnswer
+            );
+            
+            if (!matchingProfile) {
                 activeRiddleChallenge = null;
                 return false;
             }
-            setQueuedFigureVariant(normalizedAnswer);
+            
+            // Store the selected profile ID for bust/signature use
+            localStorage.setItem(SELECTED_PROFILE_KEY, matchingProfile.id);
+            
+            // Determine figure variant based on profile
+            let variant = 'hooded'; // default
+            if (matchingProfile.id === 'xenith') {
+                variant = 'xenith';
+            } else if (matchingProfile.id === 'angelcry') {
+                variant = 'angelcry';
+            } else if (matchingProfile.id === 'mysterious-figure') {
+                variant = 'hooded';
+            } else {
+                // For custom profiles, use hooded as base variant but profile will override
+                variant = 'hooded';
+            }
+            
+            setQueuedFigureVariant(variant);
             if (
                 !activeRiddleChallenge ||
                 normalizeAnswer(activeRiddleChallenge.playerName) !== normalizeAnswer(playerName)
             ) {
                 clearPendingRiddleAdvance();
-                activeRiddleChallenge = buildRiddleChallenge(playerName, normalizedAnswer);
+                activeRiddleChallenge = buildRiddleChallenge(playerName, variant);
             } else {
                 activeRiddleChallenge.playerName = playerName;
             }
-            activeRiddleChallenge.variant = normalizedAnswer;
+            activeRiddleChallenge.variant = variant;
+            activeRiddleChallenge.profileId = matchingProfile.id;
             return true;
         }
 
@@ -2674,6 +2979,14 @@
                                 if (pageId === 'riddle') {
                                     prepareRiddleView();
                                 }
+                                if (pageId === 'nameEntry') {
+                                    // Ensure name field is cleared for new accounts
+                                    const currentUser = getCurrentUser();
+                                    const playerNameInput = document.getElementById('playerName');
+                                    if (playerNameInput && currentUser && !currentUser.playerName) {
+                                        playerNameInput.value = '';
+                                    }
+                                }
                             })
                             .finally(() => {
                                 finishOverlayTransition(overlay);
@@ -2781,9 +3094,8 @@
             const submitBtn = document.getElementById('submitBtn');
             const confirmEmailGroup = document.getElementById('confirmEmailGroup');
             const confirmPasswordGroup = document.getElementById('confirmPasswordGroup');
-            const legalText = document.getElementById('legalText');
 
-            if (!pageTitle || !pageLink || !submitBtn || !confirmEmailGroup || !confirmPasswordGroup || !legalText) {
+            if (!pageTitle || !pageLink || !submitBtn || !confirmEmailGroup || !confirmPasswordGroup) {
                 console.warn('Login/Signup UI elements missing; skipping update.');
                 return;
             }
@@ -2806,7 +3118,6 @@
                 submitBtn.textContent = 'Log In';
                 confirmEmailGroup.style.display = 'none';
                 confirmPasswordGroup.style.display = 'none';
-                legalText.style.display = 'none';
             } else {
                 pageTitle.textContent = 'Sign Up';
                 pageLink.innerHTML = 'Already have an account? <a href="#" onclick="toggleLoginSignup()">Log In</a>';
@@ -2815,7 +3126,6 @@
                 submitBtn.textContent = 'Sign Up';
                 confirmEmailGroup.style.display = 'block';
                 confirmPasswordGroup.style.display = 'block';
-                legalText.style.display = 'block';
             }
         }
 
@@ -2826,17 +3136,28 @@
                 password: password,
                 playerName: null,
                 riddleAnswer: null,
+                introSeen: false, // Track if user has seen intro video
                 provider: provider, // Track the login provider
                 createdAt: new Date().toISOString()
             };
             localStorage.setItem('accounts', JSON.stringify(accounts));
+            // Set current user FIRST, then clear challenge state for the new user
             localStorage.setItem('currentUser', email);
+            clearActiveChallengeState();
         }
 
         function loginAccount(email, password) {
             const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
             if (accounts[email] && accounts[email].password === password) {
+                // Migrate old accounts to have introSeen field
+                if (accounts[email].introSeen === undefined) {
+                    accounts[email].introSeen = localStorage.getItem(INTRO_SEEN_KEY) === 'true';
+                    localStorage.setItem('accounts', JSON.stringify(accounts));
+                }
+                
+                // Set current user FIRST, then clear challenge state for the new user
                 localStorage.setItem('currentUser', email);
+                clearActiveChallengeState();
                 return accounts[email];
             }
             return null;
@@ -2961,21 +3282,30 @@
                  }
              }
              
-             if (existingDiscordAccount) {
-                 // User already has a Discord account, log them in
-                 localStorage.setItem('currentUser', existingDiscordEmail);
-                 alert('Welcome back! Logged in with ' + provider.charAt(0).toUpperCase() + provider.slice(1) + ' successfully!');
-                 
-                 // Small delay to ensure DOM is ready
-                 setTimeout(() => {
-                     routeUser(existingDiscordAccount);
-                 }, 100);
-             } else {
-                 // Create new Discord account
-                 const fakeEmail = 'user' + Date.now() + '@' + provider + '.com';
-                 const fakePassword = provider + '123';
-                 createAccount(fakeEmail, fakePassword, provider);
-                 alert('Logged in with ' + provider.charAt(0).toUpperCase() + provider.slice(1) + ' successfully!');
+            if (existingDiscordAccount) {
+                // User already has a Discord account, log them in
+                // Migrate old accounts to have introSeen field
+                if (existingDiscordAccount.introSeen === undefined) {
+                    existingDiscordAccount.introSeen = localStorage.getItem(INTRO_SEEN_KEY) === 'true';
+                    accounts[existingDiscordEmail] = existingDiscordAccount;
+                    localStorage.setItem('accounts', JSON.stringify(accounts));
+                }
+                
+                // Set current user FIRST, then clear challenge state for the new user
+                localStorage.setItem('currentUser', existingDiscordEmail);
+                clearActiveChallengeState();
+                alert('Welcome back! Logged in with ' + provider.charAt(0).toUpperCase() + provider.slice(1) + ' successfully!');
+                
+                // Small delay to ensure DOM is ready
+                setTimeout(() => {
+                    routeUser(existingDiscordAccount);
+                }, 100);
+            } else {
+                // Create new Discord account
+                const fakeEmail = 'user' + Date.now() + '@' + provider + '.com';
+                const fakePassword = provider + '123';
+                createAccount(fakeEmail, fakePassword, provider);
+                alert('Logged in with ' + provider.charAt(0).toUpperCase() + provider.slice(1) + ' successfully!');
                  
                  // Small delay to ensure DOM is ready
                  setTimeout(() => {
@@ -3111,12 +3441,10 @@
             }
             
             // Restore form data if available
+            // Note: We don't restore playerName here as it should only appear when
+            // the user is returning to edit it, not when creating a new account
             const currentUserForRestore = getCurrentUser();
             if (currentUserForRestore) {
-                if (currentUserForRestore.playerName && playerNameInput) {
-                    playerNameInput.value = currentUserForRestore.playerName;
-                }
-                
                 if (currentUserForRestore.riddleAnswer && riddleAnswerInput) {
                     riddleAnswerInput.value = currentUserForRestore.riddleAnswer;
                 }
@@ -3130,10 +3458,29 @@
         const INTRO_SEEN_KEY = 'introSeen';
 
         function markIntroSeen() {
+            const currentUser = getCurrentUser();
+            const email = localStorage.getItem('currentUser');
+            if (currentUser && email) {
+                const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+                if (accounts[email]) {
+                    accounts[email].introSeen = true;
+                    localStorage.setItem('accounts', JSON.stringify(accounts));
+                }
+            }
+            // Keep the old global key for backwards compatibility
             localStorage.setItem(INTRO_SEEN_KEY, 'true');
         }
 
         function hasSeenIntro() {
+            const currentUser = getCurrentUser();
+            const email = localStorage.getItem('currentUser');
+            if (currentUser && email) {
+                const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+                if (accounts[email] && accounts[email].introSeen !== undefined) {
+                    return accounts[email].introSeen === true;
+                }
+            }
+            // Fallback to global key for backwards compatibility with existing users
             return localStorage.getItem(INTRO_SEEN_KEY) === 'true';
         }
 
@@ -3218,13 +3565,17 @@ function safePlay(mediaElement) {
             let backgroundMusic = document.getElementById('backgroundMusic');
             let stagVoice = document.getElementById('stagVoiceover');
 
+            // Get saved volume from localStorage for initial setup
+            const initialVolume = parseFloat(localStorage.getItem('audioVolume') || '60') / 100;
+
             if (!backgroundMusic) {
                 backgroundMusic = document.createElement('audio');
                 backgroundMusic.id = 'backgroundMusic';
         backgroundMusic.src = 'sound/Alex-Productions-Challenge_Theme_Song_Battle.mp3';
                 backgroundMusic.loop = true;
                 backgroundMusic.preload = 'auto';
-                backgroundMusic.volume = 0.6;
+                backgroundMusic.dataset.baseVolume = '0.6';
+                backgroundMusic.volume = initialVolume * 0.6;
                 document.body.appendChild(backgroundMusic);
 
         backgroundMusic.addEventListener('canplay', () => {
@@ -3232,6 +3583,12 @@ function safePlay(mediaElement) {
                 safePlay(backgroundMusic);
             }
         }, { once: true });
+            } else {
+                // Ensure existing audio has baseVolume set
+                if (!backgroundMusic.dataset.baseVolume) {
+                    backgroundMusic.dataset.baseVolume = '0.6';
+                }
+                backgroundMusic.volume = initialVolume * parseFloat(backgroundMusic.dataset.baseVolume);
             }
 
             if (!stagVoice) {
@@ -3239,7 +3596,8 @@ function safePlay(mediaElement) {
                 stagVoice.id = 'stagVoiceover';
                 stagVoice.src = 'sound/hooded-figure-stag-has-guided-you-well-voiceover.mp3';
                 stagVoice.preload = 'auto';
-                stagVoice.volume = 1.0;
+                stagVoice.dataset.baseVolume = '1.0';
+                stagVoice.volume = initialVolume * 1.0;
                 stagVoice.dataset.played = localStorage.getItem('stagVoicePlayed') || 'false';
                 document.body.appendChild(stagVoice);
 
@@ -3248,6 +3606,12 @@ function safePlay(mediaElement) {
                     stagVoice.dataset.played = 'true';
                     fadeAudio(backgroundMusic, true);
                 });
+            } else {
+                // Ensure existing audio has baseVolume set
+                if (!stagVoice.dataset.baseVolume) {
+                    stagVoice.dataset.baseVolume = '1.0';
+                }
+                stagVoice.volume = initialVolume * parseFloat(stagVoice.dataset.baseVolume);
             }
 
             const updateAudioIcon = (muted) => {
@@ -3269,8 +3633,15 @@ function safePlay(mediaElement) {
 
             const applyVolumeState = (volume) => {
                 const volumeValue = volume / 100;
-                if (backgroundMusic) backgroundMusic.volume = volumeValue * 0.6;
+                if (backgroundMusic) {
+                    backgroundMusic.dataset.baseVolume = '0.6';
+                    backgroundMusic.volume = volumeValue * 0.6;
+                }
                 if (introVideo) introVideo.volume = volumeValue;
+                if (stagVoice) {
+                    stagVoice.dataset.baseVolume = '1.0';
+                    stagVoice.volume = volumeValue * 1.0;
+                }
                 localStorage.setItem('audioVolume', volume);
             };
 
@@ -3327,17 +3698,23 @@ function safePlay(mediaElement) {
             handlePageAudio(currentPage);
         }
 
-function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0.6) {
+function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = null) {
             if (!audioElement) return;
+            
+            // Get the user's current volume setting
+            const userVolume = parseFloat(localStorage.getItem('audioVolume') || '60') / 100;
+            const baseVolume = parseFloat(audioElement.dataset.baseVolume || '1.0');
+            const effectiveTargetVolume = targetVolume !== null ? targetVolume : (userVolume * baseVolume);
+            
             const startVolume = fadeIn ? 0 : audioElement.volume;
-            const endVolume = fadeIn ? targetVolume : 0;
+            const endVolume = fadeIn ? effectiveTargetVolume : 0;
             const startTime = performance.now();
 
             const step = (now) => {
                 const elapsed = now - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const currentVolume = startVolume + (endVolume - startVolume) * progress;
-                audioElement.volume = Math.max(0, Math.min(targetVolume, currentVolume));
+                audioElement.volume = Math.max(0, Math.min(effectiveTargetVolume, currentVolume));
 
                 if (progress < 1) {
                     requestAnimationFrame(step);
@@ -3370,11 +3747,15 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 return;
             }
 
-            fadeAudio(controller.backgroundMusic, true, 600, 0.6);
+            fadeAudio(controller.backgroundMusic, true, 600);
         }
 
         function saveActiveChallenge() {
             if (!activeRiddleChallenge) {
+                const currentUserEmail = localStorage.getItem('currentUser');
+                if (currentUserEmail) {
+                    localStorage.removeItem(ACTIVE_CHALLENGE_KEY + '_' + currentUserEmail);
+                }
                 localStorage.removeItem(ACTIVE_CHALLENGE_KEY);
                 return;
             }
@@ -3384,15 +3765,31 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 index: activeRiddleChallenge.index,
                 riddles: activeRiddleChallenge.riddles.map(r => r.id || r.originalId || r),
                 completed: activeRiddleChallenge.completed,
-                variant: activeRiddleChallenge.variant || localStorage.getItem(FIGURE_VARIANT_KEY) || 'hooded'
+                variant: activeRiddleChallenge.variant || localStorage.getItem(FIGURE_VARIANT_KEY) || 'hooded',
+                profileId: activeRiddleChallenge.profileId || localStorage.getItem(SELECTED_PROFILE_KEY)
             };
 
-            localStorage.setItem(ACTIVE_CHALLENGE_KEY, JSON.stringify(serialized));
+            // Save challenge state specific to the current user
+            const currentUserEmail = localStorage.getItem('currentUser');
+            if (currentUserEmail) {
+                localStorage.setItem(ACTIVE_CHALLENGE_KEY + '_' + currentUserEmail, JSON.stringify(serialized));
+            } else {
+                localStorage.setItem(ACTIVE_CHALLENGE_KEY, JSON.stringify(serialized));
+            }
         }
 
         function restoreActiveChallenge() {
             try {
-                const raw = localStorage.getItem(ACTIVE_CHALLENGE_KEY);
+                // Get challenge state specific to the current user
+                const currentUserEmail = localStorage.getItem('currentUser');
+                let raw = null;
+                if (currentUserEmail) {
+                    raw = localStorage.getItem(ACTIVE_CHALLENGE_KEY + '_' + currentUserEmail);
+                }
+                // Fallback to non-user-specific key for backwards compatibility
+                if (!raw) {
+                    raw = localStorage.getItem(ACTIVE_CHALLENGE_KEY);
+                }
                 if (!raw) {
                     return null;
                 }
@@ -3403,6 +3800,11 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
 
                 const queuedVariant = parsed.variant && FIGURE_IMAGE_MAP[parsed.variant] ? parsed.variant : 'hooded';
                 setQueuedFigureVariant(queuedVariant);
+                
+                // Restore selected profile ID if present
+                if (parsed.profileId) {
+                    localStorage.setItem(SELECTED_PROFILE_KEY, parsed.profileId);
+                }
 
                 const orderedRiddles = parsed.riddles
                     .map(id => RIDDLE_DEFINITION_MAP[id])
@@ -3423,7 +3825,8 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                     index: normalizedIndex,
                     riddles: orderedRiddles,
                     completed: Boolean(parsed.completed),
-                    variant: queuedVariant
+                    variant: queuedVariant,
+                    profileId: parsed.profileId
                 };
             } catch (error) {
                 return null;
@@ -3435,6 +3838,9 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
             if (!overlay) {
                 return;
             }
+
+            // Ensure profiles are initialized
+            loadProfiles();
 
             DevConsoleState.elements = {
                 overlay,
@@ -3453,6 +3859,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 accountsSummary: document.getElementById('devConsoleAccountsSummary'),
                 addRiddleForm: document.getElementById('devConsoleAddRiddleForm'),
                 riddleName: document.getElementById('devConsoleRiddleName'),
+                riddleWhite: document.getElementById('devConsoleRiddleWhite'),
                 riddleQuestion: document.getElementById('devConsoleRiddleQuestion'),
                 riddleAnswers: document.getElementById('devConsoleRiddleAnswers'),
                 riddleSignature: document.getElementById('devConsoleRiddleSignature'),
@@ -3462,12 +3869,31 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 exportRiddlesButton: document.getElementById('devConsoleExportRiddles'),
                 importRiddlesButton: document.getElementById('devConsoleImportRiddles'),
                 importRiddlesInput: document.getElementById('devConsoleRiddleImportInput'),
-                clearAccountsButton: document.getElementById('devConsoleClearAccounts')
+                clearAccountsButton: document.getElementById('devConsoleClearAccounts'),
+                profileList: document.getElementById('devConsoleProfileList'),
+                showAddProfileButton: document.getElementById('devConsoleShowAddProfile'),
+                profileImageInput: document.getElementById('devConsoleProfileImageInput'),
+                profileFeedback: document.getElementById('devConsoleProfileFeedback'),
+                profileEditor: document.getElementById('devConsoleProfileEditor'),
+                profileEditorTitle: document.getElementById('devConsoleProfileEditorTitle'),
+                profileForm: document.getElementById('devConsoleProfileForm'),
+                profileName: document.getElementById('devConsoleProfileName'),
+                profileSignature: document.getElementById('devConsoleProfileSignature'),
+                profilePassword: document.getElementById('devConsoleProfilePassword'),
+                profileEnabled: document.getElementById('devConsoleProfileEnabled'),
+                selectProfileImage: document.getElementById('devConsoleSelectProfileImage'),
+                profileImageName: document.getElementById('devConsoleProfileImageName'),
+                profileImagePreview: document.getElementById('devConsoleProfileImagePreview'),
+                profileImagePreviewImg: document.getElementById('devConsoleProfileImagePreviewImg'),
+                cancelProfileEdit: document.getElementById('devConsoleCancelProfileEdit'),
+                resetProfileForm: document.getElementById('devConsoleResetProfileForm'),
+                profileFormFeedback: document.getElementById('devConsoleProfileFormFeedback')
             };
 
             setupDevConsoleEvents();
             renderDevConsolePages();
             refreshDevConsolePagesActiveState();
+            populateSignatureDropdown();
         }
 
         function setupDevConsoleEvents() {
@@ -3484,7 +3910,13 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 exportRiddlesButton,
                 importRiddlesButton,
                 importRiddlesInput,
-                clearAccountsButton
+                clearAccountsButton,
+                showAddProfileButton,
+                profileImageInput,
+                profileForm,
+                selectProfileImage,
+                cancelProfileEdit,
+                resetProfileForm
             } = DevConsoleState.elements;
 
             close?.addEventListener('click', hideDevConsole);
@@ -3517,6 +3949,14 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 event.target.value = '';
             });
             clearAccountsButton?.addEventListener('click', handleClearAllAccounts);
+            
+            // Profile management events
+            showAddProfileButton?.addEventListener('click', showAddProfileForm);
+            profileForm?.addEventListener('submit', handleProfileFormSubmit);
+            selectProfileImage?.addEventListener('click', () => profileImageInput?.click());
+            profileImageInput?.addEventListener('change', handleProfileImageSelection);
+            cancelProfileEdit?.addEventListener('click', hideProfileEditor);
+            resetProfileForm?.addEventListener('click', resetProfileFormFields);
         }
 
         function handleDevConsoleKeydown(event) {
@@ -3655,6 +4095,8 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
 
             if (panelId === 'accounts') {
                 renderDevConsoleAccounts();
+            } else if (panelId === 'profiles') {
+                renderDevConsoleProfiles();
             } else if (panelId === 'riddles') {
                 renderDevConsoleRiddles();
             }
@@ -3972,7 +4414,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 .filter(Boolean);
         }
 
-        function createCustomRiddleDefinition({ name, question, answers, signature }) {
+        function createCustomRiddleDefinition({ name, question, answers, signature, white }) {
             const trimmedQuestion = question.trim();
             const trimmedName = name?.trim() || 'Custom Riddle';
             if (!trimmedQuestion || !answers.length) {
@@ -3980,13 +4422,21 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
             }
 
             const id = `custom-${Date.now()}`;
+            const whiteLines = white ? white.split('\n').map(line => line.trim()).filter(Boolean) : [];
+            
+            // Handle signature: allow empty string, null, undefined -> use default only if undefined
+            let finalSignature = signature;
+            if (signature === undefined || signature === null) {
+                finalSignature = '- Dev Console';
+            }
+            
             return {
                 id,
                 heading: trimmedName,
-                white: ['A custom riddle added via dev console.'],
+                white: whiteLines.length > 0 ? whiteLines : ['A custom riddle added via dev console.'],
                 yellow: trimmedQuestion,
                 answers,
-                signature: signature?.trim() || '- Dev Console',
+                signature: finalSignature,
                 isCustom: true
             };
         }
@@ -3995,6 +4445,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
             event.preventDefault();
             const {
                 riddleName,
+                riddleWhite,
                 riddleQuestion,
                 riddleAnswers,
                 riddleSignature,
@@ -4006,9 +4457,10 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
             }
 
             const name = riddleName.value;
+            const white = riddleWhite?.value || '';
             const question = riddleQuestion.value;
             const answers = normalizeCustomAnswers(riddleAnswers.value).map(answer => answer.toLowerCase());
-            const signature = riddleSignature?.value || '';
+            const signature = riddleSignature?.value !== undefined ? riddleSignature.value : '';
 
             if (!name.trim() || !question.trim() || !answers.length) {
                 if (riddleFeedback) {
@@ -4018,7 +4470,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 return;
             }
 
-            const customRiddle = createCustomRiddleDefinition({ name, question, answers, signature });
+            const customRiddle = createCustomRiddleDefinition({ name, white, question, answers, signature });
             if (!customRiddle) {
                 if (riddleFeedback) {
                     riddleFeedback.textContent = 'Unable to create riddle. Check your inputs and try again.';
@@ -4040,6 +4492,9 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
             }
 
             riddleName.value = '';
+            if (riddleWhite) {
+                riddleWhite.value = '';
+            }
             riddleQuestion.value = '';
             riddleAnswers.value = '';
             if (riddleSignature) {
@@ -4052,6 +4507,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
         function resetDevConsoleRiddleForm() {
             const {
                 riddleName,
+                riddleWhite,
                 riddleQuestion,
                 riddleAnswers,
                 riddleSignature,
@@ -4060,6 +4516,9 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
 
             if (riddleName) {
                 riddleName.value = '';
+            }
+            if (riddleWhite) {
+                riddleWhite.value = '';
             }
             if (riddleQuestion) {
                 riddleQuestion.value = '';
@@ -4110,7 +4569,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                         white: override.white || riddle.white,
                         yellow: override.yellow ?? riddle.yellow,
                         heading: override.heading ?? riddle.heading,
-                        signature: override.signature ?? riddle.signature
+                        signature: override.signature !== undefined ? override.signature : riddle.signature
                     } : riddle;
 
                     return {
@@ -4161,16 +4620,57 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 const yellow = riddle.yellow || '—';
                 const white = (riddle.white && riddle.white.join(' ')) || '—';
                 const answerList = (riddle.answers || []).join(', ') || '—';
+                const rawSignature = riddle.signature || '';
+                
+                // Display signature: show what it will be
+                let displaySignature = rawSignature;
+                if (rawSignature === '<default>') {
+                    displaySignature = '<default> (Uses chosen character)';
+                } else if (rawSignature === '') {
+                    displaySignature = '';
+                }
+                const signature = rawSignature;
+                
+                // Build signature dropdown options
+                const profiles = loadProfiles();
+                const currentUser = getCurrentUser();
+                const playerName = currentUser?.playerName || 'Player';
+                const noneSelected = (!signature || signature === '') ? 'selected' : '';
+                const defaultSelected = (signature === '<default>') ? 'selected' : '';
+                const signatureOptions = [
+                    `<option value="" ${noneSelected}>None</option>`, 
+                    `<option value="<default>" ${defaultSelected}>Default (player's choice)</option>`
+                ];
+                profiles.forEach(profile => {
+                    const selected = profile.signature === signature ? 'selected' : '';
+                    const displayText = profile.isPlayer ? `${profile.name} (- ${playerName})` : `${profile.name} (${profile.signature})`;
+                    signatureOptions.push(`<option value="${profile.signature.replace(/"/g, '&quot;')}" ${selected}>${displayText}</option>`);
+                });
 
                 item.innerHTML = `
-                    <div class="dev-console-riddle-title">${heading}</div>
+                    <div class="dev-console-riddle-title">
+                        <strong>Title:</strong> ${heading}
+                        ${riddle.isCustom ? '<span class="dev-console-tag" style="margin-left: 8px;">Custom</span>' : ''}
+                    </div>
                     <div class="dev-console-riddle-meta">
                         <span>ID: ${riddle.id}</span>
-                        <span>Answers: ${answerList}</span>
-                        ${riddle.isCustom ? '<span class="dev-console-tag">Custom</span>' : ''}
                     </div>
-                    <div class="dev-console-riddle-question">${yellow}</div>
-                    <div class="dev-console-riddle-question">${white}</div>
+                    <div class="dev-console-riddle-section">
+                        <strong>White Dialog:</strong>
+                        <div class="dev-console-riddle-content">${white}</div>
+                    </div>
+                    <div class="dev-console-riddle-section">
+                        <strong>Yellow Dialog:</strong>
+                        <div class="dev-console-riddle-content" style="color: #d6a550;">${yellow}</div>
+                    </div>
+                    <div class="dev-console-riddle-section">
+                        <strong>Signature:</strong>
+                        <div class="dev-console-riddle-content">${displaySignature || '<em>None</em>'}</div>
+                    </div>
+                    <div class="dev-console-riddle-section">
+                        <strong>Answers:</strong>
+                        <div class="dev-console-riddle-content">${answerList}</div>
+                    </div>
                     <div class="dev-console-riddle-actions">
                         <button type="button" class="dev-console-tertiary" data-action="edit" data-riddle="${riddle.id}">Edit</button>
                         <button type="button" class="dev-console-tertiary danger" data-action="delete" data-riddle="${riddle.id}">Delete</button>
@@ -4181,12 +4681,12 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                             <input type="text" class="dev-console-input" data-field="heading" value="${heading.replace(/"/g, '&quot;')}">
                         </label>
                         <label>
-                            Question (yellow)
-                            <textarea class="dev-console-textarea" data-field="yellow">${yellow}</textarea>
-                        </label>
-                        <label>
                             Narrative (white, one per line)
                             <textarea class="dev-console-textarea" data-field="white">${(riddle.white || []).join('\n')}</textarea>
+                        </label>
+                        <label>
+                            Question (yellow)
+                            <textarea class="dev-console-textarea" data-field="yellow">${yellow}</textarea>
                         </label>
                         <label>
                             Answers (comma separated)
@@ -4194,7 +4694,9 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                         </label>
                         <label>
                             Signature
-                            <input type="text" class="dev-console-input" data-field="signature" value="${(riddle.signature || '').replace(/"/g, '&quot;')}">
+                            <select class="dev-console-input" data-field="signature">
+                                ${signatureOptions.join('')}
+                            </select>
                         </label>
                         <div class="dev-console-inline-actions">
                             <button type="button" class="dev-console-tertiary" data-action="save" data-riddle="${riddle.id}">Save</button>
@@ -4234,10 +4736,367 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
             refreshDevConsolePagesActiveState();
             if (DevConsoleState.activePanel === 'accounts') {
                 renderDevConsoleAccounts();
+            } else if (DevConsoleState.activePanel === 'profiles') {
+                renderDevConsoleProfiles();
             } else if (DevConsoleState.activePanel === 'riddles') {
                 renderDevConsoleRiddles();
             }
         }
+
+        // Profile management functions
+        function populateSignatureDropdown() {
+            const { riddleSignature } = DevConsoleState.elements;
+            if (!riddleSignature) return;
+
+            const profiles = loadProfiles();
+            const currentValue = riddleSignature.value;
+            const currentUser = getCurrentUser();
+            const playerName = currentUser?.playerName || 'Player';
+
+            // Clear existing options except None and Default
+            while (riddleSignature.options.length > 2) {
+                riddleSignature.remove(2);
+            }
+
+            // Add profile options
+            profiles.forEach(profile => {
+                const option = document.createElement('option');
+                if (profile.isPlayer) {
+                    // For player profile, use the actual player name
+                    option.value = profile.signature;
+                    option.textContent = `${profile.name} (- ${playerName})`;
+                } else {
+                    option.value = profile.signature;
+                    option.textContent = `${profile.name} (${profile.signature})`;
+                }
+                riddleSignature.appendChild(option);
+            });
+
+            // Restore previous value if it exists
+            if (currentValue) {
+                riddleSignature.value = currentValue;
+            }
+        }
+
+        function renderDevConsoleProfiles() {
+            const { profileList } = DevConsoleState.elements;
+            if (!profileList) return;
+
+            profileList.innerHTML = '';
+            const profiles = loadProfiles();
+
+            profiles.forEach(profile => {
+                const item = document.createElement('div');
+                item.className = 'dev-console-riddle-item';
+                
+                // For player profile, get actual player name
+                let displaySignature = profile.signature;
+                if (profile.isPlayer) {
+                    const currentUser = getCurrentUser();
+                    const playerName = currentUser?.playerName || 'Player';
+                    displaySignature = `- ${playerName}`;
+                }
+                
+                item.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        ${profile.bust ? `<img src="${profile.bust}" alt="${profile.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(214, 165, 80, 0.4);">` : '<div style="width: 60px; height: 60px; background: rgba(24, 18, 12, 0.6); border-radius: 8px; border: 1px solid rgba(214, 165, 80, 0.4); display: flex; align-items: center; justify-content: center; color: rgba(249, 235, 225, 0.4); font-size: 12px;">No Image</div>'}
+                        <div style="flex: 1;">
+                            <div class="dev-console-riddle-title">${profile.name}${profile.isPlayer ? ' <span style="color: #97e8ff; font-size: 14px;">(Special)</span>' : ''}</div>
+                            <div class="dev-console-riddle-meta">
+                                <span>Signature: ${displaySignature}${profile.isPlayer ? ' <span style="color: rgba(249, 235, 225, 0.5); font-size: 11px;">(Auto: uses player name)</span>' : ''}</span>
+                                ${profile.password ? `<span>Password: ${profile.password}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dev-console-riddle-section">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #f4e3c1;">
+                            <input type="checkbox" ${profile.enabledAsPassword ? 'checked' : ''} onchange="toggleProfilePassword('${profile.id}', this.checked)" ${profile.isDefault && profile.id === 'mysterious-figure' ? '' : ''}>
+                            <span>Enable as password on "who can we trust" screen</span>
+                        </label>
+                    </div>
+                    <div class="dev-console-riddle-actions">
+                        ${profile.isPlayer ? `<button type="button" class="dev-console-tertiary" onclick="editProfile('${profile.id}')">Upload Bust</button>` : ''}
+                        ${profile.isDefault && !profile.isPlayer ? `<button type="button" class="dev-console-tertiary" onclick="editProfile('${profile.id}')">Edit</button>` : ''}
+                        ${!profile.isDefault && !profile.isPlayer ? `<button type="button" class="dev-console-tertiary" onclick="editProfile('${profile.id}')">Edit</button>` : ''}
+                        ${!profile.isDefault && !profile.isPlayer ? `<button type="button" class="dev-console-tertiary danger" onclick="deleteProfile('${profile.id}')">Delete</button>` : ''}
+                    </div>
+                `;
+                profileList.appendChild(item);
+            });
+
+            if (!profiles.length) {
+                const muted = document.createElement('div');
+                muted.className = 'dev-console-muted';
+                muted.textContent = 'No profiles found.';
+                profileList.appendChild(muted);
+            }
+        }
+
+        function toggleProfilePassword(profileId, enabled) {
+            const profiles = loadProfiles();
+            const profile = profiles.find(p => p.id === profileId);
+            if (profile) {
+                profile.enabledAsPassword = enabled;
+                saveProfiles(profiles);
+            }
+        }
+
+        function showAddProfileForm() {
+            DevConsoleState.editingProfileId = null;
+            const { profileEditor, profileEditorTitle } = DevConsoleState.elements;
+            
+            if (profileEditor && profileEditorTitle) {
+                profileEditorTitle.textContent = 'Add New Profile';
+                resetProfileFormFields();
+                profileEditor.style.display = 'block';
+                profileEditor.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function hideProfileEditor() {
+            const { profileEditor } = DevConsoleState.elements;
+            if (profileEditor) {
+                profileEditor.style.display = 'none';
+                resetProfileFormFields();
+                DevConsoleState.editingProfileId = null;
+                DevConsoleState.profileImageData = null;
+            }
+        }
+
+        function resetProfileFormFields() {
+            const {
+                profileName,
+                profileSignature,
+                profilePassword,
+                profileEnabled,
+                profileImageName,
+                profileImagePreview,
+                profileFormFeedback
+            } = DevConsoleState.elements;
+
+            if (profileName) {
+                profileName.value = '';
+                profileName.disabled = false;
+            }
+            if (profileSignature) {
+                profileSignature.value = '';
+                profileSignature.disabled = false;
+            }
+            if (profilePassword) profilePassword.value = '';
+            if (profileEnabled) profileEnabled.checked = false;
+            if (profileImageName) profileImageName.textContent = 'No image selected';
+            if (profileImagePreview) profileImagePreview.style.display = 'none';
+            if (profileFormFeedback) {
+                profileFormFeedback.textContent = '';
+                profileFormFeedback.className = 'dev-console-feedback';
+            }
+            DevConsoleState.profileImageData = null;
+        }
+
+        function handleProfileImageSelection(event) {
+            const file = event.target.files?.[0];
+            if (!file) return;
+
+            const { profileImageName, profileImagePreview, profileImagePreviewImg } = DevConsoleState.elements;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                DevConsoleState.profileImageData = e.target.result;
+                if (profileImageName) profileImageName.textContent = file.name;
+                if (profileImagePreview) profileImagePreview.style.display = 'block';
+                if (profileImagePreviewImg) profileImagePreviewImg.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+            event.target.value = '';
+        }
+
+        function handleProfileFormSubmit(event) {
+            event.preventDefault();
+
+            const {
+                profileName,
+                profileSignature,
+                profilePassword,
+                profileEnabled,
+                profileFormFeedback
+            } = DevConsoleState.elements;
+
+            const name = profileName?.value.trim();
+            const signature = profileSignature?.value.trim();
+            const password = profilePassword?.value.trim();
+            const enabled = profileEnabled?.checked || false;
+
+            if (!name || !signature) {
+                if (profileFormFeedback) {
+                    profileFormFeedback.textContent = 'Profile name and signature are required.';
+                    profileFormFeedback.className = 'dev-console-feedback error';
+                }
+                return;
+            }
+
+            const profiles = loadProfiles();
+
+            if (DevConsoleState.editingProfileId) {
+                // Edit existing profile
+                const profile = profiles.find(p => p.id === DevConsoleState.editingProfileId);
+                if (profile && !profile.isPlayer) {
+                    // For default profiles, only allow password, enabledAsPassword, and bust changes
+                    if (profile.isDefault) {
+                        profile.password = password.toLowerCase();
+                        profile.enabledAsPassword = enabled;
+                        if (DevConsoleState.profileImageData) {
+                            profile.bust = DevConsoleState.profileImageData;
+                        }
+                    } else {
+                        // For custom profiles, allow all changes
+                        profile.name = name;
+                        profile.signature = signature;
+                        profile.password = password.toLowerCase();
+                        profile.enabledAsPassword = enabled;
+                        if (DevConsoleState.profileImageData) {
+                            profile.bust = DevConsoleState.profileImageData;
+                        }
+                    }
+                }
+            } else {
+                // Add new profile
+                const newProfile = {
+                    id: `custom-profile-${Date.now()}`,
+                    name,
+                    signature,
+                    bust: DevConsoleState.profileImageData || '',
+                    password: password.toLowerCase(),
+                    enabledAsPassword: enabled,
+                    isDefault: false,
+                    isPlayer: false
+                };
+                profiles.push(newProfile);
+            }
+
+            saveProfiles(profiles);
+            renderDevConsoleProfiles();
+            populateSignatureDropdown();
+            hideProfileEditor();
+
+            const { profileFeedback } = DevConsoleState.elements;
+            if (profileFeedback) {
+                profileFeedback.textContent = DevConsoleState.editingProfileId ? 'Profile updated successfully.' : `Profile "${name}" created successfully.`;
+                profileFeedback.className = 'dev-console-feedback success';
+                setTimeout(() => {
+                    profileFeedback.textContent = '';
+                    profileFeedback.className = 'dev-console-feedback';
+                }, 3000);
+            }
+        }
+
+        function editProfile(profileId) {
+            const profiles = loadProfiles();
+            const profile = profiles.find(p => p.id === profileId);
+            if (!profile) return;
+
+            if (profile.isPlayer) {
+                // For player profile, only allow image upload
+                DevConsoleState.editingProfileId = profileId;
+                DevConsoleState.elements.profileImageInput?.click();
+                
+                // Handle the image upload for player profile
+                const originalHandler = DevConsoleState.elements.profileImageInput?.onchange;
+                DevConsoleState.elements.profileImageInput.onchange = (e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (evt) => {
+                            profile.bust = evt.target.result;
+                            saveProfiles(profiles);
+                            renderDevConsoleProfiles();
+                            
+                            const { profileFeedback } = DevConsoleState.elements;
+                            if (profileFeedback) {
+                                profileFeedback.textContent = 'Player bust image updated successfully.';
+                                profileFeedback.className = 'dev-console-feedback success';
+                                setTimeout(() => {
+                                    profileFeedback.textContent = '';
+                                    profileFeedback.className = 'dev-console-feedback';
+                                }, 3000);
+                            }
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                    e.target.value = '';
+                    // Restore normal handler
+                    if (originalHandler) {
+                        DevConsoleState.elements.profileImageInput.onchange = originalHandler;
+                    }
+                };
+            } else {
+                // Edit any profile (custom or default) with form
+                DevConsoleState.editingProfileId = profileId;
+                const { 
+                    profileEditor, 
+                    profileEditorTitle,
+                    profileName,
+                    profileSignature,
+                    profilePassword,
+                    profileEnabled,
+                    profileImageName,
+                    profileImagePreview,
+                    profileImagePreviewImg
+                } = DevConsoleState.elements;
+
+                if (profileEditor && profileEditorTitle) {
+                    profileEditorTitle.textContent = profile.isDefault ? 'Edit Default Profile' : 'Edit Profile';
+                    if (profileName) {
+                        profileName.value = profile.name;
+                        profileName.disabled = profile.isDefault; // Lock name for default profiles
+                    }
+                    if (profileSignature) {
+                        profileSignature.value = profile.signature;
+                        profileSignature.disabled = profile.isDefault; // Lock signature for default profiles
+                    }
+                    if (profilePassword) {
+                        profilePassword.value = profile.password;
+                    }
+                    if (profileEnabled) {
+                        profileEnabled.checked = profile.enabledAsPassword;
+                    }
+                    
+                    if (profile.bust) {
+                        DevConsoleState.profileImageData = profile.bust;
+                        if (profileImageName) profileImageName.textContent = 'Current image';
+                        if (profileImagePreview) profileImagePreview.style.display = 'block';
+                        if (profileImagePreviewImg) profileImagePreviewImg.src = profile.bust;
+                    }
+
+                    profileEditor.style.display = 'block';
+                    profileEditor.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        }
+
+        function deleteProfile(profileId) {
+            if (!confirm('Are you sure you want to delete this profile?')) return;
+
+            let profiles = loadProfiles();
+            profiles = profiles.filter(p => p.id !== profileId);
+            saveProfiles(profiles);
+            renderDevConsoleProfiles();
+            populateSignatureDropdown();
+
+            const { profileFeedback } = DevConsoleState.elements;
+            if (profileFeedback) {
+                profileFeedback.textContent = 'Profile deleted successfully.';
+                profileFeedback.className = 'dev-console-feedback success';
+                setTimeout(() => {
+                    profileFeedback.textContent = '';
+                    profileFeedback.className = 'dev-console-feedback';
+                }, 3000);
+            }
+        }
+
+        // Make functions globally available
+        window.toggleProfilePassword = toggleProfilePassword;
+        window.editProfile = editProfile;
+        window.deleteProfile = deleteProfile;
 
         function restoreCustomRiddles() {
             Object.keys(RIDDLE_DEFINITION_MAP).forEach(key => {
@@ -4268,7 +5127,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                     white: override.white || base.white,
                     yellow: override.yellow ?? base.yellow,
                     heading: override.heading ?? base.heading,
-                    signature: override.signature ?? base.signature,
+                    signature: override.signature !== undefined ? override.signature : base.signature,
                     isCustom: Boolean(base.isCustom || override.isCustom)
                 };
 
@@ -4350,7 +5209,8 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                 .map(line => line.trim())
                 .filter(Boolean);
             const answers = normalizeCustomAnswers(editor.querySelector('[data-field="answers"]').value);
-            const signature = editor.querySelector('[data-field="signature"]').value.trim();
+            const signatureField = editor.querySelector('[data-field="signature"]');
+            const signature = signatureField ? signatureField.value : '';
 
             return {
                 heading,
@@ -4425,17 +5285,18 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = 0
                     yellow: values.yellow,
                     white: values.white,
                     answers: values.answers,
-                    signature: values.signature
+                    signature: values.signature !== undefined ? values.signature : ''
                 };
                 saveRiddleOverrides(overrides);
 
                 const baseDefinition = BASE_RIDDLE_DEFINITIONS.find(riddle => String(riddle.id) === String(riddleId)) || RIDDLE_DEFINITION_MAP[riddleId] || {};
+                const mergedSignature = values.signature !== '' ? values.signature : (baseDefinition.signature || '');
                 const definition = {
                     ...baseDefinition,
                     heading: values.heading,
                     yellow: values.yellow,
                     white: values.white,
-                    signature: values.signature || baseDefinition.signature,
+                    signature: mergedSignature,
                     answers: values.answers,
                     normalizedAnswers: new Set(normalizedAnswersArray)
                 };
