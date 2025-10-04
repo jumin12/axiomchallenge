@@ -5469,12 +5469,13 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             const viewportWidth = window.visualViewport ? window.visualViewport.width : window.innerWidth;
             const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
             
-            // Calculate scale to fill the entire screen (stretch to fit)
+            // Calculate scale to fit proportionally (maintains aspect ratio, no distortion)
             const scaleX = viewportWidth / designWidth;
             const scaleY = viewportHeight / designHeight;
+            const scale = Math.min(scaleX, scaleY);
             
-            // Apply transform with translate(-50%, -50%) to center, then scale
-            wrapper.style.transform = `translate(-50%, -50%) scale(${scaleX}, ${scaleY})`;
+            // Apply transform with translate(-50%, -50%) to center, then uniform scale
+            wrapper.style.transform = `translate(-50%, -50%) scale(${scale})`;
         }
 
         // Call on load, resize, and orientation change
