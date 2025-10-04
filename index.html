@@ -2,27 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=2560, initial-scale=1.0" id="viewport-meta">
-    <script>
-        // Immediately set viewport zoom before anything else loads
-        (function() {
-            const viewportMeta = document.getElementById('viewport-meta');
-            if (!viewportMeta) return;
-            
-            const designWidth = 2560;
-            const designHeight = 1440;
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-            const scaleX = viewportWidth / designWidth;
-            const scaleY = viewportHeight / designHeight;
-            const scale = Math.min(scaleX, scaleY);
-            const finalScale = Math.min(scale, 1.0);
-            
-            viewportMeta.setAttribute('content', 
-                `width=${designWidth}, initial-scale=${finalScale}, minimum-scale=${finalScale}, maximum-scale=${finalScale}, user-scalable=no`
-            );
-        })();
-    </script>
+    <meta name="viewport" content="width=1920, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes">
     <title>Mysterious Journey</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Chiller&family=Centaur&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Allura&family=IM+Fell+English:ital@0;1&display=swap');
@@ -5554,31 +5534,6 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                 renderDevConsoleRiddles();
             }
         }
-
-        // Adjust viewport zoom for resolution changes
-        function adjustViewportForResolution() {
-            const viewportMeta = document.getElementById('viewport-meta');
-            if (!viewportMeta) return;
-            
-            const designWidth = 2560;
-            const designHeight = 1440;
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-            const scaleX = viewportWidth / designWidth;
-            const scaleY = viewportHeight / designHeight;
-            const scale = Math.min(scaleX, scaleY);
-            const finalScale = Math.min(scale, 1.0);
-            
-            viewportMeta.setAttribute('content', 
-                `width=${designWidth}, initial-scale=${finalScale}, minimum-scale=${finalScale}, maximum-scale=${finalScale}, user-scalable=no`
-            );
-        }
-
-        // Re-adjust on resize and orientation change
-        window.addEventListener('resize', adjustViewportForResolution);
-        window.addEventListener('orientationchange', () => {
-            setTimeout(adjustViewportForResolution, 100);
-        });
 
     </script>
     </div>
