@@ -1004,7 +1004,83 @@
 
         .page-transition-overlay.visible {
             opacity: 1;
-            pointer-events: auto;
+        }
+
+        /* Landscape-only requirement for mobile */
+        .rotate-screen-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 10000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-family: 'Centaur', serif;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .rotate-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 30px;
+            animation: rotate-pulse 2s ease-in-out infinite;
+        }
+
+        .rotate-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #d6a550;
+        }
+
+        .rotate-message {
+            font-size: 1.5rem;
+            color: #d6a550;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .rotate-submessage {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes rotate-pulse {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: rotate(90deg) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Show rotation overlay only on mobile devices in portrait mode */
+        @media screen and (max-width: 1024px) and (orientation: portrait) {
+            .rotate-screen-overlay {
+                display: flex;
+            }
+            
+            #game-wrapper {
+                display: none;
+            }
+        }
+
+        /* Ensure content shows on mobile landscape */
+        @media screen and (max-width: 1024px) and (orientation: landscape) {
+            .rotate-screen-overlay {
+                display: none;
+            }
+            
+            #game-wrapper {
+                display: block;
+            }
         }
 
         /* Button styles */
@@ -1735,6 +1811,20 @@
     </style>
 </head>
 <body>
+    <!-- Rotation Overlay for Mobile Portrait Mode -->
+    <div class="rotate-screen-overlay">
+        <div class="rotate-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.48 2.52c3.27 1.55 5.61 4.72 5.97 8.48h1.5C23.44 4.84 18.29 0 12 0l-.66.03 3.81 3.81 1.33-1.32z"/>
+                <path d="M10.23 1.75c-2.92.52-5.42 2.35-6.85 4.93-.44.77-.77 1.59-.99 2.47l1.45.42c.19-.74.46-1.45.81-2.12 1.2-2.19 3.29-3.74 5.73-4.15l-1.15-1.55z"/>
+                <path d="M7.52 21.48C4.25 19.94 1.91 16.76 1.55 13H.05C.56 19.16 5.71 24 12 24l.66-.03-3.81-3.81-1.33 1.32z"/>
+                <path d="M12 18.5c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
+            </svg>
+        </div>
+        <div class="rotate-message">Please Rotate Your Device</div>
+        <div class="rotate-submessage">This experience is best viewed in landscape mode</div>
+    </div>
+    
     <div id="game-wrapper">
     <!-- Navigation Bar -->
     <div class="nav-bar" id="navBar"></div>
