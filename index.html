@@ -39,7 +39,9 @@
         #game-wrapper {
             width: 2560px;
             height: 1440px;
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
             transform-origin: center center;
             overflow: hidden;
         }
@@ -5471,8 +5473,8 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             const scaleX = viewportWidth / designWidth;
             const scaleY = viewportHeight / designHeight;
             
-            wrapper.style.transform = `scale(${scaleX}, ${scaleY})`;
-            wrapper.style.transformOrigin = 'center center';
+            // Apply transform with translate(-50%, -50%) to center, then scale
+            wrapper.style.transform = `translate(-50%, -50%) scale(${scaleX}, ${scaleY})`;
         }
 
         // Call on load, resize, and orientation change
