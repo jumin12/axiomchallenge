@@ -40,13 +40,30 @@
             pointer-events: auto;
         }
         
+        /* Scale all content including header and footer */
         .signup-container,
         .name-entry-container,
         .riddle-container,
-        .intro-container {
+        .intro-container,
+        .nav-bar,
+        .nav-audio-toggle,
+        .signup-info-footer {
             transform: scale(var(--content-scale, 1));
             transform-origin: center center;
             transition: transform 0.3s ease;
+        }
+        
+        /* Adjust transform origins for fixed position elements */
+        .nav-bar {
+            transform-origin: center top;
+        }
+        
+        .nav-audio-toggle {
+            transform-origin: right top;
+        }
+        
+        .signup-info-footer {
+            transform-origin: center bottom;
         }
 
         /* Wrapper for all content */
