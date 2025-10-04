@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mysterious Journey</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Chiller&family=Centaur&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Allura&family=IM+Fell+English:ital@0;1&display=swap');
@@ -30,6 +30,9 @@
             align-items: center;
             justify-content: center;
             background: #000;
+            position: fixed;
+            top: 0;
+            left: 0;
         }
 
         /* Scaling wrapper to maintain consistent look across all resolutions */
@@ -576,6 +579,13 @@
             color: #ffffff;
             margin-bottom: 5px;
             text-align: center;
+            max-width: 420px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            line-height: 1.5;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .golden-swirl {
@@ -583,7 +593,7 @@
             max-width: 100%;
             height: 70px;
             background: url('art/divider.png') center/contain no-repeat;
-            margin: -20px auto 20px auto;
+            margin: -5px auto 20px auto;
         }
 
         .name-question {
@@ -1982,7 +1992,7 @@
                             </div>
                             <form id="devConsoleAddRiddleForm" class="dev-console-add-form">
                                 <label>
-                                    Heading
+                                    Heading <span style="color: rgba(249, 235, 225, 0.5); font-size: 12px;">(wraps at ~30 chars per line)</span>
                                     <input id="devConsoleRiddleName" class="dev-console-input" type="text" placeholder="e.g., The Guardian's Test" required>
                                 </label>
                                 <label>
@@ -4692,7 +4702,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                     </div>
                     <div class="dev-console-riddle-editor" id="devConsoleRiddleEditor-${riddle.id}">
                         <label>
-                            Heading
+                            Heading <span style="color: rgba(249, 235, 225, 0.5); font-size: 12px;">(wraps at ~30 chars per line)</span>
                             <input type="text" class="dev-console-input" data-field="heading" value="${heading.replace(/"/g, '&quot;')}">
                         </label>
                         <label>
@@ -5452,22 +5462,35 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             
             const designWidth = 2560;
             const designHeight = 1440;
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
+            
+            // Use visual viewport if available, otherwise fallback to window dimensions
+            const viewportWidth = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+            const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
             
             // Calculate scale to fill the entire screen (stretch to fit)
-            const scaleX = windowWidth / designWidth;
-            const scaleY = windowHeight / designHeight;
+            const scaleX = viewportWidth / designWidth;
+            const scaleY = viewportHeight / designHeight;
             
             wrapper.style.transform = `scale(${scaleX}, ${scaleY})`;
+            wrapper.style.transformOrigin = 'center center';
         }
 
-        // Call on load and resize
+        // Call on load, resize, and orientation change
         window.addEventListener('load', scaleGameWrapper);
         window.addEventListener('resize', scaleGameWrapper);
+        window.addEventListener('orientationchange', scaleGameWrapper);
         
-        // Initial call
-        scaleGameWrapper();
+        // Also listen to visual viewport changes if supported
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', scaleGameWrapper);
+        }
+        
+        // Initial call - use setTimeout to ensure DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', scaleGameWrapper);
+        } else {
+            scaleGameWrapper();
+        }
     </script>
     </div>
 </body>
