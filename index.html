@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" id="viewport-meta">
     <title>Mysterious Journey</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Chiller&family=Centaur&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Allura&family=IM+Fell+English:ital@0;1&display=swap');
@@ -5534,6 +5534,46 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                 renderDevConsoleRiddles();
             }
         }
+
+        // Automatically adjust zoom for lower resolutions
+        function adjustViewportZoom() {
+            const viewportMeta = document.getElementById('viewport-meta');
+            if (!viewportMeta) return;
+            
+            const screenWidth = window.screen.width;
+            const screenHeight = window.screen.height;
+            
+            // Base resolution (your design resolution)
+            const baseWidth = 2560;
+            const baseHeight = 1440;
+            
+            // Calculate scale based on screen size
+            // Use the smaller scale to ensure everything fits
+            const scaleX = screenWidth / baseWidth;
+            const scaleY = screenHeight / baseHeight;
+            const scale = Math.min(scaleX, scaleY, 1.0); // Cap at 1.0 for larger screens
+            
+            // Only apply zoom if screen is smaller than base resolution
+            if (screenWidth < baseWidth || screenHeight < baseHeight) {
+                viewportMeta.setAttribute('content', 
+                    `width=device-width, initial-scale=${scale}, maximum-scale=${scale}, user-scalable=no`
+                );
+            } else {
+                // For larger screens, use normal viewport
+                viewportMeta.setAttribute('content', 
+                    'width=device-width, initial-scale=1.0, user-scalable=yes'
+                );
+            }
+        }
+
+        // Call on load and orientation change
+        window.addEventListener('load', adjustViewportZoom);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(adjustViewportZoom, 100); // Small delay for orientation change to complete
+        });
+        
+        // Initial call
+        adjustViewportZoom();
 
     </script>
     </div>
