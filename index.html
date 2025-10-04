@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1920, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes">
+    <meta name="viewport" content="width=2560, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes">
     <title>Mysterious Journey</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Chiller&family=Centaur&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Allura&family=IM+Fell+English:ital@0;1&display=swap');
@@ -120,7 +120,8 @@
         .signup-title {
             font-size: 2.8rem;
             color: #ffffff;
-            margin-bottom: 14px;
+            margin-top: 30px;
+            margin-bottom: -20px;
             text-align: center;
             font-weight: 100;
             letter-spacing: 1px;
@@ -129,17 +130,27 @@
 
         .login-link {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 4px;
             color: #ffffff;
             font-family: 'Centaur', serif;
-            font-size: 1.8rem;
+            font-size: 20px;
+            font-weight: 100;
             letter-spacing: 0.5px;
         }
 
         .login-link a {
             color: #d6a550;
             text-decoration: none;
-            font-size: 1.8rem;
+            font-size: 20px;
+            font-weight: 100;
+        }
+
+        .login-title-divider {
+            width: 350px !important;
+            height: auto;
+            opacity: 0.8;
+            margin: 0px auto 4px auto;
+            display: block;
         }
 
         .signup-content {
@@ -261,7 +272,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 75px 60px 75px;
+            padding: 40px 60px 40px;
             overflow: visible;
         }
 
@@ -270,7 +281,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 2px;
             overflow: visible;
         }
 
@@ -400,7 +411,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 45px;
+            gap: 2px;
             text-transform: none;
             transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
         }
@@ -414,7 +425,7 @@
         }
 
         .discord-btn img {
-            width: 260px;
+            width: 200px;
             height: auto;
             display: block;
             filter: drop-shadow(0 0 20px rgba(214, 165, 80, 0.55));
@@ -422,6 +433,14 @@
 
         .discord-btn span {
             letter-spacing: 1px;
+        }
+
+        .discord-divider {
+            width: 350px !important;
+            height: auto;
+            opacity: 0.8;
+            margin-left: 20px;
+            margin-top: -30px;
         }
 
         .signup-info-footer {
@@ -446,7 +465,7 @@
 
         .footer-content {
             position: absolute;
-            bottom: 10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -475,6 +494,12 @@
             gap: 100px;
             align-items: center;
             justify-content: center;
+            pointer-events: auto;
+        }
+
+        .footer-logos a {
+            pointer-events: auto;
+            display: inline-block;
         }
 
         .footer-logos img {
@@ -484,9 +509,10 @@
             opacity: 0.8;
             transition: opacity 0.3s ease;
             padding-left: 35px;
+            display: block;
         }
 
-        .footer-logos img:hover {
+        .footer-logos a:hover img {
             opacity: 1;
         }
 
@@ -584,6 +610,7 @@
             height: 70px;
             background: url('art/divider.png') center/contain no-repeat;
             margin: -5px auto 20px auto;
+            display: block;
         }
 
         .name-question {
@@ -760,8 +787,8 @@
         .riddle-container[data-riddle-id="17"],
         .riddle-container[data-riddle-id="21"] {
             background: url('art/lightbox-XL.png') center/contain no-repeat;
-            width: 1200px;
-            height: 900px;
+            width: 1400px;
+            height: 1050px;
         }
 
         .riddle-content {
@@ -780,6 +807,70 @@
             transform: translateX(-50%);
             opacity: 1;
             transition: opacity 0.6s ease;
+        }
+
+        /* XL lightbox - text towards top, input anchored at bottom */
+        .riddle-container[data-riddle-id="8"] .riddle-content,
+        .riddle-container[data-riddle-id="17"] .riddle-content,
+        .riddle-container[data-riddle-id="21"] .riddle-content {
+            top: 80px;
+            height: calc(100% - 80px);
+        }
+
+        /* XL lightbox - ensure golden-swirl divider is visible */
+        .riddle-container[data-riddle-id="8"] .golden-swirl,
+        .riddle-container[data-riddle-id="17"] .golden-swirl,
+        .riddle-container[data-riddle-id="21"] .golden-swirl {
+            display: block !important;
+            position: relative;
+            z-index: 10;
+            flex-shrink: 0;
+            margin: -8px auto 12px auto;
+        }
+
+        /* XL lightbox - tighten stag-guidance spacing */
+        .riddle-container[data-riddle-id="8"] .stag-guidance,
+        .riddle-container[data-riddle-id="17"] .stag-guidance,
+        .riddle-container[data-riddle-id="21"] .stag-guidance {
+            flex-shrink: 0;
+            margin-bottom: 3px;
+        }
+
+        /* XL lightbox - tighten riddle dialog spacing */
+        .riddle-container[data-riddle-id="8"] .riddle-dialog,
+        .riddle-container[data-riddle-id="17"] .riddle-dialog,
+        .riddle-container[data-riddle-id="21"] .riddle-dialog {
+            flex-shrink: 0;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        /* XL lightbox - tighten riddle question spacing */
+        .riddle-container[data-riddle-id="8"] .riddle-question,
+        .riddle-container[data-riddle-id="17"] .riddle-question,
+        .riddle-container[data-riddle-id="21"] .riddle-question {
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+
+        /* XL lightbox - tighten signature spacing */
+        .riddle-container[data-riddle-id="8"] .mysterious-signature,
+        .riddle-container[data-riddle-id="17"] .mysterious-signature,
+        .riddle-container[data-riddle-id="21"] .mysterious-signature {
+            flex-shrink: 0;
+            margin-bottom: 12px;
+        }
+
+        /* XL lightbox - tighten map spacing for riddle 8 */
+        .riddle-container[data-riddle-id="8"] .riddle-map {
+            margin: 8px 0;
+        }
+
+        /* XL lightbox - tighten disclaimer spacing for riddles 17 and 21 */
+        .riddle-container[data-riddle-id="17"] .riddle-disclaimer,
+        .riddle-container[data-riddle-id="21"] .riddle-disclaimer {
+            margin: 8px 0;
         }
 
         .riddle-dialog {
@@ -818,9 +909,25 @@
             color: #d6a550;
         }
 
+        .riddle-map {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            margin: 20px 0;
+            display: block;
+        }
+
         .riddle-input-container {
             text-align: center;
             margin-top: 30px;
+        }
+
+        /* XL lightbox - anchor input at bottom */
+        .riddle-container[data-riddle-id="8"] .riddle-input-container,
+        .riddle-container[data-riddle-id="17"] .riddle-input-container,
+        .riddle-container[data-riddle-id="21"] .riddle-input-container {
+            margin-top: auto;
+            margin-bottom: 30px;
         }
 
         .riddle-input {
@@ -881,6 +988,21 @@
             z-index: 1;
         }
 
+        /* XL lightbox specific positioning - higher and closer together */
+        .riddle-container[data-riddle-id="8"] .riddle-hooded-figure,
+        .riddle-container[data-riddle-id="17"] .riddle-hooded-figure,
+        .riddle-container[data-riddle-id="21"] .riddle-hooded-figure {
+            left: 190px;
+            top: -35px;
+        }
+
+        .riddle-container[data-riddle-id="8"] .riddle-stag-banner,
+        .riddle-container[data-riddle-id="17"] .riddle-stag-banner,
+        .riddle-container[data-riddle-id="21"] .riddle-stag-banner {
+            right: 220px;
+            top: 5px;
+        }
+
         /* Navigation */
         .nav-bar {
             position: fixed;
@@ -897,7 +1019,7 @@
 
         .nav-audio-toggle {
             position: fixed;
-            top: 12px;
+            top: 8px;
             right: 36px;
             width: 144px;
             height: 38px;
@@ -923,8 +1045,8 @@
         }
 
         .nav-audio-toggle svg {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             fill: none;
             stroke: #f4e3c1;
             stroke-width: 2;
@@ -1545,7 +1667,7 @@
         .dev-console-list {
             display: grid;
             gap: 10px;
-            max-height: 320px;
+            max-height: calc(100vh - 320px);
             overflow-y: auto;
             padding-right: 4px;
         }
@@ -1585,7 +1707,7 @@
         }
 
         .dev-console-scroll {
-            max-height: 320px;
+            max-height: calc(100vh - 320px);
             overflow-y: auto;
             border-radius: 10px;
             border: 1px solid rgba(214, 165, 80, 0.2);
@@ -1838,7 +1960,7 @@
             <!-- X (visible when muted) -->
             <path d="M16 9l4 4M20 9l-4 4" class="mute-x" style="display: none;"></path>
         </svg>
-        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="60" aria-label="Volume control">
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="25" aria-label="Volume control">
     </div>
     <div class="page-transition-overlay" id="pageTransitionOverlay"></div>
 
@@ -1860,6 +1982,7 @@
             <div class="signup-content">
                 <div class="login-form-container">
                     <h2 class="signup-title" id="pageTitle">Log In</h2>
+                    <img src="art/divider.png" alt="Divider" class="login-title-divider">
                     <p class="login-link" id="pageLink">Don't have an account? <a href="#" onclick="toggleLoginSignup()">Sign Up</a></p>
                     
                     <div class="signup-form">
@@ -1887,8 +2010,9 @@
                 <div class="social-container">
                     <div class="social-buttons">
                         <button class="discord-btn" onclick="handleSocialLogin('discord')">
+                            <span>Continue with Discord</span>
+                            <img src="art/divider.png" alt="Divider" class="discord-divider">
                             <img src="art/discordicon1.png" alt="Discord icon">
-                            <span>Continue with discord</span>
                         </button>
                     </div>
                 </div>
@@ -1899,13 +2023,18 @@
             <img src="art/footer.png" alt="Footer" class="footer-bg">
             <div class="footer-content">
                 <p class="footer-legal">
-                    This website is not affiliated with, endorsed by, or sponsored by Intrepid Studios. All assets, imagery, and content related to Ashes of Creation are the property of Intrepid Studios, Inc. and are used here for informational and fan content purposes only.
-                    All rights reserved by their respective owners.
+                    This website is not affiliated with, endorsed by, or sponsored by Intrepid Studios. Ashes of Creation assets, imagery, and content are owned by Intrepid Studios, Inc. and used here for informational and fan purposes only. Music, sound effects, and Axiom Challenge content are owned by their respective owners and used for fan purposes only. All rights reserved.
                 </p>
                 <div class="footer-logos">
-                    <img src="art/intrepidlogo.png" alt="Intrepid Logo" class="intrepid-logo">
-                    <img src="art/Axiom-logo.png" alt="Axiom Logo">
-                    <img src="art/AOC-LOGO.png" alt="AOC Logo" class="aoc-logo">
+                    <a href="https://intrepidstudios.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="art/intrepidlogo.png" alt="Intrepid Logo" class="intrepid-logo">
+                    </a>
+                    <a href="https://www.joinaxiom.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="art/Axiom-logo.png" alt="Axiom Logo">
+                    </a>
+                    <a href="https://ashesofcreation.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="art/AOC-LOGO.png" alt="AOC Logo" class="aoc-logo">
+                    </a>
                 </div>
             </div>
         </div>
@@ -1975,7 +2104,7 @@
                     <div class="dev-console-menu" role="tablist" aria-label="Developer console views">
                         <button type="button" class="is-active" data-panel="navigate" role="tab" aria-selected="true">Navigate Pages</button>
                         <button type="button" data-panel="accounts" role="tab" aria-selected="false">Accounts</button>
-                        <button type="button" data-panel="profiles" role="tab" aria-selected="false">Riddle Profiles</button>
+                        <button type="button" data-panel="profiles" role="tab" aria-selected="false">Guide Profiles</button>
                         <button type="button" data-panel="addRiddle" role="tab" aria-selected="false">Add Riddle</button>
                         <button type="button" data-panel="riddles" role="tab" aria-selected="false">Riddle Library</button>
                     </div>
@@ -2014,7 +2143,7 @@
                         </div>
                         <div class="dev-console-panel" id="devConsolePanel-profiles" role="tabpanel">
                             <div class="dev-console-panel-header">
-                                <h3>Riddle Profiles</h3>
+                                <h3>Guide Profiles</h3>
                                 <div class="dev-console-caption">Manage character signatures, busts, and passwords for the "who can we trust" screen</div>
                             </div>
                             <div class="dev-console-list" id="devConsoleProfileList"></div>
@@ -2123,7 +2252,7 @@
 
     <script>
         // Page management
-        let currentPage = localStorage.getItem('currentPage') || 'login';
+        let currentPage = 'login'; // Always start on login page
         let isLoginMode = true; // true for login, false for signup
         
         const INTRO_RIDDLE_ID = 'intro';
@@ -2153,7 +2282,6 @@
         const DEV_CONSOLE_UNLOCK_TIMEOUT_MS = 120000;
         const DEV_CONSOLE_PAGES = [
             { id: 'login', label: 'Login' },
-            { id: 'signup', label: 'Sign Up' },
             { id: 'intro', label: 'Intro Video' },
             { id: 'nameEntry', label: 'Name Entry' },
             { id: 'riddle', label: 'Riddle Challenge' }
@@ -2240,15 +2368,14 @@
             },
             {
                 id: 8,
-                heading: 'You’ve done well so far, but the hardest trials remain.',
+                heading: 'Verra needs you. Pull your strength from the gods!',
                 white: [
                     '<player>,',
                     "So, you're smarter than a goblin. Congratulations, but don't get cocky! We have a caravan delivering some resistive supplies to one of our outposts. But they're late. Find them and help them complete their mission.",
                     'The only information we have in regard to their whereabouts is this map with a note attached:'
                 ],
                 yellow: "In a land where legends loom, A fortress guards a flower in full plume. Petals of steel, a gleaming hue, Strength and magic in every dew. What is this place where wonders grow, A haven of power few will know?",
-                answers: ['steel bloom', 'citadel of the steel bloom'],
-                disclaimer: 'Placeholder -- classified intelligence pending.'
+                answers: ['steel bloom', 'citadel of the steel bloom']
             },
             {
                 id: 9,
@@ -2384,16 +2511,6 @@
                     password: 'angelcry',
                     enabledAsPassword: true,
                     isDefault: true
-                },
-                {
-                    id: 'player',
-                    name: 'Player',
-                    signature: '- <player>',
-                    bust: '',
-                    password: '',
-                    enabledAsPassword: false,
-                    isDefault: true,
-                    isPlayer: true
                 }
             ];
         }
@@ -2685,12 +2802,16 @@
                 dialogEl.appendChild(createQuestionElement(riddle, playerName));
 
                 if (disclaimerEl) {
-                    if (riddle.disclaimer) {
+                    // Special handling for riddle 8 - show map instead of disclaimer text
+                    if (riddle.id === 8) {
+                        disclaimerEl.style.display = 'block';
+                        disclaimerEl.innerHTML = '<img src="art/map1.png" alt="Map" class="riddle-map">';
+                    } else if (riddle.disclaimer) {
                         disclaimerEl.style.display = 'block';
                         disclaimerEl.textContent = applyPlayerName(riddle.disclaimer, playerName);
                     } else {
                         disclaimerEl.style.display = 'none';
-                        disclaimerEl.textContent = '';
+                        disclaimerEl.innerHTML = '';
                     }
                 }
 
@@ -3671,7 +3792,7 @@ function safePlay(mediaElement) {
             let stagVoice = document.getElementById('stagVoiceover');
 
             // Get saved volume from localStorage for initial setup
-            const initialVolume = parseFloat(localStorage.getItem('audioVolume') || '60') / 100;
+            const initialVolume = parseFloat(localStorage.getItem('audioVolume') || '25') / 100;
 
             if (!backgroundMusic) {
                 backgroundMusic = document.createElement('audio');
@@ -3683,11 +3804,8 @@ function safePlay(mediaElement) {
                 backgroundMusic.volume = initialVolume * 0.6;
                 document.body.appendChild(backgroundMusic);
 
-        backgroundMusic.addEventListener('canplay', () => {
-            if (currentPage !== 'login' && currentPage !== 'intro') {
-                safePlay(backgroundMusic);
-            }
-        }, { once: true });
+        // Don't auto-play on canplay - let handlePageAudio control playback
+        // This prevents music from starting on login/intro pages
             } else {
                 // Ensure existing audio has baseVolume set
                 if (!backgroundMusic.dataset.baseVolume) {
@@ -3752,7 +3870,7 @@ function safePlay(mediaElement) {
 
             // Initialize saved states
             const savedMuted = localStorage.getItem('audioMuted') === 'true';
-            const savedVolume = localStorage.getItem('audioVolume') || '60';
+            const savedVolume = localStorage.getItem('audioVolume') || '25';
             applyMuteState(savedMuted);
             
             if (volumeSlider) {
@@ -3807,7 +3925,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             if (!audioElement) return;
             
             // Get the user's current volume setting
-            const userVolume = parseFloat(localStorage.getItem('audioVolume') || '60') / 100;
+            const userVolume = parseFloat(localStorage.getItem('audioVolume') || '25') / 100;
             const baseVolume = parseFloat(audioElement.dataset.baseVolume || '1.0');
             const effectiveTargetVolume = targetVolume !== null ? targetVolume : (userVolume * baseVolume);
             
@@ -4065,7 +4183,8 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
         }
 
         function handleDevConsoleKeydown(event) {
-            if (event.key !== '`') {
+            // Check if Shift is held and the key is '*' (which is Shift+8)
+            if (!event.shiftKey || event.key !== '*') {
                 DevConsoleState.recentKeypressCount = 0;
                 return;
             }
@@ -4078,7 +4197,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             DevConsoleState.recentKeypressCount += 1;
             DevConsoleState.lastKeyTime = now;
 
-            if (DevConsoleState.recentKeypressCount >= 3) {
+            if (DevConsoleState.recentKeypressCount >= 5) {
                 event.preventDefault();
                 DevConsoleState.recentKeypressCount = 0;
                 toggleDevConsole();
@@ -4894,21 +5013,13 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                 const item = document.createElement('div');
                 item.className = 'dev-console-riddle-item';
                 
-                // For player profile, get actual player name
-                let displaySignature = profile.signature;
-                if (profile.isPlayer) {
-                    const currentUser = getCurrentUser();
-                    const playerName = currentUser?.playerName || 'Player';
-                    displaySignature = `- ${playerName}`;
-                }
-                
                 item.innerHTML = `
                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
                         ${profile.bust ? `<img src="${profile.bust}" alt="${profile.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(214, 165, 80, 0.4);">` : '<div style="width: 60px; height: 60px; background: rgba(24, 18, 12, 0.6); border-radius: 8px; border: 1px solid rgba(214, 165, 80, 0.4); display: flex; align-items: center; justify-content: center; color: rgba(249, 235, 225, 0.4); font-size: 12px;">No Image</div>'}
                         <div style="flex: 1;">
-                            <div class="dev-console-riddle-title">${profile.name}${profile.isPlayer ? ' <span style="color: #97e8ff; font-size: 14px;">(Special)</span>' : ''}</div>
+                            <div class="dev-console-riddle-title">${profile.name}</div>
                             <div class="dev-console-riddle-meta">
-                                <span>Signature: ${displaySignature}${profile.isPlayer ? ' <span style="color: rgba(249, 235, 225, 0.5); font-size: 11px;">(Auto: uses player name)</span>' : ''}</span>
+                                <span>Signature: ${profile.signature}</span>
                                 ${profile.password ? `<span>Password: ${profile.password}</span>` : ''}
                             </div>
                         </div>
@@ -4920,10 +5031,9 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                         </label>
                     </div>
                     <div class="dev-console-riddle-actions">
-                        ${profile.isPlayer ? `<button type="button" class="dev-console-tertiary" onclick="editProfile('${profile.id}')">Upload Bust</button>` : ''}
-                        ${profile.isDefault && !profile.isPlayer ? `<button type="button" class="dev-console-tertiary" onclick="editProfile('${profile.id}')">Edit</button>` : ''}
-                        ${!profile.isDefault && !profile.isPlayer ? `<button type="button" class="dev-console-tertiary" onclick="editProfile('${profile.id}')">Edit</button>` : ''}
-                        ${!profile.isDefault && !profile.isPlayer ? `<button type="button" class="dev-console-tertiary danger" onclick="deleteProfile('${profile.id}')">Delete</button>` : ''}
+                        ${profile.isDefault ? `<button type="button" class="dev-console-tertiary" onclick="editProfile('${profile.id}')">Edit</button>` : ''}
+                        ${!profile.isDefault ? `<button type="button" class="dev-console-tertiary" onclick="editProfile('${profile.id}')">Edit</button>` : ''}
+                        ${!profile.isDefault ? `<button type="button" class="dev-console-tertiary danger" onclick="deleteProfile('${profile.id}')">Delete</button>` : ''}
                     </div>
                 `;
                 profileList.appendChild(item);
@@ -5044,7 +5154,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             if (DevConsoleState.editingProfileId) {
                 // Edit existing profile
                 const profile = profiles.find(p => p.id === DevConsoleState.editingProfileId);
-                if (profile && !profile.isPlayer) {
+                if (profile) {
                     // For default profiles, only allow password, enabledAsPassword, and bust changes
                     if (profile.isDefault) {
                         profile.password = password.toLowerCase();
@@ -5072,8 +5182,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                     bust: DevConsoleState.profileImageData || '',
                     password: password.toLowerCase(),
                     enabledAsPassword: enabled,
-                    isDefault: false,
-                    isPlayer: false
+                    isDefault: false
                 };
                 profiles.push(newProfile);
             }
