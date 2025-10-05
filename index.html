@@ -36,7 +36,7 @@
         }
 
         /* Responsive scaling wrapper - scales content to match 2560x1440 reference */
-        /* Use min() to always fit content within viewport without overflow */
+        /* Default: scale to fit whichever dimension is limiting */
         #game-wrapper {
             width: 2560px;
             height: 1440px;
@@ -47,25 +47,38 @@
             transform: scale(min(calc(100vw / 2560), calc(100vh / 1440)));
         }
 
-        /* Fine-tuning for smaller screens - increase scale slightly to fill better */
-        /* 1366x768 and similar small laptops */
-        @media (max-width: 1400px) and (max-height: 800px) {
+        /* Ultrawide monitors - prioritize height */
+        @media (min-aspect-ratio: 21/9) {
             #game-wrapper {
-                transform: scale(min(calc(100vw / 2560), calc(100vh / 1440)));
+                transform: scale(calc(100vh / 1440));
             }
         }
 
-        /* 1024x768 and similar small displays */
-        @media (max-width: 1100px) and (max-height: 800px) {
+        /* Medium/Small Laptops - optimize scaling for better fit */
+        @media (max-width: 1600px) {
             #game-wrapper {
-                transform: scale(min(calc(100vw / 2560), calc(100vh / 1440)));
+                transform: scale(min(calc(100vw / 2400), calc(100vh / 1350)));
             }
         }
 
-        /* Mobile landscape - very small heights */
-        @media (max-height: 700px) and (orientation: landscape) {
+        /* Small screens (1366x768, 1280x720) - more aggressive optimization */
+        @media (max-width: 1400px) {
             #game-wrapper {
-                transform: scale(min(calc(100vw / 2560), calc(100vh / 1440)));
+                transform: scale(min(calc(100vw / 2200), calc(100vh / 1240)));
+            }
+        }
+
+        /* Very small screens - tablets and small laptops */
+        @media (max-width: 1280px) {
+            #game-wrapper {
+                transform: scale(min(calc(100vw / 2000), calc(100vh / 1125)));
+            }
+        }
+
+        /* Mobile landscape and small tablets */
+        @media (max-width: 1024px) {
+            #game-wrapper {
+                transform: scale(min(calc(100vw / 1800), calc(100vh / 1012)));
             }
         }
 
@@ -1316,6 +1329,135 @@
             background: #2c5282;
         }
 
+        /* Responsive adjustments for smaller screens */
+        /* Medium screens - adjust footer text and logos */
+        @media (max-width: 1600px) {
+            .footer-legal {
+                font-size: 0.95rem;
+                max-width: 850px;
+            }
+            
+            .footer-logos {
+                gap: 80px;
+            }
+            
+            .footer-logos img {
+                height: 110px;
+                width: 220px;
+            }
+        }
+
+        /* Small screens - further reduce footer */
+        @media (max-width: 1400px) {
+            .footer-legal {
+                font-size: 0.9rem;
+                max-width: 750px;
+                line-height: 1.4;
+            }
+            
+            .footer-logos {
+                gap: 60px;
+            }
+            
+            .footer-logos img {
+                height: 95px;
+                width: 190px;
+            }
+            
+            .footer-logos .intrepid-logo {
+                height: 85px;
+                width: 150px;
+            }
+            
+            .footer-logos .aoc-logo {
+                height: 100px;
+                width: 200px;
+            }
+        }
+
+        /* Very small screens - compact footer */
+        @media (max-width: 1280px) {
+            .footer-legal {
+                font-size: 0.85rem;
+                max-width: 650px;
+                line-height: 1.3;
+                margin-bottom: -20px;
+            }
+            
+            .footer-logos {
+                gap: 40px;
+            }
+            
+            .footer-logos img {
+                height: 80px;
+                width: 160px;
+            }
+            
+            .footer-logos .intrepid-logo {
+                height: 70px;
+                width: 130px;
+            }
+            
+            .footer-logos .aoc-logo {
+                height: 85px;
+                width: 170px;
+            }
+            
+            .nav-audio-toggle {
+                right: 24px;
+                top: 6px;
+                width: 120px;
+                height: 32px;
+            }
+            
+            .nav-audio-toggle svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        /* Mobile/Tablet responsive */
+        @media (max-width: 1024px) {
+            .footer-legal {
+                font-size: 0.75rem;
+                max-width: 550px;
+                line-height: 1.2;
+                margin-bottom: -15px;
+            }
+            
+            .footer-logos {
+                gap: 30px;
+                flex-wrap: wrap;
+            }
+            
+            .footer-logos img {
+                height: 60px;
+                width: 120px;
+            }
+            
+            .footer-logos .intrepid-logo {
+                height: 55px;
+                width: 100px;
+            }
+            
+            .footer-logos .aoc-logo {
+                height: 65px;
+                width: 130px;
+            }
+            
+            .nav-audio-toggle {
+                right: 16px;
+                top: 4px;
+                width: 100px;
+                height: 28px;
+            }
+            
+            .nav-audio-toggle svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .signup-content {
@@ -1325,6 +1467,20 @@
             .signup-container {
                 margin: 10px;
                 padding: 20px;
+            }
+            
+            .footer-legal {
+                font-size: 0.7rem;
+                max-width: 450px;
+            }
+            
+            .footer-logos {
+                gap: 20px;
+            }
+            
+            .footer-logos img {
+                height: 50px;
+                width: 100px;
             }
             
             .name-entry-container,
