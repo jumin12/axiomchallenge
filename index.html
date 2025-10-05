@@ -36,7 +36,7 @@
         }
 
         /* Responsive scaling wrapper - scales content to match 2560x1440 reference */
-        /* Use min() to always fit within viewport without overflow */
+        /* Default: scale to fit height (for 16:9 and wider screens) */
         #game-wrapper {
             width: 2560px;
             height: 1440px;
@@ -44,35 +44,29 @@
             transform-origin: center center;
             flex-shrink: 0;
             overflow: visible;
-            transform: scale(calc(min(100vw / 2560, 100vh / 1440)));
+            transform: scale(calc(100vh / 1440));
         }
-        
-        /* Adjustments for smaller screens to reduce zoom */
-        /* 1080p and below - slightly reduce scale */
-        @media (max-height: 1080px) {
+
+        /* For screens narrower/taller than 16:9 (portrait-like, 4:3, 5:4, etc.) */
+        /* Scale based on width instead to fill horizontally */
+        @media (max-aspect-ratio: 16/9) {
             #game-wrapper {
-                transform: scale(calc(min(100vw / 2560, 100vh / 1440) * 0.92));
+                transform: scale(calc(100vw / 2560));
             }
         }
         
-        /* 900p and below - more reduction */
-        @media (max-height: 900px) {
+        /* Specific handling for common aspect ratios */
+        /* 21:9 Ultrawide */
+        @media (min-aspect-ratio: 21/9) {
             #game-wrapper {
-                transform: scale(calc(min(100vw / 2560, 100vh / 1440) * 0.88));
+                transform: scale(calc(100vh / 1440));
             }
         }
         
-        /* 768p and below - significant reduction */
-        @media (max-height: 768px) {
+        /* 32:9 Super Ultrawide */
+        @media (min-aspect-ratio: 32/9) {
             #game-wrapper {
-                transform: scale(calc(min(100vw / 2560, 100vh / 1440) * 0.82));
-            }
-        }
-        
-        /* 600p and below - maximum reduction for very small screens */
-        @media (max-height: 600px) {
-            #game-wrapper {
-                transform: scale(calc(min(100vw / 2560, 100vh / 1440) * 0.7));
+                transform: scale(calc(100vh / 1440));
             }
         }
 
@@ -85,31 +79,6 @@
             margin: 0;
             padding: 0;
             pointer-events: none;
-        }
-        
-        /* Full-screen backgrounds that extend beyond the wrapper */
-        .page::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-position: center center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            z-index: -2;
-            pointer-events: none;
-        }
-        
-        .signup-page::after {
-            background-image: url('art/challenge-webpage-background.png');
-        }
-        
-        .intro-page::after,
-        .name-entry-page::after,
-        .riddle-page::after {
-            background-image: url('art/challenge-webpage-background.png');
         }
 
         .page > * {
@@ -137,7 +106,6 @@
 
         /* Sign Up Page Styles */
         .signup-page {
-            background: transparent;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -147,6 +115,22 @@
             height: 1440px;
             width: 2560px;
             position: relative;
+        }
+
+        /* Full viewport background for signup page */
+        .signup-page::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('art/challenge-webpage-background.png');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: -2;
+            pointer-events: none;
         }
 
         .signup-page::before {
@@ -229,7 +213,6 @@
         }
 
         .intro-page {
-            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -238,6 +221,20 @@
             height: 1440px;
             padding-top: 130px;
             box-sizing: border-box;
+        }
+
+        /* Full viewport background for intro page */
+        .intro-page::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('art/challenge-webpage-background.png') center/cover;
+            background-size: cover;
+            z-index: -2;
+            pointer-events: none;
         }
 
         .intro-page::before {
@@ -594,7 +591,6 @@
 
         /* Name Entry Page Styles */
         .name-entry-page {
-            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -603,6 +599,20 @@
             height: 1440px;
             margin: 0;
             padding: 0;
+        }
+
+        /* Full viewport background for name entry page */
+        .name-entry-page::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('art/challenge-webpage-background.png') center/cover;
+            background-size: cover;
+            z-index: -2;
+            pointer-events: none;
         }
 
         .name-entry-page::before {
@@ -792,7 +802,6 @@
 
         /* Riddle Page Styles */
         .riddle-page {
-            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -801,6 +810,20 @@
             height: 1440px;
             margin: 0;
             padding: 0;
+        }
+
+        /* Full viewport background for riddle page */
+        .riddle-page::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('art/challenge-webpage-background.png') center/cover;
+            background-size: cover;
+            z-index: -2;
+            pointer-events: none;
         }
 
         .riddle-page::before {
@@ -1073,7 +1096,7 @@
             top: 5px;
         }
 
-        /* Navigation - stretches full viewport width */
+        /* Navigation - stretches full viewport */
         .nav-bar {
             position: fixed;
             top: -12px;
