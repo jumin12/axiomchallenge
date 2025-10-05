@@ -55,6 +55,20 @@
             }
         }
         
+        /* For standard 1080p screens and smaller - reduce zoom for better visibility */
+        @media (max-height: 1080px) and (min-aspect-ratio: 16/9) {
+            #game-wrapper {
+                transform: scale(calc((100vh - 40px) / 1440));
+            }
+        }
+        
+        /* For 1366x768 and similar smaller screens */
+        @media (max-height: 900px) {
+            #game-wrapper {
+                transform: scale(calc((100vh - 60px) / 1440));
+            }
+        }
+        
         /* Specific handling for common aspect ratios */
         /* 21:9 Ultrawide */
         @media (min-aspect-ratio: 21/9) {
