@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes">
+    <meta name="viewport" content="width=2560, initial-scale=1.0, minimum-scale=0.1, maximum-scale=10.0, user-scalable=yes">
     <title>Mysterious Journey</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Chiller&family=Centaur&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Allura&family=IM+Fell+English:ital@0;1&display=swap');
@@ -16,7 +16,6 @@
         html {
             height: 100%;
             width: 100%;
-            overflow: hidden;
         }
 
         body {
@@ -26,67 +25,20 @@
             padding: 0;
             height: 100vh;
             width: 100vw;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: #000000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        /* Responsive scaling wrapper - scales content to match 2560x1440 reference */
-        /* Default: scale to fit whichever dimension is limiting */
+        /* Wrapper for all content */
         #game-wrapper {
-            width: 2560px;
-            height: 1440px;
+            width: 100%;
+            height: 100%;
             position: relative;
-            transform-origin: center center;
-            flex-shrink: 0;
-            overflow: visible;
-            transform: scale(min(calc(100vw / 2560), calc(100vh / 1440)));
-        }
-
-        /* Ultrawide monitors - prioritize height */
-        @media (min-aspect-ratio: 21/9) {
-            #game-wrapper {
-                transform: scale(calc(100vh / 1440));
-            }
-        }
-
-        /* Medium/Small Laptops - optimize scaling for better fit */
-        @media (max-width: 1600px) {
-            #game-wrapper {
-                transform: scale(min(calc(100vw / 2400), calc(100vh / 1350)));
-            }
-        }
-
-        /* Small screens (1366x768, 1280x720) - more aggressive optimization */
-        @media (max-width: 1400px) {
-            #game-wrapper {
-                transform: scale(min(calc(100vw / 2200), calc(100vh / 1240)));
-            }
-        }
-
-        /* Very small screens - tablets and small laptops */
-        @media (max-width: 1280px) {
-            #game-wrapper {
-                transform: scale(min(calc(100vw / 2000), calc(100vh / 1125)));
-            }
-        }
-
-        /* Mobile landscape and small tablets */
-        @media (max-width: 1024px) {
-            #game-wrapper {
-                transform: scale(min(calc(100vw / 1800), calc(100vh / 1012)));
-            }
         }
 
         /* Page containers */
         .page {
             display: none;
-            width: 2560px;
-            height: 1440px;
+            width: 100vw;
+            height: 100vh;
             position: relative;
             margin: 0;
             padding: 0;
@@ -118,46 +70,33 @@
 
         /* Sign Up Page Styles */
         .signup-page {
+            background-image: url('art/challenge-webpage-background.png');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 0;
             margin: 0;
-            height: 1440px;
-            width: 2560px;
-            position: relative;
-        }
-
-        /* Full viewport background for signup page */
-        .signup-page::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
             height: 100vh;
-            background-image: url('art/challenge-webpage-background.png');
-            background-position: center center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            z-index: -2;
-            pointer-events: none;
+            width: 100vw;
+            position: relative;
         }
 
         .signup-page::before {
             content: '';
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            right: 0;
+            bottom: 0;
             background-image: url('art/challenge-webpage-background-shadow-hue.png');
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
-            z-index: -1;
-            pointer-events: none;
+            z-index: 1;
         }
 
         .signup-container {
@@ -191,12 +130,15 @@
 
         .login-link {
             text-align: center;
+            margin-top: -15px;
             margin-bottom: 4px;
             color: #ffffff;
             font-family: 'Centaur', serif;
             font-size: 20px;
             font-weight: 100;
             letter-spacing: 0.5px;
+            position: relative;
+            z-index: 10;
         }
 
         .login-link a {
@@ -225,41 +167,26 @@
         }
 
         .intro-page {
+            background: url('art/challenge-webpage-background.png') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            width: 2560px;
-            height: 1440px;
+            width: 100vw;
+            height: 100vh;
             padding-top: 130px;
             box-sizing: border-box;
         }
 
-        /* Full viewport background for intro page */
-        .intro-page::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: url('art/challenge-webpage-background.png') center/cover;
-            background-size: cover;
-            z-index: -2;
-            pointer-events: none;
-        }
-
         .intro-page::before {
             content: '';
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            right: 0;
+            bottom: 0;
             background: url('art/challenge-webpage-background-shadow-hue.png') center/cover;
-            background-size: cover;
-            z-index: -1;
-            pointer-events: none;
+            z-index: 1;
         }
 
         .intro-container {
@@ -275,7 +202,7 @@
         }
 
         .intro-content {
-            width: 1280px;
+            width: clamp(320px, 80vw, 1280px);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -284,7 +211,7 @@
         }
 
         .youtube-frame {
-            width: 1280px;
+            width: clamp(320px, 80vw, 1280px);
             aspect-ratio: 16 / 9;
             background: #000000;
             border-radius: 18px;
@@ -423,6 +350,7 @@
         .signup-btn {
             background: url('art/text-button-field.png') center/contain no-repeat;
             width: 550px;
+            max-width: 100vw;
             height: 125px;
             border: none;
             background-color: transparent;
@@ -499,11 +427,15 @@
             text-shadow: 0 0 16px rgba(214, 165, 80, 0.6), 0 0 30px rgba(214, 165, 80, 0.35);
         }
 
+        .discord-btn:hover img,
+        .discord-btn:focus img {
+            filter: drop-shadow(0 0 20px rgba(214, 165, 80, 0.55));
+        }
+
         .discord-btn img {
             width: 200px;
             height: auto;
             display: block;
-            filter: drop-shadow(0 0 20px rgba(214, 165, 80, 0.55));
         }
 
         .discord-btn span {
@@ -519,10 +451,11 @@
         }
 
         .signup-info-footer {
-            position: fixed;
+            position: absolute;
             bottom: 0;
-            left: 0;
-            width: 100vw;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2560px;
             height: auto;
             pointer-events: none;
             z-index: 3;
@@ -532,7 +465,7 @@
         }
 
         .signup-info-footer .footer-bg {
-            width: 100vw;
+            width: 2560px;
             height: auto;
             display: block;
             image-rendering: crisp-edges;
@@ -603,41 +536,26 @@
 
         /* Name Entry Page Styles */
         .name-entry-page {
+            background: url('art/challenge-webpage-background.png') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            width: 2560px;
-            height: 1440px;
+            width: 100vw;
+            height: 100vh;
             margin: 0;
             padding: 0;
         }
 
-        /* Full viewport background for name entry page */
-        .name-entry-page::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: url('art/challenge-webpage-background.png') center/cover;
-            background-size: cover;
-            z-index: -2;
-            pointer-events: none;
-        }
-
         .name-entry-page::before {
             content: '';
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            right: 0;
+            bottom: 0;
             background: url('art/challenge-webpage-background-shadow-hue.png') center/cover;
-            background-size: cover;
-            z-index: -1;
-            pointer-events: none;
+            z-index: 1;
         }
 
         .name-entry-container {
@@ -814,41 +732,26 @@
 
         /* Riddle Page Styles */
         .riddle-page {
+            background: url('art/challenge-webpage-background.png') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            width: 2560px;
-            height: 1440px;
+            width: 100vw;
+            height: 100vh;
             margin: 0;
             padding: 0;
         }
 
-        /* Full viewport background for riddle page */
-        .riddle-page::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: url('art/challenge-webpage-background.png') center/cover;
-            background-size: cover;
-            z-index: -2;
-            pointer-events: none;
-        }
-
         .riddle-page::before {
             content: '';
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            right: 0;
+            bottom: 0;
             background: url('art/challenge-webpage-background-shadow-hue.png') center/cover;
-            background-size: cover;
-            z-index: -1;
-            pointer-events: none;
+            z-index: 1;
         }
 
         .riddle-page .riddle-container,
@@ -1022,13 +925,84 @@
             display: block;
         }
 
+        /* Interactive map container for riddle 8 */
+        .interactive-map-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            display: inline-block;
+        }
+
+        /* Allow map to overlap with input on riddle 8 */
+        .riddle-container[data-riddle-id="8"] .interactive-map-container {
+            margin-bottom: -40px;
+            z-index: 1;
+        }
+
+        .interactive-map-container .riddle-map {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+
+        /* Clickable area on the map */
+        .map-clickable-area {
+            position: absolute;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .map-clickable-area:hover {
+            opacity: 0.8;
+        }
+
+        /* Steelbloom glow overlay */
+        .steelbloom-glow {
+            position: absolute;
+            position: absolute;
+        top: 26%;
+        left: 28.5%;
+        width: 14%;
+            height: auto;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+            object-fit: contain;
+        }
+
+        .steelbloom-glow.revealed {
+            opacity: 1;
+            animation: pulseRedGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseRedGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 12px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 24px rgba(255, 0, 0, 0.6)) drop-shadow(0 0 36px rgba(255, 0, 0, 0.4));
+                opacity: 0.85;
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 28px rgba(255, 0, 0, 1)) drop-shadow(0 0 48px rgba(255, 0, 0, 0.9)) drop-shadow(0 0 64px rgba(255, 0, 0, 0.7));
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
         .riddle-input-container {
             text-align: center;
             margin-top: 30px;
         }
 
         /* XL lightbox - anchor input at bottom */
-        .riddle-container[data-riddle-id="8"] .riddle-input-container,
+        .riddle-container[data-riddle-id="8"] .riddle-input-container {
+            margin-top: auto;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
         .riddle-container[data-riddle-id="17"] .riddle-input-container,
         .riddle-container[data-riddle-id="21"] .riddle-input-container {
             margin-top: auto;
@@ -1050,6 +1024,12 @@
             text-shadow: 0 0 9px rgba(151, 196, 255, 0.8);
             caret-color: transparent;
             transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .riddle-input:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            filter: grayscale(100%);
         }
 
         .riddle-input:focus {
@@ -1108,15 +1088,16 @@
             top: 5px;
         }
 
-        /* Navigation - stretches full viewport */
+        /* Navigation */
         .nav-bar {
             position: fixed;
             top: -12px;
-            left: 0;
-            width: 100vw;
-            height: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2560px;
+            height: 100px;
             background: url('art/navbar.png') center top no-repeat;
-            background-size: cover;
+            background-size: 8192px 100px;
             z-index: 1000;
             display: block;
             pointer-events: none;
@@ -1124,8 +1105,9 @@
 
         .nav-audio-toggle {
             position: fixed;
-            top: 8px;
-            right: 36px;
+            top: 12px;
+            left: 50%;
+            margin-left: 1100px;
             width: 144px;
             height: 38px;
             border: none;
@@ -1220,8 +1202,8 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 2560px;
-            height: 1440px;
+            width: 100vw;
+            height: 100vh;
             background: #000000;
             opacity: 0;
             pointer-events: none;
@@ -1233,7 +1215,7 @@
             opacity: 1;
         }
 
-        /* Landscape-only requirement for mobile (overlay stays outside scaled wrapper) */
+        /* Landscape-only requirement for mobile */
         .rotate-screen-overlay {
             display: none;
             position: fixed;
@@ -1329,135 +1311,6 @@
             background: #2c5282;
         }
 
-        /* Responsive adjustments for smaller screens */
-        /* Medium screens - adjust footer text and logos */
-        @media (max-width: 1600px) {
-            .footer-legal {
-                font-size: 0.95rem;
-                max-width: 850px;
-            }
-            
-            .footer-logos {
-                gap: 80px;
-            }
-            
-            .footer-logos img {
-                height: 110px;
-                width: 220px;
-            }
-        }
-
-        /* Small screens - further reduce footer */
-        @media (max-width: 1400px) {
-            .footer-legal {
-                font-size: 0.9rem;
-                max-width: 750px;
-                line-height: 1.4;
-            }
-            
-            .footer-logos {
-                gap: 60px;
-            }
-            
-            .footer-logos img {
-                height: 95px;
-                width: 190px;
-            }
-            
-            .footer-logos .intrepid-logo {
-                height: 85px;
-                width: 150px;
-            }
-            
-            .footer-logos .aoc-logo {
-                height: 100px;
-                width: 200px;
-            }
-        }
-
-        /* Very small screens - compact footer */
-        @media (max-width: 1280px) {
-            .footer-legal {
-                font-size: 0.85rem;
-                max-width: 650px;
-                line-height: 1.3;
-                margin-bottom: -20px;
-            }
-            
-            .footer-logos {
-                gap: 40px;
-            }
-            
-            .footer-logos img {
-                height: 80px;
-                width: 160px;
-            }
-            
-            .footer-logos .intrepid-logo {
-                height: 70px;
-                width: 130px;
-            }
-            
-            .footer-logos .aoc-logo {
-                height: 85px;
-                width: 170px;
-            }
-            
-            .nav-audio-toggle {
-                right: 24px;
-                top: 6px;
-                width: 120px;
-                height: 32px;
-            }
-            
-            .nav-audio-toggle svg {
-                width: 24px;
-                height: 24px;
-            }
-        }
-
-        /* Mobile/Tablet responsive */
-        @media (max-width: 1024px) {
-            .footer-legal {
-                font-size: 0.75rem;
-                max-width: 550px;
-                line-height: 1.2;
-                margin-bottom: -15px;
-            }
-            
-            .footer-logos {
-                gap: 30px;
-                flex-wrap: wrap;
-            }
-            
-            .footer-logos img {
-                height: 60px;
-                width: 120px;
-            }
-            
-            .footer-logos .intrepid-logo {
-                height: 55px;
-                width: 100px;
-            }
-            
-            .footer-logos .aoc-logo {
-                height: 65px;
-                width: 130px;
-            }
-            
-            .nav-audio-toggle {
-                right: 16px;
-                top: 4px;
-                width: 100px;
-                height: 28px;
-            }
-            
-            .nav-audio-toggle svg {
-                width: 20px;
-                height: 20px;
-            }
-        }
-
         /* Responsive design */
         @media (max-width: 768px) {
             .signup-content {
@@ -1467,20 +1320,6 @@
             .signup-container {
                 margin: 10px;
                 padding: 20px;
-            }
-            
-            .footer-legal {
-                font-size: 0.7rem;
-                max-width: 450px;
-            }
-            
-            .footer-logos {
-                gap: 20px;
-            }
-            
-            .footer-logos img {
-                height: 50px;
-                width: 100px;
             }
             
             .name-entry-container,
@@ -2208,7 +2047,7 @@
             <!-- X (visible when muted) -->
             <path d="M16 9l4 4M20 9l-4 4" class="mute-x" style="display: none;"></path>
         </svg>
-        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="25" aria-label="Volume control">
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="15" aria-label="Volume control">
     </div>
     <div class="page-transition-overlay" id="pageTransitionOverlay"></div>
 
@@ -2502,6 +2341,7 @@
         // Page management
         let currentPage = 'login'; // Always start on login page
         let isLoginMode = true; // true for login, false for signup
+        let isShowingRiddleCompletion = false; // Track if we're showing the completion page
         
         const INTRO_RIDDLE_ID = 'intro';
         const SECOND_RIDDLE_ID = 2;
@@ -2532,7 +2372,8 @@
             { id: 'login', label: 'Login' },
             { id: 'intro', label: 'Intro Video' },
             { id: 'nameEntry', label: 'Name Entry' },
-            { id: 'riddle', label: 'Riddle Challenge' }
+            { id: 'riddle', label: 'Riddle Challenge' },
+            { id: 'riddleCompletion', label: 'Riddle Completion' }
         ];
 
         const DevConsoleState = {
@@ -3012,6 +2853,38 @@
             return questionElement;
         }
 
+        function formatHeadingWithLineBreaks(text) {
+            // Add line breaks after periods that:
+            // 1. Are not part of an ellipsis (...)
+            // 2. Are at least 25 characters into the text
+            // 3. End a sentence (followed by space or end of string)
+            
+            let result = '';
+            for (let i = 0; i < text.length; i++) {
+                result += text[i];
+                
+                // Check if current character is a period
+                if (text[i] === '.') {
+                    // Check if period is at position >= 25
+                    if (i >= 24) {
+                        // Check if it's not part of an ellipsis
+                        const notEllipsisBefore = !(i >= 2 && text[i-1] === '.' && text[i-2] === '.');
+                        const notEllipsisAfter = !(i < text.length - 2 && text[i+1] === '.' && text[i+2] === '.');
+                        
+                        // Check if it ends a sentence (followed by space, end of string, or another sentence)
+                        const endsRiddleHeading = i === text.length - 1 || (i < text.length - 1 && text[i+1] === ' ');
+                        
+                        if (notEllipsisBefore && notEllipsisAfter && endsRiddleHeading) {
+                            // Add line break after the period
+                            result += '<br>';
+                        }
+                    }
+                }
+            }
+            
+            return result;
+        }
+
         function renderRiddleView(riddle, playerName, options = {}) {
             const content = document.getElementById('riddleContent');
             const headingEl = document.getElementById('riddleHeading');
@@ -3034,7 +2907,8 @@
             }
 
             const updateContent = () => {
-                headingEl.textContent = applyPlayerName(riddle.heading, playerName);
+                const headingText = applyPlayerName(riddle.heading, playerName);
+                headingEl.innerHTML = formatHeadingWithLineBreaks(headingText);
 
                 dialogEl.innerHTML = '';
                 const whiteSegments = Array.isArray(riddle.white) ? riddle.white : (riddle.white ? [riddle.white] : []);
@@ -3050,10 +2924,16 @@
                 dialogEl.appendChild(createQuestionElement(riddle, playerName));
 
                 if (disclaimerEl) {
-                    // Special handling for riddle 8 - show map instead of disclaimer text
+                    // Special handling for riddle 8 - show interactive map
                     if (riddle.id === 8) {
                         disclaimerEl.style.display = 'block';
-                        disclaimerEl.innerHTML = '<img src="art/map1.png" alt="Map" class="riddle-map">';
+                        disclaimerEl.innerHTML = `
+                            <div class="interactive-map-container">
+                                <img src="art/map1.png" alt="Map" class="riddle-map">
+                                <div class="map-clickable-area" id="steelbloom-clickable" style=" top: 30%; left: 30%; width: 12%; height: 12%;"></div>
+                                <img src="art/steelbloom-glow.png" alt="Steelbloom" class="steelbloom-glow" id="steelbloom-glow">
+                            </div>
+                        `;
                     } else if (riddle.disclaimer) {
                         disclaimerEl.style.display = 'block';
                         disclaimerEl.textContent = applyPlayerName(riddle.disclaimer, playerName);
@@ -3125,6 +3005,22 @@
             if (options.onContentUpdate) {
                 options.onContentUpdate();
             }
+
+            // Setup interactive map for riddle 8
+            if (riddle.id === 8) {
+                setTimeout(() => {
+                    const clickableArea = document.getElementById('steelbloom-clickable');
+                    const glowImage = document.getElementById('steelbloom-glow');
+                    
+                    if (clickableArea && glowImage && inputEl) {
+                        clickableArea.addEventListener('click', function() {
+                            glowImage.classList.add('revealed');
+                            inputEl.disabled = false;
+                            inputEl.focus({ preventScroll: true });
+                        });
+                    }
+                }, 100);
+            }
             };
 
             if (options.useTransition) {
@@ -3162,29 +3058,65 @@
             if (!intro) {
                 return;
             }
+            isShowingRiddleCompletion = false; // Not showing completion
             renderRiddleView(intro, playerName, { useTransition: false });
             // Always show hooded figure for intro riddle, ignoring custom profile
             applyFigureVariant('hooded', true);
+            
+            // Update dev console highlighting if visible
+            refreshDevConsoleIfVisible();
         }
 
         function renderCurrentChallengeRiddle(useTransition) {
             if (!activeRiddleChallenge || !activeRiddleChallenge.riddles.length) {
                 return;
             }
+            isShowingRiddleCompletion = false; // Not showing completion
             const current = activeRiddleChallenge.riddles[activeRiddleChallenge.index];
-            renderRiddleView(current, activeRiddleChallenge.playerName, { 
+            
+            // Riddle 8 requires user to click the map before enabling input
+            const options = {
                 useTransition: Boolean(useTransition),
                 onContentUpdate: () => flushQueuedFigureVariant()
-            });
+            };
+            
+            if (current.id === 8) {
+                options.disableInput = true;
+            }
+            
+            renderRiddleView(current, activeRiddleChallenge.playerName, options);
+            
+            // Update dev console highlighting if visible
+            refreshDevConsoleIfVisible();
         }
 
         function renderChallengeCompletion(playerName) {
             clearPendingRiddleAdvance();
+            isShowingRiddleCompletion = true; // Mark that we're showing completion
+            
+            // Determine which variant/guide to use for the completion message
+            let variantToUse = 'hooded'; // default
+            let signatureToUse = '- Mysterious Figure';
+            
+            if (activeRiddleChallenge) {
+                // Use the variant from the active challenge
+                variantToUse = activeRiddleChallenge.variant || 'hooded';
+                
+                // Get the signature from the profile if available
+                if (activeRiddleChallenge.profileId) {
+                    const profiles = loadProfiles();
+                    const profile = profiles.find(p => p.id === activeRiddleChallenge.profileId);
+                    if (profile && profile.signature) {
+                        signatureToUse = profile.signature;
+                    }
+                }
+            }
+            
             const completionRiddle = {
                 heading: `Stand tall, ${playerName}.`,
                 white: ['You have conquered every riddle set before you.'],
                 yellow: 'Await further orders. Your dedication has been noted.',
-                signature: '- Mysterious Figure',
+                signature: signatureToUse,
                 placeholder: 'Challenge Complete'
             };
             renderRiddleView(completionRiddle, playerName, {
@@ -3193,12 +3125,15 @@
                 inputValue: '',
                 inputPlaceholder: 'Challenge Complete'
             });
-            // Completion message is from Mysterious Figure, so show hooded figure
-            applyFigureVariant('hooded', true);
+            // Show the appropriate guide figure
+            applyFigureVariant(variantToUse, true);
             const inputEl = document.getElementById('riddleAnswer');
             if (inputEl) {
                 inputEl.classList.add('success');
             }
+            
+            // Update dev console highlighting if visible
+            refreshDevConsoleIfVisible();
         }
         
         function maybeStartRiddleChallenge(playerName, answer) {
@@ -3293,6 +3228,7 @@
                 return;
             }
             activeRiddleChallenge.completed = true;
+            saveActiveChallenge(); // Save the completed state with variant and profileId
             renderChallengeCompletion(activeRiddleChallenge.playerName);
         }
 
@@ -3471,6 +3407,11 @@
 
                 localStorage.setItem('currentPage', pageId);
                 currentPage = pageId;
+                
+                // Reset completion flag when leaving riddle page
+                if (pageId !== 'riddle') {
+                    isShowingRiddleCompletion = false;
+                }
 
                 refreshDevConsoleIfVisible();
 
@@ -4040,7 +3981,7 @@ function safePlay(mediaElement) {
             let stagVoice = document.getElementById('stagVoiceover');
 
             // Get saved volume from localStorage for initial setup
-            const initialVolume = parseFloat(localStorage.getItem('audioVolume') || '25') / 100;
+            const initialVolume = parseFloat(localStorage.getItem('audioVolume') || '15') / 100;
 
             if (!backgroundMusic) {
                 backgroundMusic = document.createElement('audio');
@@ -4072,11 +4013,19 @@ function safePlay(mediaElement) {
                 stagVoice.dataset.played = localStorage.getItem('stagVoicePlayed') || 'false';
                 document.body.appendChild(stagVoice);
 
+                // Force load the audio immediately
+                stagVoice.load();
+
                 stagVoice.addEventListener('ended', () => {
                     localStorage.setItem('stagVoicePlayed', 'true');
                     stagVoice.dataset.played = 'true';
                     fadeAudio(backgroundMusic, true);
                 });
+                
+                // Log when audio is ready to play
+                stagVoice.addEventListener('canplaythrough', () => {
+                    console.log('Stag voiceover ready to play');
+                }, { once: true });
             } else {
                 // Ensure existing audio has baseVolume set
                 if (!stagVoice.dataset.baseVolume) {
@@ -4118,7 +4067,7 @@ function safePlay(mediaElement) {
 
             // Initialize saved states
             const savedMuted = localStorage.getItem('audioMuted') === 'true';
-            const savedVolume = localStorage.getItem('audioVolume') || '25';
+            const savedVolume = localStorage.getItem('audioVolume') || '15';
             applyMuteState(savedMuted);
             
             if (volumeSlider) {
@@ -4160,9 +4109,34 @@ function safePlay(mediaElement) {
                 playStagOnce: () => {
                     if (!stagVoice || !backgroundMusic) return;
                     if (stagVoice.dataset.played === 'true') return;
+                    
+                    // Fade out background music
                     fadeAudio(backgroundMusic, false, 600);
+                    
+                    // Ensure the audio is at the beginning
                     stagVoice.currentTime = 0;
-            safePlay(stagVoice);
+                    
+                    // Ensure audio is not muted and has proper volume
+                    const isMuted = localStorage.getItem('audioMuted') === 'true';
+                    stagVoice.muted = isMuted;
+                    
+                    const userVolume = parseFloat(localStorage.getItem('audioVolume') || '15') / 100;
+                    const baseVolume = parseFloat(stagVoice.dataset.baseVolume || '1.0');
+                    stagVoice.volume = userVolume * baseVolume;
+                    
+                    // Force play immediately with error handling
+                    const playPromise = stagVoice.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            console.log('Stag voiceover playing successfully');
+                        }).catch(error => {
+                            console.warn('Stag voiceover play failed:', error);
+                            // Retry once after a brief delay
+                            setTimeout(() => {
+                                stagVoice.play().catch(e => console.error('Stag retry failed:', e));
+                            }, 100);
+                        });
+                    }
                 }
             };
 
@@ -4173,7 +4147,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             if (!audioElement) return;
             
             // Get the user's current volume setting
-            const userVolume = parseFloat(localStorage.getItem('audioVolume') || '25') / 100;
+            const userVolume = parseFloat(localStorage.getItem('audioVolume') || '15') / 100;
             const baseVolume = parseFloat(audioElement.dataset.baseVolume || '1.0');
             const effectiveTargetVolume = targetVolume !== null ? targetVolume : (userVolume * baseVolume);
             
@@ -4593,13 +4567,28 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                 item.addEventListener('click', () => {
                     if (page.id === 'riddle') {
                         renderDevConsoleRiddleSelection();
+                    } else if (page.id === 'riddleCompletion') {
+                        jumpToRiddleCompletion();
                     } else {
                         hideDevConsole();
                         showPage(page.id);
                     }
                 });
 
-                if (currentPage === page.id) {
+                // Highlight logic: check if we're on the right page/state
+                let isActive = false;
+                if (page.id === 'riddleCompletion') {
+                    // Highlight riddleCompletion if we're on riddle page AND showing completion
+                    isActive = (currentPage === 'riddle' && isShowingRiddleCompletion);
+                } else if (page.id === 'riddle') {
+                    // Highlight riddle if we're on riddle page AND NOT showing completion
+                    isActive = (currentPage === 'riddle' && !isShowingRiddleCompletion);
+                } else {
+                    // For other pages, just check currentPage
+                    isActive = (currentPage === page.id);
+                }
+                
+                if (isActive) {
                     item.classList.add('is-active');
                 }
 
@@ -4712,6 +4701,29 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             saveActiveChallenge();
             hideDevConsole();
             showPage('riddle');
+        }
+
+        function jumpToRiddleCompletion() {
+            // Get current user info
+            const currentUser = getCurrentUser();
+            const playerName = currentUser?.playerName || 'Traveler';
+            const variant = localStorage.getItem(FIGURE_VARIANT_KEY) || 'hooded';
+            const profileId = localStorage.getItem(SELECTED_PROFILE_KEY);
+
+            // Create a completed challenge to show the completion screen
+            activeRiddleChallenge = {
+                playerName: playerName,
+                index: 0,
+                riddles: [RIDDLE_DEFINITION_MAP[INTRO_RIDDLE_ID]], // Just need one riddle
+                completed: true,
+                variant: variant,
+                profileId: profileId
+            };
+
+            // Save and navigate
+            saveActiveChallenge();
+            showPage('riddle');
+            // Dev console highlighting will be updated automatically by renderChallengeCompletion()
         }
 
         function parseAccountsFromStorage() {
@@ -5875,7 +5887,21 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
 
             pageList.querySelectorAll('.dev-console-list-item').forEach(button => {
                 const pageId = button.dataset.page;
-                button.classList.toggle('is-active', pageId === currentPage);
+                
+                // Use same highlighting logic as renderDevConsolePages
+                let isActive = false;
+                if (pageId === 'riddleCompletion') {
+                    // Highlight riddleCompletion if we're on riddle page AND showing completion
+                    isActive = (currentPage === 'riddle' && isShowingRiddleCompletion);
+                } else if (pageId === 'riddle') {
+                    // Highlight riddle if we're on riddle page AND NOT showing completion
+                    isActive = (currentPage === 'riddle' && !isShowingRiddleCompletion);
+                } else {
+                    // For other pages, just check currentPage
+                    isActive = (currentPage === pageId);
+                }
+                
+                button.classList.toggle('is-active', isActive);
             });
         }
 
@@ -5896,4 +5922,3 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
     </div>
 </body>
 </html>
-
