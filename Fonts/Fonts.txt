@@ -1,0 +1,11 @@
+Fonts
+
+Riddle Header: color #ffffff, font family: Centaur
+
+White dialog text: color #ffffff, font family: Centaur
+Yellow riddle text: color #d6a550, font family: Centaur (first riddle "Who can we trust")
+
+Yellow riddle text: color #d6a550, font family: Antiquarian Scribe (Regular style)
+
+Flute-riddle icon fonts: font family: Copperplate Gothic Bold (Bold style)
+
