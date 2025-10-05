@@ -36,7 +36,7 @@
         }
 
         /* Responsive scaling wrapper - scales content to match 2560x1440 reference */
-        /* Default: scale to fit height (for 16:9 and wider screens) */
+        /* Use min() to always fit within viewport without overflow */
         #game-wrapper {
             width: 2560px;
             height: 1440px;
@@ -44,50 +44,35 @@
             transform-origin: center center;
             flex-shrink: 0;
             overflow: visible;
-            transform: scale(calc(100vh / 1440));
+            transform: scale(calc(min(100vw / 2560, 100vh / 1440)));
         }
-
-        /* For screens narrower/taller than 16:9 (portrait-like, 4:3, 5:4, etc.) */
-        /* Scale based on width instead to fill horizontally */
-        @media (max-aspect-ratio: 16/9) {
+        
+        /* Adjustments for smaller screens to reduce zoom */
+        /* 1080p and below - slightly reduce scale */
+        @media (max-height: 1080px) {
             #game-wrapper {
-                transform: scale(calc(100vw / 2560));
+                transform: scale(calc(min(100vw / 2560, 100vh / 1440) * 0.92));
             }
         }
         
-        /* For 1080p and smaller screens - scale down more to show more content */
-        @media (max-height: 1080px) and (min-aspect-ratio: 16/9) {
-            #game-wrapper {
-                transform: scale(calc(100vh / 1440 * 0.85));
-            }
-        }
-        
-        /* For 900p and similar smaller screens */
+        /* 900p and below - more reduction */
         @media (max-height: 900px) {
             #game-wrapper {
-                transform: scale(calc(100vh / 1440 * 0.8));
+                transform: scale(calc(min(100vw / 2560, 100vh / 1440) * 0.88));
             }
         }
         
-        /* For 768p and smaller screens */
+        /* 768p and below - significant reduction */
         @media (max-height: 768px) {
             #game-wrapper {
-                transform: scale(calc(100vh / 1440 * 0.75));
+                transform: scale(calc(min(100vw / 2560, 100vh / 1440) * 0.82));
             }
         }
         
-        /* Specific handling for common aspect ratios */
-        /* 21:9 Ultrawide */
-        @media (min-aspect-ratio: 21/9) {
+        /* 600p and below - maximum reduction for very small screens */
+        @media (max-height: 600px) {
             #game-wrapper {
-                transform: scale(calc(100vh / 1440));
-            }
-        }
-        
-        /* 32:9 Super Ultrawide */
-        @media (min-aspect-ratio: 32/9) {
-            #game-wrapper {
-                transform: scale(calc(100vh / 1440));
+                transform: scale(calc(min(100vw / 2560, 100vh / 1440) * 0.7));
             }
         }
 
