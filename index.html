@@ -33,6 +33,13 @@
             font-weight: 300;
             font-style: normal;
         }
+
+        @font-face {
+            font-family: 'CAD';
+            src: url('Fonts/CAD_____.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
         
         * {
             margin: 0;
@@ -147,8 +154,8 @@
         .signup-title {
             font-size: 2.8rem;
             color: #ffffff;
-            margin-top: 30px;
-            margin-bottom: -20px;
+            margin-top: 50px;
+            margin-bottom: -35px;
             text-align: center;
             font-weight: 100;
             letter-spacing: 1px;
@@ -157,8 +164,8 @@
 
         .login-link {
             text-align: center;
-            margin-top: -15px;
-            margin-bottom: 4px;
+            margin-top: 0px;
+            margin-bottom: 0px;
             color: #ffffff;
             font-family: 'Centaur', serif;
             font-size: 20px;
@@ -179,7 +186,7 @@
             width: 350px !important;
             height: auto;
             opacity: 0.8;
-            margin: 0px auto 4px auto;
+            margin: 10px auto 10px auto;
             display: block;
         }
 
@@ -301,9 +308,25 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 40px 60px 40px;
             overflow: visible;
+        }
+
+        .login-header-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-form-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .signup-form {
@@ -396,6 +419,10 @@
             transform: translateY(-3px);
             color: #e6ebff;
             text-shadow: 0 0 14px rgba(160, 190, 255, 0.95), 0 0 30px rgba(174, 110, 255, 0.6);
+        }
+
+        .signup-btn.login-mode {
+            margin-top: 40px;
         }
 
         .divider {
@@ -659,8 +686,8 @@
         }
 
         .mysterious-signature {
-            font-family: 'Centaur', serif;
-            font-style: italic;
+            font-family: 'CAD', serif;
+            font-style: normal;
             font-size: 1.3rem;
             color: #ffffff;
             text-align: left;
@@ -937,10 +964,21 @@
 
         .riddle-question.highlight {
             color: #d6a550;
+            font-family: 'CAD', serif;
         }
 
         .trust-question {
             color: #d6a550;
+            font-family: 'CAD', serif;
+        }
+        
+        .cad-word {
+            font-family: 'CAD', serif;
+        }
+        
+        .centaur-punct {
+            font-family: 'Centaur', serif;
+            font-style: italic;
         }
 
         .riddle-map {
@@ -1013,6 +1051,72 @@
                 filter: drop-shadow(0 0 12px rgba(255, 0, 0, 1)) drop-shadow(0 0 18px rgba(255, 0, 0, 0.95)) drop-shadow(0 0 24px rgba(255, 0, 0, 0.8));
                 opacity: 1;
                 transform: scale(1.05);
+            }
+        }
+
+        /* Flute game container for riddle 21 */
+        .flute-game-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            display: inline-block;
+        }
+
+        /* Allow flute game to overlap with input on riddle 21 */
+        .riddle-container[data-riddle-id="21"] .flute-game-container {
+            margin-bottom: -40px;
+            z-index: 1;
+        }
+
+        .flute-game-container .flute-lines {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+
+        /* Flute that moves across the lines */
+        .flute-moving {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 20%;
+            width: auto;
+            height: 120%;
+            min-width: 110px;
+            pointer-events: none;
+            transition: left 0s linear;
+            object-fit: contain;
+        }
+
+        /* Flute buttons on the lines */
+        .flute-button {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            transition: filter 0.3s ease, transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+            filter: brightness(0.75);
+            transform: translate(-50%, -50%);
+            transform-origin: center;
+            object-fit: contain;
+        }
+
+        .flute-button.activated {
+            filter: brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.75)) drop-shadow(0 0 12px rgba(255, 215, 0, 0.55));
+            width: 120px;
+            height: 120px;
+            transform: translate(-50%, -50%);
+            animation: flute-glow 2.8s ease-in-out infinite;
+        }
+
+        @keyframes flute-glow {
+            0%, 100% {
+                filter: brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.75)) drop-shadow(0 0 12px rgba(255, 215, 0, 0.55));
+            }
+            50% {
+                filter: brightness(1.18) drop-shadow(0 0 12px rgba(255, 215, 0, 0.85)) drop-shadow(0 0 24px rgba(255, 215, 0, 0.65));
             }
         }
 
@@ -2094,24 +2198,28 @@
         <div class="signup-container">
             <div class="signup-content">
                 <div class="login-form-container">
-                    <h2 class="signup-title" id="pageTitle">Log In</h2>
-                    <img src="art/divider.png" alt="Divider" class="login-title-divider">
-                    <p class="login-link" id="pageLink">Don't have an account? <a href="#" onclick="toggleLoginSignup()">Sign Up</a></p>
+                    <div class="login-header-section">
+                        <h2 class="signup-title" id="pageTitle">Log In</h2>
+                        <img src="art/divider.png" alt="Divider" class="login-title-divider">
+                        <p class="login-link" id="pageLink">Don't have an account? <a href="#" onclick="toggleLoginSignup()">Sign Up</a></p>
+                    </div>
                     
-                    <div class="signup-form">
-                        <div class="form-group">
-                            <input type="email" id="email" placeholder="Email" maxlength="50" required>
+                    <div class="login-form-section">
+                        <div class="signup-form">
+                            <div class="form-group">
+                                <input type="email" id="email" placeholder="Email" maxlength="50" required>
+                            </div>
+                            <div class="form-group" id="confirmEmailGroup" style="display: none;">
+                                <input type="email" id="confirmEmail" placeholder="Confirm Email" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" placeholder="Password" maxlength="30" required>
+                            </div>
+                            <div class="form-group" id="confirmPasswordGroup" style="display: none;">
+                                <input type="password" id="confirmPassword" placeholder="Confirm Password" maxlength="30">
+                            </div>
+                            <button class="signup-btn" id="submitBtn" onclick="handleSubmit()">Log In</button>
                         </div>
-                        <div class="form-group" id="confirmEmailGroup" style="display: none;">
-                            <input type="email" id="confirmEmail" placeholder="Confirm Email" maxlength="50">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id="password" placeholder="Password" maxlength="30" required>
-                        </div>
-                        <div class="form-group" id="confirmPasswordGroup" style="display: none;">
-                            <input type="password" id="confirmPassword" placeholder="Confirm Password" maxlength="30">
-                        </div>
-                        <button class="signup-btn" id="submitBtn" onclick="handleSubmit()">Log In</button>
                     </div>
                 </div>
 
@@ -2163,7 +2271,7 @@
                 <div class="golden-swirl"></div>
                 <div class="name-entry-body">
                     <div class="name-question">Speak quickly Traveler! What is your name?</div>
-                    <div class="mysterious-signature">- Mysterious Figure</div>
+                    <div class="mysterious-signature" id="nameEntrySignature"></div>
                 </div>
                 <div class="name-input-container">
                     <input type="text" class="name-input" id="playerName" placeholder="Type Your Name Here" maxlength="25" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">
@@ -2346,7 +2454,7 @@
                         <div class="dev-console-panel" id="devConsolePanel-riddles" role="tabpanel">
                             <div class="dev-console-panel-header">
                                 <h3>Riddle Library</h3>
-                                <div class="dev-console-caption">Manage base and custom riddles</div>
+                                <div class="dev-console-caption">Manage base and custom riddles. Interactive riddles use XL lightboxes (minimum 2 per playthrough).</div>
                                 <div class="dev-console-inline-actions">
                                     <button type="button" class="dev-console-tertiary" id="devConsoleExportRiddles">Export JSON</button>
                                     <button type="button" class="dev-console-tertiary" id="devConsoleImportRiddles">Import JSON</button>
@@ -2371,7 +2479,7 @@
         
         const INTRO_RIDDLE_ID = 'intro';
         const SECOND_RIDDLE_ID = 2;
-        const TOTAL_RIDDLE_COUNT = 8;
+        const TOTAL_RIDDLE_COUNT = 10;
         const RIDDLE_ADVANCE_DELAY_MS = 3000;
         const RIDDLE_TRANSITION_DELAY_MS = 600;
 
@@ -2393,7 +2501,10 @@
         const DEV_CONSOLE_RIDDLE_OVERRIDES_KEY = 'customRiddleOverrides';
         const DEV_CONSOLE_REMOVED_RIDDLES_KEY = 'removedRiddleIds';
         const DEV_CONSOLE_PROFILES_KEY = 'riddleProfiles';
+        const DEV_CONSOLE_INTERACTIVE_RIDDLES_KEY = 'interactiveRiddleIds';
         const DEV_CONSOLE_UNLOCK_TIMEOUT_MS = 120000;
+        const DEFAULT_INTERACTIVE_RIDDLE_IDS = [8, 17, 21]; // XL lightbox riddles
+        const MIN_INTERACTIVE_RIDDLES = 2;
         const DEV_CONSOLE_PAGES = [
             { id: 'login', label: 'Login' },
             { id: 'intro', label: 'Intro Video' },
@@ -2747,8 +2858,20 @@
             const intro = RIDDLE_DEFINITION_MAP[INTRO_RIDDLE_ID];
             const second = RIDDLE_DEFINITION_MAP[SECOND_RIDDLE_ID];
 
-            const pool = RIDDLE_DEFINITIONS.filter(riddle =>
-                riddle.id !== INTRO_RIDDLE_ID && riddle.id !== SECOND_RIDDLE_ID
+            // Load interactive riddle IDs from storage
+            const interactiveIds = loadInteractiveRiddleIds();
+
+            // Separate pool into interactive and non-interactive riddles
+            const interactivePool = RIDDLE_DEFINITIONS.filter(riddle =>
+                riddle.id !== INTRO_RIDDLE_ID && 
+                riddle.id !== SECOND_RIDDLE_ID &&
+                interactiveIds.has(riddle.id)
+            );
+
+            const nonInteractivePool = RIDDLE_DEFINITIONS.filter(riddle =>
+                riddle.id !== INTRO_RIDDLE_ID && 
+                riddle.id !== SECOND_RIDDLE_ID &&
+                !interactiveIds.has(riddle.id)
             );
 
             const riddles = [];
@@ -2762,11 +2885,40 @@
             }
 
             const remainingSlots = Math.max(0, TOTAL_RIDDLE_COUNT - riddles.length);
+            
             if (remainingSlots > 0) {
-            const selection = shuffleArray(pool)
-                .slice(0, remainingSlots)
-                .map(riddle => ({ ...riddle }));
-            riddles.push(...selection);
+                // Ensure we have at least MIN_INTERACTIVE_RIDDLES interactive riddles
+                const numInteractiveToSelect = Math.min(
+                    Math.max(MIN_INTERACTIVE_RIDDLES, 0),
+                    interactivePool.length,
+                    remainingSlots
+                );
+                
+                // Randomly select interactive riddles
+                const selectedInteractive = shuffleArray([...interactivePool])
+                    .slice(0, numInteractiveToSelect)
+                    .map(riddle => ({ ...riddle }));
+                
+                // Fill remaining slots with non-interactive riddles (or more interactive if available)
+                const remainingSlotsAfterInteractive = remainingSlots - selectedInteractive.length;
+                let additionalSelection = [];
+                if (remainingSlotsAfterInteractive > 0) {
+                    // Combine remaining interactive riddles with non-interactive riddles
+                    const remainingInteractive = interactivePool.filter(r => 
+                        !selectedInteractive.some(sr => sr.id === r.id)
+                    );
+                    const combinedPool = [...nonInteractivePool, ...remainingInteractive];
+                    
+                    additionalSelection = shuffleArray(combinedPool)
+                        .slice(0, remainingSlotsAfterInteractive)
+                        .map(riddle => ({ ...riddle }));
+                }
+                
+                // Combine and shuffle all selected riddles (excluding intro and second)
+                const allSelectedRiddles = [...selectedInteractive, ...additionalSelection];
+                const shuffledSelection = shuffleArray(allSelectedRiddles);
+                
+                riddles.push(...shuffledSelection);
             }
 
             return {
@@ -2841,6 +2993,29 @@
             return riddle.normalizedAnswers.has(normalizedAnswer);
         }
 
+        // Helper function to apply mixed fonts: CAD for words, Centaur for punctuation
+        function applyMixedFont(text, element) {
+            // Match words and non-word characters (punctuation, spaces, etc.)
+            const regex = /(\w+)|([^\w]+)/g;
+            let match;
+            
+            while ((match = regex.exec(text)) !== null) {
+                if (match[1]) {
+                    // It's a word - use CAD font
+                    const wordSpan = document.createElement('span');
+                    wordSpan.className = 'cad-word';
+                    wordSpan.textContent = match[1];
+                    element.appendChild(wordSpan);
+                } else if (match[2]) {
+                    // It's punctuation/space - use Centaur font
+                    const punctSpan = document.createElement('span');
+                    punctSpan.className = 'centaur-punct';
+                    punctSpan.textContent = match[2];
+                    element.appendChild(punctSpan);
+                }
+            }
+        }
+
         function createQuestionElement(riddle, playerName) {
             const questionElement = document.createElement('div');
             questionElement.id = 'riddleQuestion';
@@ -2862,20 +3037,33 @@
                     const middle = questionText.slice(tokenIndex, tokenIndex + token.length);
                     const after = questionText.slice(tokenIndex + token.length);
                     if (before) {
-                        questionElement.appendChild(document.createTextNode(before));
+                        if (!isIntroRiddle) {
+                            applyMixedFont(before, questionElement);
+                        } else {
+                            questionElement.appendChild(document.createTextNode(before));
+                        }
                     }
                     const highlightSpan = document.createElement('span');
                     highlightSpan.className = 'trust-question';
-                    highlightSpan.textContent = middle;
+                    applyMixedFont(middle, highlightSpan);
                     questionElement.appendChild(highlightSpan);
                     if (after) {
-                        questionElement.appendChild(document.createTextNode(after));
+                        if (!isIntroRiddle) {
+                            applyMixedFont(after, questionElement);
+                        } else {
+                            questionElement.appendChild(document.createTextNode(after));
+                        }
                     }
                     return questionElement;
                 }
             }
 
-            questionElement.textContent = questionText;
+            // Apply mixed font for highlighted riddles, plain text for intro
+            if (!isIntroRiddle) {
+                applyMixedFont(questionText, questionElement);
+            } else {
+                questionElement.textContent = questionText;
+            }
             return questionElement;
         }
 
@@ -2982,6 +3170,16 @@
                                 <img src="art/steelbloom-glow.png" alt="Steelbloom" class="steelbloom-glow" id="steelbloom-glow">
                             </div>
                         `;
+                    } else if (riddle.id === 21) {
+                        // Special handling for riddle 21 - show flute game
+                        disclaimerEl.style.display = 'block';
+                        disclaimerEl.innerHTML = `
+                            <div class="flute-game-container" id="flute-game-container">
+                                <img src="art/flutel-lines.png" alt="Flute Lines" class="flute-lines" id="flute-lines">
+                                <img src="art/flute.png" alt="Flute" class="flute-moving" id="flute-moving">
+                                <div id="flute-buttons-container"></div>
+                            </div>
+                        `;
                     } else if (riddle.disclaimer) {
                         disclaimerEl.style.display = 'block';
                         disclaimerEl.textContent = applyPlayerName(riddle.disclaimer, playerName);
@@ -3021,10 +3219,11 @@
                     
                     if (displaySignature) {
                         signatureEl.style.display = 'block';
-                        signatureEl.textContent = applyPlayerName(displaySignature, playerName);
+                        signatureEl.innerHTML = '';
+                        applyMixedFont(applyPlayerName(displaySignature, playerName), signatureEl);
                     } else {
                         signatureEl.style.display = 'none';
-                        signatureEl.textContent = '';
+                        signatureEl.innerHTML = '';
                     }
                 }
 
@@ -3068,6 +3267,219 @@
                         });
                     }
                 }, 100);
+            }
+
+            // Setup flute game for riddle 21
+            if (riddle.id === 21) {
+                setTimeout(() => {
+                    const fluteContainer = document.getElementById('flute-game-container');
+                    const fluteLines = document.getElementById('flute-lines');
+                    const fluteMoving = document.getElementById('flute-moving');
+                    const buttonsContainer = document.getElementById('flute-buttons-container');
+                    
+                    if (fluteContainer && fluteLines && fluteMoving && buttonsContainer && inputEl) {
+                        // Define the available buttons and their keys
+                        const buttonConfigs = [
+                            { key: '1', offImage: 'art/flute-1-off.png', onImage: 'art/flute-1-on.png' },
+                            { key: '<', offImage: 'art/flute-arrow-off.png', onImage: 'art/flute-arrow-on.png' },
+                            { key: 's', offImage: 'art/flute-s-off.png', onImage: 'art/flute-s-on.png' },
+                            { key: 'u', offImage: 'art/flute-u-off.png', onImage: 'art/flute-U-on.png' },
+                            { key: '~', offImage: 'art/flute-~-off.png', onImage: 'art/flute-~-on.png' },
+                            { key: ';', offImage: 'art/flute-_-off.png', onImage: 'art/flute-_-on.png' }
+                        ];
+
+                        // Wait for image to load to get proper dimensions
+                        fluteLines.onload = function() {
+                            initFluteGame();
+                        };
+
+                        // If already loaded
+                        if (fluteLines.complete) {
+                            initFluteGame();
+                        }
+
+                        function initFluteGame() {
+                            const linesHeight = fluteLines.offsetHeight;
+                            const linesWidth = fluteLines.offsetWidth;
+                            
+                            // Define 6 line positions aligned with the actual staff lines
+                            // Bottom 2 lines shifted up slightly from previous position
+                            const linePositions = [
+                                linesHeight * 0.12,
+                                linesHeight * 0.28,
+                                linesHeight * 0.40,
+                                linesHeight * 0.56,
+                                linesHeight * 0.72,
+                                linesHeight * 0.86,
+                                linesHeight * 0.96
+                            ];
+
+                            // Place one button on each line at random horizontal positions
+                            const buttons = [];
+                            buttonConfigs.forEach((config, index) => {
+                                const button = document.createElement('img');
+                                button.src = config.offImage;
+                                button.className = 'flute-button';
+                                button.dataset.key = config.key;
+                                button.dataset.offImage = config.offImage;
+                                button.dataset.onImage = config.onImage;
+                                button.dataset.lineIndex = index;
+                                button.dataset.activated = 'false';
+                                
+                                // Random horizontal position (20% to 80% of width)
+                                const randomX = 0.2 + Math.random() * 0.6;
+                                const buttonX = randomX * linesWidth;
+                                button.style.left = buttonX + 'px';
+                                // Position on the line (transform centers it)
+                                button.style.top = linePositions[index] + 'px';
+                                
+                                buttonsContainer.appendChild(button);
+                                buttons.push({
+                                    element: button,
+                                    config: config,
+                                    lineIndex: index,
+                                    position: buttonX,
+                                    activated: false
+                                });
+                            });
+
+                            // Flute animation state
+                            let fluteX = 0;
+                            let fluteDirection = 1; // 1 for right, -1 for left
+                            let currentLineIndex = 0;
+                            let gameCompleted = false;
+                            let keydownHandler = null;
+
+                            // Get flute width after it loads
+                            const fluteWidth = fluteMoving.offsetWidth || 110;
+
+                            // Flute stays at fixed vertical position, only moves horizontally
+
+                            // Animate flute movement (only horizontal)
+                            function animateFlute() {
+                                if (gameCompleted) return;
+
+                                fluteX += fluteDirection * 2.5;
+                                
+                                // Bounce at edges accounting for flute width
+                                if (fluteX >= linesWidth - fluteWidth) {
+                                    fluteX = linesWidth - fluteWidth;
+                                    fluteDirection = -1;
+                                } else if (fluteX <= 0) {
+                                    fluteX = 0;
+                                    fluteDirection = 1;
+                                }
+                                
+                                fluteMoving.style.left = fluteX + 'px';
+                                requestAnimationFrame(animateFlute);
+                            }
+
+                            // Start animation
+                            animateFlute();
+
+                            // Check if flute is over a button horizontally
+                            function isFluteOverButton(button) {
+                                const fluteCenterX = fluteX + (fluteWidth / 2);
+                                const buttonWidth = button.element.offsetWidth || 60;
+                                const tolerance = Math.max(18, Math.min(40, buttonWidth * 0.35));
+                                // Only check horizontal alignment since flute overlaps all lines
+                                return Math.abs(fluteCenterX - button.position) <= tolerance;
+                            }
+
+                            // Handle key press
+                            keydownHandler = function(e) {
+                                if (gameCompleted) return;
+
+                                const currentButton = buttons.find(b => b.lineIndex === currentLineIndex);
+                                if (!currentButton || currentButton.activated) return;
+
+                                // Get the pressed key
+                                let pressedKey = e.key;
+                                let expectedKey = currentButton.config.key;
+                                
+                                // For special characters that require shift, use e.key directly
+                                // For regular letters/numbers, normalize to lowercase for comparison
+                                let keysMatch = false;
+                                
+                                if (expectedKey === '~' || expectedKey === '_' || expectedKey === '<' || 
+                                    expectedKey === '>' || expectedKey === '!' || expectedKey === '@' ||
+                                    expectedKey === '#' || expectedKey === '$' || expectedKey === '%' ||
+                                    expectedKey === '^' || expectedKey === '&' || expectedKey === '*' ||
+                                    expectedKey === '(' || expectedKey === ')' || expectedKey === '+' ||
+                                    expectedKey === '{' || expectedKey === '}' || expectedKey === '|' ||
+                                    expectedKey === ':' || expectedKey === '"' || expectedKey === '?') {
+                                    // Special characters - exact match required
+                                    keysMatch = (pressedKey === expectedKey);
+                                } else if (expectedKey === 'ArrowUp' || expectedKey === 'ArrowDown' || 
+                                           expectedKey === 'ArrowLeft' || expectedKey === 'ArrowRight') {
+                                    // Arrow keys - exact match
+                                    keysMatch = (pressedKey === expectedKey);
+                                } else {
+                                    // Regular keys - case insensitive
+                                    keysMatch = (pressedKey.toLowerCase() === expectedKey.toLowerCase());
+                                }
+
+                                // Check if the correct key is pressed and flute is over the button
+                                if (keysMatch) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    if (isFluteOverButton(currentButton)) {
+                                        // Correct button pressed at correct position!
+                                        currentButton.activated = true;
+                                        currentButton.element.src = currentButton.config.onImage;
+                                        currentButton.element.classList.add('activated');
+                                        
+                                        // Move to next line
+                                        currentLineIndex++;
+                                        
+                                        if (currentLineIndex >= buttons.length) {
+                                            // All buttons completed!
+                                            gameCompleted = true;
+                                            inputEl.disabled = false;
+                                            inputEl.value = '';
+                                            inputEl.focus({ preventScroll: true });
+                                        }
+                                        // Flute stays at fixed position, no vertical movement needed
+                                    } else {
+                                        // Wrong timing - restart game
+                                        restartGame();
+                                    }
+                                }
+                            };
+
+                            // Restart game on wrong input
+                            function restartGame() {
+                                currentLineIndex = 0;
+                                fluteX = 0;
+                                fluteDirection = 1;
+                                
+                                buttons.forEach(button => {
+                                    button.activated = false;
+                                    button.element.src = button.config.offImage;
+                                    button.element.classList.remove('activated');
+                                });
+                                
+                                // Flute stays at fixed position, no vertical reset needed
+                            }
+
+                            // Add keyboard listener
+                            document.addEventListener('keydown', keydownHandler);
+
+                            // Cleanup function for when riddle changes
+                            window.cleanupFluteGame = function() {
+                                if (keydownHandler) {
+                                    document.removeEventListener('keydown', keydownHandler);
+                                }
+                            };
+                        }
+                    }
+                }, 100);
+            } else {
+                // Cleanup previous flute game if exists
+                if (window.cleanupFluteGame) {
+                    window.cleanupFluteGame();
+                    window.cleanupFluteGame = null;
+                }
             }
             };
 
@@ -3123,12 +3535,13 @@
             const current = activeRiddleChallenge.riddles[activeRiddleChallenge.index];
             
             // Riddle 8 requires user to click the map before enabling input
+            // Riddle 21 requires user to complete the flute game before enabling input
             const options = {
                 useTransition: Boolean(useTransition),
                 onContentUpdate: () => flushQueuedFigureVariant()
             };
             
-            if (current.id === 8) {
+            if (current.id === 8 || current.id === 21) {
                 options.disableInput = true;
             }
             
@@ -3442,6 +3855,12 @@
                                     if (playerNameInput && currentUser && !currentUser.playerName) {
                                         playerNameInput.value = '';
                                     }
+                                    // Initialize the signature with mixed font
+                                    const signatureEl = document.getElementById('nameEntrySignature');
+                                    if (signatureEl) {
+                                        signatureEl.innerHTML = '';
+                                        applyMixedFont('- Mysterious Figure', signatureEl);
+                                    }
                                 }
                             })
                             .finally(() => {
@@ -3577,6 +3996,7 @@
                 }
                 
                 submitBtn.textContent = 'Log In';
+                submitBtn.classList.add('login-mode');
                 confirmEmailGroup.style.display = 'none';
                 confirmPasswordGroup.style.display = 'none';
             } else {
@@ -3585,6 +4005,7 @@
                 pageLink.style.color = '#ffffff';
                 pageLink.style.fontWeight = 'normal';
                 submitBtn.textContent = 'Sign Up';
+                submitBtn.classList.remove('login-mode');
                 confirmEmailGroup.style.display = 'block';
                 confirmPasswordGroup.style.display = 'block';
             }
@@ -4937,6 +5358,24 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             localStorage.setItem(DEV_CONSOLE_REMOVED_RIDDLES_KEY, JSON.stringify(values));
         }
 
+        function loadInteractiveRiddleIds() {
+            try {
+                const stored = JSON.parse(localStorage.getItem(DEV_CONSOLE_INTERACTIVE_RIDDLES_KEY) || 'null');
+                if (Array.isArray(stored)) {
+                    return new Set(stored.map(Number));
+                }
+                // Default: return the 3 original interactive riddles
+                return new Set(DEFAULT_INTERACTIVE_RIDDLE_IDS);
+            } catch (error) {
+                return new Set(DEFAULT_INTERACTIVE_RIDDLE_IDS);
+            }
+        }
+
+        function saveInteractiveRiddleIds(set) {
+            const values = Array.from(set || new Set());
+            localStorage.setItem(DEV_CONSOLE_INTERACTIVE_RIDDLES_KEY, JSON.stringify(values));
+        }
+
         function normalizeCustomAnswers(input) {
             return (input || '')
                 .split(',')
@@ -5152,6 +5591,12 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                 const answerList = (riddle.answers || []).join(', ') || '—';
                 const rawSignature = riddle.signature || '';
                 
+                // Check if this riddle is interactive
+                const interactiveIds = loadInteractiveRiddleIds();
+                const isInteractive = interactiveIds.has(riddle.id);
+                const isDefault = DEFAULT_INTERACTIVE_RIDDLE_IDS.includes(riddle.id);
+                const canBeInteractive = riddle.id !== INTRO_RIDDLE_ID && riddle.id !== SECOND_RIDDLE_ID;
+                
                 // Display signature: show what it will be
                 let displaySignature = rawSignature;
                 if (rawSignature === '<default>') {
@@ -5181,10 +5626,17 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                     <div class="dev-console-riddle-title">
                         <strong>Title:</strong> ${heading}
                         ${riddle.isCustom ? '<span class="dev-console-tag" style="margin-left: 8px;">Custom</span>' : ''}
+                        ${isDefault ? '<span class="dev-console-tag" style="margin-left: 8px; background: rgba(214, 165, 80, 0.2); color: #d6a550;">Default Interactive</span>' : ''}
                     </div>
                     <div class="dev-console-riddle-meta">
                         <span>ID: ${riddle.id}</span>
                     </div>
+                    ${canBeInteractive ? `<div class="dev-console-riddle-section">
+                        <label style="display: flex; align-items: center; cursor: pointer; user-select: none;">
+                            <input type="checkbox" ${isInteractive ? 'checked' : ''} data-interactive-toggle="${riddle.id}" style="margin-right: 8px; width: 16px; height: 16px; cursor: pointer;">
+                            <strong>Interactive (XL Lightbox)</strong>
+                        </label>
+                    </div>` : ''}
                     <div class="dev-console-riddle-section">
                         <strong>White Dialog:</strong>
                         <div class="dev-console-riddle-content">${white}</div>
@@ -5228,6 +5680,10 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                                 ${signatureOptions.join('')}
                             </select>
                         </label>
+                        ${canBeInteractive ? `<label style="display: flex; align-items: center; cursor: pointer; user-select: none; margin-top: 10px;">
+                            <input type="checkbox" ${isInteractive ? 'checked' : ''} data-interactive-toggle-edit="${riddle.id}" style="margin-right: 8px; width: 16px; height: 16px; cursor: pointer;">
+                            <strong>Interactive (XL Lightbox)</strong>
+                        </label>` : ''}
                         <div class="dev-console-inline-actions">
                             <button type="button" class="dev-console-tertiary" data-action="save" data-riddle="${riddle.id}">Save</button>
                             <button type="button" class="dev-console-tertiary" data-action="cancel" data-riddle="${riddle.id}">Cancel</button>
@@ -5258,6 +5714,50 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
 
             riddleList.querySelectorAll('button[data-action="cancel"]').forEach(button => {
                 button.addEventListener('click', () => hideRiddleEditor(button.dataset.riddle));
+            });
+
+            // Add event listeners for interactive toggles (view mode)
+            riddleList.querySelectorAll('input[data-interactive-toggle]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const riddleId = Number(this.dataset.interactiveToggle);
+                    const currentIds = loadInteractiveRiddleIds();
+                    
+                    if (this.checked) {
+                        currentIds.add(riddleId);
+                    } else {
+                        currentIds.delete(riddleId);
+                    }
+                    
+                    saveInteractiveRiddleIds(currentIds);
+                    
+                    // Update the corresponding edit mode checkbox
+                    const editCheckbox = riddleList.querySelector(`input[data-interactive-toggle-edit="${riddleId}"]`);
+                    if (editCheckbox) {
+                        editCheckbox.checked = this.checked;
+                    }
+                });
+            });
+
+            // Add event listeners for interactive toggles (edit mode)
+            riddleList.querySelectorAll('input[data-interactive-toggle-edit]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const riddleId = Number(this.dataset.interactiveToggleEdit);
+                    const currentIds = loadInteractiveRiddleIds();
+                    
+                    if (this.checked) {
+                        currentIds.add(riddleId);
+                    } else {
+                        currentIds.delete(riddleId);
+                    }
+                    
+                    saveInteractiveRiddleIds(currentIds);
+                    
+                    // Update the corresponding view mode checkbox
+                    const viewCheckbox = riddleList.querySelector(`input[data-interactive-toggle="${riddleId}"]`);
+                    if (viewCheckbox) {
+                        viewCheckbox.checked = this.checked;
+                    }
+                });
             });
         }
 
