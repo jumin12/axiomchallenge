@@ -3347,6 +3347,16 @@
 
             // Setup flute game for riddle 21
             if (riddle.id === 21) {
+                const preloadedFluteImages = new Set();
+                const preloadFluteImage = (src) => {
+                    if (!src || preloadedFluteImages.has(src)) {
+                        return;
+                    }
+                    const img = new Image();
+                    img.src = src;
+                    preloadedFluteImages.add(src);
+                };
+
                 const initializeFluteGame = () => {
                     const fluteContainer = document.getElementById('flute-game-container');
                     const fluteLines = document.getElementById('flute-lines');
@@ -3363,6 +3373,11 @@
                             { key: '~', offImage: 'art/flute-~-off.png', onImage: 'art/flute-~-on.png' },
                             { key: ';', offImage: 'art/flute-;-off.png', onImage: 'art/flute-;-on.png' }
                         ];
+
+                        buttonConfigs.forEach(config => {
+                            preloadFluteImage(config.offImage);
+                            preloadFluteImage(config.onImage);
+                        });
 
                         // Wait for image to load to get proper dimensions
                         fluteLines.onload = initFluteGame;
@@ -3483,13 +3498,19 @@
 
                             // Handle key press
                             keydownHandler = function(e) {
-                                const currentButton = buttons.find(b => b.lineIndex === currentLineIndex);
-                                if (!currentButton || currentButton.activated) return;
+                                if (gameCompleted) {
+                                    return;
+                                }
 
-                                // Get the pressed key
-                                let pressedKey = e.key;
-                                let expectedKey = currentButton.config.key;
-                                
+                                const currentButton = buttons.find(b => b.lineIndex === currentLineIndex);
+                                if (!currentButton || currentButton.activated) {
+                                    return;
+                                }
+
+                                const pressedKey = e.key;
+                                const expectedKey = currentButton.config.key;
+                                const ignoredKeys = ['Shift', 'Alt', 'Control', 'Meta', 'CapsLock', 'Tab', 'Escape'];
+
                                 // For special characters that require shift, use e.key directly
                                 // For regular letters/numbers, normalize to lowercase for comparison
                                 let keysMatch = false;
@@ -3512,7 +3533,6 @@
                                     keysMatch = (pressedKey.toLowerCase() === expectedKey.toLowerCase());
                                 }
 
-                                // Check if the correct key is pressed and flute is over the button
                                 if (keysMatch) {
                                     e.preventDefault();
                                     e.stopPropagation();
@@ -3540,9 +3560,16 @@
                                         }
                                         // Flute stays at fixed position, no vertical movement needed
                                     } else {
-                                        // Wrong timing - restart game
+                                        // Correct key, wrong timing - restart game
                                         restartGame();
                                     }
+                                    return;
+                                }
+
+                                if (!ignoredKeys.includes(pressedKey)) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    restartGame();
                                 }
                             };
 
