@@ -50,7 +50,6 @@
         html {
             height: 100%;
             width: 100%;
-            font-size: clamp(12px, 1vw, 16px); /* Responsive base font size */
         }
 
         body {
@@ -60,24 +59,6 @@
             padding: 0;
             height: 100vh;
             width: 100vw;
-            background: #000000;
-            color: #ffffff;
-            /* Dynamic scaling based on viewport width */
-            transform-origin: top left;
-            transform: scale(min(1, 100vw / 1920px));
-        }
-
-        /* Ensure scaling doesn't break on very small screens */
-        @media (max-width: 480px) {
-            body {
-                transform: scale(min(0.8, 100vw / 1920px));
-            }
-        }
-
-        @media (max-width: 320px) {
-            body {
-                transform: scale(min(0.7, 100vw / 1920px));
-            }
         }
 
         /* Wrapper for all content */
@@ -153,31 +134,31 @@
         }
 
         .signup-container {
-            max-width: min(93.75rem, 95vw);
+            max-width: 93.75rem;
             width: 100%;
             background: transparent;
             border-radius: 0;
             box-shadow: none;
-            padding: clamp(1rem, 2.5vw, 2.5rem);
-            margin: clamp(0.5rem, 1.25vw, 1.25rem);
+            padding: 2.5rem;
+            margin: 1.25rem;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
             position: relative;
             z-index: 2;
-            height: clamp(30rem, 50vh, 50rem);
+            height: 50rem;
             gap: 2.5rem;
         }
 
         .signup-title {
-            font-size: clamp(1.5rem, 4vw, 2.8rem);
+            font-size: 2.8rem;
             color: #ffffff;
-            margin-top: clamp(1rem, 3.125vw, 3.125rem);
-            margin-bottom: clamp(-1rem, -2.1875vw, -2.1875rem);
+            margin-top: 3.125rem;
+            margin-bottom: -2.1875rem;
             text-align: center;
             font-weight: 100;
-            letter-spacing: clamp(0.025rem, 0.0625vw, 0.0625rem);
+            letter-spacing: 0.0625rem;
             font-family: 'Centaur', serif;
         }
 
@@ -244,12 +225,12 @@
 
         .intro-container {
             width: 100%;
-            max-width: min(87.5rem, 90vw);
+            max-width: 87.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 0 clamp(1rem, 2.5vw, 2.5rem);
+            padding: 0 2.5rem;
             position: relative;
             z-index: 2;
         }
@@ -537,7 +518,7 @@
         }
 
         .signup-info-footer .footer-bg {
-            width: clamp(80rem, 160vw, 160rem);
+            width: 160rem;
             height: auto;
             display: block;
             image-rendering: crisp-edges;
@@ -571,7 +552,7 @@
 
         .footer-logos {
             display: flex;
-            gap: clamp(2rem, 6.25vw, 6.25rem);
+            gap: 6.25rem;
             align-items: center;
             justify-content: center;
             pointer-events: auto;
@@ -583,12 +564,12 @@
         }
 
         .footer-logos img {
-            height: clamp(4rem, 7.8125vw, 7.8125rem);
-            width: clamp(8rem, 15.625vw, 15.625rem);
+            height: 7.8125rem;
+            width: 15.625rem;
             object-fit: contain;
             opacity: 0.8;
             transition: opacity 0.3s ease;
-            padding-left: clamp(1rem, 2.1875vw, 2.1875rem);
+            padding-left: 2.1875rem;
             display: block;
         }
 
@@ -632,8 +613,8 @@
 
         .name-entry-container {
             background: url('art/lightbox-medium.png') center/contain no-repeat;
-            width: clamp(40rem, 62.5vw, 62.5rem);
-            height: clamp(30rem, 46.875vw, 46.875rem);
+            width: 62.5rem;
+            height: 46.875rem;
             position: relative;
             margin: 0 auto;
             background-position: center center;
@@ -867,8 +848,8 @@
         .riddle-container[data-riddle-id="17"],
         .riddle-container[data-riddle-id="21"] {
             background: url('art/lightbox-XL.png') center/contain no-repeat;
-            width: clamp(55rem, 87.5vw, 87.5rem);
-            height: clamp(40rem, 65.625vw, 65.625rem);
+            width: 87.5rem;
+            height: 65.625rem;
         }
 
         .riddle-content {
