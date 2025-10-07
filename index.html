@@ -48,8 +48,6 @@
         }
 
         html {
-            /* Responsive base font size: scales from 12px at 320px viewport to 16px at 1920px viewport */
-            font-size: clamp(0.75rem, 0.5rem + 0.5vw, 1rem);
             height: 100%;
             width: 100%;
         }
@@ -136,28 +134,28 @@
         }
 
         .signup-container {
-            max-width: min(93.75rem, 90vw);
-            width: 90%;
+            max-width: min(93.75rem, 95vw);
+            width: 100%;
             background: transparent;
             border-radius: 0;
             box-shadow: none;
-            padding: clamp(1rem, 2.5vw, 2.5rem);
-            margin: clamp(0.5rem, 1.25vw, 1.25rem);
+            padding: clamp(1.25rem, 2.5vw, 2.5rem);
+            margin: clamp(0.625rem, 1.5vw, 1.25rem);
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
             position: relative;
             z-index: 2;
-            height: clamp(30rem, 50vh, 50rem);
-            gap: clamp(1rem, 2.5vw, 2.5rem);
+            height: clamp(30rem, 60vh, 50rem);
+            gap: clamp(1.25rem, 2.5vw, 2.5rem);
         }
 
         .signup-title {
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
             color: #ffffff;
-            margin-top: 3.125rem;
-            margin-bottom: -2.1875rem;
+            margin-top: clamp(1.5rem, 3vw, 3.125rem);
+            margin-bottom: clamp(-1.5rem, -2vw, -2.1875rem);
             text-align: center;
             font-weight: 100;
             letter-spacing: 0.0625rem;
@@ -170,7 +168,7 @@
             margin-bottom: 0;
             color: #ffffff;
             font-family: 'Centaur', serif;
-            font-size: 1.25rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
             font-weight: 100;
             letter-spacing: 0.0312rem;
             position: relative;
@@ -180,12 +178,12 @@
         .login-link a {
             color: #d6a550;
             text-decoration: none;
-            font-size: 1.25rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
             font-weight: 100;
         }
 
         .login-title-divider {
-            width: clamp(15rem, 21.875vw, 21.875rem) !important;
+            width: min(21.875rem, 80vw) !important;
             height: auto;
             opacity: 0.8;
             margin: 0.625rem auto 0.625rem auto;
@@ -194,12 +192,12 @@
 
         .signup-content {
             display: flex;
-            gap: clamp(1rem, 2.5vw, 2.5rem);
+            gap: 2.5rem;
             align-items: center;
             justify-content: center;
             width: 100%;
             height: 100%;
-            transform: translateX(clamp(-1.75rem, -1.75vw, -0.5rem));
+            transform: translateX(-1.75rem);
         }
 
         .intro-page {
@@ -210,7 +208,7 @@
             position: relative;
             width: 100vw;
             height: 100vh;
-            padding-top: clamp(4rem, 8.125vh, 8.125rem);
+            padding-top: 8.125rem;
             box-sizing: border-box;
         }
 
@@ -226,13 +224,13 @@
         }
 
         .intro-container {
-            width: 95%;
-            max-width: min(87.5rem, 90vw);
+            width: 100%;
+            max-width: 87.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 0 clamp(1rem, 2.5vw, 2.5rem);
+            padding: 0 2.5rem;
             position: relative;
             z-index: 2;
         }
@@ -272,8 +270,8 @@
 
         .login-divider-stack {
             position: relative;
-            width: clamp(3rem, 5.625vw, 5.625rem);
-            height: clamp(15rem, 25vh, 25rem);
+            width: 5.625rem;
+            height: 25rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -282,7 +280,7 @@
 
         .login-divider-stack img {
             position: absolute;
-            width: clamp(15rem, 25vw, 25rem);
+            width: 25rem;
             height: auto;
             top: 50%;
             left: 50%;
@@ -304,16 +302,17 @@
         .social-container {
             background: url('art/lightbox-medium.png') center/contain no-repeat;
             background-size: 100% 100%;
-            width: clamp(30rem, 62.5vw, 62.5rem);
-            height: clamp(25rem, 46.875vh, 46.875rem);
-            max-width: 90vw;
-            max-height: 80vh;
+            width: min(62.5rem, 90vw);
+            max-width: 62.5rem;
+            height: auto;
+            min-height: min(46.875rem, 70vh);
+            aspect-ratio: 1000 / 750;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: clamp(1.5rem, 2.5vw, 2.5rem) clamp(2rem, 3.75vw, 3.75rem) clamp(1.5rem, 2.5vw, 2.5rem);
+            padding: clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3.75rem);
             overflow: visible;
         }
 
@@ -359,14 +358,14 @@
 
         .form-group input {
             background: url('art/email-text-box.png') center/cover no-repeat;
-            width: clamp(20rem, 28.75vw, 28.75rem);
-            height: clamp(3.5rem, 5vh, 5rem);
-            max-width: 90%;
+            width: min(28.75rem, 80vw);
+            max-width: 28.75rem;
+            height: clamp(3.5rem, 7vw, 5rem);
             border: none;
             background-color: transparent;
             color: #d6a550;
-            font-size: 1.25rem;
-            padding: 1.25rem 1.875rem 0.75rem 1.875rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            padding: clamp(0.75rem, 1.5vw, 1.25rem) clamp(1rem, 2.5vw, 1.875rem) clamp(0.5rem, 1vw, 0.75rem);
             text-align: center;
             font-family: 'Centaur', serif;
             font-style: normal;
@@ -404,18 +403,18 @@
 
         .signup-btn {
             background: url('art/text-button-field.png') center/contain no-repeat;
-            width: clamp(25rem, 34.375vw, 34.375rem);
-            max-width: 95vw;
-            height: clamp(5rem, 7.8125vh, 7.8125rem);
+            width: min(34.375rem, 90vw);
+            max-width: 34.375rem;
+            height: clamp(5rem, 10vw, 7.8125rem);
             border: none;
             background-color: transparent;
             color: #d0d8ff;
-            font-size: 1.5rem;
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
             font-weight: 100;
             cursor: pointer;
             transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
             font-family: 'Centaur', serif;
-            padding: 0 clamp(1.5rem, 2.5vw, 2.5rem);
+            padding: 0 clamp(1.5rem, 3vw, 2.5rem);
             text-align: center;
             text-shadow: 0 0 0.5rem rgba(160, 190, 255, 0.85);
         }
@@ -464,7 +463,7 @@
             width: auto;
             height: auto;
             border: none;
-            font-size: 2.125rem;
+            font-size: clamp(1.5rem, 3vw, 2.125rem);
             font-weight: 100;
             cursor: pointer;
             color: #f2d37c;
@@ -490,7 +489,7 @@
         }
 
         .discord-btn img {
-            width: clamp(8rem, 12.5vw, 12.5rem);
+            width: min(12.5rem, 40vw);
             height: auto;
             display: block;
             transition: filter 0.3s ease, transform 0.3s ease;
@@ -501,7 +500,7 @@
         }
 
         .discord-divider {
-            width: clamp(15rem, 21.875vw, 21.875rem) !important;
+            width: min(21.875rem, 80vw) !important;
             height: auto;
             opacity: 0.8;
             margin-left: 1.25rem;
@@ -513,8 +512,7 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
-            max-width: min(160rem, 95vw);
+            width: 160rem;
             height: auto;
             pointer-events: none;
             z-index: 3;
@@ -524,8 +522,7 @@
         }
 
         .signup-info-footer .footer-bg {
-            width: 100%;
-            max-width: min(160rem, 95vw);
+            width: 160rem;
             height: auto;
             display: block;
             image-rendering: crisp-edges;
@@ -541,7 +538,7 @@
             align-items: center;
             gap: 0;
             width: 90%;
-            max-width: min(75rem, 85vw);
+            max-width: 75rem;
         }
 
         .footer-legal {
@@ -550,7 +547,7 @@
             font-size: 1.05rem;
             line-height: 1.5;
             font-family: 'Centaur', serif;
-            max-width: min(56.25rem, 80vw);
+            max-width: 56.25rem;
             margin: 0 auto;
             position: relative;
             z-index: 2;
@@ -559,7 +556,7 @@
 
         .footer-logos {
             display: flex;
-            gap: clamp(3rem, 6.25vw, 6.25rem);
+            gap: 6.25rem;
             align-items: center;
             justify-content: center;
             pointer-events: auto;
@@ -571,8 +568,8 @@
         }
 
         .footer-logos img {
-            height: clamp(5rem, 7.8125vh, 7.8125rem);
-            width: clamp(10rem, 15.625vw, 15.625rem);
+            height: 7.8125rem;
+            width: 15.625rem;
             object-fit: contain;
             opacity: 0.8;
             transition: opacity 0.3s ease;
@@ -585,13 +582,13 @@
         }
 
         .footer-logos .intrepid-logo {
-            height: clamp(4.5rem, 7.0312vh, 7.0312rem);
-            width: clamp(8rem, 12.5vw, 12.5rem);
+            height: 7.0312rem;
+            width: 12.5rem;
         }
 
         .footer-logos .aoc-logo {
-            height: clamp(5.5rem, 8.2031vh, 8.2031rem);
-            width: clamp(11rem, 16.4062vw, 16.4062rem);
+            height: 8.2031rem;
+            width: 16.4062rem;
         }
 
         /* Name Entry Page Styles */
@@ -620,10 +617,12 @@
 
         .name-entry-container {
             background: url('art/lightbox-medium.png') center/contain no-repeat;
-            width: clamp(35rem, 62.5vw, 62.5rem);
-            height: clamp(30rem, 46.875vh, 46.875rem);
-            max-width: 90vw;
-            max-height: 85vh;
+            background-size: 100% 100%;
+            width: min(62.5rem, 90vw);
+            max-width: 62.5rem;
+            height: auto;
+            min-height: min(46.875rem, 70vh);
+            aspect-ratio: 1000 / 750;
             position: relative;
             margin: 0 auto;
             background-position: center center;
@@ -638,13 +637,13 @@
             z-index: 2;
             width: 72%;
             padding: 0 0.625rem;
-            max-width: min(40rem, 80%);
+            max-width: 40rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: absolute;
-            top: clamp(5rem, 7.8125vh, 7.8125rem);
-            bottom: clamp(3rem, 5vh, 5rem);
+            top: 7.8125rem;
+            bottom: 5rem;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -652,7 +651,7 @@
         .name-entry-body {
             margin-top: 2.5rem;
             width: 100%;
-            max-width: min(37.5rem, 90%);
+            max-width: 37.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -661,11 +660,11 @@
 
         .stag-guidance {
             font-family: 'Centaur', serif;
-            font-size: 1.4rem;
+            font-size: clamp(1.15rem, 2.2vw, 1.4rem);
             color: #ffffff;
             margin-bottom: 0.3125rem;
             text-align: center;
-            max-width: 26.25rem;
+            max-width: min(26.25rem, 90vw);
             word-wrap: break-word;
             overflow-wrap: break-word;
             white-space: normal;
@@ -675,9 +674,9 @@
         }
 
         .golden-swirl {
-            width: clamp(20rem, 28.125vw, 28.125rem);
+            width: min(28.125rem, 90vw);
             max-width: 100%;
-            height: clamp(3rem, 4.375vh, 4.375rem);
+            height: clamp(3rem, 6vw, 4.375rem);
             background: url('art/divider.png') center/contain no-repeat;
             margin: -0.3125rem auto 1.25rem auto;
             display: block;
@@ -685,24 +684,24 @@
 
         .name-question {
             font-family: 'Centaur', serif;
-            font-size: 1.2rem;
+            font-size: clamp(1.05rem, 2vw, 1.2rem);
             color: #ffffff;
             margin-top: 0;
             margin-bottom: 1.125rem;
             text-align: left;
             width: 100%;
-            max-width: min(37.5rem, 90%);
+            max-width: 37.5rem;
         }
 
         .mysterious-signature {
             font-family: 'CAD', serif;
             font-style: normal;
-            font-size: 1.4rem;
+            font-size: clamp(1.15rem, 2.2vw, 1.4rem);
             color: #ffffff;
             text-align: left;
             margin-bottom: 1.5625rem;
             width: 100%;
-            max-width: min(26.25rem, 80%);
+            max-width: min(26.25rem, 85vw);
             font-weight: 100;
             align-self: flex-start;
             margin-left: 65%;
@@ -724,15 +723,15 @@
             color: #d6a550;
             font-family: 'Centaur', serif;
             font-style: normal;
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             font-weight: 100;
-            padding: 0 1.5625rem;
+            padding: 0 clamp(1rem, 2vw, 1.5625rem);
             text-align: center;
             outline: none;
             box-shadow: none;
-            width: clamp(18rem, 25vw, 25rem);
-            height: clamp(2.5rem, 3.4375vh, 3.4375rem);
-            max-width: 90%;
+            width: min(25rem, 80vw);
+            max-width: 25rem;
+            height: clamp(2.5rem, 5vw, 3.4375rem);
             position: absolute;
             top: 0.3125rem;
             z-index: 2;
@@ -740,9 +739,9 @@
 
         .name-line {
             background: url('art/character-name-line.png') center/contain no-repeat;
-            width: clamp(18rem, 25vw, 25rem);
-            height: clamp(4.5rem, 6.25vh, 6.25rem);
-            max-width: 90%;
+            width: min(25rem, 80vw);
+            max-width: 25rem;
+            height: clamp(4.5rem, 8vw, 6.25rem);
             position: relative;
             z-index: 1;
         }
@@ -776,20 +775,20 @@
 
         .hooded-figure {
             position: absolute;
-            left: clamp(1rem, 2.375vw, 2.375rem);
+            left: clamp(1rem, 3vw, 2.375rem);
             top: 0.3125rem;
-            width: clamp(12rem, 18.75vw, 18.75rem);
-            height: clamp(10rem, 15.625vh, 15.625rem);
+            width: clamp(10rem, 25vw, 18.75rem);
+            height: clamp(8rem, 20vw, 15.625rem);
             background: url('art/hooded-figure.png') center/contain no-repeat;
             z-index: 1;
         }
 
         .stag-banner {
             position: absolute;
-            right: clamp(1.5rem, 3.75vw, 3.75rem);
-            top: clamp(1.5rem, 2.8125vh, 2.8125rem);
-            width: clamp(12rem, 18.75vw, 18.75rem);
-            height: clamp(10rem, 15.625vh, 15.625rem);
+            right: clamp(1.5rem, 4vw, 3.75rem);
+            top: clamp(1.5rem, 3.5vw, 2.8125rem);
+            width: clamp(10rem, 25vw, 18.75rem);
+            height: clamp(8rem, 20vw, 15.625rem);
             background: url('art/axiom-flag.png') center/contain no-repeat;
             z-index: 1;
         }
@@ -843,10 +842,12 @@
 
         .riddle-container {
             background: url('art/lightbox-medium.png') center/contain no-repeat;
-            width: clamp(35rem, 62.5vw, 62.5rem);
-            height: clamp(30rem, 46.875vh, 46.875rem);
-            max-width: 90vw;
-            max-height: 85vh;
+            background-size: 100% 100%;
+            width: min(62.5rem, 90vw);
+            max-width: 62.5rem;
+            height: auto;
+            min-height: min(46.875rem, 70vh);
+            aspect-ratio: 1000 / 750;
             position: relative;
             margin: 0 auto;
             background-position: center center;
@@ -861,10 +862,12 @@
         .riddle-container[data-riddle-id="17"],
         .riddle-container[data-riddle-id="21"] {
             background: url('art/lightbox-XL.png') center/contain no-repeat;
-            width: clamp(50rem, 87.5vw, 87.5rem);
-            height: clamp(45rem, 65.625vh, 65.625rem);
-            max-width: 95vw;
-            max-height: 90vh;
+            background-size: 100% 100%;
+            width: min(87.5rem, 95vw);
+            max-width: 87.5rem;
+            height: auto;
+            min-height: min(65.625rem, 85vh);
+            aspect-ratio: 1400 / 1050;
         }
 
         .riddle-content {
@@ -873,12 +876,12 @@
             z-index: 2;
             width: 72%;
             padding: 0 0.625rem;
-            max-width: min(40rem, 85%);
+            max-width: 40rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: absolute;
-            top: clamp(4rem, 6.875vh, 6.875rem);
+            top: 6.875rem;
             left: 50%;
             transform: translateX(-50%);
             opacity: 1;
@@ -889,8 +892,8 @@
         .riddle-container[data-riddle-id="8"] .riddle-content,
         .riddle-container[data-riddle-id="17"] .riddle-content,
         .riddle-container[data-riddle-id="21"] .riddle-content {
-            top: clamp(3rem, 5vh, 5rem);
-            height: calc(100% - clamp(3rem, 5vh, 5rem));
+            top: 5rem;
+            height: calc(100% - 5rem);
         }
 
         /* XL lightbox - ensure golden-swirl divider is visible */
@@ -951,13 +954,13 @@
 
         .riddle-dialog {
             font-family: 'Centaur', serif;
-            font-size: 1.2rem;
+            font-size: clamp(1.05rem, 2vw, 1.2rem);
             color: #ffffff;
             margin-top: 3.125rem;
             margin-bottom: 1.25rem;
             text-align: left;
             width: 100%;
-            max-width: min(37.5rem, 90%);
+            max-width: 37.5rem;
             display: flex;
             flex-direction: column;
             gap: 1.125rem;
@@ -969,12 +972,12 @@
 
         .riddle-question {
             font-family: 'Centaur', serif;
-            font-size: 1.2rem;
+            font-size: clamp(1.05rem, 2vw, 1.2rem);
             color: #ffffff;
             margin-top: 0.625rem;
             margin-bottom: 1.125rem;
             width: 100%;
-            max-width: min(37.5rem, 90%);
+            max-width: 37.5rem;
         }
 
         .riddle-question.highlight {
@@ -1002,7 +1005,7 @@
 
         .riddle-map {
             width: 100%;
-            max-width: min(43.75rem, 85vw);
+            max-width: 43.75rem;
             height: auto;
             margin: 1.25rem 0;
             display: block;
@@ -1012,7 +1015,7 @@
         .interactive-map-container {
             position: relative;
             width: 100%;
-            max-width: min(43.75rem, 85vw);
+            max-width: 43.75rem;
             margin: 1.25rem auto;
             display: inline-block;
         }
@@ -1077,10 +1080,10 @@
         .flute-game-container {
             position: relative;
             width: 100%;
-            max-width: min(43.75rem, 85vw);
+            max-width: 43.75rem;
             margin: 3.75rem auto 2.5rem auto;
             display: inline-block;
-            transform: scale(clamp(0.9, 1.2, 1.2));
+            transform: scale(1.2);
             transform-origin: center top;
         }
 
@@ -1115,7 +1118,7 @@
             bottom: 20%;
             width: auto;
             height: 100%;
-            min-width: clamp(5rem, 6.875vw, 6.875rem);
+            min-width: 6.875rem;
             pointer-events: none;
             transition: left 0s linear;
             object-fit: contain;
@@ -1225,14 +1228,14 @@
 
         .riddle-input {
             background: url('art/text-button-field.png') center/contain no-repeat;
-            width: clamp(20rem, 34.375vw, 34.375rem);
-            max-width: 95%;
-            height: clamp(5rem, 7.5vh, 7.5rem);
+            width: min(29.53125rem, 85vw);
+            max-width: 29.53125rem;
+            height: clamp(5rem, 10vw, 7.5rem);
             border: none;
             background-color: transparent;
             color: #d0d8ff;
-            font-size: 1.25rem;
-            padding: 0 1.875rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            padding: 0 clamp(1rem, 2.5vw, 1.875rem);
             text-align: center;
             font-family: 'Centaur', serif;
             font-weight: 100;
@@ -1270,20 +1273,20 @@
 
         .riddle-hooded-figure {
             position: absolute;
-            left: clamp(2rem, 3.75vw, 3.75rem);
+            left: clamp(1.5rem, 4vw, 3.75rem);
             top: -0.625rem;
-            width: clamp(12rem, 18.75vw, 18.75rem);
-            height: clamp(10rem, 15.625vh, 15.625rem);
+            width: clamp(10rem, 25vw, 18.75rem);
+            height: clamp(8rem, 20vw, 15.625rem);
             background: center/contain no-repeat;
             z-index: 1;
         }
 
         .riddle-stag-banner {
             position: absolute;
-            right: clamp(2rem, 3.75vw, 3.75rem);
-            top: clamp(1.5rem, 2.8125vh, 2.8125rem);
-            width: clamp(12rem, 18.75vw, 18.75rem);
-            height: clamp(10rem, 15.625vh, 15.625rem);
+            right: clamp(1.5rem, 4vw, 3.75rem);
+            top: clamp(1.5rem, 3.5vw, 2.8125rem);
+            width: clamp(10rem, 25vw, 18.75rem);
+            height: clamp(8rem, 20vw, 15.625rem);
             background: url('art/axiom-flag.png') center/contain no-repeat;
             z-index: 1;
         }
@@ -1292,14 +1295,14 @@
         .riddle-container[data-riddle-id="8"] .riddle-hooded-figure,
         .riddle-container[data-riddle-id="17"] .riddle-hooded-figure,
         .riddle-container[data-riddle-id="21"] .riddle-hooded-figure {
-            left: clamp(5rem, 11.875vw, 11.875rem);
+            left: 11.875rem;
             top: -2.1875rem;
         }
 
         .riddle-container[data-riddle-id="8"] .riddle-stag-banner,
         .riddle-container[data-riddle-id="17"] .riddle-stag-banner,
         .riddle-container[data-riddle-id="21"] .riddle-stag-banner {
-            right: clamp(6rem, 13.75vw, 13.75rem);
+            right: 13.75rem;
             top: 0.3125rem;
         }
 
@@ -1309,11 +1312,10 @@
             top: -0.75rem;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
-            max-width: min(160rem, 98vw);
-            height: clamp(4rem, 6.25vh, 6.25rem);
+            width: 160rem;
+            height: 6.25rem;
             background: url('art/navbar.png') center top no-repeat;
-            background-size: 100% auto;
+            background-size: 512rem 6.25rem;
             z-index: 1000;
             display: block;
             pointer-events: none;
@@ -1323,9 +1325,9 @@
             position: fixed;
             top: 0.75rem;
             left: 50%;
-            margin-left: clamp(40rem, 68.75vw, 68.75rem);
-            width: clamp(6rem, 9vw, 9rem);
-            height: clamp(1.5rem, 2.375vh, 2.375rem);
+            margin-left: 68.75rem;
+            width: 9rem;
+            height: 2.375rem;
             border: none;
             border-radius: 0.625rem;
             background: transparent;
@@ -1451,8 +1453,8 @@
         }
 
         .rotate-icon {
-            width: clamp(3rem, 5vw, 5rem);
-            height: clamp(3rem, 5vw, 5rem);
+            width: 5rem;
+            height: 5rem;
             margin-bottom: 1.875rem;
             animation: rotate-pulse 2s ease-in-out infinite;
         }
@@ -1528,154 +1530,256 @@
         }
 
         /* Responsive design */
+        /* Tablet and medium screens */
+        @media (max-width: 64rem) {
+            .signup-container {
+                flex-direction: column;
+                height: auto;
+                min-height: 70vh;
+                padding: clamp(1rem, 2vw, 1.5rem);
+            }
+            
+            .login-divider-stack {
+                width: 100%;
+                height: 3rem;
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+            
+            .login-form-container,
+            .social-container {
+                width: min(50rem, 90vw);
+                min-height: min(37.5rem, 60vh);
+            }
+            
+            .name-entry-container,
+            .riddle-container {
+                width: min(55rem, 92vw);
+                min-height: min(40rem, 65vh);
+            }
+            
+            .riddle-container[data-riddle-id="8"],
+            .riddle-container[data-riddle-id="17"],
+            .riddle-container[data-riddle-id="21"] {
+                width: min(75rem, 95vw);
+                min-height: min(55rem, 75vh);
+            }
+            
+            .hooded-figure,
+            .riddle-hooded-figure,
+            .stag-banner,
+            .riddle-stag-banner {
+                width: clamp(8rem, 20vw, 15rem);
+                height: clamp(6.5rem, 16vw, 12.5rem);
+            }
+        }
+        
         @media (max-width: 48rem) {
             .signup-content {
                 flex-direction: column;
             }
             
             .signup-container {
-                margin: 0.625rem;
-                padding: 1.25rem;
+                margin: clamp(0.5rem, 1vw, 0.625rem);
+                padding: clamp(1rem, 2vw, 1.25rem);
+                height: auto;
+                min-height: 60vh;
+            }
+            
+            .login-form-container,
+            .social-container {
+                width: min(40rem, 92vw);
+                min-height: min(30rem, 55vh);
+                padding: clamp(1.25rem, 2.5vw, 2rem) clamp(1.5rem, 3vw, 2.5rem);
             }
             
             .name-entry-container,
             .riddle-container {
-                width: 95%;
-                height: clamp(35rem, 40.625vh, 40.625rem);
-                max-height: 85vh;
+                width: min(45rem, 95vw);
+                height: auto;
+                min-height: min(35rem, 60vh);
                 margin: 0 auto;
                 top: 50%;
                 transform: translateY(-50%);
             }
             
+            .riddle-container[data-riddle-id="8"],
+            .riddle-container[data-riddle-id="17"],
+            .riddle-container[data-riddle-id="21"] {
+                width: min(60rem, 96vw);
+                min-height: min(45rem, 70vh);
+            }
+            
             .riddle-content {
-                top: 5.625rem;
+                top: clamp(4rem, 8vw, 5.625rem);
+                width: 85%;
+                max-width: 35rem;
             }
             
             .hooded-figure,
             .riddle-hooded-figure {
-                left: 2.5rem;
+                left: clamp(1rem, 2.5vw, 2.5rem);
                 top: -0.4375rem;
-                width: 12.5rem;
-                height: 11.25rem;
+                width: clamp(7.5rem, 18vw, 12.5rem);
+                height: clamp(6rem, 15vw, 11.25rem);
             }
             
             .stag-banner,
             .riddle-stag-banner {
-                right: 2.25rem;
-                top: 1.5625rem;
-                width: 12.5rem;
-                height: 11.25rem;
+                right: clamp(1rem, 2.5vw, 2.25rem);
+                top: clamp(1rem, 2vw, 1.5625rem);
+                width: clamp(7.5rem, 18vw, 12.5rem);
+                height: clamp(6rem, 15vw, 11.25rem);
             }
             
             .name-input {
-                width: 20rem;
-                height: 2.8125rem;
-                font-size: 1.375rem;
+                width: min(20rem, 85vw);
+                height: clamp(2.25rem, 4.5vw, 2.8125rem);
+                font-size: clamp(1.1rem, 2vw, 1.375rem);
                 font-weight: 100;
                 top: 0.3125rem;
             }
             
             .name-line {
-                width: 20rem;
-                height: 5rem;
+                width: min(20rem, 85vw);
+                height: clamp(3.5rem, 7vw, 5rem);
             }
             
             .yellow-x {
-                font-size: 1.375rem;
+                font-size: clamp(1.1rem, 2vw, 1.375rem);
                 font-weight: 100;
-                left: 1.875rem;
+                left: clamp(1rem, 2.5vw, 1.875rem);
                 top: 35%;
             }
             
             .golden-swirl {
-                width: 22.5rem;
-                height: 3.4375rem;
+                width: min(22.5rem, 88vw);
+                height: clamp(2.5rem, 5vw, 3.4375rem);
             }
             
             .name-entry-content,
             .riddle-content {
-                width: 82%;
+                width: 85%;
                 max-width: 32.5rem;
-                top: 6.25rem;
+                top: clamp(4.5rem, 8vw, 6.25rem);
             }
             
             .riddle-input {
-                width: clamp(18rem, 30vw, 30rem);
-                max-width: 95%;
-                height: clamp(4.5rem, 6.25vh, 6.25rem);
-                font-size: 1.25rem;
+                width: min(23.2rem, 85vw);
+                height: clamp(4.5rem, 8vw, 6.25rem);
+                font-size: clamp(1rem, 2vw, 1.25rem);
+            }
+            
+            .form-group input,
+            .signup-btn {
+                width: min(90vw, 28rem);
             }
         }
         
         @media (max-width: 30rem) {
             .signup-container {
-                margin: 0.3125rem;
-                padding: 0.9375rem;
+                margin: clamp(0.25rem, 0.5vw, 0.3125rem);
+                padding: clamp(0.75rem, 1.5vw, 0.9375rem);
+                height: auto;
+                min-height: 55vh;
+            }
+            
+            .login-form-container,
+            .social-container {
+                width: min(30rem, 95vw);
+                min-height: min(22.5rem, 50vh);
+                padding: clamp(1rem, 2vw, 1.5rem) clamp(1.25rem, 2.5vw, 2rem);
             }
             
             .name-entry-container,
             .riddle-container {
-                width: 98%;
-                height: clamp(30rem, 34.375vh, 34.375rem);
-                max-height: 85vh;
+                width: min(35rem, 98vw);
+                height: auto;
+                min-height: min(28rem, 55vh);
                 top: 50%;
                 transform: translateY(-50%);
             }
             
+            .riddle-container[data-riddle-id="8"],
+            .riddle-container[data-riddle-id="17"],
+            .riddle-container[data-riddle-id="21"] {
+                width: min(48rem, 98vw);
+                min-height: min(36rem, 65vh);
+            }
+            
             .hooded-figure,
             .riddle-hooded-figure {
-                left: 1.875rem;
+                left: clamp(0.75rem, 2vw, 1.875rem);
                 top: -0.3125rem;
-                width: 9.375rem;
-                height: 9.375rem;
+                width: clamp(6rem, 15vw, 9.375rem);
+                height: clamp(5rem, 12.5vw, 9.375rem);
             }
             
             .stag-banner,
             .riddle-stag-banner {
-                right: 1.9375rem;
-                top: 1.25rem;
-                width: 9.375rem;
-                height: 9.375rem;
+                right: clamp(0.75rem, 2vw, 1.9375rem);
+                top: clamp(0.75rem, 1.5vw, 1.25rem);
+                width: clamp(6rem, 15vw, 9.375rem);
+                height: clamp(5rem, 12.5vw, 9.375rem);
             }
             
             .name-input {
-                width: 16.25rem;
-                height: 2.5rem;
-                font-size: 1.25rem;
+                width: min(16.25rem, 88vw);
+                height: clamp(2rem, 4vw, 2.5rem);
+                font-size: clamp(1rem, 2vw, 1.25rem);
                 font-weight: 100;
                 top: 0.3125rem;
             }
             
             .name-line {
-                width: 16.25rem;
-                height: 4.375rem;
+                width: min(16.25rem, 88vw);
+                height: clamp(3rem, 6vw, 4.375rem);
             }
             
             .yellow-x {
-                font-size: 1.25rem;
+                font-size: clamp(1rem, 2vw, 1.25rem);
                 font-weight: 100;
-                left: 1.5625rem;
+                left: clamp(0.75rem, 2vw, 1.5625rem);
                 top: 35%;
             }
             
             .golden-swirl {
-                width: 17.5rem;
-                height: 2.8125rem;
+                width: min(17.5rem, 90vw);
+                height: clamp(2rem, 4vw, 2.8125rem);
             }
             
             .name-entry-content,
             .riddle-content {
-                top: 5.625rem;
-                width: 86%;
+                top: clamp(4rem, 7vw, 5.625rem);
+                width: 88%;
                 max-width: 27.5rem;
+                padding: 0 clamp(0.5rem, 1vw, 0.625rem);
             }
             
             .riddle-input {
-                width: clamp(18rem, 28.75vw, 28.75rem);
-                max-width: 95%;
-                height: clamp(4rem, 5.625vh, 5.625rem);
-                font-size: 1.25rem;
+                width: min(18.98125rem, 90vw);
+                height: clamp(4rem, 7vw, 5.625rem);
+                font-size: clamp(0.9rem, 1.8vw, 1.25rem);
+            }
+            
+            .form-group input {
+                width: min(92vw, 24rem);
+                height: clamp(3rem, 6vw, 4rem);
+            }
+            
+            .signup-btn {
+                width: min(92vw, 26rem);
+                height: clamp(4rem, 8vw, 6rem);
+            }
+            
+            .stag-guidance {
+                font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+            }
+            
+            .riddle-dialog,
+            .riddle-question,
+            .name-question {
+                font-size: clamp(1rem, 2vw, 1.15rem);
             }
         }
 
@@ -1684,8 +1788,7 @@
             left: 0;
             top: 0;
             bottom: 0;
-            width: clamp(20rem, 26.25vw, 26.25rem);
-            max-width: 90vw;
+            width: 26.25rem;
             z-index: 3200;
             pointer-events: none;
             transform: translateX(-100%);
@@ -6726,4 +6829,3 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
     </div>
 </body>
 </html>
-
