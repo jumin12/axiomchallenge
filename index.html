@@ -688,7 +688,7 @@
         .mysterious-signature {
             font-family: 'CAD', serif;
             font-style: normal;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #ffffff;
             text-align: left;
             margin-bottom: 25px;
@@ -965,11 +965,15 @@
         .riddle-question.highlight {
             color: #d6a550;
             font-family: 'CAD', serif;
+            font-size: 1.35rem;
+            letter-spacing: 0.04em;
         }
 
         .trust-question {
             color: #d6a550;
             font-family: 'CAD', serif;
+            font-size: 1.35rem;
+            letter-spacing: 0.04em;
         }
         
         .cad-word {
@@ -1059,8 +1063,20 @@
             position: relative;
             width: 100%;
             max-width: 700px;
-            margin: 20px auto;
+            margin: 60px auto 40px auto;
             display: inline-block;
+            transform: scale(1.2);
+            transform-origin: center top;
+        }
+
+        #flute-buttons-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
         }
 
         /* Allow flute game to overlap with input on riddle 21 */
@@ -1083,11 +1099,23 @@
             left: 0;
             bottom: 20%;
             width: auto;
-            height: 120%;
+            height: 100%;
             min-width: 110px;
             pointer-events: none;
             transition: left 0s linear;
             object-fit: contain;
+            z-index: 3;
+        }
+
+        .flute-shadow {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 15%;
+            height: 18%;
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.05) 60%, rgba(0, 0, 0, 0) 100%);
+            z-index: 2;
+            pointer-events: none;
         }
 
         /* Flute buttons on the lines */
@@ -1098,25 +1126,66 @@
             cursor: pointer;
             transition: filter 0.3s ease, transform 0.3s ease, width 0.3s ease, height 0.3s ease;
             filter: brightness(0.75);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.65);
             transform-origin: center;
             object-fit: contain;
+            image-rendering: auto;
+            will-change: transform;
+            --flute-glow-color-base: rgba(255, 215, 0, 0.75);
+            --flute-glow-color-strong: rgba(255, 215, 0, 0.95);
+            --flute-glow-color-soft: rgba(255, 215, 0, 0.55);
+            z-index: 2;
+            pointer-events: none;
         }
 
         .flute-button.activated {
-            filter: brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.75)) drop-shadow(0 0 12px rgba(255, 215, 0, 0.55));
-            width: 120px;
-            height: 120px;
-            transform: translate(-50%, -50%);
+            filter: brightness(1) drop-shadow(0 0 6px var(--flute-glow-color-base)) drop-shadow(0 0 12px var(--flute-glow-color-soft));
+            transform: translate(-50%, -50%) scale(1.6);
             animation: flute-glow 2.8s ease-in-out infinite;
+        }
+
+        .flute-button.flute-glow-violet {
+            --flute-glow-color-base: rgba(170, 120, 255, 0.9);
+            --flute-glow-color-strong: rgba(200, 170, 255, 1);
+            --flute-glow-color-soft: rgba(135, 100, 235, 0.6);
+        }
+
+        .flute-button.flute-glow-crimson {
+            --flute-glow-color-base: rgba(255, 110, 40, 0.9);
+            --flute-glow-color-strong: rgba(255, 150, 80, 1);
+            --flute-glow-color-soft: rgba(255, 90, 30, 0.6);
+        }
+
+        .flute-button.flute-glow-neon-green {
+            --flute-glow-color-base: rgba(125, 255, 120, 0.9);
+            --flute-glow-color-strong: rgba(180, 255, 180, 1);
+            --flute-glow-color-soft: rgba(100, 255, 150, 0.6);
+        }
+
+        .flute-button.flute-glow-neon-blue {
+            --flute-glow-color-base: rgba(120, 220, 255, 0.9);
+            --flute-glow-color-strong: rgba(170, 240, 255, 1);
+            --flute-glow-color-soft: rgba(110, 200, 255, 0.65);
+        }
+
+        .flute-button.flute-glow-neon-yellow {
+            --flute-glow-color-base: rgba(255, 255, 140, 0.95);
+            --flute-glow-color-strong: rgba(255, 255, 200, 1);
+            --flute-glow-color-soft: rgba(255, 250, 120, 0.65);
+        }
+
+        .flute-button.flute-glow-neon-orange {
+            --flute-glow-color-base: rgba(255, 180, 70, 0.95);
+            --flute-glow-color-strong: rgba(255, 210, 130, 1);
+            --flute-glow-color-soft: rgba(255, 160, 60, 0.65);
         }
 
         @keyframes flute-glow {
             0%, 100% {
-                filter: brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.75)) drop-shadow(0 0 12px rgba(255, 215, 0, 0.55));
+                filter: brightness(1) drop-shadow(0 0 6px var(--flute-glow-color-base)) drop-shadow(0 0 12px var(--flute-glow-color-soft));
             }
             50% {
-                filter: brightness(1.18) drop-shadow(0 0 12px rgba(255, 215, 0, 0.85)) drop-shadow(0 0 24px rgba(255, 215, 0, 0.65));
+                filter: brightness(1.18) drop-shadow(0 0 12px var(--flute-glow-color-strong)) drop-shadow(0 0 24px var(--flute-glow-color-soft));
             }
         }
 
@@ -2619,7 +2688,7 @@
             },
             {
                 id: 11,
-                heading: 'Your choices will have consequences.',
+                heading: 'Iron sharpens iron...',
                 white: ['Show them what you’re capable of. But be careful. Others have tried and failed.'],
                 yellow: "A goddess, wise, prepared the way, For those who'd flee the darkened fray. A world was made, a distant shore, What was its name forevermore?",
                 answers: ['sanctus']
@@ -3176,6 +3245,7 @@
                         disclaimerEl.innerHTML = `
                             <div class="flute-game-container" id="flute-game-container">
                                 <img src="art/flutel-lines.png" alt="Flute Lines" class="flute-lines" id="flute-lines">
+                                <div class="flute-shadow" id="flute-shadow"></div>
                                 <img src="art/flute.png" alt="Flute" class="flute-moving" id="flute-moving">
                                 <div id="flute-buttons-container"></div>
                             </div>
@@ -3262,6 +3332,12 @@
                     if (clickableArea && glowImage && inputEl) {
                         clickableArea.addEventListener('click', function() {
                             glowImage.classList.add('revealed');
+                            const audioController = window.__audioController;
+                            const steelbloomActivation = audioController?.steelbloomAudio;
+                            if (steelbloomActivation) {
+                                steelbloomActivation.currentTime = 0;
+                                safePlay(steelbloomActivation);
+                            }
                             inputEl.disabled = false;
                             inputEl.focus({ preventScroll: true });
                         });
@@ -3271,7 +3347,7 @@
 
             // Setup flute game for riddle 21
             if (riddle.id === 21) {
-                setTimeout(() => {
+                const initializeFluteGame = () => {
                     const fluteContainer = document.getElementById('flute-game-container');
                     const fluteLines = document.getElementById('flute-lines');
                     const fluteMoving = document.getElementById('flute-moving');
@@ -3285,15 +3361,11 @@
                             { key: 's', offImage: 'art/flute-s-off.png', onImage: 'art/flute-s-on.png' },
                             { key: 'u', offImage: 'art/flute-u-off.png', onImage: 'art/flute-U-on.png' },
                             { key: '~', offImage: 'art/flute-~-off.png', onImage: 'art/flute-~-on.png' },
-                            { key: ';', offImage: 'art/flute-_-off.png', onImage: 'art/flute-_-on.png' }
+                            { key: ';', offImage: 'art/flute-;-off.png', onImage: 'art/flute-;-on.png' }
                         ];
 
                         // Wait for image to load to get proper dimensions
-                        fluteLines.onload = function() {
-                            initFluteGame();
-                        };
-
-                        // If already loaded
+                        fluteLines.onload = initFluteGame;
                         if (fluteLines.complete) {
                             initFluteGame();
                         }
@@ -3325,6 +3397,29 @@
                                 button.dataset.onImage = config.onImage;
                                 button.dataset.lineIndex = index;
                                 button.dataset.activated = 'false';
+                            
+                            switch (config.key) {
+                                case '1':
+                                    button.classList.add('flute-glow-violet');
+                                    break;
+                                case '<':
+                                    button.classList.add('flute-glow-crimson');
+                                    break;
+                                case 's':
+                                    button.classList.add('flute-glow-neon-green');
+                                    break;
+                                case 'u':
+                                    button.classList.add('flute-glow-neon-blue');
+                                    break;
+                                case '~':
+                                    button.classList.add('flute-glow-neon-yellow');
+                                    break;
+                                case ';':
+                                    button.classList.add('flute-glow-neon-orange');
+                                    break;
+                                default:
+                                    break;
+                            }
                                 
                                 // Random horizontal position (20% to 80% of width)
                                 const randomX = 0.2 + Math.random() * 0.6;
@@ -3357,8 +3452,6 @@
 
                             // Animate flute movement (only horizontal)
                             function animateFlute() {
-                                if (gameCompleted) return;
-
                                 fluteX += fluteDirection * 2.5;
                                 
                                 // Bounce at edges accounting for flute width
@@ -3371,7 +3464,9 @@
                                 }
                                 
                                 fluteMoving.style.left = fluteX + 'px';
-                                requestAnimationFrame(animateFlute);
+                                if (!gameCompleted) {
+                                    requestAnimationFrame(animateFlute);
+                                }
                             }
 
                             // Start animation
@@ -3388,8 +3483,6 @@
 
                             // Handle key press
                             keydownHandler = function(e) {
-                                if (gameCompleted) return;
-
                                 const currentButton = buttons.find(b => b.lineIndex === currentLineIndex);
                                 if (!currentButton || currentButton.activated) return;
 
@@ -3428,6 +3521,12 @@
                                         currentButton.activated = true;
                                         currentButton.element.src = currentButton.config.onImage;
                                         currentButton.element.classList.add('activated');
+                                        const audioController = window.__audioController;
+                                        const fluteActivation = audioController?.fluteButtonAudio;
+                                        if (fluteActivation) {
+                                            fluteActivation.currentTime = 0;
+                                            safePlay(fluteActivation);
+                                        }
                                         
                                         // Move to next line
                                         currentLineIndex++;
@@ -3473,7 +3572,9 @@
                             };
                         }
                     }
-                }, 100);
+                };
+
+                requestAnimationFrame(() => initializeFluteGame());
             } else {
                 // Cleanup previous flute game if exists
                 if (window.cleanupFluteGame) {
@@ -4446,6 +4547,8 @@ function safePlay(mediaElement) {
             const introVideo = document.getElementById('introVideo');
             let backgroundMusic = document.getElementById('backgroundMusic');
             let stagVoice = document.getElementById('stagVoiceover');
+            let fluteButtonAudio = document.getElementById('fluteButtonAudio');
+            let steelbloomAudio = document.getElementById('steelbloomAudio');
 
             // Get saved volume from localStorage for initial setup
             const initialVolume = parseFloat(localStorage.getItem('audioVolume') || '15') / 100;
@@ -4501,6 +4604,36 @@ function safePlay(mediaElement) {
                 stagVoice.volume = initialVolume * parseFloat(stagVoice.dataset.baseVolume);
             }
 
+            if (!fluteButtonAudio) {
+                fluteButtonAudio = document.createElement('audio');
+                fluteButtonAudio.id = 'fluteButtonAudio';
+                fluteButtonAudio.src = 'sound/flute-button-activation.wav';
+                fluteButtonAudio.preload = 'auto';
+                fluteButtonAudio.dataset.baseVolume = '0.8';
+                fluteButtonAudio.volume = initialVolume * 0.8;
+                document.body.appendChild(fluteButtonAudio);
+            } else {
+                if (!fluteButtonAudio.dataset.baseVolume) {
+                    fluteButtonAudio.dataset.baseVolume = '0.8';
+                }
+                fluteButtonAudio.volume = initialVolume * parseFloat(fluteButtonAudio.dataset.baseVolume);
+            }
+
+            if (!steelbloomAudio) {
+                steelbloomAudio = document.createElement('audio');
+                steelbloomAudio.id = 'steelbloomAudio';
+                steelbloomAudio.src = 'sound/map-riddle-steelbloom-activation.wav';
+                steelbloomAudio.preload = 'auto';
+                steelbloomAudio.dataset.baseVolume = '1.0';
+                steelbloomAudio.volume = initialVolume * 1.0;
+                document.body.appendChild(steelbloomAudio);
+            } else {
+                if (!steelbloomAudio.dataset.baseVolume) {
+                    steelbloomAudio.dataset.baseVolume = '1.0';
+                }
+                steelbloomAudio.volume = initialVolume * parseFloat(steelbloomAudio.dataset.baseVolume);
+            }
+
             const updateAudioIcon = (muted) => {
                 const waves = audioIcon?.querySelectorAll('.wave');
                 const muteX = audioIcon?.querySelector('.mute-x');
@@ -4516,6 +4649,8 @@ function safePlay(mediaElement) {
                 if (introVideo) introVideo.muted = muted;
                 if (backgroundMusic) backgroundMusic.muted = muted;
                 if (stagVoice) stagVoice.muted = muted;
+                if (fluteButtonAudio) fluteButtonAudio.muted = muted;
+                if (steelbloomAudio) steelbloomAudio.muted = muted;
             };
 
             const applyVolumeState = (volume) => {
@@ -4528,6 +4663,14 @@ function safePlay(mediaElement) {
                 if (stagVoice) {
                     stagVoice.dataset.baseVolume = '1.0';
                     stagVoice.volume = volumeValue * 1.0;
+                }
+                if (fluteButtonAudio) {
+                    const baseVolume = parseFloat(fluteButtonAudio.dataset.baseVolume || '0.8');
+                    fluteButtonAudio.volume = volumeValue * baseVolume;
+                }
+                if (steelbloomAudio) {
+                    const baseVolume = parseFloat(steelbloomAudio.dataset.baseVolume || '1.0');
+                    steelbloomAudio.volume = volumeValue * baseVolume;
                 }
                 localStorage.setItem('audioVolume', volume);
             };
@@ -4573,6 +4716,8 @@ function safePlay(mediaElement) {
             window.__audioController = {
                 backgroundMusic,
                 stagVoice,
+                fluteButtonAudio,
+                steelbloomAudio,
                 playStagOnce: () => {
                     if (!stagVoice || !backgroundMusic) return;
                     if (stagVoice.dataset.played === 'true') return;
