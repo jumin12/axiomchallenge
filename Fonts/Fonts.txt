@@ -9,3 +9,9 @@ Yellow riddle text: color #d6a550, font family: Antiquarian Scribe (Regular styl
 
 Flute-riddle icon fonts: font family: Copperplate Gothic Bold (Bold style)
 
+Your viewport size is:
+2560 × 1271
+
+DPR: 1.00
+
+Screen Size: 2560 × 1440

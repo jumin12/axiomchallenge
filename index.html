@@ -869,7 +869,7 @@
             font-family: 'Centaur', serif;
             font-size: 1.1rem;
             margin-top: 0.35rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             letter-spacing: 0.05em;
             max-width: min(32rem, 78vw);
             margin-left: auto;
@@ -878,7 +878,7 @@
 
         .completion-divider {
             width: min(30rem, 85vw);
-            margin: 0.25rem auto 2.5rem !important;
+            margin: -1.25rem auto 2.5rem !important;
         }
 
         .golden-swirl.completion-divider {
@@ -886,6 +886,8 @@
             height: 4.5rem;
             filter: drop-shadow(0 0 1.5rem rgba(0, 0, 0, 0.6));
             background-size: 100% 100% !important;
+            position: relative;
+            z-index: 1;
         }
 
         .completion-rewards {
@@ -914,24 +916,20 @@
             transition: transform 0.25s ease;
         }
 
-        .completion-reward-button.is-selected {
-            transform: translateY(-0.5rem);
-        }
-
         .completion-reward-button:focus-visible {
             outline: 0.1875rem solid rgba(214, 165, 80, 0.85);
             outline-offset: 0.35rem;
         }
 
-        .completion-reward-button:hover {
-            transform: translateY(-0.5rem);
+        .completion-reward-art {
+            width: 30rem;
+            height: auto;
+            transition: filter 0.3s ease, transform 0.3s ease;
+            filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55));
         }
 
-        .completion-reward-art {
-            width: 19.5rem;
-            height: auto;
-            transition: filter 0.3s ease;
-            filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55));
+        .completion-reward-button.is-selected .completion-reward-art {
+            transform: translateY(-0.5rem);
         }
 
         @keyframes completionGlowTeal {
@@ -1041,6 +1039,28 @@
             text-shadow: 0 0 0.85rem rgba(0, 0, 0, 0.75);
         }
 
+        .completion-modal-discord {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+            text-decoration: none;
+            color: #d6a550;
+            font-family: 'Centaur', serif;
+            font-size: 1.1rem;
+            text-shadow: 0 0 0.85rem rgba(0, 0, 0, 0.75);
+            transition: transform 0.2s ease;
+        }
+
+        .completion-modal-discord:hover {
+            transform: translateY(-0.15rem);
+        }
+
+        .completion-modal-discord-icon {
+            width: 2.75rem;
+            height: 2.75rem;
+        }
+
         .completion-modal-btn {
             transform: scale(0.9);
             text-shadow: 0 0 1rem rgba(0, 0, 0, 0.85), 0 0 2rem rgba(0, 0, 0, 0.55);
@@ -1085,13 +1105,14 @@
             color: white;
             z-index: 2;
             width: 72%;
-            padding: 0 0.625rem;
+            padding: 0 0.625rem 1.875rem;
             max-width: 40rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: absolute;
             top: 6.875rem;
+            bottom: 3rem;
             left: 50%;
             transform: translateX(-50%);
             opacity: 1;
@@ -1103,7 +1124,8 @@
         .riddle-container[data-riddle-id="17"] .riddle-content,
         .riddle-container[data-riddle-id="21"] .riddle-content {
             top: 5rem;
-            height: calc(100% - 5rem);
+            bottom: 0;
+            padding-bottom: 3rem;
         }
 
         /* XL lightbox - ensure golden-swirl divider is visible */
@@ -1232,7 +1254,8 @@
 
         /* Allow map to overlap with input on riddle 8 */
         .riddle-container[data-riddle-id="8"] .interactive-map-container {
-            margin-bottom: -2.5rem;
+            margin-top: -2rem;
+            margin-bottom: 1.5rem;
             z-index: 1;
         }
 
@@ -1419,21 +1442,26 @@
 
         .riddle-input-container {
             text-align: center;
-            margin-top: 1.875rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+            padding-top: 1.875rem;
+            margin-bottom: 0;
         }
 
         /* XL lightbox - anchor input at bottom */
         .riddle-container[data-riddle-id="8"] .riddle-input-container {
-            margin-top: auto;
-            margin-bottom: 1.875rem;
+            padding-top: 0;
+            margin-bottom: 4rem;
             position: relative;
+            top: -2.5rem;
             z-index: 2;
         }
 
         .riddle-container[data-riddle-id="17"] .riddle-input-container,
         .riddle-container[data-riddle-id="21"] .riddle-input-container {
-            margin-top: auto;
-            margin-bottom: 1.875rem;
+            padding-top: 2.5rem;
         }
 
         .riddle-input {
@@ -2586,6 +2614,10 @@
         <div class="completion-modal-content" role="dialog" aria-modal="true" aria-labelledby="completionModalHeading">
             <h2 id="completionModalHeading">Reward Submitted</h2>
             <p>Your answers have been recorded. Someone will be in touch soon with instructions on how to claim your reward.</p>
+            <a href="https://discord.gg/Axiom" class="completion-modal-discord" target="_blank" rel="noopener noreferrer">
+                <img src="art/discordicon1.png" alt="Join Axiom on Discord" class="completion-modal-discord-icon">
+                <span>Join our Discord to claim your prize</span>
+            </a>
             <button type="button" class="signup-btn completion-modal-btn" id="completionModalClose">Close</button>
         </div>
     </div>
@@ -2598,15 +2630,15 @@
             <div class="completion-rewards" id="completionRewards">
                 <button type="button" class="completion-reward-button" data-reward="armor" aria-pressed="false">
                     <img src="art/completion-armor-unselected.png" alt="In-game armor set reward" class="completion-reward-art">
-                    <span class="completion-reward-caption">Your choice of in-game armorset (must be reasonably obtainable).</span>
+                    <span class="completion-reward-caption">Your choice of in-game armorset <br> (must be reasonably obtainable).</span>
                 </button>
                 <button type="button" class="completion-reward-button" data-reward="scroll" aria-pressed="false">
                     <img src="art/completion-scroll-unselected.png" alt="In-game craftable item reward" class="completion-reward-art">
-                    <span class="completion-reward-caption">Your choice of in-game craftable item (must be reasonably obtainable).</span>
+                    <span class="completion-reward-caption">Your choice of in-game craftable item <br> (must be reasonably obtainable).</span>
                 </button>
                 <button type="button" class="completion-reward-button" data-reward="mount" aria-pressed="false">
                     <img src="art/completion-mount-unselected.png" alt="In-game mount reward" class="completion-reward-art">
-                    <span class="completion-reward-caption">Your choice of in-game mount <br> (must be reasonably obtainable).</span>
+                    <span class="completion-reward-caption">Your choice of in-game mount <br>(must be reasonably obtainable).</span>
                 </button>
                 <img src="art/completion-page-selector.png" alt="" class="completion-selector" id="completionSelector" aria-hidden="true">
             </div>
