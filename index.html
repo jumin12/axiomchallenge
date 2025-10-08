@@ -415,6 +415,12 @@
             text-shadow: 0 0 0.5rem rgba(160, 190, 255, 0.85);
         }
 
+        .signup-btn:disabled {
+            pointer-events: none;
+            filter: grayscale(35%);
+            opacity: 0.75;
+        }
+
         .signup-btn:hover {
             transform: translateY(-0.1875rem);
             color: #e6ebff;
@@ -816,6 +822,228 @@
         .riddle-page .riddle-container.is-transitioning,
         .riddle-page .riddle-content.is-transitioning {
             opacity: 0;
+        }
+
+        .riddle-page.is-completion .riddle-container,
+        .riddle-page.is-completion .riddle-hooded-figure,
+        .riddle-page.is-completion .riddle-stag-banner {
+            display: none;
+        }
+
+        .completion-container {
+            position: relative;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 5rem 2.5rem 6.5rem;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .riddle-page.is-completion .completion-container {
+            display: flex;
+        }
+
+        .completion-heading,
+        .completion-subheading,
+        .completion-reward-caption,
+        .completion-modal-content h2,
+        .completion-modal-content p {
+            color: #ffffff;
+            text-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.8), 0 0 3rem rgba(0, 0, 0, 0.55);
+        }
+
+        .completion-heading {
+            font-family: 'Centaur', serif;
+            font-weight: 700;
+            font-size: 2.6rem;
+            letter-spacing: 0.2em;
+            margin: 0 auto;
+            max-width: min(36rem, 80vw);
+        }
+
+        .completion-subheading {
+            font-family: 'Centaur', serif;
+            font-size: 1.1rem;
+            margin-top: 0.35rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+            max-width: min(32rem, 78vw);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .completion-divider {
+            width: min(30rem, 85vw);
+            margin: 0.25rem auto 2.5rem !important;
+        }
+
+        .golden-swirl.completion-divider {
+            width: min(30rem, 85vw);
+            height: 4.5rem;
+            filter: drop-shadow(0 0 1.5rem rgba(0, 0, 0, 0.6));
+            background-size: 100% 100% !important;
+        }
+
+        .completion-rewards {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 5.75rem;
+            position: relative;
+            width: 100%;
+            max-width: 78rem;
+            margin-bottom: 3.5rem;
+            transform: translateX(-1.5rem);
+        }
+
+        .completion-reward-button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            color: #ffffff;
+            max-width: 21rem;
+            transition: transform 0.25s ease;
+        }
+
+        .completion-reward-button.is-selected {
+            transform: translateY(-0.5rem);
+        }
+
+        .completion-reward-button:focus-visible {
+            outline: 0.1875rem solid rgba(214, 165, 80, 0.85);
+            outline-offset: 0.35rem;
+        }
+
+        .completion-reward-button:hover {
+            transform: translateY(-0.5rem);
+        }
+
+        .completion-reward-art {
+            width: 19.5rem;
+            height: auto;
+            transition: filter 0.3s ease;
+            filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55));
+        }
+
+        @keyframes completionGlowTeal {
+            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 1.5rem rgba(48, 226, 176, 0.4)); }
+            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 2.8rem rgba(48, 226, 176, 0.7)); }
+        }
+
+        @keyframes completionGlowAmber {
+            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 1.5rem rgba(255, 183, 66, 0.4)); }
+            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 2.8rem rgba(255, 183, 66, 0.7)); }
+        }
+
+        @keyframes completionGlowAqua {
+            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 1.5rem rgba(92, 196, 255, 0.4)); }
+            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 2.8rem rgba(92, 196, 255, 0.7)); }
+        }
+
+        .completion-reward-button.is-selected[data-reward="armor"] .completion-reward-art {
+            animation: completionGlowTeal 2.4s ease-in-out infinite;
+        }
+
+        .completion-reward-button.is-selected[data-reward="scroll"] .completion-reward-art {
+            animation: completionGlowAmber 2.4s ease-in-out infinite;
+        }
+
+        .completion-reward-button.is-selected[data-reward="mount"] .completion-reward-art {
+            animation: completionGlowAqua 2.4s ease-in-out infinite;
+        }
+
+        .completion-reward-caption {
+            font-family: 'Centaur', serif;
+            font-size: 1.2rem;
+            line-height: 1.75;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 1rem rgba(0, 0, 0, 0.7), 0 0 2rem rgba(0, 0, 0, 0.45);
+        }
+
+        .completion-selector {
+            position: absolute;
+            bottom: -4.5rem;
+            left: 0;
+            width: 5.25rem;
+            height: auto;
+            transform: translateX(-9999px);
+            transition: transform 0.35s ease;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .completion-submit-btn {
+            margin-top: 1.75rem;
+            transform: scale(0.81);
+            color: #ffffff;
+            font-weight: 400;
+            text-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.85), 0 0 2.5rem rgba(0, 0, 0, 0.55);
+        }
+        .completion-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .completion-modal.is-visible {
+            display: flex;
+        }
+
+        .completion-modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(4, 6, 12, 0.78);
+            backdrop-filter: blur(0.35rem);
+        }
+
+        .completion-modal-content {
+            position: relative;
+            width: min(34rem, 90vw);
+            padding: 3.25rem 2.5rem 3rem;
+            background: rgba(13, 11, 9, 0.92);
+            border: 0.125rem solid rgba(214, 165, 80, 0.45);
+            border-radius: 1.25rem;
+            box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.6), inset 0 0 2.5rem rgba(214, 165, 80, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .completion-modal-content h2 {
+            font-family: 'Centaur', serif;
+            font-size: 2.15rem;
+            font-weight: 400;
+            color: #ffffff;
+            margin: 0;
+            text-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.85);
+        }
+
+        .completion-modal-content p {
+            font-family: 'Centaur', serif;
+            font-size: 1.2rem;
+            line-height: 1.75;
+            color: #ffffff;
+            margin: 0;
+            text-shadow: 0 0 0.85rem rgba(0, 0, 0, 0.75);
+        }
+
+        .completion-modal-btn {
+            transform: scale(0.9);
+            text-shadow: 0 0 1rem rgba(0, 0, 0, 0.85), 0 0 2rem rgba(0, 0, 0, 0.55);
         }
 
         .riddle-content .stag-guidance,
@@ -2353,7 +2581,37 @@
     </div>
 
     <!-- Riddle Page -->
+    <div class="completion-modal" id="completionModal" aria-hidden="true">
+        <div class="completion-modal-backdrop"></div>
+        <div class="completion-modal-content" role="dialog" aria-modal="true" aria-labelledby="completionModalHeading">
+            <h2 id="completionModalHeading">Reward Submitted</h2>
+            <p>Your answers have been recorded. Someone will be in touch soon with instructions on how to claim your reward.</p>
+            <button type="button" class="signup-btn completion-modal-btn" id="completionModalClose">Close</button>
+        </div>
+    </div>
+
     <div class="page riddle-page" id="riddlePage">
+        <div class="completion-container" id="completionContainer" aria-hidden="true">
+            <h1 class="completion-heading">Congratulations!</h1>
+            <p class="completion-subheading">You've completed the Challenge! Choose your reward.</p>
+            <div class="golden-swirl completion-divider"></div>
+            <div class="completion-rewards" id="completionRewards">
+                <button type="button" class="completion-reward-button" data-reward="armor" aria-pressed="false">
+                    <img src="art/completion-armor-unselected.png" alt="In-game armor set reward" class="completion-reward-art">
+                    <span class="completion-reward-caption">Your choice of in-game armorset (must be reasonably obtainable).</span>
+                </button>
+                <button type="button" class="completion-reward-button" data-reward="scroll" aria-pressed="false">
+                    <img src="art/completion-scroll-unselected.png" alt="In-game craftable item reward" class="completion-reward-art">
+                    <span class="completion-reward-caption">Your choice of in-game craftable item (must be reasonably obtainable).</span>
+                </button>
+                <button type="button" class="completion-reward-button" data-reward="mount" aria-pressed="false">
+                    <img src="art/completion-mount-unselected.png" alt="In-game mount reward" class="completion-reward-art">
+                    <span class="completion-reward-caption">Your choice of in-game mount <br> (must be reasonably obtainable).</span>
+                </button>
+                <img src="art/completion-page-selector.png" alt="" class="completion-selector" id="completionSelector" aria-hidden="true">
+            </div>
+            <button type="button" class="signup-btn completion-submit-btn" id="completionSubmitBtn" disabled>Submit Reward</button>
+        </div>
         <div class="riddle-container">
             <div class="riddle-hooded-figure"></div>
             <div class="riddle-stag-banner"></div>
@@ -2574,6 +2832,21 @@
         const DEV_CONSOLE_UNLOCK_TIMEOUT_MS = 120000;
         const DEFAULT_INTERACTIVE_RIDDLE_IDS = [8, 17, 21]; // XL lightbox riddles
         const MIN_INTERACTIVE_RIDDLES = 2;
+        const COMPLETION_REWARD_ART_MAP = {
+            armor: {
+                selected: 'art/completion-armor-selected.png',
+                unselected: 'art/completion-armor-unselected.png'
+            },
+            scroll: {
+                selected: 'art/completion-scroll-selected.png',
+                unselected: 'art/completion-scroll-unselected.png'
+            },
+            mount: {
+                selected: 'art/completion-mount-selected.png',
+                unselected: 'art/completion-mount-unselected.png'
+            }
+        };
+
         const DEV_CONSOLE_PAGES = [
             { id: 'login', label: 'Login' },
             { id: 'intro', label: 'Intro Video' },
@@ -2995,7 +3268,8 @@
                 index: 0,
                 riddles,
                 completed: false,
-                variant
+                variant,
+                selectedReward: null
             };
         }
 
@@ -3197,6 +3471,7 @@
             const signatureEl = document.getElementById('riddleSignature');
             const disclaimerEl = document.getElementById('riddleDisclaimer');
             const inputEl = document.getElementById('riddleAnswer');
+            const riddlePage = document.getElementById('riddlePage');
 
             if (!content || !headingEl || !dialogEl || !inputEl) {
                 return;
@@ -3204,6 +3479,8 @@
 
             // Clear any pending error removal timeout
             clearPendingErrorRemoval();
+
+            hideCompletionView();
 
             // Set riddle ID on container for CSS targeting
             const container = content.closest('.riddle-container');
@@ -3509,7 +3786,7 @@
 
                                 const pressedKey = e.key;
                                 const expectedKey = currentButton.config.key;
-                                const ignoredKeys = ['Shift', 'Alt', 'Control', 'Meta', 'CapsLock', 'Tab', 'Escape'];
+                                const ignoredKeys = ['Shift', 'Alt', 'Control', 'Meta', 'CapsLock', 'Tab', 'Escape', '*'];
 
                                 // For special characters that require shift, use e.key directly
                                 // For regular letters/numbers, normalize to lowercase for comparison
@@ -3701,26 +3978,11 @@
                 }
             }
             
-            const completionRiddle = {
-                heading: `Stand tall, ${playerName}.`,
-                white: ['You have conquered every riddle set before you.'],
-                yellow: 'Await further orders. Your dedication has been noted.',
-                signature: signatureToUse,
-                placeholder: 'Challenge Complete'
-            };
-            renderRiddleView(completionRiddle, playerName, {
-                useTransition: true,
-                disableInput: true,
-                inputValue: '',
-                inputPlaceholder: 'Challenge Complete'
-            });
-            // Show the appropriate guide figure
             applyFigureVariant(variantToUse, true);
-            const inputEl = document.getElementById('riddleAnswer');
-            if (inputEl) {
-                inputEl.classList.add('success');
-            }
-            
+
+            showCompletionView(playerName, signatureToUse);
+            updateCompletionSelectionUI(activeRiddleChallenge?.selectedReward || null, { skipPersist: true });
+
             // Update dev console highlighting if visible
             refreshDevConsoleIfVisible();
         }
@@ -3777,6 +4039,8 @@
             if (!contentExists) {
                 return;
             }
+            hideCompletionView();
+            updateCompletionSelectionUI(null, { skipPersist: true });
             clearPendingRiddleAdvance();
             const playerName = getActivePlayerName();
             const restored = restoreActiveChallenge();
@@ -4462,6 +4726,7 @@
 
             initializeDevConsoleElements();
             restoreCustomRiddles();
+            setupCompletionRewardEvents();
         });
 
         const INTRO_VIDEO_PATH = 'intro/Challenge_Intro_Video.mov';
@@ -4850,7 +5115,9 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                 riddles: activeRiddleChallenge.riddles.map(r => r.id || r.originalId || r),
                 completed: activeRiddleChallenge.completed,
                 variant: activeRiddleChallenge.variant || localStorage.getItem(FIGURE_VARIANT_KEY) || 'hooded',
-                profileId: activeRiddleChallenge.profileId || localStorage.getItem(SELECTED_PROFILE_KEY)
+                profileId: activeRiddleChallenge.profileId || localStorage.getItem(SELECTED_PROFILE_KEY),
+                selectedReward: activeRiddleChallenge.selectedReward || null,
+                rewardSubmitted: Boolean(activeRiddleChallenge.rewardSubmitted)
             };
 
             // Save challenge state specific to the current user
@@ -4910,7 +5177,9 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                     riddles: orderedRiddles,
                     completed: Boolean(parsed.completed),
                     variant: queuedVariant,
-                    profileId: parsed.profileId
+                    profileId: parsed.profileId,
+                    selectedReward: parsed.selectedReward || null,
+                    rewardSubmitted: Boolean(parsed.rewardSubmitted)
                 };
             } catch (error) {
                 return null;
@@ -6698,6 +6967,188 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             } else if (DevConsoleState.activePanel === 'riddles') {
                 renderDevConsoleRiddles();
             }
+        }
+
+        function getCompletionElements() {
+            return {
+                page: document.getElementById('riddlePage'),
+                container: document.getElementById('completionContainer'),
+                rewards: document.getElementById('completionRewards'),
+                buttons: Array.from(document.querySelectorAll('.completion-reward-button')),
+                selector: document.getElementById('completionSelector')
+            };
+        }
+
+        function showCompletionView(playerName, signature) {
+            const { page, container, selector, buttons } = getCompletionElements();
+            if (page) {
+                page.classList.add('is-completion');
+            }
+            if (container) {
+                container.setAttribute('aria-hidden', 'false');
+            }
+            if (selector) {
+                selector.style.opacity = '0';
+                selector.style.transform = 'translateX(-9999px)';
+            }
+            const hasSelection = Boolean(activeRiddleChallenge?.selectedReward);
+            const isSubmitted = Boolean(activeRiddleChallenge?.rewardSubmitted);
+            buttons.forEach(button => {
+                button.disabled = isSubmitted;
+                button.tabIndex = isSubmitted ? -1 : 0;
+            });
+            const submitBtn = document.getElementById('completionSubmitBtn');
+            if (submitBtn) {
+                submitBtn.disabled = !hasSelection || isSubmitted;
+                submitBtn.textContent = isSubmitted ? 'Reward Submitted' : 'Submit Reward';
+            }
+        }
+
+        function hideCompletionView() {
+            const { page, container, selector, buttons } = getCompletionElements();
+            if (page) {
+                page.classList.remove('is-completion');
+            }
+            if (container) {
+                container.setAttribute('aria-hidden', 'true');
+            }
+            if (selector) {
+                selector.style.opacity = '0';
+                selector.style.transform = 'translateX(-9999px)';
+            }
+            buttons.forEach(button => {
+                button.disabled = false;
+                button.tabIndex = 0;
+            });
+            const submitBtn = document.getElementById('completionSubmitBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submit Reward';
+            }
+        }
+
+        function updateCompletionSelectionUI(selectedReward, { skipPersist = false } = {}) {
+            const elements = getCompletionElements();
+            if (!elements.buttons.length) {
+                return;
+            }
+
+            elements.buttons.forEach(button => {
+                const rewardType = button.dataset.reward;
+                const art = button.querySelector('.completion-reward-art');
+                const isSelected = selectedReward === rewardType;
+                button.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+                button.classList.toggle('is-selected', isSelected);
+
+                if (art && COMPLETION_REWARD_ART_MAP[rewardType]) {
+                    art.src = COMPLETION_REWARD_ART_MAP[rewardType][isSelected ? 'selected' : 'unselected'];
+                }
+            });
+
+            if (elements.selector) {
+            const activeButton = elements.buttons.find(btn => btn.dataset.reward === selectedReward);
+            if (activeButton && elements.rewards) {
+                const buttonRect = activeButton.getBoundingClientRect();
+                const containerRect = elements.rewards.getBoundingClientRect();
+                const selectorWidth = elements.selector.offsetWidth || 74;
+                const offsetX = (buttonRect.left + buttonRect.width / 2) - containerRect.left - (selectorWidth / 2);
+                elements.selector.style.transform = `translateX(${offsetX}px)`;
+                elements.selector.style.opacity = '1';
+            } else {
+                elements.selector.style.transform = 'translateX(-9999px)';
+                elements.selector.style.opacity = '0';
+            }
+            }
+
+            if (!skipPersist && activeRiddleChallenge) {
+                activeRiddleChallenge.selectedReward = selectedReward;
+                saveActiveChallenge();
+            }
+
+            const submitBtn = document.getElementById('completionSubmitBtn');
+            const isSubmitted = Boolean(activeRiddleChallenge?.rewardSubmitted);
+            if (submitBtn && !isSubmitted) {
+                submitBtn.disabled = !selectedReward;
+            }
+        }
+
+        function setupCompletionRewardEvents() {
+            const { buttons } = getCompletionElements();
+            if (!buttons.length) {
+                return;
+            }
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (!activeRiddleChallenge) {
+                        return;
+                    }
+                    const reward = button.dataset.reward;
+                    updateCompletionSelectionUI(reward);
+                });
+            });
+
+            const submitBtn = document.getElementById('completionSubmitBtn');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', handleCompletionSubmit);
+            }
+
+            const closeBtn = document.getElementById('completionModalClose');
+            const modal = document.getElementById('completionModal');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', hideCompletionModal);
+            }
+            modal?.addEventListener('click', (event) => {
+                if (event.target === modal || event.target.classList.contains('completion-modal-backdrop')) {
+                    hideCompletionModal();
+                }
+            });
+        }
+
+        function handleCompletionSubmit() {
+            if (!activeRiddleChallenge || !activeRiddleChallenge.selectedReward) {
+                return;
+            }
+
+            activeRiddleChallenge.rewardSubmitted = true;
+            saveActiveChallenge();
+
+            const { buttons, selector } = getCompletionElements();
+            buttons.forEach(button => {
+                button.disabled = true;
+                button.tabIndex = -1;
+            });
+            if (selector) {
+                selector.style.opacity = '0.85';
+            }
+
+            const submitBtn = document.getElementById('completionSubmitBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Reward Submitted';
+            }
+
+            showCompletionModal();
+        }
+
+        function showCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            if (!modal) {
+                return;
+            }
+            modal.classList.add('is-visible');
+            modal.setAttribute('aria-hidden', 'false');
+            document.getElementById('completionModalClose')?.focus({ preventScroll: true });
+        }
+
+        function hideCompletionModal() {
+            const modal = document.getElementById('completionModal');
+            if (!modal) {
+                return;
+            }
+            modal.classList.remove('is-visible');
+            modal.setAttribute('aria-hidden', 'true');
+            document.getElementById('completionSubmitBtn')?.focus({ preventScroll: true });
         }
 
     </script>
