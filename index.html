@@ -699,7 +699,7 @@
         .mysterious-signature {
             font-family: 'CAD', serif;
             font-style: normal;
-            font-size: 1.4rem;
+            font-size: 1.7rem;
             color: #ffffff;
             text-align: left;
             margin-bottom: 1.5625rem;
@@ -1253,14 +1253,14 @@
         .riddle-question.highlight {
             color: #d6a550;
             font-family: 'CAD', serif;
-            font-size: 1.35rem;
+            font-size: 1.5rem;
             letter-spacing: 0.04em;
         }
 
         .trust-question {
             color: #d6a550;
             font-family: 'CAD', serif;
-            font-size: 1.35rem;
+            font-size: 1.5rem;
             letter-spacing: 0.04em;
         }
         
@@ -1555,7 +1555,7 @@
             display: block !important;
         }
 
-        .pyrai-symbol-button.wrong {
+        .pyrai-symbol-button.wrong:not(.completed) {
             animation: wrongRuneEffect 0.5s ease-in-out;
         }
 
@@ -1565,7 +1565,7 @@
 
         @keyframes wrongRuneEffect {
             0% { filter: none; }
-            50% { filter: hue-rotate(0deg) saturate(2) brightness(1.2) drop-shadow(0 0 0.5rem rgba(255, 0, 0, 0.8)); }
+            50% { filter: hue-rotate(-15deg) saturate(2) brightness(1.1) drop-shadow(0 0 0.5rem rgba(204, 0, 153, 0.45)); }
             100% { filter: none; }
         }
 
@@ -1605,8 +1605,8 @@
         /* Flute buttons on the lines */
         .flute-button {
             position: absolute;
-            width: 3.75rem;
-            height: 3.75rem;
+            width: 4.125rem;
+            height: 4.125rem;
             cursor: pointer;
             transition: filter 0.3s ease, transform 0.3s ease, width 0.3s ease, height 0.3s ease;
             filter: brightness(0.75);
@@ -1615,9 +1615,9 @@
             object-fit: contain;
             image-rendering: auto;
             will-change: transform;
-            --flute-glow-color-base: rgba(255, 215, 0, 0.75);
-            --flute-glow-color-strong: rgba(255, 215, 0, 0.95);
-            --flute-glow-color-soft: rgba(255, 215, 0, 0.55);
+            --flute-glow-color-base: rgba(255, 215, 0, 0.675);
+            --flute-glow-color-strong: rgba(255, 215, 0, 0.855);
+            --flute-glow-color-soft: rgba(255, 215, 0, 0.495);
             z-index: 2;
             pointer-events: none;
         }
@@ -1629,39 +1629,39 @@
         }
 
         .flute-button.flute-glow-violet {
-            --flute-glow-color-base: rgba(170, 120, 255, 0.9);
-            --flute-glow-color-strong: rgba(200, 170, 255, 1);
-            --flute-glow-color-soft: rgba(135, 100, 235, 0.6);
+            --flute-glow-color-base: rgba(170, 120, 255, 0.81);
+            --flute-glow-color-strong: rgba(200, 170, 255, 0.9);
+            --flute-glow-color-soft: rgba(135, 100, 235, 0.54);
         }
 
         .flute-button.flute-glow-crimson {
-            --flute-glow-color-base: rgba(255, 110, 40, 0.9);
-            --flute-glow-color-strong: rgba(255, 150, 80, 1);
-            --flute-glow-color-soft: rgba(255, 90, 30, 0.6);
+            --flute-glow-color-base: rgba(255, 110, 40, 0.81);
+            --flute-glow-color-strong: rgba(255, 150, 80, 0.9);
+            --flute-glow-color-soft: rgba(255, 90, 30, 0.54);
         }
 
         .flute-button.flute-glow-neon-green {
-            --flute-glow-color-base: rgba(125, 255, 120, 0.9);
-            --flute-glow-color-strong: rgba(180, 255, 180, 1);
-            --flute-glow-color-soft: rgba(100, 255, 150, 0.6);
+            --flute-glow-color-base: rgba(125, 255, 120, 0.81);
+            --flute-glow-color-strong: rgba(180, 255, 180, 0.9);
+            --flute-glow-color-soft: rgba(100, 255, 150, 0.54);
         }
 
         .flute-button.flute-glow-neon-blue {
-            --flute-glow-color-base: rgba(120, 220, 255, 0.9);
-            --flute-glow-color-strong: rgba(170, 240, 255, 1);
-            --flute-glow-color-soft: rgba(110, 200, 255, 0.65);
+            --flute-glow-color-base: rgba(120, 220, 255, 0.81);
+            --flute-glow-color-strong: rgba(170, 240, 255, 0.9);
+            --flute-glow-color-soft: rgba(110, 200, 255, 0.585);
         }
 
         .flute-button.flute-glow-neon-yellow {
-            --flute-glow-color-base: rgba(255, 255, 140, 0.95);
-            --flute-glow-color-strong: rgba(255, 255, 200, 1);
-            --flute-glow-color-soft: rgba(255, 250, 120, 0.65);
+            --flute-glow-color-base: rgba(255, 255, 140, 0.855);
+            --flute-glow-color-strong: rgba(255, 255, 200, 0.9);
+            --flute-glow-color-soft: rgba(255, 250, 120, 0.585);
         }
 
         .flute-button.flute-glow-neon-orange {
-            --flute-glow-color-base: rgba(255, 180, 70, 0.95);
-            --flute-glow-color-strong: rgba(255, 210, 130, 1);
-            --flute-glow-color-soft: rgba(255, 160, 60, 0.65);
+            --flute-glow-color-base: rgba(255, 180, 70, 0.855);
+            --flute-glow-color-strong: rgba(255, 210, 130, 0.9);
+            --flute-glow-color-soft: rgba(255, 160, 60, 0.585);
         }
 
         @keyframes flute-glow {
@@ -1690,6 +1690,10 @@
             position: relative;
             top: -2.5rem;
             z-index: 2;
+        }
+
+        .riddle-container[data-riddle-id="2"] .riddle-input-container {
+            padding-top: 0rem;
         }
 
         .riddle-container[data-riddle-id="17"] .riddle-input-container {
@@ -4090,8 +4094,12 @@
                                 const randomX = 0.2 + Math.random() * 0.6;
                                 const buttonX = randomX * linesWidth;
                                 button.style.left = buttonX + 'px';
-                                // Position on the line (transform centers it)
-                                button.style.top = linePositions[index] + 'px';
+                                // Position on the line with subtle adjustments for select keys
+                                let buttonTop = linePositions[index];
+                                if (config.key === '<' || config.key === '~' || config.key === ';') {
+                                    buttonTop -= linesHeight * 0.015;
+                                }
+                                button.style.top = buttonTop + 'px';
                                 
                                 buttonsContainer.appendChild(button);
                                 buttons.push({
