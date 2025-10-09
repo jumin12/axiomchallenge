@@ -672,12 +672,17 @@
         }
 
         .golden-swirl {
-            width: 28.125rem;
+            width: min(28.125rem, 74vw);
             max-width: 100%;
-            height: 4.375rem;
+            height: auto;
+            aspect-ratio: 450 / 70;
             background: url('art/divider.png') center/contain no-repeat;
             margin: -0.3125rem auto 1.25rem auto;
             display: block;
+        }
+
+        .riddle-content .golden-swirl {
+            margin: -1.75rem auto 0.75rem auto !important;
         }
 
         .name-question {
@@ -933,18 +938,18 @@
         }
 
         @keyframes completionGlowTeal {
-            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 1.5rem rgba(48, 226, 176, 0.4)); }
-            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 2.8rem rgba(48, 226, 176, 0.7)); }
+            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(48, 226, 176, 0.2)); }
+            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(48, 226, 176, 0.2)); }
         }
 
         @keyframes completionGlowAmber {
-            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 1.5rem rgba(255, 183, 66, 0.4)); }
-            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 2.8rem rgba(255, 183, 66, 0.7)); }
+            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(255, 183, 66, 0.2)); }
+            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(255, 183, 66, 0.2)); }
         }
 
         @keyframes completionGlowAqua {
-            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 1.5rem rgba(92, 196, 255, 0.4)); }
-            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 2.8rem rgba(92, 196, 255, 0.7)); }
+            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(92, 196, 255, 0.2)); }
+            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(92, 196, 255, 0.2)); }
         }
 
         .completion-reward-button.is-selected[data-reward="armor"] .completion-reward-art {
@@ -957,6 +962,32 @@
 
         .completion-reward-button.is-selected[data-reward="mount"] .completion-reward-art {
             animation: completionGlowAqua 2.4s ease-in-out infinite;
+        }
+
+        /* Hover glow effects for all completion items */
+        .completion-reward-button:hover[data-reward="armor"] .completion-reward-art {
+            filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(48, 226, 176, 0.2));
+        }
+
+        .completion-reward-button:hover[data-reward="scroll"] .completion-reward-art {
+            filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(255, 183, 66, 0.2));
+        }
+
+        .completion-reward-button:hover[data-reward="mount"] .completion-reward-art {
+            filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(92, 196, 255, 0.2));
+        }
+
+        /* Show selected image on hover */
+        .completion-reward-button:hover[data-reward="armor"] .completion-reward-art {
+            content: url('art/completion-armor-selected.png');
+        }
+
+        .completion-reward-button:hover[data-reward="scroll"] .completion-reward-art {
+            content: url('art/completion-scroll-selected.png');
+        }
+
+        .completion-reward-button:hover[data-reward="mount"] .completion-reward-art {
+            content: url('art/completion-mount-selected.png');
         }
 
         .completion-reward-caption {
@@ -1071,8 +1102,7 @@
         .riddle-content .mysterious-signature,
         .riddle-dialog,
         .riddle-question,
-        .trust-question,
-        .riddle-disclaimer {
+        .trust-question {
             user-select: none;
             -webkit-user-select: none;
             -ms-user-select: none;
@@ -1094,7 +1124,8 @@
 
         .riddle-container[data-riddle-id="8"],
         .riddle-container[data-riddle-id="17"],
-        .riddle-container[data-riddle-id="21"] {
+        .riddle-container[data-riddle-id="21"],
+        .riddle-container[data-riddle-id="22"] {
             background: url('art/lightbox-XL.png') center/contain no-repeat;
             width: 87.5rem;
             height: 65.625rem;
@@ -1122,7 +1153,8 @@
         /* XL lightbox - text towards top, input anchored at bottom */
         .riddle-container[data-riddle-id="8"] .riddle-content,
         .riddle-container[data-riddle-id="17"] .riddle-content,
-        .riddle-container[data-riddle-id="21"] .riddle-content {
+        .riddle-container[data-riddle-id="21"] .riddle-content,
+        .riddle-container[data-riddle-id="22"] .riddle-content {
             top: 5rem;
             bottom: 0;
             padding-bottom: 3rem;
@@ -1131,7 +1163,8 @@
         /* XL lightbox - ensure golden-swirl divider is visible */
         .riddle-container[data-riddle-id="8"] .golden-swirl,
         .riddle-container[data-riddle-id="17"] .golden-swirl,
-        .riddle-container[data-riddle-id="21"] .golden-swirl {
+        .riddle-container[data-riddle-id="21"] .golden-swirl,
+        .riddle-container[data-riddle-id="22"] .golden-swirl {
             display: block !important;
             position: relative;
             z-index: 10;
@@ -1142,7 +1175,8 @@
         /* XL lightbox - tighten stag-guidance spacing */
         .riddle-container[data-riddle-id="8"] .stag-guidance,
         .riddle-container[data-riddle-id="17"] .stag-guidance,
-        .riddle-container[data-riddle-id="21"] .stag-guidance {
+        .riddle-container[data-riddle-id="21"] .stag-guidance,
+        .riddle-container[data-riddle-id="22"] .stag-guidance {
             flex-shrink: 0;
             margin-bottom: 0.1875rem;
         }
@@ -1150,7 +1184,8 @@
         /* XL lightbox - tighten riddle dialog spacing */
         .riddle-container[data-riddle-id="8"] .riddle-dialog,
         .riddle-container[data-riddle-id="17"] .riddle-dialog,
-        .riddle-container[data-riddle-id="21"] .riddle-dialog {
+        .riddle-container[data-riddle-id="21"] .riddle-dialog,
+        .riddle-container[data-riddle-id="22"] .riddle-dialog {
             flex-shrink: 0;
             margin-top: 1.5625rem;
             margin-bottom: 0.75rem;
@@ -1160,7 +1195,8 @@
         /* XL lightbox - tighten riddle question spacing */
         .riddle-container[data-riddle-id="8"] .riddle-question,
         .riddle-container[data-riddle-id="17"] .riddle-question,
-        .riddle-container[data-riddle-id="21"] .riddle-question {
+        .riddle-container[data-riddle-id="21"] .riddle-question,
+        .riddle-container[data-riddle-id="22"] .riddle-question {
             margin-top: 0.5rem;
             margin-bottom: 0.75rem;
         }
@@ -1168,7 +1204,8 @@
         /* XL lightbox - tighten signature spacing */
         .riddle-container[data-riddle-id="8"] .mysterious-signature,
         .riddle-container[data-riddle-id="17"] .mysterious-signature,
-        .riddle-container[data-riddle-id="21"] .mysterious-signature {
+        .riddle-container[data-riddle-id="21"] .mysterious-signature,
+        .riddle-container[data-riddle-id="22"] .mysterious-signature {
             flex-shrink: 0;
             margin-bottom: 0.75rem;
         }
@@ -1178,9 +1215,10 @@
             margin: 0.5rem 0;
         }
 
-        /* XL lightbox - tighten disclaimer spacing for riddles 17 and 21 */
+        /* XL lightbox - tighten disclaimer spacing for riddles 17, 21, and 22 */
         .riddle-container[data-riddle-id="17"] .riddle-disclaimer,
-        .riddle-container[data-riddle-id="21"] .riddle-disclaimer {
+        .riddle-container[data-riddle-id="21"] .riddle-disclaimer,
+        .riddle-container[data-riddle-id="22"] .riddle-disclaimer {
             margin: 0.5rem 0;
         }
 
@@ -1336,6 +1374,201 @@
             z-index: 1;
         }
 
+        /* Class rune game container for riddle 22 */
+        .class-rune-game-container {
+            position: relative;
+            width: 100%;
+            max-width: 43.75rem;
+            margin: 1.25rem auto;
+            display: inline-block;
+        }
+
+        /* Allow class rune game to overlap with input on riddle 22 */
+        .riddle-container[data-riddle-id="22"] .class-rune-game-container {
+            margin-top: -2rem;
+            margin-bottom: 1.5rem;
+            z-index: 1;
+        }
+
+        /* Pyrai symbol game container for riddle 17 */
+        .pyrai-symbol-game-container {
+            position: relative;
+            width: 100%;
+            max-width: 43.75rem;
+            margin: 1.25rem auto;
+            display: inline-block;
+        }
+
+        /* Allow Pyrai symbol game to overlap with input on riddle 17 */
+        .riddle-container[data-riddle-id="17"] .pyrai-symbol-game-container {
+            margin-top: -2rem;
+            margin-bottom: 1.5rem;
+            z-index: 1;
+        }
+
+        .class-rune-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 2.5rem;
+            width: 100%;
+            max-width: 55rem;
+            margin: 2rem auto 0 auto;
+            margin-left: -5rem;
+            padding: 2rem;
+        }
+
+        .pyrai-symbol-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 2.5rem;
+            width: 100%;
+            max-width: 55rem;
+            margin: 2rem auto 0 auto;
+            margin-left: -5rem;
+            padding: 2rem;
+        }
+
+        .class-rune-button {
+            position: relative;
+            width: 10rem;
+            height: 10rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.2s ease, filter 0.3s ease;
+            justify-self: center;
+        }
+
+        .class-rune-button:hover {
+            transform: scale(1.05);
+        }
+
+        .class-rune-button:active {
+            transform: scale(0.95);
+        }
+
+        .class-rune-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s ease, filter 0.3s ease;
+        }
+
+        .class-rune-button .inactive-img {
+            display: block;
+            opacity: 0.6;
+        }
+
+        .class-rune-button .active-img {
+            display: none;
+            opacity: 1;
+        }
+
+        .class-rune-button .wrong-img {
+            display: none;
+            opacity: 1;
+        }
+
+        .class-rune-button.selected .inactive-img {
+            display: none !important;
+        }
+
+        .class-rune-button.selected .active-img {
+            display: block !important;
+        }
+
+        .class-rune-button.wrong .inactive-img {
+            display: none !important;
+        }
+
+        .class-rune-button.wrong .active-img {
+            display: none !important;
+        }
+
+        .class-rune-button.wrong .wrong-img {
+            display: block !important;
+        }
+
+        .class-rune-button.wrong {
+            animation: wrongRuneEffect 0.5s ease-in-out;
+        }
+
+        .pyrai-symbol-button {
+            position: relative;
+            width: 10rem;
+            height: 10rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.2s ease, filter 0.3s ease;
+            justify-self: center;
+            pointer-events: auto;
+        }
+
+        .pyrai-symbol-button:hover {
+            transform: scale(1.05);
+        }
+
+        .pyrai-symbol-button:active {
+            transform: scale(0.95);
+        }
+
+        .pyrai-symbol-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s ease, filter 0.3s ease;
+        }
+
+        .pyrai-symbol-button .inactive-img {
+            display: block;
+            opacity: 0.6;
+        }
+
+        .pyrai-symbol-button .active-img {
+            display: none;
+            opacity: 1;
+        }
+
+        .pyrai-symbol-button .wrong-img {
+            display: none;
+            opacity: 1;
+        }
+
+        .pyrai-symbol-button.selected .inactive-img {
+            display: none !important;
+        }
+
+        .pyrai-symbol-button.selected .active-img {
+            display: block !important;
+        }
+
+        .pyrai-symbol-button.wrong .inactive-img {
+            display: none !important;
+        }
+
+        .pyrai-symbol-button.wrong .wrong-img {
+            display: block !important;
+        }
+
+        .pyrai-symbol-button.wrong {
+            animation: wrongRuneEffect 0.5s ease-in-out;
+        }
+
+        .pyrai-symbol-button.completed {
+            pointer-events: none;
+        }
+
+        @keyframes wrongRuneEffect {
+            0% { filter: none; }
+            50% { filter: hue-rotate(0deg) saturate(2) brightness(1.2) drop-shadow(0 0 0.5rem rgba(255, 0, 0, 0.8)); }
+            100% { filter: none; }
+        }
+
         .flute-game-container .flute-lines {
             width: 100%;
             height: auto;
@@ -1459,9 +1692,17 @@
             z-index: 2;
         }
 
-        .riddle-container[data-riddle-id="17"] .riddle-input-container,
+        .riddle-container[data-riddle-id="17"] .riddle-input-container {
+            padding-top: 0.5rem;
+        }
+        
         .riddle-container[data-riddle-id="21"] .riddle-input-container {
             padding-top: 2.5rem;
+        }
+
+        /* Hide input container for riddle 22 */
+        .riddle-container[data-riddle-id="22"] .riddle-input-container {
+            display: none;
         }
 
         .riddle-input {
@@ -1531,14 +1772,16 @@
         /* XL lightbox specific positioning - higher and closer together */
         .riddle-container[data-riddle-id="8"] .riddle-hooded-figure,
         .riddle-container[data-riddle-id="17"] .riddle-hooded-figure,
-        .riddle-container[data-riddle-id="21"] .riddle-hooded-figure {
+        .riddle-container[data-riddle-id="21"] .riddle-hooded-figure,
+        .riddle-container[data-riddle-id="22"] .riddle-hooded-figure {
             left: 11.875rem;
             top: -2.1875rem;
         }
 
         .riddle-container[data-riddle-id="8"] .riddle-stag-banner,
         .riddle-container[data-riddle-id="17"] .riddle-stag-banner,
-        .riddle-container[data-riddle-id="21"] .riddle-stag-banner {
+        .riddle-container[data-riddle-id="21"] .riddle-stag-banner,
+        .riddle-container[data-riddle-id="22"] .riddle-stag-banner {
             right: 13.75rem;
             top: 0.3125rem;
         }
@@ -2862,7 +3105,7 @@
         const DEV_CONSOLE_PROFILES_KEY = 'riddleProfiles';
         const DEV_CONSOLE_INTERACTIVE_RIDDLES_KEY = 'interactiveRiddleIds';
         const DEV_CONSOLE_UNLOCK_TIMEOUT_MS = 120000;
-        const DEFAULT_INTERACTIVE_RIDDLE_IDS = [8, 17, 21]; // XL lightbox riddles
+        const DEFAULT_INTERACTIVE_RIDDLE_IDS = [8, 17, 21, 22]; // XL lightbox riddles
         const MIN_INTERACTIVE_RIDDLES = 2;
         const COMPLETION_REWARD_ART_MAP = {
             armor: {
@@ -3065,10 +3308,18 @@
             {
                 id: 21,
                 heading: 'A song of The Seven...',
-                white: ['We’ve recently come across an ancient artifact. It looks to be sealed by magic. Only the proper notes will unlock its secrets.'],
+                white: ['We\'ve recently come across an ancient artifact. It looks to be sealed by magic. Only the proper notes will unlock its secrets.'],
                 yellow: "From skies above, a blazing flight,Turning day into endless night.With searing breath, it scorches the land,Summoning embers at its command. A name of flame, both feared and grand—",
                 answers: ['firebrand'],
                 disclaimer: 'Placeholder -- melody required.'
+            },
+            {
+                id: 22,
+                heading: 'They don\'t tell stories about the ones who quit...',
+                white: ['They left behind only fragments of the truth. Can you piece them together?'],
+                yellow: "Born of light, yet darkness draws near, a hunter's strike, both swift and clear. Steel defends, yet steel will bite, two forces clashe in frozen light. A song is played calling forth what sleeps in rune.",
+                answers: ['cleric', 'ranger', 'tank', 'fighter', 'rogue', 'mage', 'bard', 'summoner'],
+                disclaimer: 'Placeholder -- class rune sequence required.'
             }
         ];
 
@@ -3559,6 +3810,96 @@
                                 <div id="flute-buttons-container"></div>
                             </div>
                         `;
+                    } else if (riddle.id === 17) {
+                        // Special handling for riddle 17 - show Pyrai symbol game
+                        disclaimerEl.style.display = 'block';
+                        disclaimerEl.innerHTML = `
+                            <div class="pyrai-symbol-game-container" id="pyrai-symbol-game-container">
+                                <div class="pyrai-symbol-grid">
+                                    <button class="pyrai-symbol-button" data-symbol="pyrai">
+                                        <img src="art/pyrai-icon-inactive.png" alt="Pyrai" class="inactive-img">
+                                        <img src="art/pyrai-icon-active.png" alt="Pyrai" class="active-img">
+                                    </button>
+                                    <button class="pyrai-symbol-button" data-symbol="dunir">
+                                        <img src="art/dunir-icon-inactive.png" alt="Dunir" class="inactive-img">
+                                        <img src="art/dunir-icon-wrong-selection.png" alt="Dunir" class="wrong-img">
+                                    </button>
+                                    <button class="pyrai-symbol-button" data-symbol="empyrean">
+                                        <img src="art/empyrean-icon-inactive.png" alt="Empyrean" class="inactive-img">
+                                        <img src="art/empyrean-icon-wrong-selection.png" alt="Empyrean" class="wrong-img">
+                                    </button>
+                                    <button class="pyrai-symbol-button" data-symbol="kaelar">
+                                        <img src="art/kaelar-icon-inactive.png" alt="Kaelar" class="inactive-img">
+                                        <img src="art/kaelar-icon-wrong-selection.png" alt="Kaelar" class="wrong-img">
+                                    </button>
+                                    <button class="pyrai-symbol-button" data-symbol="nikua">
+                                        <img src="art/nikua-icon-inactive.png" alt="Nikua" class="inactive-img">
+                                        <img src="art/nikua-icon-wrong-selection.png" alt="Nikua" class="wrong-img">
+                                    </button>
+                                    <button class="pyrai-symbol-button" data-symbol="renkai">
+                                        <img src="art/renkai-icon-inactive.png" alt="Renkai" class="inactive-img">
+                                        <img src="art/renkai-icon-wrong-selection.png" alt="Renkai" class="wrong-img">
+                                    </button>
+                                    <button class="pyrai-symbol-button" data-symbol="vaelune">
+                                        <img src="art/vaelune-icon-inactive.png" alt="Vaelune" class="inactive-img">
+                                        <img src="art/vaelune-icon-wrong-selection.png" alt="Vaelune" class="wrong-img">
+                                    </button>
+                                    <button class="pyrai-symbol-button" data-symbol="vek">
+                                        <img src="art/vek-icon-inactive.png" alt="Vek" class="inactive-img">
+                                        <img src="art/vek-icon-wrong-selection.png" alt="Vek" class="wrong-img">
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    } else if (riddle.id === 22) {
+                        // Special handling for riddle 22 - show class rune game
+                        disclaimerEl.style.display = 'block';
+                        disclaimerEl.innerHTML = `
+                            <div class="class-rune-game-container" id="class-rune-game-container">
+                                <div class="class-rune-grid">
+                                    <button class="class-rune-button" data-class="cleric">
+                                        <img src="art/cleric-inactive rune.png" alt="Cleric" class="inactive-img">
+                                        <img src="art/cleric-active rune.png" alt="Cleric" class="active-img">
+                                        <img src="art/cleric-active rune-wrong.png" alt="Cleric" class="wrong-img">
+                                    </button>
+                                    <button class="class-rune-button" data-class="ranger">
+                                        <img src="art/ranger-inactive rune.png" alt="Ranger" class="inactive-img">
+                                        <img src="art/ranger-active rune.png" alt="Ranger" class="active-img">
+                                        <img src="art/ranger-active rune-wrong.png" alt="Ranger" class="wrong-img">
+                                    </button>
+                                    <button class="class-rune-button" data-class="tank">
+                                        <img src="art/tank-inactive rune.png" alt="Tank" class="inactive-img">
+                                        <img src="art/tank-active rune.png" alt="Tank" class="active-img">
+                                        <img src="art/tank-active rune-wrong.png" alt="Tank" class="wrong-img">
+                                    </button>
+                                    <button class="class-rune-button" data-class="fighter">
+                                        <img src="art/fighter-inactive rune.png" alt="Fighter" class="inactive-img">
+                                        <img src="art/fighter-active rune.png" alt="Fighter" class="active-img">
+                                        <img src="art/fighter-active rune-wrong.png" alt="Fighter" class="wrong-img">
+                                    </button>
+                                    <button class="class-rune-button" data-class="rogue">
+                                        <img src="art/rogue-inactive rune.png" alt="Rogue" class="inactive-img">
+                                        <img src="art/rogue-active rune.png" alt="Rogue" class="active-img">
+                                        <img src="art/rogue-active rune-wrong.png" alt="Rogue" class="wrong-img">
+                                    </button>
+                                    <button class="class-rune-button" data-class="mage">
+                                        <img src="art/mage-inactive rune.png" alt="Mage" class="inactive-img">
+                                        <img src="art/mage-active rune.png" alt="Mage" class="active-img">
+                                        <img src="art/mage-active rune-wrong.png" alt="Mage" class="wrong-img">
+                                    </button>
+                                    <button class="class-rune-button" data-class="bard">
+                                        <img src="art/bard-inactive rune.png" alt="Bard" class="inactive-img">
+                                        <img src="art/bard-active rune.png" alt="Bard" class="active-img">
+                                        <img src="art/bard-active rune-wrong.png" alt="Bard" class="wrong-img">
+                                    </button>
+                                    <button class="class-rune-button" data-class="summoner">
+                                        <img src="art/summoner-inactive rune.png" alt="Summoner" class="inactive-img">
+                                        <img src="art/summoner-active rune.png" alt="Summoner" class="active-img">
+                                        <img src="art/summoner-active rune-wrong.png" alt="Summoner" class="wrong-img">
+                                    </button>
+                                </div>
+                            </div>
+                        `;
                     } else if (riddle.disclaimer) {
                         disclaimerEl.style.display = 'block';
                         disclaimerEl.textContent = applyPlayerName(riddle.disclaimer, playerName);
@@ -3918,6 +4259,208 @@
                     window.cleanupFluteGame = null;
                 }
             }
+
+            // Setup Pyrai symbol game for riddle 17
+            if (riddle.id === 17) {
+                setTimeout(() => {
+                    const gameContainer = document.getElementById('pyrai-symbol-game-container');
+                    const symbolButtons = gameContainer?.querySelectorAll('.pyrai-symbol-button');
+                    const inputEl = document.getElementById('riddleAnswer');
+
+                    if (gameContainer && symbolButtons && inputEl) {
+                        const buttons = Array.from(symbolButtons);
+                        const correctSymbol = 'pyrai';
+                        let isPyraiActivated = false;
+
+                        // Randomize the visual order of symbols in the grid
+                        const grid = gameContainer.querySelector('.pyrai-symbol-grid');
+                        const shuffledButtons = [...buttons].sort(() => Math.random() - 0.5);
+                        shuffledButtons.forEach(button => grid.appendChild(button));
+
+                        const resetGame = () => {
+                            isPyraiActivated = false;
+                            buttons.forEach(button => {
+                                button.classList.remove('selected', 'wrong', 'completed');
+                                button.removeAttribute('aria-pressed');
+                                const activeImg = button.querySelector('.active-img');
+                                const inactiveImg = button.querySelector('.inactive-img');
+                                const wrongImg = button.querySelector('.wrong-img');
+                                if (activeImg) activeImg.style.display = 'none';
+                                if (inactiveImg) inactiveImg.style.display = 'block';
+                                if (wrongImg) wrongImg.style.display = 'none';
+                            });
+                            inputEl.disabled = true;
+                            inputEl.value = '';
+                        };
+
+                        const showWrongEffect = (button) => {
+                            if (isPyraiActivated) return;
+                            button.classList.remove('selected');
+                            button.classList.add('wrong');
+
+                            const wrongImg = button.querySelector('.wrong-img');
+                            const inactiveImg = button.querySelector('.inactive-img');
+                            if (wrongImg) wrongImg.style.display = 'block';
+                            if (inactiveImg) inactiveImg.style.display = 'none';
+
+                            setTimeout(() => {
+                                if (!isPyraiActivated) {
+                                    button.classList.remove('wrong');
+                                    if (wrongImg) wrongImg.style.display = 'none';
+                                    if (inactiveImg) inactiveImg.style.display = 'block';
+                                }
+                            }, 500);
+                        };
+
+                        const activatePyrai = () => {
+                            isPyraiActivated = true;
+                            inputEl.disabled = false;
+                            inputEl.focus({ preventScroll: true });
+
+                            buttons.forEach(button => {
+                                const isCorrect = button.dataset.symbol === correctSymbol;
+                                const activeImg = button.querySelector('.active-img');
+                                const inactiveImg = button.querySelector('.inactive-img');
+                                const wrongImg = button.querySelector('.wrong-img');
+
+                                button.classList.add('completed');
+                                button.setAttribute('aria-pressed', isCorrect ? 'true' : 'false');
+
+                                if (isCorrect) {
+                                    button.classList.add('selected');
+                                    button.classList.remove('wrong');
+                                    if (activeImg) activeImg.style.display = 'block';
+                                    if (inactiveImg) inactiveImg.style.display = 'none';
+                                    if (wrongImg) wrongImg.style.display = 'none';
+                                } else {
+                                    button.classList.remove('selected');
+                                    button.classList.add('wrong');
+                                    if (activeImg) activeImg.style.display = 'none';
+                                    if (inactiveImg) inactiveImg.style.display = 'none';
+                                    if (wrongImg) wrongImg.style.display = 'block';
+                                }
+                            });
+
+                            const audioController = window.__audioController;
+                            const activationSound = audioController?.classRuneAudio;
+                            if (activationSound) {
+                                activationSound.currentTime = 0;
+                                safePlay(activationSound);
+                            }
+                        };
+
+                        buttons.forEach(button => {
+                            button.addEventListener('click', () => {
+                                if (isPyraiActivated || button.classList.contains('completed')) return;
+
+                                const symbolName = button.dataset.symbol;
+                                if (symbolName === correctSymbol) {
+                                    activatePyrai();
+                                } else {
+                                    showWrongEffect(button);
+                                }
+                            });
+                        });
+
+                        resetGame();
+                    }
+                }, 100);
+            }
+
+            // Setup class rune game for riddle 22
+            if (riddle.id === 22) {
+                setTimeout(() => {
+                    const gameContainer = document.getElementById('class-rune-game-container');
+                    const runeButtons = gameContainer?.querySelectorAll('.class-rune-button');
+                    
+                    if (gameContainer && runeButtons) {
+                        // Correct sequence: Cleric, Ranger, Tank, Fighter, Rogue, Mage, Bard, Summoner
+                        const correctSequence = ['cleric', 'ranger', 'tank', 'fighter', 'rogue', 'mage', 'bard', 'summoner'];
+                        let currentSequence = [];
+                        let isGameCompleted = false;
+                        
+                        // Randomize the visual order of runes in the grid
+                        const runeArray = Array.from(runeButtons);
+                        const shuffledRunes = [...runeArray].sort(() => Math.random() - 0.5);
+                        
+                        // Reorder the DOM elements
+                        const grid = gameContainer.querySelector('.class-rune-grid');
+                        shuffledRunes.forEach(rune => grid.appendChild(rune));
+                        
+                        const resetGame = () => {
+                            currentSequence = [];
+                            isGameCompleted = false;
+                            runeButtons.forEach(button => {
+                                button.classList.remove('selected', 'wrong');
+                            });
+                        };
+                        
+                        const showWrongEffect = (button) => {
+                            button.classList.add('wrong');
+                            setTimeout(() => {
+                                button.classList.remove('wrong');
+                            }, 500);
+                        };
+                        
+                        const advanceToNextRiddle = () => {
+                            setTimeout(() => {
+                                advanceRiddle();
+                            }, 3000);
+                        };
+                        
+                        const checkSequence = () => {
+                            if (currentSequence.length === correctSequence.length) {
+                                // Check if sequence is correct
+                                const isCorrect = currentSequence.every((className, index) => 
+                                    className === correctSequence[index]
+                                );
+                                
+                                if (isCorrect) {
+                                    isGameCompleted = true;
+                                    advanceToNextRiddle();
+                                } else {
+                                    // Wrong sequence, reset
+                                    setTimeout(resetGame, 500);
+                                }
+                            }
+                        };
+                        
+                        runeButtons.forEach(button => {
+                            button.addEventListener('click', () => {
+                                if (isGameCompleted) return;
+                                
+                                const className = button.dataset.class;
+                                
+                                // Check if this is the next correct class
+                                const expectedClass = correctSequence[currentSequence.length];
+                                
+                                if (className === expectedClass) {
+                                    // Correct selection
+                                    currentSequence.push(className);
+                                    button.classList.add('selected');
+                                    
+                                    // Play activation sound
+                                    const audioController = window.__audioController;
+                                    const activationSound = audioController?.classRuneAudio;
+                                    if (activationSound) {
+                                        activationSound.currentTime = 0;
+                                        safePlay(activationSound);
+                                    }
+                                    
+                                    checkSequence();
+                                } else {
+                                    // Wrong selection, show effect and reset
+                                    showWrongEffect(button);
+                                    setTimeout(resetGame, 500);
+                                }
+                            });
+                        });
+                        
+                        // Initialize game state
+                        resetGame();
+                    }
+                }, 100);
+            }
             };
 
             if (options.useTransition) {
@@ -3978,7 +4521,7 @@
                 onContentUpdate: () => flushQueuedFigureVariant()
             };
             
-            if (current.id === 8 || current.id === 21) {
+            if (current.id === 8 || current.id === 17 || current.id === 21 || current.id === 22) {
                 options.disableInput = true;
             }
             
@@ -4873,6 +5416,7 @@ function safePlay(mediaElement) {
             let stagVoice = document.getElementById('stagVoiceover');
             let fluteButtonAudio = document.getElementById('fluteButtonAudio');
             let steelbloomAudio = document.getElementById('steelbloomAudio');
+            let classRuneAudio = document.getElementById('classRuneAudio');
 
             // Get saved volume from localStorage for initial setup
             const initialVolume = parseFloat(localStorage.getItem('audioVolume') || '15') / 100;
@@ -4958,6 +5502,21 @@ function safePlay(mediaElement) {
                 steelbloomAudio.volume = initialVolume * parseFloat(steelbloomAudio.dataset.baseVolume);
             }
 
+            if (!classRuneAudio) {
+                classRuneAudio = document.createElement('audio');
+                classRuneAudio.id = 'classRuneAudio';
+                classRuneAudio.src = 'sound/class-rune-riddle-activation.wav';
+                classRuneAudio.preload = 'auto';
+                classRuneAudio.dataset.baseVolume = '0.8';
+                classRuneAudio.volume = initialVolume * 0.8;
+                document.body.appendChild(classRuneAudio);
+            } else {
+                if (!classRuneAudio.dataset.baseVolume) {
+                    classRuneAudio.dataset.baseVolume = '0.8';
+                }
+                classRuneAudio.volume = initialVolume * parseFloat(classRuneAudio.dataset.baseVolume);
+            }
+
             const updateAudioIcon = (muted) => {
                 const waves = audioIcon?.querySelectorAll('.wave');
                 const muteX = audioIcon?.querySelector('.mute-x');
@@ -4975,6 +5534,7 @@ function safePlay(mediaElement) {
                 if (stagVoice) stagVoice.muted = muted;
                 if (fluteButtonAudio) fluteButtonAudio.muted = muted;
                 if (steelbloomAudio) steelbloomAudio.muted = muted;
+                if (classRuneAudio) classRuneAudio.muted = muted;
             };
 
             const applyVolumeState = (volume) => {
@@ -4995,6 +5555,10 @@ function safePlay(mediaElement) {
                 if (steelbloomAudio) {
                     const baseVolume = parseFloat(steelbloomAudio.dataset.baseVolume || '1.0');
                     steelbloomAudio.volume = volumeValue * baseVolume;
+                }
+                if (classRuneAudio) {
+                    const baseVolume = parseFloat(classRuneAudio.dataset.baseVolume || '0.8');
+                    classRuneAudio.volume = volumeValue * baseVolume;
                 }
                 localStorage.setItem('audioVolume', volume);
             };
@@ -5042,6 +5606,7 @@ function safePlay(mediaElement) {
                 stagVoice,
                 fluteButtonAudio,
                 steelbloomAudio,
+                classRuneAudio,
                 playStagOnce: () => {
                     if (!stagVoice || !backgroundMusic) return;
                     if (stagVoice.dataset.played === 'true') return;
