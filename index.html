@@ -49,29 +49,146 @@
 
         :root {
             --base-font-size: clamp(9px, calc(1.35vmin + 2px), 16px);
+            --audio-toggle-right-margin: 2.5rem;
+            --audio-toggle-width: 9rem;
+            --audio-toggle-height: 2.375rem;
+            --audio-toggle-icon-size: 1.75rem;
+            --audio-toggle-padding-x: 0.75rem;
+            --audio-toggle-gap: 0;
+            --audio-toggle-top: 0.75rem;
+            --audio-toggle-slider-width: 5rem;
+            --audio-slider-expanded-margin: 0.5rem;
+            --audio-toggle-thumb-size: 0.75rem;
+            --audio-slider-height: 0.25rem;
         }
 
         @media (max-width: 1920px) and (max-height: 1080px) {
             :root {
-                --base-font-size: clamp(9px, calc(0.9vmin + 0.95px), 10.6667px);
+                --base-font-size: clamp(11.25px, calc(1.125vmin + 1.1875px), 13.3334px);
+                --audio-toggle-right-margin: 2.25rem;
+                --audio-toggle-top: 0.6rem;
+            }
+
+            .nav-bar {
+                top: -0.6rem;
+                width: 128rem;
+                height: 5rem;
+                background-size: calc(512rem / 1.25) calc(6.25rem / 1.25);
             }
         }
 
         @media (max-width: 1400px), (max-height: 900px) {
             :root {
                 --base-font-size: clamp(9px, calc(1.45vmin + 1.25px), 15px);
+                --audio-toggle-right-margin: 2rem;
+                --audio-toggle-width: 8.5rem;
+                --audio-toggle-height: 2.25rem;
+                --audio-toggle-icon-size: 1.625rem;
+                --audio-toggle-padding-x: 0.65rem;
+                --audio-toggle-slider-width: 4.5rem;
+                --audio-slider-expanded-margin: 0.45rem;
             }
         }
 
         @media (max-width: 1100px), (max-height: 720px) {
             :root {
                 --base-font-size: clamp(9px, calc(1.6vmin + 0.75px), 14px);
+                --audio-toggle-right-margin: 1.75rem;
+                --audio-toggle-width: 7.75rem;
+                --audio-toggle-height: 2.125rem;
+                --audio-toggle-icon-size: 1.5rem;
+                --audio-toggle-padding-x: 0.6rem;
+                --audio-toggle-slider-width: 4rem;
+                --audio-toggle-thumb-size: 0.7rem;
+                --audio-slider-expanded-margin: 0.4rem;
             }
         }
 
         @media (min-aspect-ratio: 21/9) {
             :root {
                 --base-font-size: clamp(9px, calc(1.15vmin + 3px), 15px);
+            }
+        }
+
+        @media (max-width: 960px), (max-height: 640px) {
+            :root {
+                --audio-toggle-right-margin: 1.5rem;
+                --audio-toggle-width: 7.5rem;
+                --audio-toggle-height: 2.0625rem;
+                --audio-toggle-icon-size: 1.45rem;
+                --audio-toggle-padding-x: 0.55rem;
+                --audio-toggle-slider-width: 3.75rem;
+                --audio-toggle-thumb-size: 0.65rem;
+                --audio-slider-expanded-margin: 0.35rem;
+            }
+        }
+
+        @media (max-width: 820px), (max-height: 600px), (max-aspect-ratio: 4/3) {
+            :root {
+                --audio-toggle-right-margin: 1.25rem;
+                --audio-toggle-width: 7.25rem;
+                --audio-toggle-height: 2rem;
+                --audio-toggle-icon-size: 1.35rem;
+                --audio-toggle-padding-x: 0.5rem;
+                --audio-toggle-slider-width: 3.5rem;
+                --audio-toggle-thumb-size: 0.6rem;
+                --audio-slider-expanded-margin: 0.3rem;
+                --audio-toggle-gap: 0.35rem;
+            }
+        }
+
+        @media (max-width: 720px), (max-height: 540px) {
+            :root {
+                --audio-toggle-right-margin: 1rem;
+                --audio-toggle-width: 7rem;
+                --audio-toggle-height: 1.9375rem;
+                --audio-toggle-icon-size: 1.3rem;
+                --audio-toggle-padding-x: 0.45rem;
+                --audio-toggle-slider-width: 3.25rem;
+                --audio-toggle-thumb-size: 0.575rem;
+                --audio-slider-expanded-margin: 0.275rem;
+            }
+        }
+
+        @media (max-width: 640px), (max-height: 520px) {
+            :root {
+                --audio-toggle-right-margin: 0.85rem;
+                --audio-toggle-width: 6.875rem;
+                --audio-toggle-height: 1.875rem;
+                --audio-toggle-icon-size: 1.25rem;
+                --audio-toggle-padding-x: 0.425rem;
+                --audio-toggle-slider-width: 3rem;
+                --audio-toggle-thumb-size: 0.55rem;
+                --audio-slider-expanded-margin: 0.25rem;
+            }
+        }
+
+        @media (max-width: 560px) {
+            :root {
+                --audio-toggle-right-margin: 0.75rem;
+                --audio-toggle-width: 6.75rem;
+                --audio-toggle-height: 1.85rem;
+                --audio-toggle-icon-size: 1.2rem;
+                --audio-toggle-padding-x: 0.4rem;
+                --audio-toggle-slider-width: 2.85rem;
+                --audio-toggle-thumb-size: 0.525rem;
+                --audio-slider-expanded-margin: 0.225rem;
+                --audio-toggle-gap: 0.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --audio-toggle-right-margin: 0.65rem;
+                --audio-toggle-top: 0.9rem;
+                --audio-toggle-width: 6.5rem;
+                --audio-toggle-height: 1.7875rem;
+                --audio-toggle-icon-size: 1.15rem;
+                --audio-toggle-padding-x: 0.375rem;
+                --audio-toggle-slider-width: 2.75rem;
+                --audio-toggle-thumb-size: 0.5rem;
+                --audio-slider-expanded-margin: 0.2rem;
+                --audio-toggle-gap: 0.3rem;
             }
         }
 
@@ -961,6 +1078,7 @@
             height: auto;
             transition: filter 0.3s ease, transform 0.3s ease;
             filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55));
+            transform: translateX(0.125rem);
         }
 
         .completion-reward-button.is-selected .completion-reward-art {
@@ -1060,6 +1178,7 @@
             color: #ffffff;
             font-weight: 400;
             text-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.85), 0 0 2.5rem rgba(0, 0, 0, 0.55);
+            transform: translateX(-2.5rem);
         }
         .completion-modal {
             position: fixed;
@@ -1589,7 +1708,7 @@
 
         .pyrai-symbol-button.selected .active-img {
             display: block !important;
-            filter: drop-shadow(0 0 0.6rem rgba(57, 255, 20, 0.22)) drop-shadow(0 0 1.2rem rgba(57, 255, 20, 0.165));
+            filter: drop-shadow(0 0 0.35rem rgba(57, 255, 20, 0.22)) drop-shadow(0 0 0.7rem rgba(57, 255, 20, 0.165));
             animation: pyrai-glow-pulse 3s ease-in-out infinite;
             animation-delay: 0s;
             animation-fill-mode: both;
@@ -1600,10 +1719,10 @@
         @keyframes pyrai-glow-pulse {
             0%,
             100% {
-                filter: drop-shadow(0 0 0.6rem rgba(57, 255, 20, 0.22)) drop-shadow(0 0 1.2rem rgba(57, 255, 20, 0.165));
+                filter: drop-shadow(0 0 0.35rem rgba(57, 255, 20, 0.22)) drop-shadow(0 0 0.7rem rgba(57, 255, 20, 0.165));
             }
             50% {
-                filter: drop-shadow(0 0 0.6rem rgba(57, 255, 20, 0.33)) drop-shadow(0 0 1.2rem rgba(57, 255, 20, 0.2475));
+                filter: drop-shadow(0 0 0.35rem rgba(57, 255, 20, 0.33)) drop-shadow(0 0 0.7rem rgba(57, 255, 20, 0.2475));
             }
         }
 
@@ -1868,11 +1987,10 @@
 
         .nav-audio-toggle {
             position: fixed;
-            top: 0.75rem;
-            left: 50%;
-            margin-left: 68.75rem;
-            width: 9rem;
-            height: 2.375rem;
+            top: var(--audio-toggle-top, 0.75rem);
+            right: var(--audio-toggle-right-margin, 2.5rem);
+            width: var(--audio-toggle-width, 9rem);
+            height: var(--audio-toggle-height, 2.375rem);
             border: none;
             border-radius: 0.625rem;
             background: transparent;
@@ -1880,12 +1998,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0;
-            padding: 0 0.75rem;
+            gap: var(--audio-toggle-gap, 0);
+            padding: 0 var(--audio-toggle-padding-x, 0.75rem);
             transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
             z-index: 1100;
             pointer-events: auto;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .nav-audio-toggle:hover {
@@ -1895,14 +2013,15 @@
         }
 
         .nav-audio-toggle svg {
-            width: 1.75rem;
-            height: 1.75rem;
+            width: var(--audio-toggle-icon-size, 1.75rem);
+            height: var(--audio-toggle-icon-size, 1.75rem);
             fill: none;
             stroke: #f4e3c1;
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
             flex-shrink: 0;
+            transform-origin: center;
         }
 
         .nav-audio-toggle.is-muted svg {
@@ -1913,7 +2032,7 @@
             -webkit-appearance: none;
             appearance: none;
             width: 0;
-            height: 0.25rem;
+            height: var(--audio-slider-height, 0.25rem);
             background: rgba(214, 165, 80, 0.3);
             border-radius: 0.125rem;
             outline: none;
@@ -1926,17 +2045,17 @@
 
         .nav-audio-toggle:hover .volume-slider,
         .nav-audio-toggle:focus-within .volume-slider {
-            width: 5rem;
+            width: var(--audio-toggle-slider-width, 5rem);
             opacity: 1;
-            margin-left: 0.5rem;
+            margin-left: var(--audio-slider-expanded-margin, 0.5rem);
             pointer-events: auto;
         }
 
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 0.75rem;
-            height: 0.75rem;
+            width: var(--audio-toggle-thumb-size, 0.75rem);
+            height: var(--audio-toggle-thumb-size, 0.75rem);
             background: #f4e3c1;
             border-radius: 50%;
             cursor: pointer;
@@ -1948,8 +2067,8 @@
         }
 
         .volume-slider::-moz-range-thumb {
-            width: 0.75rem;
-            height: 0.75rem;
+            width: var(--audio-toggle-thumb-size, 0.75rem);
+            height: var(--audio-toggle-thumb-size, 0.75rem);
             background: #f4e3c1;
             border-radius: 50%;
             cursor: pointer;
@@ -3158,6 +3277,7 @@
         const QUEUED_FIGURE_VARIANT_KEY = 'queuedFigureVariant';
         const SELECTED_PROFILE_KEY = 'selectedProfileId';
         const ACTIVE_CHALLENGE_KEY = 'activeRiddleState';
+        const USER_PAGE_STORAGE_PREFIX = 'currentPageFor';
 
         let activeRiddleChallenge = null;
         let pendingRiddleAdvanceTimeout = null;
@@ -3634,24 +3754,39 @@
             }
         }
 
-        function clearActiveChallengeState() {
-            // Clear user-specific challenge state
+        function clearActiveChallengeState(options = {}) {
+            const {
+                preservePage = false,
+                preserveStoredChallenge = false,
+                resetNameField = true
+            } = options;
+
             const currentUserEmail = localStorage.getItem('currentUser');
-            if (currentUserEmail) {
-                localStorage.removeItem(ACTIVE_CHALLENGE_KEY + '_' + currentUserEmail);
+
+            if (!preserveStoredChallenge) {
+                if (currentUserEmail) {
+                    localStorage.removeItem(ACTIVE_CHALLENGE_KEY + '_' + currentUserEmail);
+                }
+                // Also clear global keys for backwards compatibility
+                localStorage.removeItem(ACTIVE_CHALLENGE_KEY);
+                localStorage.removeItem(FIGURE_VARIANT_KEY);
+                localStorage.removeItem(SELECTED_PROFILE_KEY);
             }
-            // Also clear global keys for backwards compatibility
-            localStorage.removeItem(ACTIVE_CHALLENGE_KEY);
-            localStorage.removeItem(FIGURE_VARIANT_KEY);
+
             localStorage.removeItem(QUEUED_FIGURE_VARIANT_KEY);
-            localStorage.removeItem(SELECTED_PROFILE_KEY);
+
+            if (!preservePage) {
+                clearSavedPageForUser(currentUserEmail || undefined);
+            }
+
             clearPendingRiddleAdvance();
             activeRiddleChallenge = null;
-            
-            // Clear the name input field
-            const playerNameInput = document.getElementById('playerName');
-            if (playerNameInput) {
-                playerNameInput.value = '';
+
+            if (resetNameField) {
+                const playerNameInput = document.getElementById('playerName');
+                if (playerNameInput) {
+                    playerNameInput.value = '';
+                }
             }
         }
 
@@ -4840,10 +4975,10 @@
             }
         }
 
-        function showPage(pageId) {
+        function showPage(pageId, options = {}) {
             const overlay = document.getElementById('pageTransitionOverlay');
             if (!overlay) {
-                performPageSwitch(pageId);
+                performPageSwitch(pageId, null, options);
                 return;
             }
 
@@ -4868,11 +5003,11 @@
                     return;
                 }
 
-                performPageSwitch(pageId, overlay);
+                performPageSwitch(pageId, overlay, options);
             }, 500);
         }
 
-        function performPageSwitch(pageId, overlay = null) {
+        function performPageSwitch(pageId, overlay = null, options = {}) {
             const targetPageId = pageId + 'Page';
 
             // Hide all pages
@@ -4939,7 +5074,13 @@
                     });
                 });
 
-                localStorage.setItem('currentPage', pageId);
+                if (!options.suppressPersistence) {
+                    const currentUserEmail = localStorage.getItem('currentUser');
+                    if (currentUserEmail) {
+                        localStorage.setItem(`${USER_PAGE_STORAGE_PREFIX}_${currentUserEmail}`, pageId);
+                    }
+                    localStorage.setItem('currentPage', pageId);
+                }
                 currentPage = pageId;
                 
                 // Reset completion flag when leaving riddle page
@@ -5094,7 +5235,7 @@
             localStorage.setItem('accounts', JSON.stringify(accounts));
             // Set current user FIRST, then clear challenge state for the new user
             localStorage.setItem('currentUser', email);
-            clearActiveChallengeState();
+            clearActiveChallengeState({ preservePage: true, preserveStoredChallenge: false });
         }
 
         function loginAccount(email, password) {
@@ -5108,7 +5249,11 @@
                 
                 // Set current user FIRST, then clear challenge state for the new user
                 localStorage.setItem('currentUser', email);
-                clearActiveChallengeState();
+                const persistedPage = getSavedPageForUser(email);
+                clearActiveChallengeState({ preservePage: true, preserveStoredChallenge: true });
+                if (persistedPage) {
+                    routeUser._redirectOverride = persistedPage;
+                }
                 return accounts[email];
             }
             return null;
@@ -5123,26 +5268,55 @@
             return null;
         }
 
-         function routeUser(user) {
-             if (!user) {
-                showPage('login');
-                 return;
+        function getSavedPageForUser(email = localStorage.getItem('currentUser')) {
+            if (!email) {
+                return localStorage.getItem('currentPage');
             }
+            return localStorage.getItem(`${USER_PAGE_STORAGE_PREFIX}_${email}`) || localStorage.getItem('currentPage');
+        }
+
+        function clearSavedPageForUser(email = localStorage.getItem('currentUser')) {
+            if (email) {
+                localStorage.removeItem(`${USER_PAGE_STORAGE_PREFIX}_${email}`);
+            }
+            localStorage.removeItem('currentPage');
+        }
+
+        function routeUser(user) {
+            if (!user) {
+                showPage('login');
+                return;
+            }
+
+            const overridePage = routeUser._redirectOverride;
+            routeUser._redirectOverride = undefined;
+
+            let savedPage = overridePage || getSavedPageForUser();
 
             if (!hasSeenIntro()) {
                 showPage('intro');
                 return;
             }
-             
-             if (!user.playerName) {
-                 showPage('nameEntry');
-             } else if (!user.riddleAnswer) {
-                 showPage('riddle');
-             } else {
-                 // User has completed everything, stay on riddle page
-                 showPage('riddle');
-             }
-         }
+
+            if (!user.playerName) {
+                showPage('nameEntry');
+                return;
+            }
+
+            if (savedPage && savedPage !== 'login') {
+                if (savedPage === 'nameEntry' && user.playerName) {
+                    savedPage = 'riddle';
+                }
+
+                if (savedPage !== 'login') {
+                    showPage(savedPage);
+                    return;
+                }
+            }
+
+            // Default routing based on progress
+            showPage('riddle');
+        }
 
         function handleSubmit() {
             const email = document.getElementById('email').value;
@@ -5244,7 +5418,11 @@
                 
                 // Set current user FIRST, then clear challenge state for the new user
                 localStorage.setItem('currentUser', existingDiscordEmail);
-                clearActiveChallengeState();
+                const persistedPage = getSavedPageForUser(existingDiscordEmail);
+                clearActiveChallengeState({ preservePage: true, preserveStoredChallenge: true });
+                if (persistedPage) {
+                    routeUser._redirectOverride = persistedPage;
+                }
                 alert('Welcome back! Logged in with ' + provider.charAt(0).toUpperCase() + provider.slice(1) + ' successfully!');
                 
                 // Small delay to ensure DOM is ready
@@ -5256,6 +5434,10 @@
                 const fakeEmail = 'user' + Date.now() + '@' + provider + '.com';
                 const fakePassword = provider + '123';
                 createAccount(fakeEmail, fakePassword, provider);
+                const persistedPage = getSavedPageForUser(fakeEmail);
+                if (persistedPage) {
+                    routeUser._redirectOverride = persistedPage;
+                }
                 alert('Logged in with ' + provider.charAt(0).toUpperCase() + provider.slice(1) + ' successfully!');
                  
                  // Small delay to ensure DOM is ready
