@@ -938,18 +938,30 @@
         }
 
         @keyframes completionGlowTeal {
-            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(48, 226, 176, 0.2)); }
-            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(48, 226, 176, 0.2)); }
+            0%, 100% {
+                filter: drop-shadow(0 0 1.05rem rgba(0, 0, 0, 0.46)) drop-shadow(0 0 0.55rem rgba(48, 226, 176, 0.06));
+            }
+            50% {
+                filter: drop-shadow(0 0 1.6rem rgba(0, 0, 0, 0.68)) drop-shadow(0 0 1.45rem rgba(48, 226, 176, 0.25));
+            }
         }
 
         @keyframes completionGlowAmber {
-            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(255, 183, 66, 0.2)); }
-            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(255, 183, 66, 0.2)); }
+            0%, 100% {
+                filter: drop-shadow(0 0 1.05rem rgba(0, 0, 0, 0.46)) drop-shadow(0 0 0.55rem rgba(255, 183, 66, 0.06));
+            }
+            50% {
+                filter: drop-shadow(0 0 1.6rem rgba(0, 0, 0, 0.68)) drop-shadow(0 0 1.45rem rgba(255, 183, 66, 0.25));
+            }
         }
 
         @keyframes completionGlowAqua {
-            0%, 100% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(92, 196, 255, 0.2)); }
-            50% { filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(92, 196, 255, 0.2)); }
+            0%, 100% {
+                filter: drop-shadow(0 0 1.05rem rgba(0, 0, 0, 0.46)) drop-shadow(0 0 0.55rem rgba(92, 196, 255, 0.06));
+            }
+            50% {
+                filter: drop-shadow(0 0 1.6rem rgba(0, 0, 0, 0.68)) drop-shadow(0 0 1.45rem rgba(92, 196, 255, 0.25));
+            }
         }
 
         .completion-reward-button.is-selected[data-reward="armor"] .completion-reward-art {
@@ -966,15 +978,15 @@
 
         /* Hover glow effects for all completion items */
         .completion-reward-button:hover[data-reward="armor"] .completion-reward-art {
-            filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(48, 226, 176, 0.2));
+            animation: completionGlowTeal 2.4s ease-in-out infinite;
         }
 
         .completion-reward-button:hover[data-reward="scroll"] .completion-reward-art {
-            filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(255, 183, 66, 0.2));
+            animation: completionGlowAmber 2.4s ease-in-out infinite;
         }
 
         .completion-reward-button:hover[data-reward="mount"] .completion-reward-art {
-            filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55)) drop-shadow(0 0 0.75rem rgba(92, 196, 255, 0.2));
+            animation: completionGlowAqua 2.4s ease-in-out infinite;
         }
 
         /* Show selected image on hover */
@@ -1000,7 +1012,7 @@
 
         .completion-selector {
             position: absolute;
-            bottom: -4.5rem;
+            bottom: -6rem;
             left: 0;
             width: 5.25rem;
             height: auto;
@@ -1011,8 +1023,10 @@
         }
 
         .completion-submit-btn {
-            margin-top: 1.75rem;
-            transform: scale(0.81);
+            margin-top: clamp(3rem, 8vw, 5rem);
+            flex: 0 0 auto;
+            position: relative;
+            z-index: 3;
             color: #ffffff;
             font-weight: 400;
             text-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.85), 0 0 2.5rem rgba(0, 0, 0, 0.55);
@@ -1401,8 +1415,8 @@
 
         /* Allow Pyrai symbol game to overlap with input on riddle 17 */
         .riddle-container[data-riddle-id="17"] .pyrai-symbol-game-container {
-            margin-top: -2rem;
-            margin-bottom: 1.5rem;
+            margin-top: -4rem;
+            margin-bottom: 0.75rem;
             z-index: 1;
         }
 
@@ -1545,6 +1559,7 @@
 
         .pyrai-symbol-button.selected .active-img {
             display: block !important;
+            filter: drop-shadow(0 0 0.6rem rgba(57, 255, 20, 0.6375)) drop-shadow(0 0 1.2rem rgba(57, 255, 20, 0.4875));
         }
 
         .pyrai-symbol-button.wrong .inactive-img {
@@ -1697,7 +1712,8 @@
         }
 
         .riddle-container[data-riddle-id="17"] .riddle-input-container {
-            padding-top: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 0;
         }
         
         .riddle-container[data-riddle-id="21"] .riddle-input-container {
@@ -2749,7 +2765,7 @@
             <!-- X (visible when muted) -->
             <path d="M16 9l4 4M20 9l-4 4" class="mute-x" style="display: none;"></path>
         </svg>
-        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="15" aria-label="Volume control">
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50" aria-label="Volume control">
     </div>
     <div class="page-transition-overlay" id="pageTransitionOverlay"></div>
 
@@ -2758,8 +2774,7 @@
         <div class="intro-container">
             <div class="intro-content">
                 <div class="youtube-frame">
-                    <video id="introVideo" preload="auto" controls poster="art/lightbox-texture.png">
-                        <track label="English" kind="captions" srclang="en" src="intro/Challenge_Intro_Video.vtt">
+                    <video id="introVideo" preload="auto" controls controlsList="nodownload" poster="art/lightbox-texture.png">
                     </video>
                 </div>
             </div>
@@ -2871,7 +2886,7 @@
 
     <div class="page riddle-page" id="riddlePage">
         <div class="completion-container" id="completionContainer" aria-hidden="true">
-            <h1 class="completion-heading">Congratulations!</h1>
+            <h1 class="completion-heading">CONGRATULATIONS!</h1>
             <p class="completion-subheading">You've completed the Challenge! Choose your reward.</p>
             <div class="golden-swirl completion-divider"></div>
             <div class="completion-rewards" id="completionRewards">
@@ -3182,7 +3197,7 @@
                 id: 3,
                 heading: 'Move with purpose...',
                 white: ['The past is riddled with forgotten truths. Let’s bring them back to light.'],
-                yellow: "In shadows deep where whispers play, I tread with grace at break of day. A crown I wear, though not of gold, In autumn’s chill, my tale is told. What am I?",
+                yellow: "In shadows deep where whispers play, I tread with grace at break of day.\nA crown I wear, though not of gold, In autumn’s chill, my tale is told.\nWhat am I?",
                 answers: ['stag', 'a stag']
             },
             {
@@ -3196,7 +3211,7 @@
                 id: 5,
                 heading: 'The past is riddled with forgotten truths...',
                 white: ["The shadows have whispered of your arrival. I hope you're as skilled as they say."],
-                yellow: "Two divine sisters, bound by trust, One shaped worlds, the other discussed. A warning whispered, dark forces wait, Who foresaw this tragic fate?",
+                yellow: "Two divine sisters, bound by trust, One shaped worlds, the other discussed. \nA warning whispered, dark forces wait, Who foresaw this tragic fate?",
                 answers: ['goddess of fate']
             },
             {
@@ -3228,7 +3243,7 @@
                 id: 9,
                 heading: 'You’ve done well so far, but the hardest trials remain.',
                 white: ['No challenge is too great for those who persevere. Step into the unknown and prove yourself. You’re closer than you think. Keep going.'],
-                yellow: "From essence pure, creation sprung, by divine hands, songs were sung. A goddess's touch ignited the flame, bringing forth life, bestowing name. Who is this deity of birthing light, crafting worlds from boundless might?",
+                yellow: "From essence pure, creation sprung, by divine hands, songs were sung. \nA goddess's touch ignited the flame, bringing forth life, bestowing name. \nWho is this deity of birthing light, crafting worlds from boundless might?",
                 answers: ['goddess of creation', 'vyra']
             },
             {
@@ -3249,7 +3264,7 @@
                 id: 12,
                 heading: 'Some knowledge is best left untouched...',
                 white: ['Not all answers bring comfort. Solving this may unlock something… dangerous.'],
-                yellow: "Opposing the triad's daring course, deities stood firm with righteous force. They battled to banish, to set things right, casting out darkness to restore the light. Who are these guardians of order and truth, defenders of creation since its youth?",
+                yellow: "Opposing the triad's daring course, deities stood firm with righteous force. \nThey battled to banish, to set things right, casting out darkness to restore the light. Who are these guardians of order and truth, defenders of creation since its youth?",
                 answers: ['the seven', 'seven']
             },
             {
@@ -3261,7 +3276,7 @@
             },
             {
                 id: 14,
-                heading: 'You have a sharp mind. Put it to good use.',
+                heading: 'You have a sharp mind. \nPut it to good use.',
                 white: ['You’ve proven yourself before. Do it again. There’s no one better suited for this than you.'],
                 yellow: "Three of ten, with secrets to impart, taught forbidden truths, a rebellious start. Elevating mortals to divine estate, leading to conflict and a fractured fate. Who are these mentors of hidden lore, whose actions ignited divine war?",
                 answers: ['the others', 'others']
@@ -3275,7 +3290,7 @@
             },
             {
                 id: 16,
-                heading: 'One wrong step and you might never get another...',
+                heading: 'One wrong step and \nyou might never get another...',
                 white: ['At the heart of every mystery is a simple truth. You just have to find it.'],
                 yellow: "From distant voids, they made their way, Through twisted doors of dark decay. A gateway born from dread and fright, What name is given to this blight?",
                 answers: ['harbingers', 'the harbingers']
@@ -3283,14 +3298,14 @@
             {
                 id: 17,
                 heading: 'A keen eye and a sharp mind—that’s what will get you through this.',
-                white: ['If you succeed, your name will be remembered. If you fail, no one will ever know you were here.'],
+                white: ['If you succeed, your name will be remembered. If you fail, no one \nwill ever know you were here.'],
                 yellow: "In the heart of dense forests, under canopies green, Nature's guardians dwell, rarely seen. With pointed ears and a bond to the land, They wield ancient magic with a gentle hand. Who are these beings of the woodland realm, With nature's power at their helm?",
                 answers: ["py'rai", "pyr'ai", 'pyrai'],
                 disclaimer: 'Placeholder -- awaiting verification.'
             },
             {
                 id: 18,
-                heading: 'You’ve handled worse. This should be no different.',
+                heading: 'You’ve handled worse. \nThis should be no different.',
                 white: ['You smell that? That’s the scent of something rotten lurking nearby.'],
                 yellow: "A world once bright, now cloaked in dread, Its trees defiled, its rivers bled. A force unseen yet felt so deep, What twisted all and made gods weep?",
                 answers: ['corruption']
@@ -3638,10 +3653,39 @@
                     element.appendChild(wordSpan);
                 } else if (match[2]) {
                     // It's punctuation/space - use Centaur font
-                    const punctSpan = document.createElement('span');
-                    punctSpan.className = 'centaur-punct';
-                    punctSpan.textContent = match[2];
-                    element.appendChild(punctSpan);
+                    const segment = match[2];
+                    let buffer = '';
+
+                    for (let i = 0; i < segment.length; i++) {
+                        const char = segment[i];
+                        const isCarriageReturn = char === '\r';
+                        const isLineFeed = char === '\n';
+
+                        if (isLineFeed || (isCarriageReturn && segment[i + 1] === '\n')) {
+                            if (buffer) {
+                                const punctSpan = document.createElement('span');
+                                punctSpan.className = 'centaur-punct';
+                                punctSpan.textContent = buffer;
+                                element.appendChild(punctSpan);
+                                buffer = '';
+                            }
+
+                            if (isCarriageReturn && segment[i + 1] === '\n') {
+                                i++; // Skip the line feed in CRLF sequences
+                            }
+
+                            element.appendChild(document.createElement('br'));
+                        } else if (!isCarriageReturn) {
+                            buffer += char;
+                        }
+                    }
+
+                    if (buffer) {
+                        const punctSpan = document.createElement('span');
+                        punctSpan.className = 'centaur-punct';
+                        punctSpan.textContent = buffer;
+                        element.appendChild(punctSpan);
+                    }
                 }
             }
         }
@@ -3698,57 +3742,62 @@
         }
 
         function formatHeadingWithLineBreaks(text) {
-            // Add line breaks for long titles:
-            // 1. Prefer breaking after periods (not part of ellipsis) at position >= 25
-            // 2. If no period found, break at first space after position 30
-            // 3. If no space found after 30, let CSS handle natural wrapping
-            
-            let result = '';
-            let lineBreakAdded = false;
-            
-            for (let i = 0; i < text.length; i++) {
-                result += text[i];
-                
-                if (!lineBreakAdded) {
-                    // Check if current character is a period
-                    if (text[i] === '.') {
-                        // Check if period is at position >= 30
-                        if (i >= 29) {
-                            // Check if it's not part of an ellipsis
-                            const notEllipsisBefore = !(i >= 2 && text[i-1] === '.' && text[i-2] === '.');
-                            const notEllipsisAfter = !(i < text.length - 2 && text[i+1] === '.' && text[i+2] === '.');
-                            
-                            // Check if it ends a sentence (followed by space, end of string, or another sentence)
-                            const endsRiddleHeading = i === text.length - 1 || (i < text.length - 1 && text[i+1] === ' ');
-                            
-                            if (notEllipsisBefore && notEllipsisAfter && endsRiddleHeading) {
-                                // Add line break after the period
+            if (!text) {
+                return '';
+            }
+
+            const segments = text.split(/\r?\n/);
+
+            const processedSegments = segments.map(segment => {
+                let result = '';
+                let lineBreakAdded = false;
+
+                for (let i = 0; i < segment.length; i++) {
+                    result += segment[i];
+
+                    if (!lineBreakAdded) {
+                        // Check if current character is a period
+                        if (segment[i] === '.') {
+                            // Check if period is at position >= 30
+                            if (i >= 29) {
+                                // Check if it's not part of an ellipsis
+                                const notEllipsisBefore = !(i >= 2 && segment[i-1] === '.' && segment[i-2] === '.');
+                                const notEllipsisAfter = !(i < segment.length - 2 && segment[i+1] === '.' && segment[i+2] === '.');
+
+                                // Check if it ends a sentence (followed by space, end of string, or another sentence)
+                                const endsRiddleHeading = i === segment.length - 1 || (i < segment.length - 1 && segment[i+1] === ' ');
+
+                                if (notEllipsisBefore && notEllipsisAfter && endsRiddleHeading) {
+                                    // Add line break after the period
+                                    result += '<br>';
+                                    lineBreakAdded = true;
+                                }
+                            }
+                        }
+                        // If no period found yet and we're past 30 chars, look for space to break
+                        else if (segment[i] === ' ' && i >= 29 && i < segment.length - 1) {
+                            // Only add break if we haven't found a period yet and there's more text
+                            // Check if there's a period coming soon (within next 10 chars)
+                            let periodSoon = false;
+                            for (let j = i + 1; j < Math.min(i + 11, segment.length); j++) {
+                                if (segment[j] === '.') {
+                                    periodSoon = true;
+                                    break;
+                                }
+                            }
+                            // If no period coming soon, break at this space
+                            if (!periodSoon) {
                                 result += '<br>';
                                 lineBreakAdded = true;
                             }
                         }
                     }
-                    // If no period found yet and we're past 30 chars, look for space to break
-                    else if (text[i] === ' ' && i >= 29 && i < text.length - 1) {
-                        // Only add break if we haven't found a period yet and there's more text
-                        // Check if there's a period coming soon (within next 10 chars)
-                        let periodSoon = false;
-                        for (let j = i + 1; j < Math.min(i + 11, text.length); j++) {
-                            if (text[j] === '.') {
-                                periodSoon = true;
-                                break;
-                            }
-                        }
-                        // If no period coming soon, break at this space
-                        if (!periodSoon) {
-                            result += '<br>';
-                            lineBreakAdded = true;
-                        }
-                    }
                 }
-            }
-            
-            return result;
+
+                return result;
+            });
+
+            return processedSegments.join('<br>');
         }
 
         function renderRiddleView(riddle, playerName, options = {}) {
@@ -4382,8 +4431,8 @@
                     const runeButtons = gameContainer?.querySelectorAll('.class-rune-button');
                     
                     if (gameContainer && runeButtons) {
-                        // Correct sequence: Cleric, Ranger, Tank, Fighter, Rogue, Mage, Bard, Summoner
-                        const correctSequence = ['cleric', 'ranger', 'tank', 'fighter', 'rogue', 'mage', 'bard', 'summoner'];
+                        // Correct sequence: Cleric, Rogue, Ranger, Tank, Fighter, Mage, Bard, Summoner
+                        const correctSequence = ['cleric', 'rogue', 'ranger', 'tank', 'fighter', 'mage', 'bard', 'summoner'];
                         let currentSequence = [];
                         let isGameCompleted = false;
                         
@@ -5312,7 +5361,7 @@
             setupCompletionRewardEvents();
         });
 
-        const INTRO_VIDEO_PATH = 'intro/Challenge_Intro_Video.mov';
+        const INTRO_VIDEO_PATH = 'intro/Challenge-Intro-Video (English).mp4';
         const INTRO_SEEN_KEY = 'introSeen';
 
         function markIntroSeen() {
@@ -5427,7 +5476,7 @@ function safePlay(mediaElement) {
             let classRuneAudio = document.getElementById('classRuneAudio');
 
             // Get saved volume from localStorage for initial setup
-            const initialVolume = parseFloat(localStorage.getItem('audioVolume') || '15') / 100;
+            const initialVolume = parseFloat(localStorage.getItem('audioVolume') || '50') / 100;
 
             if (!backgroundMusic) {
                 backgroundMusic = document.createElement('audio');
@@ -5573,7 +5622,7 @@ function safePlay(mediaElement) {
 
             // Initialize saved states
             const savedMuted = localStorage.getItem('audioMuted') === 'true';
-            const savedVolume = localStorage.getItem('audioVolume') || '15';
+            const savedVolume = localStorage.getItem('audioVolume') || '50';
             applyMuteState(savedMuted);
             
             if (volumeSlider) {
@@ -5629,7 +5678,7 @@ function safePlay(mediaElement) {
                     const isMuted = localStorage.getItem('audioMuted') === 'true';
                     stagVoice.muted = isMuted;
                     
-                    const userVolume = parseFloat(localStorage.getItem('audioVolume') || '15') / 100;
+                    const userVolume = parseFloat(localStorage.getItem('audioVolume') || '50') / 100;
                     const baseVolume = parseFloat(stagVoice.dataset.baseVolume || '1.0');
                     stagVoice.volume = userVolume * baseVolume;
                     
@@ -5656,7 +5705,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
             if (!audioElement) return;
             
             // Get the user's current volume setting
-            const userVolume = parseFloat(localStorage.getItem('audioVolume') || '15') / 100;
+            const userVolume = parseFloat(localStorage.getItem('audioVolume') || '50') / 100;
             const baseVolume = parseFloat(audioElement.dataset.baseVolume || '1.0');
             const effectiveTargetVolume = targetVolume !== null ? targetVolume : (userVolume * baseVolume);
             
@@ -6083,7 +6132,6 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                     } else if (page.id === 'riddleCompletion') {
                         jumpToRiddleCompletion();
                     } else {
-                        hideDevConsole();
                         showPage(page.id);
                     }
                 });
@@ -6212,7 +6260,6 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
 
             // Save and navigate
             saveActiveChallenge();
-            hideDevConsole();
             showPage('riddle');
         }
 
