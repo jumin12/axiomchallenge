@@ -71,14 +71,14 @@
 
             .nav-bar {
                 top: -0.6rem;
-                width: 153.6rem;
-                height: 6rem;
-                background-size: calc(512rem * 1.2) calc(6.25rem * 1.2);
+                width: 192rem;
+                height: 5rem;
+                background-size: 614.4rem 7.5rem;
             }
 
             .signup-info-footer,
             .signup-info-footer .footer-bg {
-                width: 153.6rem;
+                width: 192rem;
             }
         }
 
@@ -666,7 +666,7 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 160rem;
+            width: 192rem;
             height: auto;
             pointer-events: none;
             z-index: 3;
@@ -676,7 +676,7 @@
         }
 
         .signup-info-footer .footer-bg {
-            width: 160rem;
+            width: 192rem;
             height: auto;
             display: block;
             image-rendering: crisp-edges;
@@ -797,7 +797,6 @@
             left: 50%;
             transform: translateX(-50%);
         }
-
         .name-entry-body {
             margin-top: 2.5rem;
             width: 100%;
@@ -1588,7 +1587,6 @@
             margin-bottom: 0.75rem;
             z-index: 1;
         }
-
         .class-rune-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1600,7 +1598,6 @@
             margin-left: -5rem;
             padding: 2rem;
         }
-
         .pyrai-symbol-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -2389,7 +2386,6 @@
             overflow: hidden;
             position: relative;
         }
-
         .dev-console-header {
             display: flex;
             align-items: center;
@@ -2398,7 +2394,6 @@
             background: linear-gradient(90deg, rgba(26, 20, 14, 0.98), rgba(36, 28, 20, 0.96));
             border-bottom: 0.0625rem solid rgba(214, 165, 80, 0.35);
         }
-
         .dev-console-title {
             font-size: 1.5625rem;
             font-weight: 100;
@@ -3273,9 +3268,7 @@
             </div>
         </div>
     </div>
-
     <button type="button" class="dev-console-toggle-btn" id="devConsoleToggle" aria-label="Toggle developer console">DEV CONSOLE</button>
-
     <script>
         // Page management
         let currentPage = 'login'; // Always start on login page
@@ -3999,7 +3992,6 @@
 
             return processedSegments.join('<br>');
         }
-
         function renderRiddleView(riddle, playerName, options = {}) {
             const content = document.getElementById('riddleContent');
             const headingEl = document.getElementById('riddleHeading');
@@ -4787,7 +4779,6 @@
             // Update dev console highlighting if visible
             refreshDevConsoleIfVisible();
         }
-
         function renderChallengeCompletion(playerName) {
             clearPendingRiddleAdvance();
             isShowingRiddleCompletion = true; // Mark that we're showing completion
@@ -5947,7 +5938,6 @@ function safePlay(mediaElement) {
 
             handlePageAudio(currentPage);
         }
-
 function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = null) {
             if (!audioElement) return;
             
@@ -6749,7 +6739,6 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
                 isCustom: true
             };
         }
-
         function handleDevConsoleRiddleSubmit(event) {
             event.preventDefault();
             const {
@@ -7542,7 +7531,6 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
 
             editor.classList.add('is-visible');
         }
-
         function hideRiddleEditor(riddleId) {
             if (!riddleId) {
                 return;
