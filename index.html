@@ -842,7 +842,7 @@
 
         .name-question {
             font-family: 'Centaur', serif;
-            font-size: 1.2rem;
+            font-size: 1.8rem;
             color: #ffffff;
             margin-top: 0;
             margin-bottom: 1.125rem;
@@ -896,7 +896,7 @@
 
         .name-line {
             background: url('art/character-name-line.png') center/contain no-repeat;
-            width: 25rem;
+            width: 21rem;
             height: 6.25rem;
             position: relative;
             z-index: 1;
@@ -1393,6 +1393,14 @@
             margin-bottom: 0.75rem;
         }
 
+        .riddle-container[data-riddle-id="intro"] .riddle-question {
+            font-size: 1.8rem;
+        }
+
+        .riddle-container[data-riddle-id="intro"] .trust-question {
+            font-size: 1.95rem;
+        }
+
         /* XL lightbox - tighten signature spacing */
         .riddle-container[data-riddle-id="8"] .mysterious-signature,
         .riddle-container[data-riddle-id="17"] .mysterious-signature,
@@ -1434,7 +1442,7 @@
 
         .riddle-question {
             font-family: 'Centaur', serif;
-            font-size: 1.2rem;
+            font-size: 1.95rem;
             color: #ffffff;
             margin-top: 0.625rem;
             margin-bottom: 1.125rem;
@@ -1445,14 +1453,14 @@
         .riddle-question.highlight {
             color: #d6a550;
             font-family: 'CAD', serif;
-            font-size: 1.5rem;
+            font-size: 1.95rem;
             letter-spacing: 0.04em;
         }
 
         .trust-question {
             color: #d6a550;
             font-family: 'CAD', serif;
-            font-size: 1.5rem;
+            font-size: 1.95rem;
             letter-spacing: 0.04em;
         }
         
@@ -1923,7 +1931,7 @@
             border: none;
             background-color: transparent;
             color: #d0d8ff;
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             padding: 0 1.875rem;
             text-align: center;
             font-family: 'Centaur', serif;
@@ -1948,6 +1956,7 @@
         .riddle-input::placeholder {
             color: rgba(208, 216, 255, 0.5);
             font-family: 'Centaur', serif;
+            font-size: 1.5rem;
         }
 
         .riddle-input.success {
@@ -2046,8 +2055,8 @@
         }
 
         .nav-audio-toggle svg {
-            width: var(--audio-toggle-icon-size, 1.75rem);
-            height: var(--audio-toggle-icon-size, 1.75rem);
+            width: calc(var(--audio-toggle-icon-size, 1.75rem) * 1.25);
+            height: calc(var(--audio-toggle-icon-size, 1.75rem) * 1.25);
             fill: none;
             stroke: #f4e3c1;
             stroke-width: 2;
@@ -3391,7 +3400,7 @@
                 id: 3,
                 heading: 'Move with purpose...',
                 white: ['The past is riddled with forgotten truths. Let’s bring them back to light.'],
-                yellow: "In shadows deep where whispers play, I tread with grace at break of day.\nA crown I wear, though not of gold, In autumn’s chill, my tale is told.\nWhat am I?",
+                yellow: "In shadows deep where whispers play, I tread with grace at break of day. A crown I wear, though not of gold, In autumn’s chill, my tale is told. What am I?",
                 answers: ['stag', 'a stag']
             },
             {
@@ -3405,7 +3414,7 @@
                 id: 5,
                 heading: 'The past is riddled with forgotten truths...',
                 white: ["The shadows have whispered of your arrival. I hope you're as skilled as they say."],
-                yellow: "Two divine sisters, bound by trust, One shaped worlds, the other discussed. \nA warning whispered, dark forces wait, Who foresaw this tragic fate?",
+                yellow: "Two divine sisters, bound by trust, One shaped worlds, the other discussed. A warning whispered, dark forces wait, Who foresaw this tragic fate?",
                 answers: ['goddess of fate']
             },
             {
@@ -3417,32 +3426,33 @@
             },
             {
                 id: 7,
-                heading: 'A hidden enemy watches from the shadows. Can you outsmart them?',
+                heading: 'A hidden enemy watches \nfrom the shadows. \nCan you outsmart them?',
                 white: ['The past is riddled with forgotten truths. Let’s bring them back to light.'],
                 yellow: "A realm was forged, both new and bright, Yet shadows stirred beyond its light. Their defeat was not the end, What vile foes would rise again?",
                 answers: ['the ancients', 'ancients', 'the others']
             },
             {
                 id: 8,
-                heading: 'Verra needs you. Pull your strength from the gods!',
+                heading: 'Verra needs you.\nPull your strength \nfrom the gods!',
                 white: [
                     '<player>,',
-                    "So, you're smarter than a goblin. Congratulations, but don't get cocky! We have a caravan delivering some resistive supplies to one of our outposts. But they're late. Find them and help them complete their mission.",
-                    'The only information we have in regard to their whereabouts is this map with a note attached:'
+                    "You're smarter than a goblin, but don't get cocky!",
+                    'Our caravan with resistive supplies is late. Find them and help complete their mission.',
+                    'All we have is this map with a note.'
                 ],
                 yellow: "In a land where legends loom, A fortress guards a flower in full plume. Petals of steel, a gleaming hue, Strength and magic in every dew. What is this place where wonders grow, A haven of power few will know?",
                 answers: ['steel bloom', 'citadel of the steel bloom']
             },
             {
                 id: 9,
-                heading: 'You’ve done well so far, but the hardest trials remain.',
+                heading: 'You’ve done well so far, but \nthe hardest trials remain.',
                 white: ['No challenge is too great for those who persevere. Step into the unknown and prove yourself. You’re closer than you think. Keep going.'],
-                yellow: "From essence pure, creation sprung, by divine hands, songs were sung. \nA goddess's touch ignited the flame, bringing forth life, bestowing name. \nWho is this deity of birthing light, crafting worlds from boundless might?",
+                yellow: "From essence pure, creation sprung, by divine hands, songs were sung. A goddess's touch ignited the flame, bringing forth life, bestowing name. Who is this deity of birthing light, crafting worlds from boundless might?",
                 answers: ['goddess of creation', 'vyra']
             },
             {
                 id: 10,
-                heading: 'Your choices will have consequences.',
+                heading: 'Your choices will \nhave consequences.',
                 white: ['I believe in you. Now prove me right. You didn’t come this far for nothing.'],
                 yellow: "Banished to realms devoid of grace, the defeated found a desolate place. Stripped of power, in shadows they reside, plotting return with vengeful pride. Where were these fallen exiles sent, a place of darkness and lament?",
                 answers: ['the void', 'void']
@@ -3456,14 +3466,14 @@
             },
             {
                 id: 12,
-                heading: 'Some knowledge is best left untouched...',
+                heading: 'Some knowledge is best \nleft untouched...',
                 white: ['Not all answers bring comfort. Solving this may unlock something… dangerous.'],
-                yellow: "Opposing the triad's daring course, deities stood firm with righteous force. \nThey battled to banish, to set things right, casting out darkness to restore the light. Who are these guardians of order and truth, defenders of creation since its youth?",
+                yellow: "Opposing the triad's daring course, deities stood firm with righteous force. They battled to banish, to set things right, casting out darkness to restore the light. Who are these guardians of order and truth, defenders of creation since its youth?",
                 answers: ['the seven', 'seven']
             },
             {
                 id: 13,
-                heading: 'Time for the next test. Let’s begin.',
+                heading: 'Time for the next test. \nLet’s begin.',
                 white: ['I expect nothing less than brilliance from you. You were meant for this adventure.'],
                 yellow: "A bridge between the worlds was set, A path unknown, a fate unmet. By gods' design, a door was made, What is this bridge, through light and shade?",
                 answers: ['divine gateways', 'the divine gateways']
@@ -3477,43 +3487,43 @@
             },
             {
                 id: 15,
-                heading: 'Your instincts haven’t failed you yet...',
+                heading: 'Your instincts haven’t \nfailed you yet...',
                 white: ['Some journeys are measured in miles. Yours is measured in decisions.'],
                 yellow: "In times of old, when danger was nigh, They sought refuge where shadows lie. A blend of races, united and strong, In the depths they waited, enduring long. Who emerged from darkness to the light, A testament to survival's might?",
                 answers: ['tulnar', 'the tulnar']
             },
             {
                 id: 16,
-                heading: 'One wrong step and \nyou might never get another...',
+                heading: 'One wrong step \nand you might never \nget another...',
                 white: ['At the heart of every mystery is a simple truth. You just have to find it.'],
                 yellow: "From distant voids, they made their way, Through twisted doors of dark decay. A gateway born from dread and fright, What name is given to this blight?",
                 answers: ['harbingers', 'the harbingers']
             },
             {
                 id: 17,
-                heading: 'A keen eye and a sharp mind—that’s what will get you through this.',
-                white: ['If you succeed, your name will be remembered. If you fail, no one \nwill ever know you were here.'],
+                heading: 'A keen eye and a sharp \nmind—that’s what will \nget you through this.',
+                white: ['If you succeed, your name will be remembered. If you fail, no one will ever know you were here.'],
                 yellow: "In the heart of dense forests, under canopies green, Nature's guardians dwell, rarely seen. With pointed ears and a bond to the land, They wield ancient magic with a gentle hand. Who are these beings of the woodland realm, With nature's power at their helm?",
                 answers: ["py'rai", "pyr'ai", 'pyrai'],
                 disclaimer: 'Placeholder -- awaiting verification.'
             },
             {
                 id: 18,
-                heading: 'You’ve handled worse. \nThis should be no different.',
+                heading: 'You’ve handled worse. \nThis should \nbe no different.',
                 white: ['You smell that? That’s the scent of something rotten lurking nearby.'],
                 yellow: "A world once bright, now cloaked in dread, Its trees defiled, its rivers bled. A force unseen yet felt so deep, What twisted all and made gods weep?",
                 answers: ['corruption']
             },
             {
                 id: 19,
-                heading: 'No hesitation. No doubt. Just action.',
+                heading: 'No hesitation. \nNo doubt. \nJust action.',
                 white: ['You’ve got the brains. Now show me you’ve got the nerve.'],
                 yellow: "Not of flesh, yet part of you, A tethered link both old and new. Through planes unknown, it makes its flight, What guides your being beyond the night?",
                 answers: ['soul', 'a soul']
             },
             {
                 id: 20,
-                heading: 'Your next decision could be your last. Choose carefully.',
+                heading: 'Your next decision \ncould be your last. \nChoose carefully.',
                 white: ['You carry yourself like someone who knows what they’re doing. Let’s hope that’s true. They’re expecting you to fail. Prove them wrong.'],
                 yellow: "A power pure yet darkly split, It shapes the world as gods see fit. Yet twisted hands can bring its doom, What force was tainted to consume?",
                 answers: ['essence']
@@ -3522,7 +3532,7 @@
                 id: 21,
                 heading: 'A song of The Seven...',
                 white: ['We\'ve recently come across an ancient artifact. It looks to be sealed by magic. Only the proper notes will unlock its secrets.'],
-                yellow: "From skies above, a blazing flight,Turning day into endless night.With searing breath, it scorches the land,Summoning embers at its command. A name of flame, both feared and grand—",
+                yellow: "From skies above, a blazing flight,Turning day into endless night. With searing breath, it scorches the land, Summoning embers at its command. A name of flame, both feared and grand.",
                 answers: ['firebrand'],
                 disclaimer: 'Placeholder -- melody required.'
             },
