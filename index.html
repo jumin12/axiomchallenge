@@ -1046,12 +1046,13 @@
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            gap: 5.75rem;
+            gap: 10rem;
             position: relative;
             width: 100%;
-            max-width: 78rem;
+            max-width: 92rem;
             margin-bottom: 3.5rem;
-            transform: translateX(-1.5rem);
+            transform: translateX(-0.5rem);
+            padding: 0 1.5rem;
         }
 
         .completion-reward-button {
@@ -1064,8 +1065,10 @@
             align-items: center;
             gap: 1.5rem;
             color: #ffffff;
-            max-width: 21rem;
+            max-width: 26.25rem;
             transition: transform 0.25s ease;
+            position: relative;
+            margin: 0;
         }
 
         .completion-reward-button:focus-visible {
@@ -1073,8 +1076,12 @@
             outline-offset: 0.35rem;
         }
 
+        .completion-reward-button:hover {
+            z-index: 4;
+        }
+
         .completion-reward-art {
-            width: 30rem;
+            width: 37.5rem;
             height: auto;
             transition: filter 0.3s ease, transform 0.3s ease;
             filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.55));
@@ -1178,7 +1185,11 @@
             color: #ffffff;
             font-weight: 400;
             text-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.85), 0 0 2.5rem rgba(0, 0, 0, 0.55);
-            transform: translateX(-2.5rem);
+            transform: translateX(-0.5rem);
+        }
+
+        .completion-submit-btn:hover {
+            transform: translateX(-0.5rem) translateY(-0.1875rem);
         }
         .completion-modal {
             position: fixed;
@@ -1708,8 +1719,8 @@
 
         .pyrai-symbol-button.selected .active-img {
             display: block !important;
-            filter: drop-shadow(0 0 0.35rem rgba(57, 255, 20, 0.22)) drop-shadow(0 0 0.7rem rgba(57, 255, 20, 0.165));
-            animation: pyrai-glow-pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.3)) drop-shadow(0 0 0.2rem rgba(64, 255, 171, 0.16)) drop-shadow(0 0 0.45rem rgba(64, 255, 171, 0.18));
+            animation: pyrai-glow-pulse 2.6s ease-in-out infinite;
             animation-delay: 0s;
             animation-fill-mode: both;
             will-change: filter;
@@ -1719,10 +1730,10 @@
         @keyframes pyrai-glow-pulse {
             0%,
             100% {
-                filter: drop-shadow(0 0 0.35rem rgba(57, 255, 20, 0.22)) drop-shadow(0 0 0.7rem rgba(57, 255, 20, 0.165));
+                filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.3)) drop-shadow(0 0 0.2rem rgba(64, 255, 171, 0.16)) drop-shadow(0 0 0.45rem rgba(64, 255, 171, 0.18));
             }
             50% {
-                filter: drop-shadow(0 0 0.35rem rgba(57, 255, 20, 0.33)) drop-shadow(0 0 0.7rem rgba(57, 255, 20, 0.2475));
+                filter: drop-shadow(0 0 0.6rem rgba(0, 0, 0, 0.45)) drop-shadow(0 0 0.45rem rgba(64, 255, 171, 0.28)) drop-shadow(0 0 0.95rem rgba(64, 255, 171, 0.24));
             }
         }
 
