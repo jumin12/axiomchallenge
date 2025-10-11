@@ -881,7 +881,7 @@
             color: #d6a550;
             font-family: 'Centaur', serif;
             font-style: normal;
-            font-size: 1.3rem;
+            font-size: 2.0rem;
             font-weight: 100;
             padding: 0 1.5625rem;
             text-align: center;
@@ -942,8 +942,8 @@
 
         .stag-banner {
             position: absolute;
-            right: 3.75rem;
-            top: 2.8125rem;
+            right: 5rem;
+            top: 4rem;
             width: 18.75rem;
             height: 15.625rem;
             background: url('art/axiom-flag.png') center/contain no-repeat;
@@ -1368,11 +1368,18 @@
 
         /* XL lightbox - tighten riddle dialog spacing */
         .riddle-container[data-riddle-id="8"] .riddle-dialog,
-        .riddle-container[data-riddle-id="17"] .riddle-dialog,
+        .riddle-container[data-riddle-id="17"] .riddle-dialog {
+            flex-shrink: 0;
+            margin-top: 1.5625rem;
+            margin-bottom: 0.75rem;
+            gap: 0.75rem;
+        }
+
+        /* Move dialog text down for riddles 21 and 22 */
         .riddle-container[data-riddle-id="21"] .riddle-dialog,
         .riddle-container[data-riddle-id="22"] .riddle-dialog {
             flex-shrink: 0;
-            margin-top: 1.5625rem;
+            margin-top: 3rem;
             margin-bottom: 0.75rem;
             gap: 0.75rem;
         }
@@ -1973,12 +1980,18 @@
             z-index: 1;
         }
 
+        /* Medium lightbox - move banner left and down */
+        .riddle-container:not([data-riddle-id="8"]):not([data-riddle-id="17"]):not([data-riddle-id="21"]):not([data-riddle-id="22"]) .riddle-stag-banner {
+            right: 5rem;
+            top: 4rem;
+        }
+
         /* XL lightbox specific positioning - higher and closer together */
         .riddle-container[data-riddle-id="8"] .riddle-hooded-figure,
         .riddle-container[data-riddle-id="17"] .riddle-hooded-figure,
         .riddle-container[data-riddle-id="21"] .riddle-hooded-figure,
         .riddle-container[data-riddle-id="22"] .riddle-hooded-figure {
-            left: 10.875rem;
+            left: 6.875rem;
             top: -3.1875rem;
         }
 
@@ -1986,7 +1999,7 @@
         .riddle-container[data-riddle-id="17"] .riddle-stag-banner,
         .riddle-container[data-riddle-id="21"] .riddle-stag-banner,
         .riddle-container[data-riddle-id="22"] .riddle-stag-banner {
-            right: 13.75rem;
+            right: 12rem;
             top: 0.3125rem;
         }
 
@@ -2256,7 +2269,7 @@
             .name-input {
                 width: 20rem;
                 height: 2.8125rem;
-                font-size: 1.375rem;
+                font-size: 2.0rem;
                 font-weight: 100;
                 top: 0.3125rem;
             }
@@ -2325,7 +2338,7 @@
             .name-input {
                 width: 16.25rem;
                 height: 2.5rem;
-                font-size: 1.25rem;
+                font-size: 2.0rem;
                 font-weight: 100;
                 top: 0.3125rem;
             }
