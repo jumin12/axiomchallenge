@@ -909,11 +909,12 @@
             height: 6.25rem;
             position: relative;
             z-index: 1;
+            margin-top: 0.5rem;
         }
 
         .yellow-x {
             position: absolute;
-            left: -1rem;
+            left: 0rem;
             top: 35%;
             transform: translateY(-50%);
             color: #d6a550;
@@ -1363,7 +1364,8 @@
             position: relative;
             z-index: 10;
             flex-shrink: 0;
-            margin: -0.5rem auto 0.75rem auto;
+            margin: -0.75rem auto 0.75rem auto;
+            top: 0.2rem;
         }
 
         /* XL lightbox - tighten stag-guidance spacing */
@@ -1497,13 +1499,20 @@
             max-width: 43.75rem;
             margin: 1.25rem auto;
             display: inline-block;
+            overflow: visible;
+        }
+
+        .riddle-container[data-riddle-id="8"] .riddle-content {
+            overflow: visible;
         }
 
         /* Allow map to overlap with input on riddle 8 */
         .riddle-container[data-riddle-id="8"] .interactive-map-container {
             margin-top: -2rem;
             margin-bottom: 1.5rem;
-            z-index: 1;
+            z-index: 5;
+            transform: scale(1.2);
+            transform-origin: center top;
         }
 
         .interactive-map-container .riddle-map {
@@ -1561,7 +1570,7 @@
             position: relative;
             width: 100%;
             max-width: 43.75rem;
-            margin: 3.75rem auto 2.5rem auto;
+            margin: 1.5rem auto 2.5rem auto;
             display: inline-block;
             transform: scale(1.2);
             transform-origin: center top;
@@ -1909,9 +1918,9 @@
         /* XL lightbox - anchor input at bottom */
         .riddle-container[data-riddle-id="8"] .riddle-input-container {
             padding-top: 0;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
             position: relative;
-            top: -2.5rem;
+            top: 2.5rem;
             z-index: 2;
         }
 
@@ -3444,7 +3453,7 @@
                 id: 8,
                 heading: 'Verra needs you. Pull your \nstrength from the gods!',
                 white: [
-                    "You're smarter than a goblin, but don't get cocky! Our caravan with resistive supplies is late. Find them and help complete their mission. All we have is this map with a note."
+                    "You're smarter than a goblin, but don't get cocky! Our caravan with seige supplies is late. Find them and help complete their mission. All we have is this map with a note."
                 ],
                 yellow: "In a land where legends loom, A fortress guards a flower in full plume. Petals of steel, a gleaming hue, Strength and magic in every dew. What is this place where wonders grow, A haven of power few will know?",
                 answers: ['steel bloom', 'citadel of the steel bloom']
@@ -3522,7 +3531,7 @@
             },
             {
                 id: 19,
-                heading: 'No hesitation. \nNo doubt. \nJust action.',
+                heading: 'No hesitation. No doubt. \nJust action.',
                 white: ['You’ve got the brains. Now show me you’ve got the nerve.'],
                 yellow: "Not of flesh, yet part of you, A tethered link both old and new. Through planes unknown, it makes its flight, What guides your being beyond the night?",
                 answers: ['soul', 'a soul']
