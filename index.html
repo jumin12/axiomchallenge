@@ -40,6 +40,13 @@
             font-weight: normal;
             font-style: normal;
         }
+
+        @font-face {
+            font-family: 'Booter Zero One';
+            src: url('Fonts/booter.zero-one.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
         
         * {
             margin: 0;
@@ -1467,14 +1474,14 @@
 
         .riddle-question.highlight {
             color: #d6a550;
-            font-family: 'CAD', serif;
+            font-family: 'Booter Zero One', 'CAD', serif;
             font-size: 1.95rem;
             letter-spacing: 0.04em;
         }
 
         .trust-question {
             color: #d6a550;
-            font-family: 'CAD', serif;
+            font-family: 'Booter Zero One', 'CAD', serif;
             font-size: 1.95rem;
             letter-spacing: 0.04em;
         }
@@ -1486,6 +1493,14 @@
         .centaur-punct {
             font-family: 'Centaur', serif;
             font-style: italic;
+        }
+
+        .riddle-question.highlight .cad-word,
+        .riddle-question.highlight .centaur-punct,
+        .trust-question .cad-word,
+        .trust-question .centaur-punct {
+            font-family: 'Booter Zero One', 'CAD', serif;
+            font-style: normal;
         }
 
         .riddle-map {
@@ -1540,32 +1555,29 @@
         /* Steelbloom glow overlay */
         .steelbloom-glow {
             position: absolute;
-            position: absolute;
-        top: 26%;
-        left: 28.5%;
-        width: 14%;
+            top: 26%;
+            left: 28.5%;
+            width: 14%;
             height: auto;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 1s ease;
+            transition: opacity 0.6s ease;
             object-fit: contain;
         }
 
         .steelbloom-glow.revealed {
             opacity: 1;
-            animation: pulseRedGlow 2s ease-in-out infinite;
+            animation: steelbloomGlowPulse 2.6s ease-in-out infinite;
         }
 
-        @keyframes pulseRedGlow {
+        @keyframes steelbloomGlowPulse {
             0%, 100% {
-                filter: drop-shadow(0 0 0.5rem rgba(255, 0, 0, 0.9)) drop-shadow(0 0 0.75rem rgba(255, 0, 0, 0.7)) drop-shadow(0 0 1rem rgba(255, 0, 0, 0.5));
-                opacity: 0.3;
+                filter: brightness(1) drop-shadow(0 0 0.35rem rgba(255, 0, 0, 0.55)) drop-shadow(0 0 0.85rem rgba(255, 0, 0, 0.4));
                 transform: scale(1);
             }
             50% {
-                filter: drop-shadow(0 0 0.75rem rgba(255, 0, 0, 1)) drop-shadow(0 0 1.125rem rgba(255, 0, 0, 0.95)) drop-shadow(0 0 1.5rem rgba(255, 0, 0, 0.8));
-                opacity: 1;
-                transform: scale(1.05);
+                filter: brightness(1.15) drop-shadow(0 0 0.65rem rgba(255, 80, 80, 0.85)) drop-shadow(0 0 1.45rem rgba(255, 0, 0, 0.6));
+                transform: scale(1.04);
             }
         }
 
@@ -3550,7 +3562,7 @@
                 id: 21,
                 heading: 'A song of The Seven...',
                 white: ['We\'ve recently come across an ancient artifact. It looks to be sealed by magic. Only the proper notes will unlock its secrets.'],
-                yellow: "From skies above, a blazing flight,Turning day into endless night. With searing breath, it scorches the land, Summoning embers at its command. A name of flame, both feared and grand.",
+                yellow: "From skies above, a blazing flight, turning day into endless night. With searing breath, it scorches the land, summoning embers at its command. A name of flame, both feared and grand.",
                 answers: ['firebrand'],
                 disclaimer: 'Placeholder -- melody required.'
             },
