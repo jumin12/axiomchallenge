@@ -1045,6 +1045,7 @@
             letter-spacing: 0.2em;
             margin: 0 auto;
             max-width: min(36rem, 80vw);
+            line-height: 1.6;
         }
 
         .completion-subheading {
@@ -1076,6 +1077,23 @@
         .completion-container .completion-subheading,
         .completion-container .golden-swirl.completion-divider {
             transform: translateY(clamp(4rem, 10vh, 9rem));
+        }
+
+        .completion-container .completion-heading {
+            transform: translateY(clamp(1.6667rem, 5.833vh, 6.25rem)) scaleY(1.6);
+            transform-origin: center;
+        }
+
+        @media (max-width: 120rem) {
+            .completion-container .completion-heading {
+                transform: translateY(clamp(2.65rem, 8.25vh, 7.75rem)) scaleY(1.6);
+            }
+        }
+
+        @media (max-width: 64rem) {
+            .completion-container .completion-heading {
+                transform: translateY(clamp(3.1rem, 9.25vh, 8.4rem)) scaleY(1.6);
+            }
         }
 
         .completion-rewards {
