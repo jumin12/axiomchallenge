@@ -1049,7 +1049,7 @@
 
         .completion-subheading {
             font-family: 'Centaur', serif;
-            font-size: 1.1rem;
+            font-size: 1.8rem;
             margin-top: 0.35rem;
             margin-bottom: 0.5rem;
             letter-spacing: 0.05em;
@@ -1070,6 +1070,12 @@
             background-size: 100% 100% !important;
             position: relative;
             z-index: 1;
+        }
+
+        .completion-container .completion-heading,
+        .completion-container .completion-subheading,
+        .completion-container .golden-swirl.completion-divider {
+            transform: translateY(clamp(4rem, 10vh, 9rem));
         }
 
         .completion-rewards {
@@ -1189,17 +1195,24 @@
 
         .completion-reward-caption {
             font-family: 'Centaur', serif;
-            font-size: 1.2rem;
+            font-size: 1.8rem;
             line-height: 1.75;
             letter-spacing: 0.05em;
             text-shadow: 0 0 1rem rgba(0, 0, 0, 0.7), 0 0 2rem rgba(0, 0, 0, 0.45);
         }
 
+        .completion-reward-button[data-reward="scroll"] .completion-reward-caption {
+            white-space: nowrap;
+            overflow: visible;
+            display: inline-block;
+            transform: translateX(-0.5rem);
+        }
+
         .completion-selector {
             position: absolute;
-            bottom: -6rem;
+            bottom: -6.75rem;
             left: 0;
-            width: 5.25rem;
+            width: 6.25rem;
             height: auto;
             transform: translateX(-9999px);
             transition: transform 0.35s ease;
@@ -1267,7 +1280,7 @@
 
         .completion-modal-content p {
             font-family: 'Centaur', serif;
-            font-size: 1.2rem;
+            font-size: 1.8rem;
             line-height: 1.75;
             color: #ffffff;
             margin: 0;
@@ -1282,7 +1295,7 @@
             text-decoration: none;
             color: #d6a550;
             font-family: 'Centaur', serif;
-            font-size: 1.1rem;
+            font-size: 1.8rem;
             text-shadow: 0 0 0.85rem rgba(0, 0, 0, 0.75);
             transition: transform 0.2s ease;
         }
@@ -1475,14 +1488,14 @@
         .riddle-question.highlight {
             color: #d6a550;
             font-family: 'Booter Zero One', 'CAD', serif;
-            font-size: 1.95rem;
+            font-size: 2.25rem;
             letter-spacing: 0.04em;
         }
 
         .trust-question {
             color: #d6a550;
             font-family: 'Booter Zero One', 'CAD', serif;
-            font-size: 1.95rem;
+            font-size: 2.25rem;
             letter-spacing: 0.04em;
         }
         
