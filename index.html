@@ -80,6 +80,11 @@
             height: 100%;
         }
 
+        #responsive-stage-inner {
+            width: 100%;
+            height: 100%;
+        }
+
         @media screen and (max-width: 1920px), screen and (max-height: 917px) {
             :root {
                 --responsive-scale-width: calc(100vw / (var(--design-width) * 1px));
@@ -94,26 +99,40 @@
             }
 
             #responsive-stage {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: calc(var(--design-width) * 1px);
-                height: calc(var(--design-height) * 1px);
-                max-width: calc(var(--design-width) * 1px);
-                max-height: calc(var(--design-height) * 1px);
-                transform-origin: top left;
-                transform: translate(-50%, -50%) scale(var(--responsive-stage-scale));
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
             }
 
-            #responsive-stage #game-wrapper,
+            #responsive-stage-inner {
+                position: relative;
+                width: calc(var(--design-width) * var(--responsive-stage-scale) * 1px);
+                height: calc(var(--design-height) * var(--responsive-stage-scale) * 1px);
+                overflow: hidden;
+            }
+
+            #responsive-stage #game-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: calc(var(--design-width) * 1px);
+                height: calc(var(--design-height) * 1px);
+                transform-origin: top left;
+                transform: scale(var(--responsive-stage-scale));
+            }
+
             #responsive-stage .page,
             #responsive-stage .signup-page,
             #responsive-stage .intro-page,
             #responsive-stage .name-entry-page {
-                width: 100%;
-                height: 100%;
-                max-width: 100%;
-                max-height: 100%;
+                width: calc(var(--design-width) * 1px);
+                height: calc(var(--design-height) * 1px);
             }
         }
 
@@ -3131,7 +3150,8 @@
     </div>
     
     <div id="responsive-stage">
-    <div id="game-wrapper">
+        <div id="responsive-stage-inner">
+            <div id="game-wrapper">
     <!-- Navigation Bar -->
     <div class="nav-bar" id="navBar"></div>
     <div class="nav-audio-toggle" id="audioToggle">
@@ -8237,6 +8257,7 @@ function fadeAudio(audioElement, fadeIn = true, duration = 800, targetVolume = n
         }
 
     </script>
+        </div>
     </div>
     </div>
 </body>
