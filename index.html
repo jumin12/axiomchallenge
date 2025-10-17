@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Mysterious Journey</title>
     <style>
         /* Local Font Declarations */
@@ -2654,14 +2654,89 @@
             left: 26.25rem;
         }
 
-        /* Hide dev console on mobile and tablet devices */
+        /* Mobile and tablet optimizations */
         @media screen and (max-width: 64rem) {
+            /* Hide dev console */
             .dev-console-toggle-btn {
                 display: none !important;
             }
             
             .dev-console-overlay {
                 display: none !important;
+            }
+            
+            /* Scale up navbar for mobile */
+            .nav-bar {
+                width: 100%;
+                max-width: 100%;
+                height: 8rem;
+                background-size: cover;
+                top: -1rem;
+            }
+            
+            /* Make audio toggle more prominent on mobile */
+            .nav-audio-toggle {
+                width: 12rem;
+                height: 3.5rem;
+                right: 1.5rem;
+                top: 1.5rem;
+            }
+            
+            .nav-audio-toggle svg {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+            
+            .volume-slider {
+                height: 0.5rem;
+            }
+            
+            .volume-slider::-webkit-slider-thumb {
+                width: 1.25rem;
+                height: 1.25rem;
+            }
+            
+            .volume-slider::-moz-range-thumb {
+                width: 1.25rem;
+                height: 1.25rem;
+            }
+            
+            /* Better touch targets for mobile */
+            .signup-btn,
+            .login-btn,
+            .name-input,
+            button,
+            input[type="text"],
+            input[type="email"],
+            input[type="password"] {
+                min-height: 3rem;
+                font-size: 1.25rem;
+            }
+            
+            /* Make text more readable on mobile */
+            .signup-title {
+                font-size: 3rem;
+            }
+            
+            .login-link {
+                font-size: 1.25rem;
+            }
+            
+            /* Make riddle text larger on mobile */
+            .riddle-heading {
+                font-size: 2.5rem;
+            }
+            
+            .riddle-text {
+                font-size: 1.5rem;
+                line-height: 1.6;
+            }
+            
+            /* Better button sizes */
+            .class-rune-button,
+            .pyrai-symbol-button {
+                min-width: 4rem;
+                min-height: 4rem;
             }
         }
 
@@ -3458,8 +3533,10 @@
     <script>
         // Viewport scaling for mobile and tablet devices
         (function() {
-            const MIN_WIDTH = 1920;
-            const MIN_HEIGHT = 917;
+            const DESKTOP_WIDTH = 1920;
+            const DESKTOP_HEIGHT = 917;
+            const MOBILE_WIDTH = 1280;  // Smaller base for mobile = larger content
+            const MOBILE_HEIGHT = 720;
             
             function updateScale() {
                 const wrapper = document.getElementById('game-wrapper');
@@ -3475,22 +3552,27 @@
                     viewportHeight = window.visualViewport.height;
                 }
                 
-                // Only apply scaling if viewport is smaller than minimum design resolution
-                if (viewportWidth >= MIN_WIDTH && viewportHeight >= MIN_HEIGHT) {
+                const isMobileOrTablet = viewportWidth < 1024;
+                
+                // Use different base dimensions for mobile (smaller base = larger scaled content)
+                const BASE_WIDTH = isMobileOrTablet ? MOBILE_WIDTH : DESKTOP_WIDTH;
+                const BASE_HEIGHT = isMobileOrTablet ? MOBILE_HEIGHT : DESKTOP_HEIGHT;
+                
+                // Only apply scaling if viewport is smaller than base resolution
+                if (viewportWidth >= BASE_WIDTH && viewportHeight >= BASE_HEIGHT) {
                     wrapper.style.width = '100vw';
                     wrapper.style.height = '100vh';
                     wrapper.style.transform = 'none';
+                    wrapper.style.position = 'relative';
+                    wrapper.style.top = '';
+                    wrapper.style.left = '';
                     document.documentElement.style.setProperty('--scale-factor', '1');
                     return;
                 }
                 
                 // Calculate scale factors
-                const widthScale = viewportWidth / MIN_WIDTH;
-                const heightScale = viewportHeight / MIN_HEIGHT;
-                
-                // For mobile and tablets, fill the entire screen (may slightly distort)
-                // For desktop, maintain aspect ratio with letterboxing
-                const isMobileOrTablet = viewportWidth < 1024;
+                const widthScale = viewportWidth / BASE_WIDTH;
+                const heightScale = viewportHeight / BASE_HEIGHT;
                 
                 if (isMobileOrTablet) {
                     // Fill entire screen - scale width and height independently
@@ -3501,16 +3583,17 @@
                     wrapper.style.position = 'absolute';
                     wrapper.style.top = '0';
                     wrapper.style.left = '0';
-                    wrapper.style.width = MIN_WIDTH + 'px';
-                    wrapper.style.height = MIN_HEIGHT + 'px';
+                    wrapper.style.width = BASE_WIDTH + 'px';
+                    wrapper.style.height = BASE_HEIGHT + 'px';
                     wrapper.style.transform = `scaleX(${scaleX}) scaleY(${scaleY})`;
                     wrapper.style.transformOrigin = 'top left';
                     
                     console.log('Mobile scaling (fill screen):', {
                         viewport: viewportWidth + 'x' + viewportHeight,
+                        baseResolution: BASE_WIDTH + 'x' + BASE_HEIGHT,
                         scaleX: (scaleX * 100).toFixed(1) + '%',
                         scaleY: (scaleY * 100).toFixed(1) + '%',
-                        scaledSize: Math.round(MIN_WIDTH * scaleX) + 'x' + Math.round(MIN_HEIGHT * scaleY)
+                        effectiveSize: Math.round(BASE_WIDTH * scaleX) + 'x' + Math.round(BASE_HEIGHT * scaleY)
                     });
                 } else {
                     // Desktop: maintain aspect ratio
@@ -3520,8 +3603,8 @@
                     wrapper.style.position = 'relative';
                     wrapper.style.top = '';
                     wrapper.style.left = '';
-                    wrapper.style.width = MIN_WIDTH + 'px';
-                    wrapper.style.height = MIN_HEIGHT + 'px';
+                    wrapper.style.width = BASE_WIDTH + 'px';
+                    wrapper.style.height = BASE_HEIGHT + 'px';
                     wrapper.style.transform = `scale(${scale})`;
                     wrapper.style.transformOrigin = 'center center';
                 }
