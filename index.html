@@ -226,6 +226,16 @@
             align-items: center;
             justify-content: center;
             background: #000;
+            position: relative;
+        }
+        
+        /* Fix mobile viewport issues - remove centering and fill screen */
+        @media screen and (max-width: 64rem) {
+            body {
+                height: 100svh; /* Use small viewport height on mobile to account for browser chrome */
+                display: block; /* Remove flexbox centering on mobile */
+                overflow: hidden;
+            }
         }
 
         /* Wrapper for all content */
@@ -2644,6 +2654,17 @@
             left: 26.25rem;
         }
 
+        /* Hide dev console on mobile and tablet devices */
+        @media screen and (max-width: 64rem) {
+            .dev-console-toggle-btn {
+                display: none !important;
+            }
+            
+            .dev-console-overlay {
+                display: none !important;
+            }
+        }
+
         .dev-console-body {
             display: flex;
             flex-direction: column;
@@ -3439,14 +3460,20 @@
         (function() {
             const MIN_WIDTH = 1920;
             const MIN_HEIGHT = 917;
-            const ASPECT_RATIO = MIN_WIDTH / MIN_HEIGHT;
             
             function updateScale() {
                 const wrapper = document.getElementById('game-wrapper');
                 if (!wrapper) return;
                 
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
+                // Get actual viewport dimensions
+                let viewportWidth = window.innerWidth;
+                let viewportHeight = window.innerHeight;
+                
+                // On mobile, use visualViewport if available for more accurate dimensions
+                if (window.visualViewport && viewportWidth < 1024) {
+                    viewportWidth = window.visualViewport.width;
+                    viewportHeight = window.visualViewport.height;
+                }
                 
                 // Only apply scaling if viewport is smaller than minimum design resolution
                 if (viewportWidth >= MIN_WIDTH && viewportHeight >= MIN_HEIGHT) {
@@ -3457,16 +3484,47 @@
                     return;
                 }
                 
-                // Calculate scale factor based on viewport dimensions
+                // Calculate scale factors
                 const widthScale = viewportWidth / MIN_WIDTH;
                 const heightScale = viewportHeight / MIN_HEIGHT;
-                const scale = Math.min(widthScale, heightScale);
                 
-                // Apply the scale
-                document.documentElement.style.setProperty('--scale-factor', scale.toString());
-                wrapper.style.width = MIN_WIDTH + 'px';
-                wrapper.style.height = MIN_HEIGHT + 'px';
-                wrapper.style.transform = `scale(${scale})`;
+                // For mobile and tablets, fill the entire screen (may slightly distort)
+                // For desktop, maintain aspect ratio with letterboxing
+                const isMobileOrTablet = viewportWidth < 1024;
+                
+                if (isMobileOrTablet) {
+                    // Fill entire screen - scale width and height independently
+                    const scaleX = widthScale;
+                    const scaleY = heightScale;
+                    
+                    document.documentElement.style.setProperty('--scale-factor', Math.min(scaleX, scaleY).toString());
+                    wrapper.style.position = 'absolute';
+                    wrapper.style.top = '0';
+                    wrapper.style.left = '0';
+                    wrapper.style.width = MIN_WIDTH + 'px';
+                    wrapper.style.height = MIN_HEIGHT + 'px';
+                    wrapper.style.transform = `scaleX(${scaleX}) scaleY(${scaleY})`;
+                    wrapper.style.transformOrigin = 'top left';
+                    
+                    console.log('Mobile scaling (fill screen):', {
+                        viewport: viewportWidth + 'x' + viewportHeight,
+                        scaleX: (scaleX * 100).toFixed(1) + '%',
+                        scaleY: (scaleY * 100).toFixed(1) + '%',
+                        scaledSize: Math.round(MIN_WIDTH * scaleX) + 'x' + Math.round(MIN_HEIGHT * scaleY)
+                    });
+                } else {
+                    // Desktop: maintain aspect ratio
+                    const scale = Math.min(widthScale, heightScale);
+                    
+                    document.documentElement.style.setProperty('--scale-factor', scale.toString());
+                    wrapper.style.position = 'relative';
+                    wrapper.style.top = '';
+                    wrapper.style.left = '';
+                    wrapper.style.width = MIN_WIDTH + 'px';
+                    wrapper.style.height = MIN_HEIGHT + 'px';
+                    wrapper.style.transform = `scale(${scale})`;
+                    wrapper.style.transformOrigin = 'center center';
+                }
             }
             
             // Update scale on load and resize
@@ -3475,10 +3533,20 @@
             } else {
                 updateScale();
             }
+            
             window.addEventListener('resize', updateScale);
             window.addEventListener('orientationchange', function() {
                 setTimeout(updateScale, 100);
             });
+            
+            // Listen to visualViewport changes on mobile (handles address bar show/hide)
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener('resize', updateScale);
+                window.visualViewport.addEventListener('scroll', updateScale);
+            }
+            
+            // Force update after a short delay to handle any rendering issues
+            setTimeout(updateScale, 250);
         })();
         
         // Page management
