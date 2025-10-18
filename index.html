@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Mysterious Journey</title>
     <style>
         /* Local Font Declarations */
@@ -212,6 +212,7 @@
             height: 100%;
             width: 100%;
             font-size: var(--base-font-size);
+            background: #000;
         }
 
         body {
@@ -227,6 +228,8 @@
             justify-content: center;
             background: #000;
             position: relative;
+            touch-action: pan-x pan-y;
+            -webkit-overflow-scrolling: touch;
         }
         
         /* Fix mobile viewport issues - remove centering and fill screen */
@@ -244,6 +247,7 @@
             height: 100vh;
             position: relative;
             transform-origin: center center;
+            background: #000;
         }
         
         /* Scale down game wrapper for screens smaller than 1920x917 */
@@ -2387,9 +2391,11 @@
 
         /* Responsive design */
         @media (max-width: 48rem) {
-            .signup-content {
+            /* DO NOT change flex-direction for signup-content - let scaling handle it */
+            /* Commenting out to prevent login page stacking on mobile */
+            /* .signup-content {
                 flex-direction: column;
-            }
+            } */
             
             .signup-container {
                 margin: 0.625rem;
@@ -2654,7 +2660,7 @@
             left: 26.25rem;
         }
 
-        /* Mobile and tablet optimizations */
+        /* Mobile and tablet optimizations - applies to ALL mobile devices consistently */
         @media screen and (max-width: 64rem) {
             /* Hide dev console */
             .dev-console-toggle-btn {
@@ -2665,43 +2671,43 @@
                 display: none !important;
             }
             
-            /* Scale up navbar for mobile */
+            /* Scale up navbar for mobile - consistent across all sizes */
             .nav-bar {
-                width: 100%;
-                max-width: 100%;
-                height: 8rem;
-                background-size: cover;
-                top: -1rem;
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 8rem !important;
+                background-size: cover !important;
+                top: -1rem !important;
             }
             
-            /* Make audio toggle more prominent on mobile */
+            /* Make audio toggle more prominent on mobile - same size for all devices */
             .nav-audio-toggle {
-                width: 12rem;
-                height: 3.5rem;
-                right: 1.5rem;
-                top: 1.5rem;
+                width: 12rem !important;
+                height: 3.5rem !important;
+                right: 1.5rem !important;
+                top: 1.5rem !important;
             }
             
             .nav-audio-toggle svg {
-                width: 2.5rem;
-                height: 2.5rem;
+                width: 2.5rem !important;
+                height: 2.5rem !important;
             }
             
             .volume-slider {
-                height: 0.5rem;
+                height: 0.5rem !important;
             }
             
             .volume-slider::-webkit-slider-thumb {
-                width: 1.25rem;
-                height: 1.25rem;
+                width: 1.25rem !important;
+                height: 1.25rem !important;
             }
             
             .volume-slider::-moz-range-thumb {
-                width: 1.25rem;
-                height: 1.25rem;
+                width: 1.25rem !important;
+                height: 1.25rem !important;
             }
             
-            /* Better touch targets for mobile */
+            /* Better touch targets for mobile - consistent sizing */
             .signup-btn,
             .login-btn,
             .name-input,
@@ -2709,34 +2715,159 @@
             input[type="text"],
             input[type="email"],
             input[type="password"] {
-                min-height: 3rem;
-                font-size: 1.25rem;
+                min-height: 3rem !important;
+                font-size: 1.25rem !important;
             }
             
-            /* Make text more readable on mobile */
+            /* Make text more readable on mobile - same for all devices */
             .signup-title {
-                font-size: 3rem;
+                font-size: 3rem !important;
             }
             
             .login-link {
-                font-size: 1.25rem;
+                font-size: 1.25rem !important;
             }
             
-            /* Make riddle text larger on mobile */
+            /* Make riddle text larger on mobile - consistent across sizes */
             .riddle-heading {
-                font-size: 2.5rem;
+                font-size: 2.5rem !important;
             }
             
             .riddle-text {
-                font-size: 1.5rem;
-                line-height: 1.6;
+                font-size: 1.5rem !important;
+                line-height: 1.6 !important;
             }
             
-            /* Better button sizes */
+            /* Better button sizes - same for all mobile devices */
             .class-rune-button,
             .pyrai-symbol-button {
-                min-width: 4rem;
-                min-height: 4rem;
+                min-width: 4rem !important;
+                min-height: 4rem !important;
+            }
+            
+            /* Ensure wrapper positioning is consistent */
+            #game-wrapper {
+                position: absolute !important;
+            }
+        }
+
+        /* Small mobile device optimizations - prevents stacking and ensures proper layout */
+        @media screen and (max-width: 480px) {
+            /* Ensure login page containers maintain their side-by-side layout */
+            .signup-container {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: auto !important;
+                min-height: 50rem !important;
+            }
+            
+            .signup-content {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            
+            .login-form-container,
+            .social-container {
+                flex-shrink: 0 !important;
+                min-width: 62.5rem !important;
+                width: 62.5rem !important;
+                height: 46.875rem !important;
+            }
+            
+            .login-divider-stack {
+                flex-shrink: 0 !important;
+                width: 5.625rem !important;
+                height: 25rem !important;
+            }
+            
+            /* Ensure form inputs maintain proper size */
+            .form-group input {
+                width: 28.75rem !important;
+                height: 5rem !important;
+            }
+            
+            .signup-btn {
+                width: 34.375rem !important;
+                height: 7.8125rem !important;
+            }
+            
+            /* Ensure character portraits and banners maintain size */
+            .angel-bust-portrait,
+            .xenith-bust-portrait,
+            .hooded-figure {
+                width: auto !important;
+                height: auto !important;
+                max-width: none !important;
+                max-height: none !important;
+            }
+            
+            /* Prevent text from becoming too small */
+            body {
+                font-size: var(--base-font-size) !important;
+            }
+            
+            /* Ensure all interactive elements have adequate touch targets */
+            /* Note: Removed pixel-based overrides to work with scaling */
+        }
+
+        /* Extra small mobile devices - very aggressive fixes */
+        @media screen and (max-width: 375px) {
+            /* Force proper scaling on very small screens */
+            #game-wrapper {
+                transform-origin: top left !important;
+            }
+            
+            /* Ensure no content stacks */
+            .signup-container,
+            .signup-content {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+            }
+        }
+
+        /* Ensure content fills and doesn't overflow viewport on all mobile devices */
+        @media screen and (max-width: 64rem) {
+            html, body {
+                overflow: hidden !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                height: 100dvh !important; /* Use dynamic viewport height */
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            body {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+            }
+            
+            #game-wrapper {
+                overflow: hidden !important;
+            }
+            
+            /* Ensure all pages fit within scaled wrapper */
+            .page {
+                overflow: hidden !important;
+            }
+            
+            /* Ensure riddle and name entry content don't break layout */
+            .name-entry-content,
+            .riddle-content {
+                width: 72% !important;
+                max-width: none !important;
+            }
+            
+            /* Ensure riddle containers maintain proper positioning */
+            .riddle-container,
+            .name-entry-container {
+                width: 100% !important;
+                height: 100% !important;
             }
         }
 
@@ -3535,12 +3666,18 @@
         (function() {
             const DESKTOP_WIDTH = 1920;
             const DESKTOP_HEIGHT = 917;
-            const MOBILE_WIDTH = 1280;  // Smaller base for mobile = larger content
-            const MOBILE_HEIGHT = 720;
+            const TABLET_WIDTH = 1280;  // Tablet base (landscape oriented)
+            const TABLET_HEIGHT = 720;
+            const SMALL_MOBILE_WIDTH = 640;  // Small mobile base - smaller = content appears larger
+            const SMALL_MOBILE_HEIGHT = 360;  // Using 16:9 landscape to avoid extreme stretching
             
             function updateScale() {
                 const wrapper = document.getElementById('game-wrapper');
-                if (!wrapper) return;
+                if (!wrapper) {
+                    // Retry if wrapper not found yet
+                    setTimeout(updateScale, 100);
+                    return;
+                }
                 
                 // Get actual viewport dimensions
                 let viewportWidth = window.innerWidth;
@@ -3552,11 +3689,25 @@
                     viewportHeight = window.visualViewport.height;
                 }
                 
+                const isSmallMobile = viewportWidth < 480;
                 const isMobileOrTablet = viewportWidth < 1024;
                 
-                // Use different base dimensions for mobile (smaller base = larger scaled content)
-                const BASE_WIDTH = isMobileOrTablet ? MOBILE_WIDTH : DESKTOP_WIDTH;
-                const BASE_HEIGHT = isMobileOrTablet ? MOBILE_HEIGHT : DESKTOP_HEIGHT;
+                // Use different base dimensions based on device size
+                let BASE_WIDTH, BASE_HEIGHT;
+                if (isSmallMobile) {
+                    BASE_WIDTH = SMALL_MOBILE_WIDTH;
+                    BASE_HEIGHT = SMALL_MOBILE_HEIGHT;
+                } else if (isMobileOrTablet) {
+                    BASE_WIDTH = TABLET_WIDTH;
+                    BASE_HEIGHT = TABLET_HEIGHT;
+                } else {
+                    BASE_WIDTH = DESKTOP_WIDTH;
+                    BASE_HEIGHT = DESKTOP_HEIGHT;
+                }
+                
+                // Reset any previous inline styles that might interfere
+                wrapper.style.margin = '0';
+                wrapper.style.padding = '0';
                 
                 // Only apply scaling if viewport is smaller than base resolution
                 if (viewportWidth >= BASE_WIDTH && viewportHeight >= BASE_HEIGHT) {
@@ -3564,8 +3715,8 @@
                     wrapper.style.height = '100vh';
                     wrapper.style.transform = 'none';
                     wrapper.style.position = 'relative';
-                    wrapper.style.top = '';
-                    wrapper.style.left = '';
+                    wrapper.style.top = '0';
+                    wrapper.style.left = '0';
                     document.documentElement.style.setProperty('--scale-factor', '1');
                     return;
                 }
@@ -3575,25 +3726,32 @@
                 const heightScale = viewportHeight / BASE_HEIGHT;
                 
                 if (isMobileOrTablet) {
-                    // Fill entire screen - scale width and height independently
+                    // Fill entire screen - scale to cover viewport completely (no black bars)
                     const scaleX = widthScale;
                     const scaleY = heightScale;
                     
+                    // Use the smaller of the two for CSS variable (for any rem-based calculations)
                     document.documentElement.style.setProperty('--scale-factor', Math.min(scaleX, scaleY).toString());
+                    
+                    // Force absolute positioning for mobile
                     wrapper.style.position = 'absolute';
                     wrapper.style.top = '0';
                     wrapper.style.left = '0';
                     wrapper.style.width = BASE_WIDTH + 'px';
                     wrapper.style.height = BASE_HEIGHT + 'px';
+                    
+                    // Use independent X/Y scaling to fill screen completely
                     wrapper.style.transform = `scaleX(${scaleX}) scaleY(${scaleY})`;
                     wrapper.style.transformOrigin = 'top left';
                     
-                    console.log('Mobile scaling (fill screen):', {
+                    const deviceType = isSmallMobile ? 'Small Mobile' : 'Tablet/Large Mobile';
+                    console.log(`${deviceType} scaling (fill screen, no black bars):`, {
                         viewport: viewportWidth + 'x' + viewportHeight,
                         baseResolution: BASE_WIDTH + 'x' + BASE_HEIGHT,
                         scaleX: (scaleX * 100).toFixed(1) + '%',
                         scaleY: (scaleY * 100).toFixed(1) + '%',
-                        effectiveSize: Math.round(BASE_WIDTH * scaleX) + 'x' + Math.round(BASE_HEIGHT * scaleY)
+                        effectiveSize: Math.round(BASE_WIDTH * scaleX) + 'x' + Math.round(BASE_HEIGHT * scaleY),
+                        distortion: ((Math.abs(scaleX - scaleY) / Math.min(scaleX, scaleY)) * 100).toFixed(1) + '%'
                     });
                 } else {
                     // Desktop: maintain aspect ratio
@@ -3601,13 +3759,20 @@
                     
                     document.documentElement.style.setProperty('--scale-factor', scale.toString());
                     wrapper.style.position = 'relative';
-                    wrapper.style.top = '';
-                    wrapper.style.left = '';
+                    wrapper.style.top = '0';
+                    wrapper.style.left = '0';
                     wrapper.style.width = BASE_WIDTH + 'px';
                     wrapper.style.height = BASE_HEIGHT + 'px';
                     wrapper.style.transform = `scale(${scale})`;
                     wrapper.style.transformOrigin = 'center center';
                 }
+            }
+            
+            // Debounce function to prevent excessive updates
+            let resizeTimeout;
+            function debouncedUpdateScale() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(updateScale, 50);
             }
             
             // Update scale on load and resize
@@ -3617,19 +3782,32 @@
                 updateScale();
             }
             
-            window.addEventListener('resize', updateScale);
+            window.addEventListener('resize', debouncedUpdateScale);
+            
+            // Handle orientation change with proper timing for mobile
             window.addEventListener('orientationchange', function() {
+                // Force immediate update
+                updateScale();
+                // Follow up updates to handle browser chrome changes
                 setTimeout(updateScale, 100);
+                setTimeout(updateScale, 300);
+                setTimeout(updateScale, 500);
             });
             
             // Listen to visualViewport changes on mobile (handles address bar show/hide)
             if (window.visualViewport) {
-                window.visualViewport.addEventListener('resize', updateScale);
-                window.visualViewport.addEventListener('scroll', updateScale);
+                window.visualViewport.addEventListener('resize', debouncedUpdateScale);
             }
             
-            // Force update after a short delay to handle any rendering issues
+            // Force updates after page load to ensure proper initial state
+            setTimeout(updateScale, 100);
             setTimeout(updateScale, 250);
+            setTimeout(updateScale, 500);
+            
+            // Ensure proper state on page show (handles back/forward navigation)
+            window.addEventListener('pageshow', function() {
+                setTimeout(updateScale, 50);
+            });
         })();
         
         // Page management
