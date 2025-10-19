@@ -1622,6 +1622,16 @@
             white-space: nowrap;
             overflow: visible;
             max-width: none;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .riddle-container[data-riddle-id="23"] .riddle-question .riddle-23-yellow-text {
+            text-align: right;
+            align-self: flex-end;
+            display: block;
+            margin-top: 0.5em;
         }
 
         .trust-question {
@@ -4538,14 +4548,20 @@
             if (riddle && riddle.id === 23 && riddle.white && Array.isArray(riddle.white) && riddle.white[1]) {
                 const hammerQuote = document.createElement('span');
                 hammerQuote.style.fontFamily = 'Centaur, serif';
-                hammerQuote.style.fontSize = '0.7em';
+                hammerQuote.style.fontSize = '0.8em';
                 hammerQuote.style.color = 'rgba(249, 235, 225, 1)';
-                hammerQuote.style.marginRight = '0.5em';
-                hammerQuote.textContent = riddle.white[1] + ' ';
+                hammerQuote.textContent = riddle.white[1];
                 questionElement.appendChild(hammerQuote);
             }
 
             const questionText = applyPlayerName(riddle ? riddle.yellow : '', playerName);
+            
+            // For riddle 23, wrap yellow text in a container
+            const yellowTextContainer = (riddle && riddle.id === 23) ? document.createElement('span') : null;
+            if (yellowTextContainer) {
+                yellowTextContainer.className = 'riddle-23-yellow-text';
+            }
+            
             if (riddle && riddle.highlightToken) {
                 const token = riddle.highlightToken;
                 const lowerText = questionText.toLowerCase();
@@ -4555,33 +4571,45 @@
                     const before = questionText.slice(0, tokenIndex);
                     const middle = questionText.slice(tokenIndex, tokenIndex + token.length);
                     const after = questionText.slice(tokenIndex + token.length);
+                    
+                    const targetElement = yellowTextContainer || questionElement;
+                    
                     if (before) {
                         if (!isIntroRiddle) {
-                            applyMixedFont(before, questionElement);
+                            applyMixedFont(before, targetElement);
                         } else {
-                            questionElement.appendChild(document.createTextNode(before));
+                            targetElement.appendChild(document.createTextNode(before));
                         }
                     }
                     const highlightSpan = document.createElement('span');
                     highlightSpan.className = 'trust-question';
                     applyMixedFont(middle, highlightSpan);
-                    questionElement.appendChild(highlightSpan);
+                    targetElement.appendChild(highlightSpan);
                     if (after) {
                         if (!isIntroRiddle) {
-                            applyMixedFont(after, questionElement);
+                            applyMixedFont(after, targetElement);
                         } else {
-                            questionElement.appendChild(document.createTextNode(after));
+                            targetElement.appendChild(document.createTextNode(after));
                         }
+                    }
+                    
+                    if (yellowTextContainer) {
+                        questionElement.appendChild(yellowTextContainer);
                     }
                     return questionElement;
                 }
             }
 
             // Apply mixed font for highlighted riddles, plain text for intro
+            const targetElement = yellowTextContainer || questionElement;
             if (!isIntroRiddle) {
-                applyMixedFont(questionText, questionElement);
+                applyMixedFont(questionText, targetElement);
             } else {
-                questionElement.textContent = questionText;
+                targetElement.textContent = questionText;
+            }
+            
+            if (yellowTextContainer) {
+                questionElement.appendChild(yellowTextContainer);
             }
             return questionElement;
         }
