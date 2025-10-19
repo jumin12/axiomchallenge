@@ -47,6 +47,13 @@
             font-weight: normal;
             font-style: normal;
         }
+
+        @font-face {
+            font-family: 'Rune';
+            src: url('Fonts/RUNE.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
         
         * {
             margin: 0;
@@ -1024,13 +1031,15 @@
         }
 
         .riddle-page .riddle-container,
-        .riddle-page .riddle-content {
+        .riddle-page .riddle-content,
+        .riddle-page .completion-container {
             opacity: 1;
             transition: opacity 0.6s ease;
         }
 
         .riddle-page .riddle-container.is-transitioning,
-        .riddle-page .riddle-content.is-transitioning {
+        .riddle-page .riddle-content.is-transitioning,
+        .riddle-page .completion-container.is-transitioning {
             opacity: 0;
         }
 
@@ -1450,7 +1459,8 @@
         .riddle-container[data-riddle-id="8"],
         .riddle-container[data-riddle-id="17"],
         .riddle-container[data-riddle-id="21"],
-        .riddle-container[data-riddle-id="22"] {
+        .riddle-container[data-riddle-id="22"],
+        .riddle-container[data-riddle-id="23"] {
             background: url('art/lightbox-XL.png') center/contain no-repeat;
             width: 87.5rem;
             height: 72.625rem;
@@ -1481,7 +1491,8 @@
         .riddle-container[data-riddle-id="8"] .riddle-content,
         .riddle-container[data-riddle-id="17"] .riddle-content,
         .riddle-container[data-riddle-id="21"] .riddle-content,
-        .riddle-container[data-riddle-id="22"] .riddle-content {
+        .riddle-container[data-riddle-id="22"] .riddle-content,
+        .riddle-container[data-riddle-id="23"] .riddle-content {
             top: 5rem;
             bottom: 0;
             padding-bottom: 3rem;
@@ -1491,7 +1502,8 @@
         .riddle-container[data-riddle-id="8"] .golden-swirl,
         .riddle-container[data-riddle-id="17"] .golden-swirl,
         .riddle-container[data-riddle-id="21"] .golden-swirl,
-        .riddle-container[data-riddle-id="22"] .golden-swirl {
+        .riddle-container[data-riddle-id="22"] .golden-swirl,
+        .riddle-container[data-riddle-id="23"] .golden-swirl {
             display: block !important;
             position: relative;
             z-index: 10;
@@ -1504,7 +1516,8 @@
         .riddle-container[data-riddle-id="8"] .stag-guidance,
         .riddle-container[data-riddle-id="17"] .stag-guidance,
         .riddle-container[data-riddle-id="21"] .stag-guidance,
-        .riddle-container[data-riddle-id="22"] .stag-guidance {
+        .riddle-container[data-riddle-id="22"] .stag-guidance,
+        .riddle-container[data-riddle-id="23"] .stag-guidance {
             flex-shrink: 0;
             margin-bottom: 0.1875rem;
         }
@@ -1518,9 +1531,10 @@
             gap: 0.75rem;
         }
 
-        /* Move dialog text down for riddles 21 and 22 */
+        /* Move dialog text down for riddles 21, 22, and 23 */
         .riddle-container[data-riddle-id="21"] .riddle-dialog,
-        .riddle-container[data-riddle-id="22"] .riddle-dialog {
+        .riddle-container[data-riddle-id="22"] .riddle-dialog,
+        .riddle-container[data-riddle-id="23"] .riddle-dialog {
             flex-shrink: 0;
             margin-top: 3rem;
             margin-bottom: 0.75rem;
@@ -1531,7 +1545,8 @@
         .riddle-container[data-riddle-id="8"] .riddle-question,
         .riddle-container[data-riddle-id="17"] .riddle-question,
         .riddle-container[data-riddle-id="21"] .riddle-question,
-        .riddle-container[data-riddle-id="22"] .riddle-question {
+        .riddle-container[data-riddle-id="22"] .riddle-question,
+        .riddle-container[data-riddle-id="23"] .riddle-question {
             margin-top: 0.5rem;
             margin-bottom: 0.75rem;
         }
@@ -1548,7 +1563,8 @@
         .riddle-container[data-riddle-id="8"] .mysterious-signature,
         .riddle-container[data-riddle-id="17"] .mysterious-signature,
         .riddle-container[data-riddle-id="21"] .mysterious-signature,
-        .riddle-container[data-riddle-id="22"] .mysterious-signature {
+        .riddle-container[data-riddle-id="22"] .mysterious-signature,
+        .riddle-container[data-riddle-id="23"] .mysterious-signature {
             flex-shrink: 0;
             margin-bottom: 0.75rem;
         }
@@ -1558,10 +1574,11 @@
             margin: 0.5rem 0;
         }
 
-        /* XL lightbox - tighten disclaimer spacing for riddles 17, 21, and 22 */
+        /* XL lightbox - tighten disclaimer spacing for riddles 17, 21, 22, and 23 */
         .riddle-container[data-riddle-id="17"] .riddle-disclaimer,
         .riddle-container[data-riddle-id="21"] .riddle-disclaimer,
-        .riddle-container[data-riddle-id="22"] .riddle-disclaimer {
+        .riddle-container[data-riddle-id="22"] .riddle-disclaimer,
+        .riddle-container[data-riddle-id="23"] .riddle-disclaimer {
             margin: 0.5rem 0;
         }
 
@@ -1598,6 +1615,13 @@
             font-family: 'Booter Zero One', 'CAD', serif;
             font-size: 2.25rem;
             letter-spacing: 0.04em;
+        }
+
+        /* Riddle 23 - allow text to overflow on one line */
+        .riddle-container[data-riddle-id="23"] .riddle-question {
+            white-space: nowrap;
+            overflow: visible;
+            max-width: none;
         }
 
         .trust-question {
@@ -1938,6 +1962,53 @@
             100% { filter: none; }
         }
 
+        /* Dwarven rune text for riddle 23 */
+        .dwarven-rune-text {
+            font-family: 'Rune', serif;
+            font-size: 2.4rem;
+            color: #666666;
+            text-align: center;
+            margin: 0.5rem auto 0.5rem auto;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            line-height: 1.8;
+            user-select: none;
+            max-width: 48rem;
+        }
+
+        .rune-letter {
+            display: inline-block;
+            color: inherit;
+            transition: none;
+        }
+
+        .rune-letter.lit {
+            animation: runeLightUp 0.4s ease-out forwards;
+        }
+
+        @keyframes runeLightUp {
+            0% { 
+                color: #666666;
+                filter: brightness(1);
+                text-shadow: 0 0 0 rgba(0, 229, 255, 0);
+            }
+            50% { 
+                color: #00e5ff;
+                filter: brightness(2);
+                text-shadow: 0 0 1.5rem rgba(0, 229, 255, 1), 
+                            0 0 2.5rem rgba(0, 229, 255, 0.9),
+                            0 0 3.5rem rgba(0, 229, 255, 0.7);
+            }
+            100% { 
+                color: #00e5ff;
+                filter: brightness(1.2);
+                text-shadow: 0 0 1rem rgba(0, 229, 255, 0.8), 
+                            0 0 2rem rgba(0, 229, 255, 0.6),
+                            0 0 3rem rgba(0, 229, 255, 0.4);
+            }
+        }
+
         .flute-game-container .flute-lines {
             width: 100%;
             height: auto;
@@ -2053,7 +2124,8 @@
         }
 
         /* XL lightbox - anchor input at bottom */
-        .riddle-container[data-riddle-id="8"] .riddle-input-container {
+        .riddle-container[data-riddle-id="8"] .riddle-input-container,
+        .riddle-container[data-riddle-id="23"] .riddle-input-container {
             padding-top: 0;
             margin-bottom: 2rem;
             position: relative;
@@ -2145,7 +2217,7 @@
         }
 
         /* Medium lightbox - move banner left and down */
-        .riddle-container:not([data-riddle-id="8"]):not([data-riddle-id="17"]):not([data-riddle-id="21"]):not([data-riddle-id="22"]) .riddle-stag-banner {
+        .riddle-container:not([data-riddle-id="8"]):not([data-riddle-id="17"]):not([data-riddle-id="21"]):not([data-riddle-id="22"]):not([data-riddle-id="23"]) .riddle-stag-banner {
             right: 5rem;
             top: 4rem;
         }
@@ -2154,7 +2226,8 @@
         .riddle-container[data-riddle-id="8"] .riddle-hooded-figure,
         .riddle-container[data-riddle-id="17"] .riddle-hooded-figure,
         .riddle-container[data-riddle-id="21"] .riddle-hooded-figure,
-        .riddle-container[data-riddle-id="22"] .riddle-hooded-figure {
+        .riddle-container[data-riddle-id="22"] .riddle-hooded-figure,
+        .riddle-container[data-riddle-id="23"] .riddle-hooded-figure {
             left: 6.875rem;
             top: -3.1875rem;
         }
@@ -2162,7 +2235,8 @@
         .riddle-container[data-riddle-id="8"] .riddle-stag-banner,
         .riddle-container[data-riddle-id="17"] .riddle-stag-banner,
         .riddle-container[data-riddle-id="21"] .riddle-stag-banner,
-        .riddle-container[data-riddle-id="22"] .riddle-stag-banner {
+        .riddle-container[data-riddle-id="22"] .riddle-stag-banner,
+        .riddle-container[data-riddle-id="23"] .riddle-stag-banner {
             right: 12rem;
             top: 0.3125rem;
         }
@@ -3889,7 +3963,7 @@
         const BASE_RIDDLE_DEFINITIONS = [
             {
                 id: INTRO_RIDDLE_ID,
-                heading: 'The Stag has guided you well...',
+                heading: 'What you say next, could bring \nlife... or death.',
                 white: [
                     '<player>,',
                     'So, you want to join our ranks? We applaud you for making it this far. Time is short and desperate times call for desperate measures. Only your dedication and perseverance will prove that. But can we trust you?'
@@ -4055,6 +4129,18 @@
                 yellow: "Born of light, yet darkness draws near, a hunter's strike, both swift and clear. Steel defends, yet steel will bite, two forces clashe in frozen light. A song is played calling forth what sleeps in rune.",
                 answers: ['cleric', 'ranger', 'tank', 'fighter', 'rogue', 'mage', 'bard', 'summoner'],
                 disclaimer: 'Placeholder -- class rune sequence required.'
+            },
+            {
+                id: 23,
+                heading: 'A Hero from the past...',
+                white: [
+                    'The Dunir have set traps in The Anvils for uninvited guests. However, we might\'ve found a way. Translating these dwarven runes seem to be the key to the answer we need to move forward. It looks like there\'s another legible inscription...',
+                    '"By the hammer of Dünheim! Vengeance upon evil!"'
+                ],
+                yellow: '- Elder Futhark',
+                runeText: 'Father called in urgent plea, to salvage what the quake set free. Names echoed in the chaos wild, aiding kin, the faithful child. Who rushed to gather food and gear.',
+                answers: ['helgun thargud'],
+                disclaimer: 'Placeholder -- rune translation required.'
             }
         ];
 
@@ -4431,6 +4517,17 @@
                 questionElement.classList.add('highlight');
             }
 
+            // Special handling for riddle 23: prepend the hammer quote
+            if (riddle && riddle.id === 23 && riddle.white && Array.isArray(riddle.white) && riddle.white[1]) {
+                const hammerQuote = document.createElement('span');
+                hammerQuote.style.fontStyle = 'italic';
+                hammerQuote.style.fontSize = '0.9em';
+                hammerQuote.style.color = 'rgba(249, 235, 225, 1)';
+                hammerQuote.style.marginRight = '0.5em';
+                hammerQuote.textContent = riddle.white[1] + ' ';
+                questionElement.appendChild(hammerQuote);
+            }
+
             const questionText = applyPlayerName(riddle ? riddle.yellow : '', playerName);
             if (riddle && riddle.highlightToken) {
                 const token = riddle.highlightToken;
@@ -4546,6 +4643,12 @@
             // Clear any pending error removal timeout
             clearPendingErrorRemoval();
 
+            // Fade out completion view if transitioning from it
+            const completionContainerPre = document.getElementById('completionContainer');
+            if (options.useTransition && completionContainerPre && completionContainerPre.offsetParent !== null) {
+                completionContainerPre.classList.add('is-transitioning');
+            }
+            
             hideCompletionView();
 
             // Set riddle ID on container for CSS targeting
@@ -4560,7 +4663,12 @@
 
                 dialogEl.innerHTML = '';
                 const whiteSegments = Array.isArray(riddle.white) ? riddle.white : (riddle.white ? [riddle.white] : []);
-                whiteSegments.forEach(segment => {
+                whiteSegments.forEach((segment, index) => {
+                    // Skip the second white segment for riddle 23 (the hammer quote)
+                    // It will be rendered inline with the yellow text
+                    if (riddle.id === 23 && index === 1) {
+                        return;
+                    }
                     const resolved = applyPlayerName(segment, playerName);
                     if (!resolved) {
                         return;
@@ -4681,6 +4789,27 @@
                                         <img src="art/summoner-active rune-wrong.png" alt="Summoner" class="wrong-img">
                                     </button>
                                 </div>
+                            </div>
+                        `;
+                    } else if (riddle.id === 23) {
+                        // Special handling for riddle 23 - show dwarven rune text
+                        disclaimerEl.style.display = 'block';
+                        
+                        // Split text into individual characters for random animation
+                        const runeText = riddle.runeText;
+                        const wrappedText = runeText.split('').map((char, index) => {
+                            if (char === ' ') {
+                                return ' ';
+                            } else if (char === '\n') {
+                                return '<br>';
+                            } else {
+                                return `<span class="rune-letter" data-index="${index}">${char}</span>`;
+                            }
+                        }).join('');
+                        
+                        disclaimerEl.innerHTML = `
+                            <div class="dwarven-rune-text" id="dwarven-rune-text">
+                                ${wrappedText}
                             </div>
                         `;
                     } else if (riddle.disclaimer) {
@@ -5248,6 +5377,61 @@
                     }
                 }, 100);
             }
+
+            // Setup dwarven rune text for riddle 23
+            if (riddle.id === 23) {
+                setTimeout(() => {
+                    const runeTextEl = document.getElementById('dwarven-rune-text');
+                    
+                    if (runeTextEl && inputEl) {
+                        let isActivated = false;
+                        
+                        runeTextEl.addEventListener('click', function() {
+                            if (isActivated) return;
+                            
+                            isActivated = true;
+                            runeTextEl.classList.add('activated');
+                            
+                            // Play medieval horn sound
+                            const audioController = window.__audioController;
+                            const activationSound = audioController?.medievalHornAudio;
+                            if (activationSound) {
+                                activationSound.currentTime = 0;
+                                safePlay(activationSound);
+                            }
+                            
+                            // Get all letter elements
+                            const letters = Array.from(runeTextEl.querySelectorAll('.rune-letter'));
+                            
+                            // Create array of indices and shuffle randomly
+                            const indices = letters.map((_, i) => i);
+                            for (let i = indices.length - 1; i > 0; i--) {
+                                const j = Math.floor(Math.random() * (i + 1));
+                                [indices[i], indices[j]] = [indices[j], indices[i]];
+                            }
+                            
+                            // Light up letters in random order with checkerboard pattern
+                            const totalDuration = 2000; // 2 seconds total
+                            const delayPerLetter = totalDuration / letters.length;
+                            
+                            indices.forEach((letterIndex, animIndex) => {
+                                setTimeout(() => {
+                                    letters[letterIndex].classList.add('lit');
+                                }, animIndex * delayPerLetter);
+                            });
+                            
+                            // Enable input after all letters are lit
+                            setTimeout(() => {
+                                inputEl.disabled = false;
+                                inputEl.focus({ preventScroll: true });
+                            }, totalDuration + 400);
+                        });
+                        
+                        // Disable input initially
+                        inputEl.disabled = true;
+                    }
+                }, 100);
+            }
             };
 
             if (options.useTransition) {
@@ -5267,6 +5451,10 @@
                             if (container) {
                                 container.classList.remove('is-transitioning');
                             }
+                            // Clean up completion container transition
+                            if (completionContainerPre) {
+                                completionContainerPre.classList.remove('is-transitioning');
+                            }
                         });
                     });
                 }, RIDDLE_TRANSITION_DELAY_MS);
@@ -5276,6 +5464,10 @@
                 const container = content.closest('.riddle-container');
                 if (container) {
                     container.classList.remove('is-transitioning');
+                }
+                // Clean up completion container transition
+                if (completionContainerPre) {
+                    completionContainerPre.classList.remove('is-transitioning');
                 }
             }
         }
@@ -5303,12 +5495,13 @@
             
             // Riddle 8 requires user to click the map before enabling input
             // Riddle 21 requires user to complete the flute game before enabling input
+            // Riddle 23 requires user to click the rune text before enabling input
             const options = {
                 useTransition: Boolean(useTransition),
                 onContentUpdate: () => flushQueuedFigureVariant()
             };
             
-            if (current.id === 8 || current.id === 17 || current.id === 21 || current.id === 22) {
+            if (current.id === 8 || current.id === 17 || current.id === 21 || current.id === 22 || current.id === 23) {
                 options.disableInput = true;
             }
             
@@ -5317,7 +5510,7 @@
             // Update dev console highlighting if visible
             refreshDevConsoleIfVisible();
         }
-        function renderChallengeCompletion(playerName) {
+        function renderChallengeCompletion(playerName, useTransition = false) {
             clearPendingRiddleAdvance();
             isShowingRiddleCompletion = true; // Mark that we're showing completion
             
@@ -5339,13 +5532,62 @@
                 }
             }
             
-            applyFigureVariant(variantToUse, true);
-
-            showCompletionView(playerName, signatureToUse);
-            updateCompletionSelectionUI(activeRiddleChallenge?.selectedReward || null, { skipPersist: true });
-
-            // Update dev console highlighting if visible
-            refreshDevConsoleIfVisible();
+            const completionContainer = document.getElementById('completionContainer');
+            const content = document.getElementById('riddleContent');
+            const container = content?.closest('.riddle-container');
+            
+            if (useTransition && completionContainer) {
+                // Fade out current riddle
+                if (content) {
+                    content.classList.add('is-transitioning');
+                }
+                if (container) {
+                    container.classList.add('is-transitioning');
+                }
+                
+                setTimeout(() => {
+                    // Switch to completion view
+                    applyFigureVariant(variantToUse, true);
+                    showCompletionView(playerName, signatureToUse);
+                    updateCompletionSelectionUI(activeRiddleChallenge?.selectedReward || null, { skipPersist: true });
+                    
+                    // Fade in completion container
+                    completionContainer.classList.add('is-transitioning');
+                    
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            completionContainer.classList.remove('is-transitioning');
+                            if (content) {
+                                content.classList.remove('is-transitioning');
+                            }
+                            if (container) {
+                                container.classList.remove('is-transitioning');
+                            }
+                        });
+                    });
+                    
+                    // Update dev console highlighting if visible
+                    refreshDevConsoleIfVisible();
+                }, RIDDLE_TRANSITION_DELAY_MS);
+            } else {
+                // No transition
+                applyFigureVariant(variantToUse, true);
+                showCompletionView(playerName, signatureToUse);
+                updateCompletionSelectionUI(activeRiddleChallenge?.selectedReward || null, { skipPersist: true });
+                
+                if (completionContainer) {
+                    completionContainer.classList.remove('is-transitioning');
+                }
+                if (content) {
+                    content.classList.remove('is-transitioning');
+                }
+                if (container) {
+                    container.classList.remove('is-transitioning');
+                }
+                
+                // Update dev console highlighting if visible
+                refreshDevConsoleIfVisible();
+            }
         }
         
         function maybeStartRiddleChallenge(playerName, answer) {
@@ -5443,7 +5685,7 @@
             }
             activeRiddleChallenge.completed = true;
             saveActiveChallenge(); // Save the completed state with variant and profileId
-            renderChallengeCompletion(activeRiddleChallenge.playerName);
+            renderChallengeCompletion(activeRiddleChallenge.playerName, true);
         }
 
         function handleRiddleSubmission(answer) {
@@ -6350,6 +6592,22 @@ function safePlay(mediaElement) {
                 classRuneAudio.volume = initialVolume * parseFloat(classRuneAudio.dataset.baseVolume);
             }
 
+            let medievalHornAudio = document.getElementById('medievalHornAudio');
+            if (!medievalHornAudio) {
+                medievalHornAudio = document.createElement('audio');
+                medievalHornAudio.id = 'medievalHornAudio';
+                medievalHornAudio.src = 'sound/medieval-horn-by-kris-klavenes-wav-77565.mp3';
+                medievalHornAudio.preload = 'auto';
+                medievalHornAudio.dataset.baseVolume = '0.9';
+                medievalHornAudio.volume = initialVolume * 0.9;
+                document.body.appendChild(medievalHornAudio);
+            } else {
+                if (!medievalHornAudio.dataset.baseVolume) {
+                    medievalHornAudio.dataset.baseVolume = '0.9';
+                }
+                medievalHornAudio.volume = initialVolume * parseFloat(medievalHornAudio.dataset.baseVolume);
+            }
+
             const updateAudioIcon = (muted) => {
                 const waves = audioIcon?.querySelectorAll('.wave');
                 const muteX = audioIcon?.querySelector('.mute-x');
@@ -6440,6 +6698,7 @@ function safePlay(mediaElement) {
                 fluteButtonAudio,
                 steelbloomAudio,
                 classRuneAudio,
+                medievalHornAudio,
                 playStagOnce: () => {
                     if (!stagVoice || !backgroundMusic) return;
                     if (stagVoice.dataset.played === 'true') return;
