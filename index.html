@@ -59,6 +59,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         :root {
@@ -4118,7 +4122,7 @@
         const DEV_CONSOLE_INTERACTIVE_RIDDLES_KEY = 'interactiveRiddleIds';
         const DEV_CONSOLE_UNLOCK_TIMEOUT_MS = 120000;
         const DEFAULT_INTERACTIVE_RIDDLE_IDS = [8, 17, 21, 22, 24]; // XL lightbox riddles
-        const MIN_INTERACTIVE_RIDDLES = 2;
+        const MIN_INTERACTIVE_RIDDLES = 3;
         const COMPLETION_REWARD_ART_MAP = {
             armor: {
                 selected: 'art/completion-armor-selected.png',
