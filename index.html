@@ -1460,7 +1460,8 @@
         .riddle-container[data-riddle-id="17"],
         .riddle-container[data-riddle-id="21"],
         .riddle-container[data-riddle-id="22"],
-        .riddle-container[data-riddle-id="23"] {
+        .riddle-container[data-riddle-id="23"],
+        .riddle-container[data-riddle-id="24"] {
             background: url('art/lightbox-XL.png') center/contain no-repeat;
             width: 87.5rem;
             height: 72.625rem;
@@ -1492,7 +1493,8 @@
         .riddle-container[data-riddle-id="17"] .riddle-content,
         .riddle-container[data-riddle-id="21"] .riddle-content,
         .riddle-container[data-riddle-id="22"] .riddle-content,
-        .riddle-container[data-riddle-id="23"] .riddle-content {
+        .riddle-container[data-riddle-id="23"] .riddle-content,
+        .riddle-container[data-riddle-id="24"] .riddle-content {
             top: 5rem;
             bottom: 0;
             padding-bottom: 3rem;
@@ -1503,7 +1505,8 @@
         .riddle-container[data-riddle-id="17"] .golden-swirl,
         .riddle-container[data-riddle-id="21"] .golden-swirl,
         .riddle-container[data-riddle-id="22"] .golden-swirl,
-        .riddle-container[data-riddle-id="23"] .golden-swirl {
+        .riddle-container[data-riddle-id="23"] .golden-swirl,
+        .riddle-container[data-riddle-id="24"] .golden-swirl {
             display: block !important;
             position: relative;
             z-index: 10;
@@ -1517,7 +1520,8 @@
         .riddle-container[data-riddle-id="17"] .stag-guidance,
         .riddle-container[data-riddle-id="21"] .stag-guidance,
         .riddle-container[data-riddle-id="22"] .stag-guidance,
-        .riddle-container[data-riddle-id="23"] .stag-guidance {
+        .riddle-container[data-riddle-id="23"] .stag-guidance,
+        .riddle-container[data-riddle-id="24"] .stag-guidance {
             flex-shrink: 0;
             margin-bottom: 0.1875rem;
         }
@@ -1531,10 +1535,11 @@
             gap: 0.75rem;
         }
 
-        /* Move dialog text down for riddles 21, 22, and 23 */
+        /* Move dialog text down for riddles 21, 22, 23, and 24 */
         .riddle-container[data-riddle-id="21"] .riddle-dialog,
         .riddle-container[data-riddle-id="22"] .riddle-dialog,
-        .riddle-container[data-riddle-id="23"] .riddle-dialog {
+        .riddle-container[data-riddle-id="23"] .riddle-dialog,
+        .riddle-container[data-riddle-id="24"] .riddle-dialog {
             flex-shrink: 0;
             margin-top: 3rem;
             margin-bottom: 0.75rem;
@@ -1546,7 +1551,8 @@
         .riddle-container[data-riddle-id="17"] .riddle-question,
         .riddle-container[data-riddle-id="21"] .riddle-question,
         .riddle-container[data-riddle-id="22"] .riddle-question,
-        .riddle-container[data-riddle-id="23"] .riddle-question {
+        .riddle-container[data-riddle-id="23"] .riddle-question,
+        .riddle-container[data-riddle-id="24"] .riddle-question {
             margin-top: 0.5rem;
             margin-bottom: 0.75rem;
         }
@@ -1564,7 +1570,8 @@
         .riddle-container[data-riddle-id="17"] .mysterious-signature,
         .riddle-container[data-riddle-id="21"] .mysterious-signature,
         .riddle-container[data-riddle-id="22"] .mysterious-signature,
-        .riddle-container[data-riddle-id="23"] .mysterious-signature {
+        .riddle-container[data-riddle-id="23"] .mysterious-signature,
+        .riddle-container[data-riddle-id="24"] .mysterious-signature {
             flex-shrink: 0;
             margin-bottom: 0.75rem;
         }
@@ -1574,11 +1581,12 @@
             margin: 0.5rem 0;
         }
 
-        /* XL lightbox - tighten disclaimer spacing for riddles 17, 21, 22, and 23 */
+        /* XL lightbox - tighten disclaimer spacing for riddles 17, 21, 22, 23, and 24 */
         .riddle-container[data-riddle-id="17"] .riddle-disclaimer,
         .riddle-container[data-riddle-id="21"] .riddle-disclaimer,
         .riddle-container[data-riddle-id="22"] .riddle-disclaimer,
-        .riddle-container[data-riddle-id="23"] .riddle-disclaimer {
+        .riddle-container[data-riddle-id="23"] .riddle-disclaimer,
+        .riddle-container[data-riddle-id="24"] .riddle-disclaimer {
             margin: 0.5rem 0;
         }
 
@@ -1815,6 +1823,166 @@
             margin: 2rem auto 0 auto;
             margin-left: -5rem;
             padding: 2rem;
+        }
+
+        /* Compass layout for riddle 24 */
+        .compass-game-container {
+            position: relative;
+            width: 100%;
+            max-width: 52rem;
+            margin: 1.25rem auto 0.75rem auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .compass-runes {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 0.35rem;
+        }
+        .compass-runes img {
+            width: 2.85rem;
+            height: auto;
+            filter: drop-shadow(0 0 0.45rem rgba(255, 215, 150, 0.55));
+        }
+        .compass-stage {
+            position: relative;
+            width: 28rem;
+            height: 28rem;
+            margin: 0.15rem 0;
+            background: none;
+        }
+        .compass-wrapper {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .compass-stage .compass-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 0.35rem rgba(0, 0, 0, 0.6));
+        }
+        .compass-north-gem {
+            position: absolute;
+            top: 15%;
+            left: 51%;
+            transform: translateX(-50%);
+            width: 2%;
+            height: 2%;
+            background: radial-gradient(circle, rgba(255, 50, 50, 0.9) 0%, rgba(200, 0, 0, 0.7) 50%, transparent 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: gemGlisten 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 0.3rem rgba(255, 50, 50, 0.8)) drop-shadow(0 0 0.6rem rgba(200, 0, 0, 0.5));
+        }
+        @keyframes gemGlisten {
+            0%, 100% { 
+                opacity: 0.7;
+                filter: drop-shadow(0 0 0.3rem rgba(255, 50, 50, 0.8)) drop-shadow(0 0 0.6rem rgba(200, 0, 0, 0.5));
+            }
+            50% { 
+                opacity: 1;
+                filter: drop-shadow(0 0 0.5rem rgba(255, 80, 80, 1)) drop-shadow(0 0 1rem rgba(220, 30, 30, 0.8));
+            }
+        }
+        /* Arc-positioned runes (absolute inside compass-stage) */
+        .compass-arc-runes { position: absolute; inset: 0; }
+        .arc-rune { position: absolute; width: 8rem; filter: none; pointer-events: none; }
+        .arc-rune.on { 
+            filter: brightness(1.05) drop-shadow(0 0 0.4rem rgba(255, 210, 140, 0.65)) drop-shadow(0 0 0.9rem rgba(255, 190, 120, 0.4)); 
+            animation: runeOnPulse 2s ease-in-out infinite;
+        }
+        .arc-rune.wrong { animation: runeWrongPulse 450ms ease; }
+        .starmap-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; animation: spin-ccw 120s linear infinite; opacity: 0.9; }
+        .compass-orb-left.on,
+        .compass-orb-right.on { animation: orbPulse 2s ease-in-out infinite; }
+        .compass-orb-left.on { filter: brightness(1.08) drop-shadow(0 0 0.8rem rgba(100, 255, 180, 0.85)) drop-shadow(0 0 1.8rem rgba(80, 220, 150, 0.6)); }
+        .compass-orb-right.on { filter: brightness(1.08) drop-shadow(0 0 0.8rem rgba(255, 120, 200, 0.85)) drop-shadow(0 0 1.8rem rgba(220, 100, 180, 0.6)); }
+        .compass-orb-left.activating,
+        .compass-orb-right.activating { animation: orbActivation 0.8s ease-out forwards; }
+        @keyframes spin-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        @keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes runeOnPulse { 
+            0%, 100% { filter: brightness(1.05) drop-shadow(0 0 0.4rem rgba(255, 210, 140, 0.65)) drop-shadow(0 0 0.9rem rgba(255, 190, 120, 0.4)); }
+            50% { filter: brightness(1.1) drop-shadow(0 0 0.6rem rgba(255, 220, 160, 0.85)) drop-shadow(0 0 1.2rem rgba(255, 200, 130, 0.6)); }
+        }
+        @keyframes orbPulse {
+            0%, 100% { filter: brightness(1.08); }
+            50% { filter: brightness(1.15); }
+        }
+        @keyframes orbActivation {
+            0% { 
+                filter: brightness(1) drop-shadow(0 0 0 transparent) drop-shadow(0 0 0 transparent);
+            }
+            30% { 
+                filter: brightness(1.35) drop-shadow(0 0 0.4rem currentColor) drop-shadow(0 0 0.8rem currentColor);
+            }
+            60% { 
+                filter: brightness(1.25) drop-shadow(0 0 1.2rem currentColor) drop-shadow(0 0 2.5rem currentColor);
+            }
+            100% { 
+                filter: brightness(1.08);
+            }
+        }
+        @keyframes runeWrongPulse { 0%,100% { filter: drop-shadow(0 0 0.2rem rgba(255,60,60,0.6)); } 50% { filter: drop-shadow(0 0 0.9rem rgba(255,60,60,0.95)); } }
+        /* explicit user-specified layout */
+        .arc-pos-1 {
+            top: 28%;
+            left: -8%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            width: 7rem;
+        }
+        .arc-pos-2 {
+            top: 1%;
+            left: 16%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            width: 7rem;
+        }
+        .arc-pos-3 {
+            top: -9%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            width: 7rem;
+        }
+        .arc-pos-4 {
+            top: 1%;
+            left: 85%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            width: 7rem;
+        }
+        .arc-pos-5 {
+            top: 32%;
+            left: 105%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            width: 7rem;
+        }
+        .compass-orb-left,
+        .compass-orb-right {
+            position: absolute;
+            width: 7rem;
+            height: auto;
+            top: 55%;
+        }
+        .compass-orb-left { left: -18%; transform: translate(-50%, -50%); }
+        .compass-orb-right { right: -18%; transform: translate(50%, -50%); }
+        .compass-icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 0.15rem;
+        }
+        .compass-icons img {
+            width: 4rem;
+            height: auto;
+            filter: drop-shadow(0 0 0.4rem rgba(255, 215, 150, 0.5));
         }
 
         .class-rune-button {
@@ -2172,6 +2340,10 @@
         .riddle-container[data-riddle-id="21"] .riddle-input-container {
             padding-top: 2.5rem;
         }
+        .riddle-container[data-riddle-id="24"] .riddle-input-container {
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+        }
 
         /* Hide input container for riddle 22 */
         .riddle-container[data-riddle-id="22"] .riddle-input-container {
@@ -2244,7 +2416,7 @@
         }
 
         /* Medium lightbox - move banner left and down */
-        .riddle-container:not([data-riddle-id="8"]):not([data-riddle-id="17"]):not([data-riddle-id="21"]):not([data-riddle-id="22"]):not([data-riddle-id="23"]) .riddle-stag-banner {
+        .riddle-container:not([data-riddle-id="8"]):not([data-riddle-id="17"]):not([data-riddle-id="21"]):not([data-riddle-id="22"]):not([data-riddle-id="23"]):not([data-riddle-id="24"]) .riddle-stag-banner {
             right: 5rem;
             top: 4rem;
         }
@@ -2254,7 +2426,8 @@
         .riddle-container[data-riddle-id="17"] .riddle-hooded-figure,
         .riddle-container[data-riddle-id="21"] .riddle-hooded-figure,
         .riddle-container[data-riddle-id="22"] .riddle-hooded-figure,
-        .riddle-container[data-riddle-id="23"] .riddle-hooded-figure {
+        .riddle-container[data-riddle-id="23"] .riddle-hooded-figure,
+        .riddle-container[data-riddle-id="24"] .riddle-hooded-figure {
             left: 6.875rem;
             top: -3.1875rem;
         }
@@ -2263,7 +2436,8 @@
         .riddle-container[data-riddle-id="17"] .riddle-stag-banner,
         .riddle-container[data-riddle-id="21"] .riddle-stag-banner,
         .riddle-container[data-riddle-id="22"] .riddle-stag-banner,
-        .riddle-container[data-riddle-id="23"] .riddle-stag-banner {
+        .riddle-container[data-riddle-id="23"] .riddle-stag-banner,
+        .riddle-container[data-riddle-id="24"] .riddle-stag-banner {
             right: 12rem;
             top: 0.3125rem;
         }
@@ -3943,7 +4117,7 @@
         const DEV_CONSOLE_PROFILES_KEY = 'riddleProfiles';
         const DEV_CONSOLE_INTERACTIVE_RIDDLES_KEY = 'interactiveRiddleIds';
         const DEV_CONSOLE_UNLOCK_TIMEOUT_MS = 120000;
-        const DEFAULT_INTERACTIVE_RIDDLE_IDS = [8, 17, 21, 22]; // XL lightbox riddles
+        const DEFAULT_INTERACTIVE_RIDDLE_IDS = [8, 17, 21, 22, 24]; // XL lightbox riddles
         const MIN_INTERACTIVE_RIDDLES = 2;
         const COMPLETION_REWARD_ART_MAP = {
             armor: {
@@ -4168,6 +4342,16 @@
                 runeText: 'Father called in urgent plea, to salvage what the quake set free. Names echoed in the chaos wild, aiding kin, the faithful child. Who rushed to gather food and gear.',
                 answers: ['helgun thargud'],
                 disclaimer: 'Placeholder -- rune translation required.'
+            },
+            {
+                id: 24,
+                heading: 'The Compass of Eradal...',
+                white: [
+                    'Travelers whisper the compass holds the key to Eradal\'s past. Point it true warrior... What mystery will the compass open for you? Who were these warriors?'
+                ],
+                yellow: 'I guard your head, then breathe fire next. A gentle deer follows, with wings on a blade\'s neck. As arrows cross the shield protects.',
+                answers: ['empyrean', 'empyrean elves', 'the empyrean', 'the empyrean elves'],
+                disclaimer: 'Compass puzzle layout.'
             }
         ];
 
@@ -4857,6 +5041,326 @@
                                 ${wrappedText}
                             </div>
                         `;
+                    } else if (riddle.id === 24) {
+                        // Riddle 24 - Compass of Eradal layout (static display)
+                        disclaimerEl.style.display = 'block';
+                        disclaimerEl.innerHTML = `
+                            <div class="compass-game-container">
+                                <div class="compass-stage" id="compass-stage">
+                                    <img class="starmap-img" src="art/starmap.png" alt="Star Map">
+                                    <div class="compass-wrapper" id="compass-wrapper">
+                                        <img class="compass-img" id="compass-rose" src="art/compass.png" alt="Compass">
+                                        <div class="compass-north-gem" id="compass-gem"></div>
+                                    </div>
+                                    <div class="compass-arc-runes">
+                                        <img class="arc-rune arc-pos-1" src="art/emp-sword-shield-off.png" alt="Sword and Shield">
+                                        <img class="arc-rune arc-pos-2" src="art/emp-dragon-fire-off.png" alt="Dragon Fire">
+                                        <img class="arc-rune arc-pos-3" src="art/emp-deer-off.png" alt="Deer">
+                                        <img class="arc-rune arc-pos-4" src="art/emp-helm-off.png" alt="Helm">
+                                        <img class="arc-rune arc-pos-5" src="art/emp-arrows-shield-off.png" alt="Arrows Crossing Shield">
+                                    </div>
+                                    <img class="compass-orb-left" src="art/green-orb-off.png" alt="Green Orb">
+                                    <img class="compass-orb-right" src="art/pink-orb-off.png" alt="Pink Orb">
+                                </div>
+                                
+                            </div>
+                        `;
+
+                        // Interactive logic for riddle 24
+                        setTimeout(() => {
+                            const stage = document.getElementById('compass-stage');
+                            const wrapper = document.getElementById('compass-wrapper');
+                            const compass = document.getElementById('compass-rose');
+                            const gem = document.getElementById('compass-gem');
+                            const starmap = document.querySelector('#compass-stage .starmap-img');
+                            const input = document.getElementById('riddleAnswer');
+                            const runeImgs = Array.from(document.querySelectorAll('#compass-stage .arc-rune'));
+                            const leftOrb = stage?.querySelector('.compass-orb-left');
+                            const rightOrb = stage?.querySelector('.compass-orb-right');
+
+                            if (!stage || !wrapper || !compass || !gem || !starmap || !input || !runeImgs.length) return;
+
+                            // Start starmap slow counter-rotation
+                            starmap.style.animationPlayState = 'running';
+
+                            // Audio setup - only play first 2 seconds
+                            const compassRotateAudio = new Audio('sound/compass-sound.mp3');
+                            compassRotateAudio.volume = 1.0;
+                            let compassAudioTimeout = null;
+                            
+                            function playCompassAudio() {
+                                compassRotateAudio.currentTime = 0;
+                                compassRotateAudio.play().catch(err => {
+                                    console.log('Compass audio play failed:', err);
+                                });
+                                // Stop and restart after 2 seconds
+                                if (compassAudioTimeout) clearTimeout(compassAudioTimeout);
+                                compassAudioTimeout = setTimeout(() => {
+                                    playCompassAudio(); // Loop the first 2 seconds
+                                }, 2000);
+                            }
+                            
+                            const symbolOnAudio = new Audio('sound/emp-symbols-on.mp3');
+                            symbolOnAudio.volume = 1.0;
+                            const orbActivationAudio = new Audio('sound/empyrean-orb-activation.wav');
+                            orbActivationAudio.volume = 1.0;
+
+                            // Compass rotation - starts stationary, only starmap moves
+                            let isSpinning = false;
+                            let angle = 0;
+                            let lastTime = null;
+                            let speedDegPerSec = 20; // slow, positive = clockwise
+                            let starmapDirection = 'ccw'; // counter-clockwise initially
+
+                            function tick(ts) {
+                                if (!lastTime) lastTime = ts;
+                                const dt = (ts - lastTime) / 1000;
+                                lastTime = ts;
+                                if (isSpinning) {
+                                    angle = (angle + speedDegPerSec * dt) % 360;
+                                    wrapper.style.transform = `rotate(${angle}deg)`;
+                                } else {
+                                    // Stop audio when compass stops
+                                    if (compassAudioTimeout) {
+                                        clearTimeout(compassAudioTimeout);
+                                        compassAudioTimeout = null;
+                                    }
+                                    compassRotateAudio.pause();
+                                }
+                                requestAnimationFrame(tick);
+                            }
+                            requestAnimationFrame(tick);
+
+                            // Click to stop/start and select nearest rune to the red gem (north)
+                            // Rune definitions: helm, dragon, deer, sword-shield, arrows
+                            const RUNE_IMAGES = {
+                                helm:        { off: 'art/emp-helm-off.png',         on: 'art/emp-helm-on.png',         alt: 'Helm' },
+                                dragon:      { off: 'art/emp-dragon-fire-off.png',  on: 'art/emp-dragon-fire-on.png',  alt: 'Dragon Fire' },
+                                deer:        { off: 'art/emp-deer-off.png',         on: 'art/emp-deer-on.png',         alt: 'Deer' },
+                                swordshield: { off: 'art/emp-sword-shield-off.png', on: 'art/emp-sword-shield-on.png', alt: 'Sword and Shield' },
+                                arrows:      { off: 'art/emp-arrows-shield-off.png',on: 'art/emp-arrows-shield-on.png',alt: 'Arrows Crossing Shield' }
+                            };
+                            // Correct sequence (by rune key): helm → dragon → deer → sword-shield → arrows
+                            const ANSWER_ORDER_KEYS = ['helm', 'dragon', 'deer', 'swordshield', 'arrows'];
+                            let progressIndex = 0;
+
+                            function setRuneState(idx, state) {
+                                const img = runeImgs[idx];
+                                if (!img) return;
+                                const key = img.dataset.rune;
+                                const art = key ? RUNE_IMAGES[key] : null;
+                                if (state === 'on') {
+                                    img.classList.add('on');
+                                    img.classList.remove('wrong');
+                                    if (art) img.src = art.on;
+                                } else if (state === 'wrong') {
+                                    img.classList.add('wrong');
+                                    img.classList.remove('on');
+                                    if (art) img.src = art.off;
+                                } else {
+                                    img.classList.remove('on', 'wrong');
+                                    if (art) img.src = art.off;
+                                }
+                            }
+
+                            // Geometry helpers
+                            function bearingFromNorthCW(cx, cy, x, y) {
+                                const vx = x - cx;
+                                const vy = y - cy;
+                                const deg = (Math.atan2(vx, -vy) * 180 / Math.PI + 360) % 360; // 0=north, cw+
+                                return deg;
+                            }
+
+                            let runeBearings = [];
+                            let runeHitboxes = [];
+                            function recomputeBearings() {
+                                const rect = stage.getBoundingClientRect();
+                                const cx = rect.left + rect.width / 2;
+                                const cy = rect.top + rect.height / 2;
+                                runeBearings = [];
+                                runeHitboxes = [];
+                                runeImgs.forEach(img => {
+                                    const r = img.getBoundingClientRect();
+                                    const rx = r.left + r.width / 2;
+                                    const ry = r.top + r.height / 2;
+                                    runeBearings.push(bearingFromNorthCW(cx, cy, rx, ry));
+                                    // Build a circular hitbox around the rune center
+                                    const radius = Math.max(r.width, r.height) * 0.6; // generous hit area
+                                    runeHitboxes.push({ cx: rx, cy: ry, r: radius });
+                                });
+                            }
+                            window.addEventListener('resize', recomputeBearings);
+
+                            function shuffleArray(arr) {
+                                const copy = arr.slice();
+                                for (let i = copy.length - 1; i > 0; i--) {
+                                    const j = Math.floor(Math.random() * (i + 1));
+                                    [copy[i], copy[j]] = [copy[j], copy[i]];
+                                }
+                                return copy;
+                            }
+
+                            function randomizeRunes() {
+                                const keys = shuffleArray([...ANSWER_ORDER_KEYS]);
+                                runeImgs.forEach((img, i) => {
+                                    const key = keys[i];
+                                    img.dataset.rune = key;
+                                    img.alt = RUNE_IMAGES[key].alt;
+                                    img.src = RUNE_IMAGES[key].off;
+                                });
+                                recomputeBearings();
+                            }
+
+                            function resetRunes() {
+                                progressIndex = 0;
+                                runeImgs.forEach((img, i) => {
+                                    img.classList.remove('on', 'wrong');
+                                    const key = img.dataset.rune;
+                                    if (key && RUNE_IMAGES[key]) {
+                                        img.src = RUNE_IMAGES[key].off;
+                                    }
+                                });
+                                input.disabled = true;
+                            }
+
+                            randomizeRunes();
+                            resetRunes();
+
+                            function nearestRuneIndex(currentAngleDeg) {
+                                const a = ((currentAngleDeg % 360) + 360) % 360;
+                                let best = 0;
+                                let bestDiff = 1e9;
+                                for (let i = 0; i < runeBearings.length; i++) {
+                                    const d = Math.abs(((a - runeBearings[i] + 540) % 360) - 180);
+                                    if (d < bestDiff) { bestDiff = d; best = i; }
+                                }
+                                return { index: best, diff: bestDiff, angle: a };
+                            }
+
+                            // Given compass north angle and stage geometry, test if the north ray intersects a rune hitbox
+                            function northIntersectsRune(index) {
+                                const rect = stage.getBoundingClientRect();
+                                const cx = rect.left + rect.width / 2;
+                                const cy = rect.top + rect.height / 2;
+                                const hb = runeHitboxes[index];
+                                if (!hb) return false;
+                                // Parametric ray from center at current north bearing
+                                const theta = ((angle % 360) + 360) % 360 * Math.PI / 180;
+                                const dx = Math.sin(theta); // x increases clockwise from north
+                                const dy = -Math.cos(theta);
+                                // Distance from center to circle along the ray
+                                const ex = hb.cx - cx;
+                                const ey = hb.cy - cy;
+                                const t = ex * dx + ey * dy; // projection length
+                                if (t <= 0) return false; // behind the center
+                                // Closest approach distance squared
+                                const closestX = cx + dx * t;
+                                const closestY = cy + dy * t;
+                                const dist2 = (closestX - hb.cx) * (closestX - hb.cx) + (closestY - hb.cy) * (closestY - hb.cy);
+                                return dist2 <= (hb.r * hb.r);
+                            }
+
+                            function handleSelection(index) {
+                                const selectedKey = runeImgs[index]?.dataset.rune;
+                                const expectedKey = ANSWER_ORDER_KEYS[progressIndex];
+                                if (selectedKey && selectedKey === expectedKey) {
+                                    setRuneState(index, 'on');
+                                    // Play symbol-on sound
+                                    symbolOnAudio.currentTime = 0;
+                                    safePlay(symbolOnAudio);
+                                    
+                                    progressIndex += 1;
+                                    if (progressIndex === ANSWER_ORDER_KEYS.length) {
+                                        // success: light orbs and enable input
+                                        const leftOrb = document.querySelector('.compass-orb-left');
+                                        const rightOrb = document.querySelector('.compass-orb-right');
+                                        
+                                        // Play orb activation sound
+                                        orbActivationAudio.currentTime = 0;
+                                        safePlay(orbActivationAudio);
+                                        
+                                        if (leftOrb) {
+                                            leftOrb.src = 'art/green-orb-on.png';
+                                            leftOrb.classList.add('activating');
+                                            setTimeout(() => {
+                                                leftOrb.classList.remove('activating');
+                                                leftOrb.classList.add('on');
+                                            }, 800);
+                                        }
+                                        if (rightOrb) {
+                                            rightOrb.src = 'art/pink-orb-on.png';
+                                            rightOrb.classList.add('activating');
+                                            setTimeout(() => {
+                                                rightOrb.classList.remove('activating');
+                                                rightOrb.classList.add('on');
+                                            }, 800);
+                                        }
+                                        input.disabled = false;
+                                        input.focus({ preventScroll: true });
+                                    }
+                                } else {
+                                    // wrong: flash all runes and reset
+                                    flashAllRunesWrong();
+                                    setTimeout(resetRunes, 500);
+                                }
+                            }
+
+                            function flashAllRunesWrong() {
+                                runeImgs.forEach(img => img.classList.add('wrong'));
+                                setTimeout(() => runeImgs.forEach(img => img.classList.remove('wrong')), 450);
+                            }
+
+                            stage.addEventListener('click', (e) => {
+                                const rect = stage.getBoundingClientRect();
+                                const cx = rect.left + rect.width / 2;
+                                const cy = rect.top + rect.height / 2;
+                                const x = e.clientX;
+                                const y = e.clientY;
+
+                                // If clicked on lower half or within either orb, just flash red and ignore
+                                const clickBelowCenter = y > cy;
+                                const inOrb = (leftOrb && rightOrb) ? (() => {
+                                    const lo = leftOrb.getBoundingClientRect();
+                                    const ro = rightOrb.getBoundingClientRect();
+                                    return (x >= lo.left && x <= lo.right && y >= lo.top && y <= lo.bottom) ||
+                                           (x >= ro.left && x <= ro.right && y >= ro.top && y <= ro.bottom);
+                                })() : false;
+
+                                if (clickBelowCenter || inOrb) {
+                                    flashAllRunesWrong();
+                                    return; // do not toggle spinning or select
+                                }
+
+                                if (isSpinning) {
+                                    isSpinning = false;
+                                    // Recompute bearings in case of layout shifts before deciding
+                                    recomputeBearings();
+                                    const { index, diff } = nearestRuneIndex(angle);
+                                    const HIT_TOLERANCE_DEG = 12; // angular cone tolerance
+                                    // Require both angular cone AND intersection with rune hitbox
+                                    const withinCone = diff <= HIT_TOLERANCE_DEG;
+                                    const intersects = northIntersectsRune(index);
+                                    if (withinCone && intersects) {
+                                        handleSelection(index);
+                                    } else {
+                                        // Not on a rune. Flash all runes, reset, and resume spin.
+                                        flashAllRunesWrong();
+                                        setTimeout(() => { 
+                                            resetRunes();
+                                            isSpinning = true; 
+                                        }, 500);
+                                    }
+                                } else {
+                                    // Start/resume spin and reverse both compass and starmap direction
+                                    isSpinning = true;
+                                    speedDegPerSec = -speedDegPerSec;
+                                    starmapDirection = starmapDirection === 'ccw' ? 'cw' : 'ccw';
+                                    starmap.style.animationName = starmapDirection === 'ccw' ? 'spin-ccw' : 'spin-cw';
+                                    // Start audio when resuming
+                                    playCompassAudio();
+                                }
+                            });
+                        }, 50);
                     } else if (riddle.disclaimer) {
                         disclaimerEl.style.display = 'block';
                         disclaimerEl.textContent = applyPlayerName(riddle.disclaimer, playerName);
@@ -5546,7 +6050,7 @@
                 onContentUpdate: () => flushQueuedFigureVariant()
             };
             
-            if (current.id === 8 || current.id === 17 || current.id === 21 || current.id === 22 || current.id === 23) {
+            if (current.id === 8 || current.id === 17 || current.id === 21 || current.id === 22 || current.id === 23 || current.id === 24) {
                 options.disableInput = true;
             }
             
