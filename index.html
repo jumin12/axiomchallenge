@@ -1854,8 +1854,8 @@
         }
         .compass-stage {
             position: relative;
-            width: 28rem;
-            height: 28rem;
+            width: 26rem;
+            height: 26rem;
             margin: 0.15rem 0;
             background: none;
         }
@@ -1864,6 +1864,8 @@
             inset: 0;
             width: 100%;
             height: 100%;
+            top: 6%;
+            left: -1.5%;
         }
         .compass-stage .compass-img {
             position: absolute;
@@ -1875,7 +1877,7 @@
         }
         .compass-north-gem {
             position: absolute;
-            top: 15%;
+            top: 21%;
             left: 51%;
             transform: translateX(-50%);
             width: 2%;
@@ -1904,7 +1906,7 @@
             animation: runeOnPulse 2s ease-in-out infinite;
         }
         .arc-rune.wrong { animation: runeWrongPulse 450ms ease; }
-        .starmap-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; animation: spin-ccw 120s linear infinite; opacity: 0.9; }
+        .starmap-img { position: absolute; inset: 0; width: 100%; height: 100%; top: 8%; left: -0.5%; object-fit: contain; animation: spin-ccw 100s linear infinite; opacity: 0.9; transform-origin: 50% 50%; }
         .compass-orb-left.on,
         .compass-orb-right.on { animation: orbPulse 2s ease-in-out infinite; }
         .compass-orb-left.on { filter: brightness(1.08) drop-shadow(0 0 0.8rem rgba(100, 255, 180, 0.85)) drop-shadow(0 0 1.8rem rgba(80, 220, 150, 0.6)); }
@@ -1938,31 +1940,31 @@
         @keyframes runeWrongPulse { 0%,100% { filter: drop-shadow(0 0 0.2rem rgba(255,60,60,0.6)); } 50% { filter: drop-shadow(0 0 0.9rem rgba(255,60,60,0.95)); } }
         /* explicit user-specified layout */
         .arc-pos-1 {
-            top: 28%;
+            top: 34%;
             left: -8%;
             transform: translate(-50%, -50%) rotate(0deg);
             width: 7rem;
         }
         .arc-pos-2 {
-            top: 1%;
+            top: 7%;
             left: 16%;
             transform: translate(-50%, -50%) rotate(0deg);
             width: 7rem;
         }
         .arc-pos-3 {
-            top: -9%;
+            top: -3%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(0deg);
             width: 7rem;
         }
         .arc-pos-4 {
-            top: 1%;
+            top: 7%;
             left: 85%;
             transform: translate(-50%, -50%) rotate(0deg);
             width: 7rem;
         }
         .arc-pos-5 {
-            top: 32%;
+            top: 38%;
             left: 105%;
             transform: translate(-50%, -50%) rotate(0deg);
             width: 7rem;
@@ -1972,7 +1974,7 @@
             position: absolute;
             width: 7rem;
             height: auto;
-            top: 55%;
+            top: 61%;
         }
         .compass-orb-left { left: -18%; transform: translate(-50%, -50%); }
         .compass-orb-right { right: -18%; transform: translate(50%, -50%); }
@@ -5113,7 +5115,7 @@
                             let isSpinning = false;
                             let angle = 0;
                             let lastTime = null;
-                            let speedDegPerSec = 20; // slow, positive = clockwise
+                            let speedDegPerSec = 24; // slow, positive = clockwise
                             let starmapDirection = 'ccw'; // counter-clockwise initially
 
                             function tick(ts) {
