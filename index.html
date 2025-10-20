@@ -4892,6 +4892,9 @@
                 container.setAttribute('data-riddle-id', riddle.id);
             }
 
+            // Calculate initialization delay based on whether we're transitioning
+            const initDelay = options.useTransition ? 700 : 100;
+            
             const updateContent = () => {
                 const headingText = applyPlayerName(riddle.heading, playerName);
                 headingEl.innerHTML = formatHeadingWithLineBreaks(headingText);
@@ -5366,7 +5369,7 @@
                                     playCompassAudio();
                                 }
                             });
-                        }, 50);
+                        }, initDelay);
                     } else if (riddle.disclaimer) {
                         disclaimerEl.style.display = 'block';
                         disclaimerEl.textContent = applyPlayerName(riddle.disclaimer, playerName);
@@ -5459,7 +5462,7 @@
                             inputEl.focus({ preventScroll: true });
                         });
                     }
-                }, 100);
+                }, initDelay);
             }
 
             // Setup flute game for riddle 21
@@ -5583,12 +5586,16 @@
 
                             // Get flute width after it loads
                             const fluteWidth = fluteMoving.offsetWidth || 110;
+                            
+                            // Calculate speed based on screen width for consistent timing across resolutions
+                            // Speed scales with width so it takes roughly the same time to cross on any screen
+                            const fluteSpeed = Math.max(1.5, linesWidth * 0.002);
 
                             // Flute stays at fixed vertical position, only moves horizontally
 
                             // Animate flute movement (only horizontal)
                             function animateFlute() {
-                                fluteX += fluteDirection * 2.5;
+                                fluteX += fluteDirection * fluteSpeed;
                                 
                                 // Bounce at edges accounting for flute width
                                 if (fluteX >= linesWidth - fluteWidth) {
@@ -5630,7 +5637,7 @@
 
                                 const pressedKey = e.key;
                                 const expectedKey = currentButton.config.key;
-                                const ignoredKeys = ['Shift', 'Alt', 'Control', 'Meta', 'CapsLock', 'Tab', 'Escape', '*'];
+                                const ignoredKeys = ['Shift', 'Alt', 'Control', 'Meta', 'CapsLock', 'Tab', 'Escape', '*', 'F12'];
 
                                 // For special characters that require shift, use e.key directly
                                 // For regular letters/numbers, normalize to lowercase for comparison
@@ -5835,7 +5842,7 @@
 
                         resetGame();
                     }
-                }, 100);
+                }, initDelay);
             }
 
             // Setup class rune game for riddle 22
@@ -5930,7 +5937,7 @@
                         // Initialize game state
                         resetGame();
                     }
-                }, 100);
+                }, initDelay);
             }
 
             // Setup dwarven rune text for riddle 23
@@ -5985,7 +5992,7 @@
                         // Disable input initially
                         inputEl.disabled = true;
                     }
-                }, 100);
+                }, initDelay);
             }
             };
 
