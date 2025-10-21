@@ -1906,7 +1906,7 @@
             animation: runeOnPulse 2s ease-in-out infinite;
         }
         .arc-rune.wrong { animation: runeWrongPulse 450ms ease; }
-        .starmap-img { position: absolute; inset: 0; width: 100%; height: 100%; top: 8%; left: -0.5%; object-fit: contain; animation: spin-ccw 100s linear infinite; opacity: 0.9; transform-origin: 50% 50%; }
+        .starmap-img { position: absolute; inset: 0; width: 100%; height: 100%; top: 7%; left: -0.1%; object-fit: contain; animation: spin-ccw 100s linear infinite; opacity: 0.9; transform-origin: 50% 50%; }
         .compass-orb-left.on,
         .compass-orb-right.on { animation: orbPulse 2s ease-in-out infinite; }
         .compass-orb-left.on { filter: brightness(1.08) drop-shadow(0 0 0.8rem rgba(100, 255, 180, 0.85)) drop-shadow(0 0 1.8rem rgba(80, 220, 150, 0.6)); }
@@ -5123,6 +5123,7 @@
                             let lastTime = null;
                             let speedDegPerSec = 24; // slow, positive = clockwise
                             let starmapDirection = 'ccw'; // counter-clockwise initially
+                            let puzzleCompleted = false; // lock compass once puzzle is solved
 
                             function tick(ts) {
                                 if (!lastTime) lastTime = ts;
@@ -5197,7 +5198,7 @@
                                     const ry = r.top + r.height / 2;
                                     runeBearings.push(bearingFromNorthCW(cx, cy, rx, ry));
                                     // Build a circular hitbox around the rune center
-                                    const radius = Math.max(r.width, r.height) * 0.7; // generous hit area
+                                    const radius = Math.max(r.width, r.height) * 1.2; // 100%+ hit area
                                     runeHitboxes.push({ cx: rx, cy: ry, r: radius });
                                 });
                             }
@@ -5287,6 +5288,15 @@
                                         const leftOrb = document.querySelector('.compass-orb-left');
                                         const rightOrb = document.querySelector('.compass-orb-right');
                                         
+                                        // Lock compass - stop spinning and audio
+                                        puzzleCompleted = true;
+                                        isSpinning = false;
+                                        if (compassAudioTimeout) {
+                                            clearTimeout(compassAudioTimeout);
+                                            compassAudioTimeout = null;
+                                        }
+                                        compassRotateAudio.pause();
+                                        
                                         // Play orb activation sound
                                         orbActivationAudio.currentTime = 0;
                                         safePlay(orbActivationAudio);
@@ -5323,14 +5333,18 @@
                             }
 
                             stage.addEventListener('click', (e) => {
+                                // If puzzle is completed, ignore all clicks on compass
+                                if (puzzleCompleted) {
+                                    return;
+                                }
+                                
                                 const rect = stage.getBoundingClientRect();
                                 const cx = rect.left + rect.width / 2;
                                 const cy = rect.top + rect.height / 2;
                                 const x = e.clientX;
                                 const y = e.clientY;
 
-                                // If clicked on lower half or within either orb, just flash red and ignore
-                                const clickBelowCenter = y > cy;
+                                // Only block clicks on the orbs themselves
                                 const inOrb = (leftOrb && rightOrb) ? (() => {
                                     const lo = leftOrb.getBoundingClientRect();
                                     const ro = rightOrb.getBoundingClientRect();
@@ -5338,8 +5352,9 @@
                                            (x >= ro.left && x <= ro.right && y >= ro.top && y <= ro.bottom);
                                 })() : false;
 
-                                if (clickBelowCenter || inOrb) {
+                                if (inOrb) {
                                     flashAllRunesWrong();
+                                    setTimeout(resetRunes, 500);
                                     return; // do not toggle spinning or select
                                 }
 
@@ -5348,11 +5363,10 @@
                                     // Recompute bearings in case of layout shifts before deciding
                                     recomputeBearings();
                                     const { index, diff } = nearestRuneIndex(angle);
-                                    const HIT_TOLERANCE_DEG = 12; // angular cone tolerance
-                                    // Require both angular cone AND intersection with rune hitbox
+                                    const HIT_TOLERANCE_DEG = 30; // angular cone tolerance - larger for easier selection
+                                    // Check if within angular tolerance of any rune
                                     const withinCone = diff <= HIT_TOLERANCE_DEG;
-                                    const intersects = northIntersectsRune(index);
-                                    if (withinCone && intersects) {
+                                    if (withinCone) {
                                         handleSelection(index);
                                     } else {
                                         // Not on a rune. Flash all runes, reset, and resume spin.
