@@ -50,6 +50,13 @@
 
         @font-face {
             font-family: 'Rune';
+            src: url('Fonts/dunir-rune-text.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'RuneFallback';
             src: url('Fonts/RUNE.TTF') format('truetype');
             font-weight: normal;
             font-style: normal;
@@ -1594,6 +1601,11 @@
             margin: 0.5rem 0;
         }
 
+        /* Allow riddle 23 disclaimer to overflow for wide slab */
+        .riddle-container[data-riddle-id="23"] .riddle-disclaimer {
+            overflow: visible;
+        }
+
         .riddle-dialog {
             font-family: 'Centaur', serif;
             font-size: 1.8rem;
@@ -1689,6 +1701,11 @@
         }
 
         .riddle-container[data-riddle-id="8"] .riddle-content {
+            overflow: visible;
+        }
+
+        /* Allow riddle 23 content to overflow for slab */
+        .riddle-container[data-riddle-id="23"] .riddle-content {
             overflow: visible;
         }
 
@@ -2149,64 +2166,108 @@
         /* Dwarven rune text for riddle 23 */
         .dwarven-rune-text {
             font-family: 'Rune', serif;
-            font-size: 2.4rem;
-            color: #666666;
+            font-size: 1.8rem;
             text-align: center;
-            margin: 0.5rem auto 0.5rem auto;
-            padding: 0.5rem 1rem;
+            margin: 0.5rem auto -8rem auto;
+            padding: 6rem 8rem;
             cursor: pointer;
             transition: all 0.4s ease;
-            line-height: 1.8;
+            line-height: 2.2;
+            letter-spacing: 0.15em;
             user-select: none;
-            max-width: 48rem;
+            width: 60rem;
+            max-width: none;
+            background-image: url('art/slab.png');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            top: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .rune-letter {
             display: inline-block;
-            color: inherit;
+            color: transparent;
             transition: none;
+            -webkit-text-stroke: 1.5px #3a3a3a;
+            text-shadow: 
+                1px 1px 0 rgba(0, 0, 0, 0.8),
+                2px 2px 0 rgba(0, 0, 0, 0.5),
+                -1px -1px 0 rgba(255, 255, 255, 0.1);
         }
 
-        .rune-letter.lit {
+        .rune-letter-fallback {
+            display: inline-block;
+            color: transparent;
+            transition: none;
+            font-family: 'RuneFallback', serif;
+            -webkit-text-stroke: 1.5px #3a3a3a;
+            text-shadow: 
+                1px 1px 0 rgba(0, 0, 0, 0.8),
+                2px 2px 0 rgba(0, 0, 0, 0.5),
+                -1px -1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .rune-letter.lit,
+        .rune-letter-fallback.lit {
             animation: runeLightUp 0.4s ease-out forwards, runeGlowPulse 2.6s ease-in-out 0.4s infinite;
         }
 
         @keyframes runeLightUp {
             0% { 
-                color: #666666;
+                color: transparent;
+                -webkit-text-stroke: 1.5px #3a3a3a;
                 filter: brightness(1);
-                text-shadow: 0 0 0 rgba(0, 229, 255, 0);
+                text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8), 2px 2px 0 rgba(0, 0, 0, 0.5), -1px -1px 0 rgba(255, 255, 255, 0.1);
             }
             50% { 
                 color: #00e5ff;
+                -webkit-text-stroke: 1px rgba(0, 180, 200, 0.8);
                 filter: brightness(2);
-                text-shadow: 0 0 1.5rem rgba(0, 229, 255, 1), 
-                            0 0 2.5rem rgba(0, 229, 255, 0.9),
-                            0 0 3.5rem rgba(0, 229, 255, 0.7);
+                text-shadow: 
+                    2px 2px 3px rgba(0, 100, 120, 0.9),
+                    -1px -1px 2px rgba(100, 240, 255, 0.5),
+                    0 0 1.5rem rgba(0, 229, 255, 1), 
+                    0 0 2.5rem rgba(0, 229, 255, 0.9),
+                    0 0 3.5rem rgba(0, 229, 255, 0.7);
             }
             100% { 
                 color: #00e5ff;
+                -webkit-text-stroke: 1px rgba(0, 180, 200, 0.6);
                 filter: brightness(1.2);
-                text-shadow: 0 0 1rem rgba(0, 229, 255, 0.8), 
-                            0 0 2rem rgba(0, 229, 255, 0.6),
-                            0 0 3rem rgba(0, 229, 255, 0.4);
+                text-shadow: 
+                    2px 2px 3px rgba(0, 100, 120, 0.8),
+                    -1px -1px 2px rgba(100, 240, 255, 0.4),
+                    0 0 1rem rgba(0, 229, 255, 0.8), 
+                    0 0 2rem rgba(0, 229, 255, 0.6),
+                    0 0 3rem rgba(0, 229, 255, 0.4);
             }
         }
 
         @keyframes runeGlowPulse {
             0%, 100% {
                 color: #00e5ff;
+                -webkit-text-stroke: 1px rgba(0, 180, 200, 0.6);
                 filter: brightness(1.2);
-                text-shadow: 0 0 1rem rgba(0, 229, 255, 0.8), 
-                            0 0 2rem rgba(0, 229, 255, 0.6),
-                            0 0 3rem rgba(0, 229, 255, 0.4);
+                text-shadow: 
+                    2px 2px 3px rgba(0, 100, 120, 0.8),
+                    -1px -1px 2px rgba(100, 240, 255, 0.4),
+                    0 0 1rem rgba(0, 229, 255, 0.8), 
+                    0 0 2rem rgba(0, 229, 255, 0.6),
+                    0 0 3rem rgba(0, 229, 255, 0.4);
             }
             50% {
                 color: #00e5ff;
+                -webkit-text-stroke: 1px rgba(0, 180, 200, 0.8);
                 filter: brightness(1.5);
-                text-shadow: 0 0 1.5rem rgba(0, 229, 255, 1), 
-                            0 0 2.5rem rgba(0, 229, 255, 0.8),
-                            0 0 3.5rem rgba(0, 229, 255, 0.6);
+                text-shadow: 
+                    2px 2px 4px rgba(0, 100, 120, 0.9),
+                    -1px -1px 3px rgba(100, 240, 255, 0.6),
+                    0 0 1.5rem rgba(0, 229, 255, 1), 
+                    0 0 2.5rem rgba(0, 229, 255, 0.8),
+                    0 0 3.5rem rgba(0, 229, 255, 0.6);
             }
         }
 
@@ -4347,7 +4408,7 @@
                     'The Dunir have set traps in The Anvils for uninvited guests. However, we might\'ve found a way. Translating these dwarven runes seem to be the key to the answer we need to move forward. It looks like there\'s another legible inscription...',
                     '"By the hammer of Dünheim! Vengeance upon evil!"'
                 ],
-                yellow: '- Elder Futhark',
+                yellow: '- Elder Kehdrai',
                 runeText: 'Father called in urgent plea, to salvage what the quake set free. Names echoed in the chaos wild, aiding kin, the faithful child. Who rushed to gather food and gear.',
                 answers: ['helgun thargud'],
                 disclaimer: 'Placeholder -- rune translation required.'
@@ -5044,7 +5105,10 @@
                             } else if (char === '\n') {
                                 return '<br>';
                             } else {
-                                return `<span class="rune-letter" data-index="${index}">${char}</span>`;
+                                // Use fallback font for special characters and punctuation
+                                const isSpecialChar = /[^a-zA-Z0-9]/.test(char);
+                                const className = isSpecialChar ? 'rune-letter-fallback' : 'rune-letter';
+                                return `<span class="${className}" data-index="${index}">${char}</span>`;
                             }
                         }).join('');
                         
@@ -5980,7 +6044,7 @@
                             }
                             
                             // Get all letter elements
-                            const letters = Array.from(runeTextEl.querySelectorAll('.rune-letter'));
+                            const letters = Array.from(runeTextEl.querySelectorAll('.rune-letter, .rune-letter-fallback'));
                             
                             // Create array of indices and shuffle randomly
                             const indices = letters.map((_, i) => i);
