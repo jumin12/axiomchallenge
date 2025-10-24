@@ -2166,7 +2166,7 @@
         /* Dwarven rune text for riddle 23 */
         .dwarven-rune-text {
             font-family: 'Rune', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             text-align: center;
             margin: 0.5rem auto -8rem auto;
             padding: 6rem 8rem;
@@ -2176,15 +2176,18 @@
             letter-spacing: 0.15em;
             user-select: none;
             width: 60rem;
-            max-width: none;
+            max-width: calc(100vw - 4rem);
             background-image: url('art/slab.png');
-            background-size: 100% 100%;
+            background-size: 100% 125%;
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
             top: -1rem;
             left: 50%;
             transform: translateX(-50%);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
         }
 
         .rune-letter {
@@ -5158,18 +5161,26 @@
                         // Special handling for riddle 23 - show dwarven rune text
                         disclaimerEl.style.display = 'block';
                         
-                        // Split text into individual characters for random animation
+                        // Split text into words and characters, keeping words together
                         const runeText = riddle.runeText;
-                        const wrappedText = runeText.split('').map((char, index) => {
-                            if (char === ' ') {
+                        let charIndex = 0;
+                        const wrappedText = runeText.split(/(\s+|\n)/).map((segment) => {
+                            if (segment === ' ') {
                                 return ' ';
-                            } else if (char === '\n') {
+                            } else if (segment === '\n') {
                                 return '<br>';
+                            } else if (segment.trim() === '') {
+                                return segment; // preserve other whitespace
                             } else {
-                                // Use fallback font for special characters and punctuation
-                                const isSpecialChar = /[^a-zA-Z0-9]/.test(char);
-                                const className = isSpecialChar ? 'rune-letter-fallback' : 'rune-letter';
-                                return `<span class="${className}" data-index="${index}">${char}</span>`;
+                                // Wrap each word in a span to keep it together
+                                const wordChars = segment.split('').map((char) => {
+                                    const isSpecialChar = /[^a-zA-Z0-9]/.test(char);
+                                    const className = isSpecialChar ? 'rune-letter-fallback' : 'rune-letter';
+                                    const result = `<span class="${className}" data-index="${charIndex}">${char}</span>`;
+                                    charIndex++;
+                                    return result;
+                                }).join('');
+                                return `<span style="display: inline-block; white-space: nowrap;">${wordChars}</span>`;
                             }
                         }).join('');
                         
