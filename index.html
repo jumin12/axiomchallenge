@@ -3147,7 +3147,9 @@
             
             /* Ensure character portraits and banners maintain size */
             .angel-bust-portrait,
-            .xenith-bust-portrait,
+            .xen-bust-portrait,
+            .kat-bust-portrait,
+            .king-bust-portrait,
             .hooded-figure {
                 width: auto !important;
                 height: auto !important;
@@ -4157,8 +4159,10 @@
 
         const FIGURE_IMAGE_MAP = {
             hooded: 'art/hooded-figure.png',
-            xenith: 'art/xenith-bust.png',
-            angelcry: 'art/angel-bust.png'
+            xen: 'art/xen-guide-bust.png',
+            angelcry: 'art/angel-bust.png',
+            kat: 'art/kat-guide-bust.png',
+            king: 'art/king-guide-bust.png'
         };
         const FIGURE_VARIANT_KEY = 'figureVariant';
         const QUEUED_FIGURE_VARIANT_KEY = 'queuedFigureVariant';
@@ -4440,8 +4444,26 @@
                     id: 'xenith',
                     name: 'Xenith',
                     signature: '- Xenith',
-                    bust: 'art/xenith-bust.png',
+                    bust: 'art/xen-guide-bust.png',
                     password: 'xenith',
+                    enabledAsPassword: true,
+                    isDefault: true
+                },
+                {
+                    id: 'kat',
+                    name: 'Kat',
+                    signature: '- Kat',
+                    bust: 'art/kat-guide-bust.png',
+                    password: 'kat',
+                    enabledAsPassword: true,
+                    isDefault: true
+                },
+                {
+                    id: 'king',
+                    name: 'King',
+                    signature: '- King',
+                    bust: 'art/king-guide-bust.png',
+                    password: 'king',
                     enabledAsPassword: true,
                     isDefault: true
                 },
@@ -5474,8 +5496,10 @@
                             const currentVariant = localStorage.getItem(FIGURE_VARIANT_KEY) || 'hooded';
                             const variantToProfile = {
                                 'hooded': profiles.find(p => p.id === 'mysterious-figure'),
-                                'xenith': profiles.find(p => p.id === 'xenith'),
-                                'angelcry': profiles.find(p => p.id === 'angelcry')
+                                'xen': profiles.find(p => p.id === 'xenith'),
+                                'angelcry': profiles.find(p => p.id === 'angelcry'),
+                                'kat': profiles.find(p => p.id === 'kat'),
+                                'king': profiles.find(p => p.id === 'king')
                             };
                             selectedProfile = variantToProfile[currentVariant];
                         }
@@ -6252,9 +6276,13 @@
             // Determine figure variant based on profile
             let variant = 'hooded'; // default
             if (matchingProfile.id === 'xenith') {
-                variant = 'xenith';
+                variant = 'xen';
             } else if (matchingProfile.id === 'angelcry') {
                 variant = 'angelcry';
+            } else if (matchingProfile.id === 'kat') {
+                variant = 'kat';
+            } else if (matchingProfile.id === 'king') {
+                variant = 'king';
             } else if (matchingProfile.id === 'mysterious-figure') {
                 variant = 'hooded';
             } else {
