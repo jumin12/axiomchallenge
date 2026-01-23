@@ -4160,9 +4160,11 @@
         const FIGURE_IMAGE_MAP = {
             hooded: 'art/hooded-figure.png',
             xen: 'art/xen-guide-bust.png',
-            angelcry: 'art/angel-bust.png',
+            angelcry: 'art/angel-guide-bust.png',
             kat: 'art/kat-guide-bust.png',
-            king: 'art/king-guide-bust.png'
+            king: 'art/king-guide-bust.png',
+            lilk: 'art/lilk-guide-bust.png',
+            tide: 'art/tide-guide-bust.png'
         };
         const FIGURE_VARIANT_KEY = 'figureVariant';
         const QUEUED_FIGURE_VARIANT_KEY = 'queuedFigureVariant';
@@ -4471,8 +4473,26 @@
                     id: 'angelcry',
                     name: 'Angelcry',
                     signature: '- Angelcry',
-                    bust: 'art/angel-bust.png',
+                    bust: 'art/angel-guide-bust.png',
                     password: 'angelcry',
+                    enabledAsPassword: true,
+                    isDefault: true
+                },
+                {
+                    id: 'lilk',
+                    name: 'Lilk',
+                    signature: '- Lilk',
+                    bust: 'art/lilk-guide-bust.png',
+                    password: 'Lilkinsly',
+                    enabledAsPassword: true,
+                    isDefault: true
+                },
+                {
+                    id: 'tide',
+                    name: 'Tide',
+                    signature: '- Tide',
+                    bust: 'art/tide-guide-bust.png',
+                    password: 'TideTactics',
                     enabledAsPassword: true,
                     isDefault: true
                 }
@@ -5499,7 +5519,9 @@
                                 'xen': profiles.find(p => p.id === 'xenith'),
                                 'angelcry': profiles.find(p => p.id === 'angelcry'),
                                 'kat': profiles.find(p => p.id === 'kat'),
-                                'king': profiles.find(p => p.id === 'king')
+                                'king': profiles.find(p => p.id === 'king'),
+                                'lilk': profiles.find(p => p.id === 'lilk'),
+                                'tide': profiles.find(p => p.id === 'tide')
                             };
                             selectedProfile = variantToProfile[currentVariant];
                         }
@@ -6283,6 +6305,10 @@
                 variant = 'kat';
             } else if (matchingProfile.id === 'king') {
                 variant = 'king';
+            } else if (matchingProfile.id === 'lilk') {
+                variant = 'lilk';
+            } else if (matchingProfile.id === 'tide') {
+                variant = 'tide';
             } else if (matchingProfile.id === 'mysterious-figure') {
                 variant = 'hooded';
             } else {
